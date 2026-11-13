@@ -9,7 +9,7 @@ import { classify, detectLanguage } from "@/lib/router";
 import { retrieve, evidenceBlock } from "@/lib/rag";
 import { chatLLM, llmConfigured } from "@/lib/llm";
 import { rateLimit } from "@/lib/rate-limit";
-import { logConversation, logAudit } from "@/lib/supabase";
+import { getConversationHistory, logAudit, logConversation } from "@/lib/supabase";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -21,6 +21,7 @@ interface ChatBody {
   message?: string;
   history?: { role: "user" | "assistant"; content: string }[];
   language?: Lang;
+  conversationId?: string;
 }
 
 /** Respuesta local sin LLM: siempre disponible, muestra el flujo completo */
@@ -106,6 +107,17 @@ export async function POST(req: NextRequest) {
       content: m.content.slice(0, MAX_LEN),
     }));
 
+  // --- Memoria persistente: reutilizar conversación existente o empezar nueva ---
+  let conversationId: string | undefined;
+  let effectiveHistory: { role: "user" | "assistant"; content: string }[] = [];
+
+  if (typeof body.conversationId === "string" && body.conversationId.length > 0) {
+    conversationId = body.conversationId;
+    effectiveHistory = await getConversationHistory(body.conversationId);
+  } else {
+    effectiveHistory = [];
+  }
+
   // --- MASTER AGENT: idioma + clasificación de intención ---
   const lang: Lang =
     body.language && ["gl", "es", "en"].includes(body.language)
@@ -125,12 +137,13 @@ export async function POST(req: NextRequest) {
   let provider = "demo-local";
   let model = "template-rag";
   let demoMode = true;
+  let escalated = false;
 
   if (llmConfigured()) {
     try {
       const out = await chatLLM({
         system,
-        messages: [...history, { role: "user", content: message }],
+        messages: [...effectiveHistory, { role: "user", content: message }],
         temperature: 0.2,
         maxTokens: 600,
       });
@@ -138,6 +151,7 @@ export async function POST(req: NextRequest) {
       provider = out.provider;
       model = out.model;
       demoMode = false;
+      escalated = Boolean(out.escalated);
     } catch {
       reply = localFallbackReply(message, lang, sources, hasEvidence, agentLabelStr);
     }
@@ -158,6 +172,8 @@ export async function POST(req: NextRequest) {
     provider,
     model,
     demoMode,
+    conversationId: conversationId ?? undefined,
+    escalated,
   };
 
   // --- Auditoría y persistencia (no bloquean) ---
@@ -165,7 +181,8 @@ export async function POST(req: NextRequest) {
     eventType: "chat_request",
     payload: { agent: route.agent, routed_score: route.score, hasEvidence, provider, model },
   });
-  logConversation({
+  const persistedConversationId = await logConversation({
+    conversationId,
     language: lang,
     userMessage: message,
     assistantReply: reply,
@@ -175,5 +192,5 @@ export async function POST(req: NextRequest) {
     sources,
   });
 
-  return NextResponse.json(result);
+  return NextResponse.json({ ...result, conversationId: persistedConversationId ?? conversationId ?? undefined });
 }

@@ -52,4 +52,8 @@ export interface ChatResponse {
   provider: string;
   model: string;
   demoMode: boolean;
+  /** ID de conversación (Supabase) para continuar la memoria entre turnos */
+  conversationId?: string;
+  /** true cuando el agente decidió escalar a personal municipal (Human-in-the-Loop) */
+  escalated?: boolean;
 }

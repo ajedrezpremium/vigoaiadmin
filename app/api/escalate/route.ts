@@ -13,7 +13,10 @@ export async function POST(req: NextRequest) {
     const body = await req.json().catch(() => ({}));
     const escalation = await createEscalation({
       agent: typeof body.agent === "string" ? body.agent : undefined,
-      context: body.context ?? undefined,
+      context: {
+        ...(body.context ?? {}),
+        conversationId: typeof body.conversationId === "string" ? body.conversationId : undefined,
+      },
       language: typeof body.language === "string" ? body.language : undefined,
     });
 

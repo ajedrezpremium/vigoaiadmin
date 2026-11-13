@@ -47,6 +47,7 @@ export default function AssistantWidget() {
   const [showHuman, setShowHuman] = useState(false);
   const [escalation, setEscalation] = useState<{ id: string; status: string } | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [conversationId, setConversationId] = useState<string | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const t = I18N[lang];
 
@@ -86,10 +87,11 @@ export default function AssistantWidget() {
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: query, history, language: lang }),
+        body: JSON.stringify({ message: query, history, language: lang, conversationId: conversationId ?? undefined }),
       });
       const data: ChatResponse & { error?: string } = await res.json();
       if (!res.ok || data.error) throw new Error(data.error ?? `HTTP ${res.status}`);
+      if (data.conversationId) setConversationId(data.conversationId);
       setMessages((prev) => [
         ...prev,
         {
@@ -141,6 +143,7 @@ export default function AssistantWidget() {
     setShowHuman(false);
     setEscalation(null);
     setError(null);
+    setConversationId(null);
     pushWelcome(lang);
   }
 
@@ -347,7 +350,7 @@ export default function AssistantWidget() {
                       const res = await fetch("/api/escalate", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ context: { lastMessages: messages.slice(-4) } }),
+                        body: JSON.stringify({ context: { lastMessages: messages.slice(-4) }, conversationId }),
                       });
                       const data = await res.json();
                       if (res.ok && data.escalationId) setEscalation({ id: data.escalationId, status: data.status ?? "open" });

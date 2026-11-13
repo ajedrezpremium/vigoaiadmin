@@ -52,9 +52,33 @@ export interface ConversationLogInput {
   provider: string;
   model: string;
   sources: unknown[];
+  /** Si se indica, se añaden los mensajes a esa conversación existente (memoria). Si no, se crea una nueva. */
+  conversationId?: string;
 }
 
-/** Persistencia de la interacción (minimización de datos: sin PII) */
+/** Historial de una conversación concreta (memoria entre turnos) */
+export async function getConversationHistory(
+  conversationId: string
+): Promise<Array<{ role: "user" | "assistant"; content: string }>> {
+  const client = getServerSupabase();
+  if (!client) return [];
+  try {
+    const { data, error } = await client
+      .from("messages")
+      .select("role, content")
+      .eq("conversation_id", conversationId)
+      .order("created_at", { ascending: true })
+      .limit(20);
+    if (error) return [];
+    return (data ?? []).map((m) => ({
+      role: (m.role === "assistant" ? "assistant" : "user") as "user" | "assistant",
+      content: String(m.content ?? ""),
+    }));
+  } catch {
+    return [];
+  }
+}
+
 export interface EscalationInput {
   agent?: string;
   context?: Record<string, unknown>;
@@ -86,21 +110,32 @@ export async function createEscalation(
   }
 }
 
-export async function logConversation(input: ConversationLogInput): Promise<void> {
+/**
+ * Persistencia de la interacción (minimización de datos: sin PII).
+ * Crea una conversación nueva o, si se indica `conversationId`,
+ * la reutiliza (memoria persistente entre turnos).
+ * Devuelve el `conversationId` usado.
+ */
+export async function logConversation(input: ConversationLogInput): Promise<string | null> {
   const client = getServerSupabase();
-  if (!client) return;
+  if (!client) return null;
   try {
-    const { data: conv, error: convErr } = await client
-      .from("conversations")
-      .insert({ language: input.language, demo: true })
-      .select("id")
-      .single();
-    if (convErr || !conv) throw convErr ?? new Error("sin id de conversación");
+    let conversationId = input.conversationId ?? null;
+
+    if (!conversationId) {
+      const { data: conv, error: convErr } = await client
+        .from("conversations")
+        .insert({ language: input.language, demo: true })
+        .select("id")
+        .single();
+      if (convErr || !conv) throw convErr ?? new Error("sin id de conversación");
+      conversationId = conv.id;
+    }
 
     await client.from("messages").insert([
-      { conversation_id: conv.id, role: "user", content: input.userMessage },
+      { conversation_id: conversationId, role: "user", content: input.userMessage },
       {
-        conversation_id: conv.id,
+        conversation_id: conversationId,
         role: "assistant",
         agent: input.agent,
         content: input.assistantReply,
@@ -114,7 +149,10 @@ export async function logConversation(input: ConversationLogInput): Promise<void
       eventType: "chat_interaction",
       payload: { agent: input.agent, provider: input.provider, model: input.model },
     });
+
+    return conversationId;
   } catch (e) {
     console.warn("[supabase] fallo persistencia:", e);
+    return null;
   }
 }

@@ -11,6 +11,7 @@
 //     (tool `search_knowledge`) y ejecuta la búsqueda, iterando hasta responder.
 
 import { retrieve } from "@/lib/rag";
+import { createEscalation } from "@/lib/supabase";
 
 export interface ToolDef {
   name: string;
@@ -35,6 +36,8 @@ export interface LLMResponse {
     name: string;
     arguments: string;
   }>;
+  /** true cuando la respuesta final implica escalación a personal municipal (HIT) */
+  escalated?: boolean;
 }
 
 const TIMEOUT_MS = 45_000;
@@ -75,6 +78,18 @@ const DEFAULT_TOOLS: ToolDef[] = [
         query: { type: "string", description: "Pregunta o término de búsqueda" },
       },
       required: ["query"],
+    },
+  },
+  {
+    name: "escalate_to_human",
+    description:
+      "Escala la consulta a un agente humano municipal cuando la atención requiere revisión personal, respuesta fuera del alcance automatizable o caso sensible. Debe usarse cuando el ciudadano lo solicite o la respuesta no pueda completarse de forma autónoma.",
+    parameters: {
+      type: "object",
+      properties: {
+        reason: { type: "string", description: "Motivo breve de la escalación" },
+      },
+      required: ["reason"],
     },
   },
 ];
@@ -279,6 +294,23 @@ export async function executeTool(
   name: string,
   args: Record<string, unknown>
 ): Promise<string> {
+  if (name === "escalate_to_human") {
+    const reason = String(args?.reason ?? args?.query ?? "Consulta ciudadana");
+    const created = await createEscalation({
+      agent: "master",
+      context: { reason, source: "agent_loop" },
+      language: "es",
+    });
+    const id = created?.id ?? null;
+    const status = created?.status ?? "open";
+    return JSON.stringify({
+      ok: true,
+      escalated: true,
+      escalationId: id,
+      status,
+      message: `Caso escalado con el equipo municipal. Referencia: ${id ?? "PENDIENTE"}. Un especialista humano se pondrá en contacto a través de los canales oficiales.`,
+    });
+  }
   if (name !== "search_knowledge") {
     return JSON.stringify({ ok: false, error: `Herramienta desconocida: ${name}` });
   }
@@ -320,6 +352,25 @@ async function runAgentLoop(
     const toolCall = out.toolCalls[0];
     const args = safeJsonParse(toolCall.arguments) ?? {};
     const result = await executeTool(toolCall.name, args);
+
+    // Human-in-the-Loop: si la herramienta decide escalar a personal municipal,
+    // finalizamos la respuesta con el mensaje de escalación (no seguimos al LLM).
+    if (toolCall.name === "escalate_to_human") {
+      let parsed: Record<string, unknown> = {};
+      try {
+        parsed = JSON.parse(result) as Record<string, unknown>;
+      } catch {
+        /* respuesta sin JSON estructurado → usamos el texto previo */
+      }
+      const finalText = typeof parsed.message === "string" ? parsed.message : out.text;
+      return {
+        text: finalText,
+        provider: out.provider,
+        model: out.model,
+        toolCalls: undefined,
+        escalated: true,
+      };
+    }
 
     const lastAssistant = [...messages].reverse().find((m) => m.role === "assistant") ?? {
       role: "assistant" as const,
