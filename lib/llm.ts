@@ -1,23 +1,44 @@
 // Capa de abstracción de modelos (Megaprompt §9 — AI LAYER)
 // Orden de proveedores:
 //   1. OpenRouter (modelos ":free")
-//   2. Gemini directo (Google AI Studio, nivel gratuito)
-//   3. Modo demo local sin LLM (respuestas plantilla a partir de la evidencia)
+//   2. OpenRouter (fallback)
+//   3. Gemini directo (Google AI Studio)
+//   4. Modo demo local sin LLM (respuestas plantilla a partir de la evidencia)
+//
+// Nivel PRO implementado (CHESS AI AGENCY · XG AI AGENT ENGINE):
+//   - LLM Router con fallback automático entre modelos/proveedores.
+//   - Tool Calling: el agente decide cuándo buscar en la base de conocimiento
+//     (tool `search_knowledge`) y ejecuta la búsqueda, iterando hasta responder.
 
-interface LLMRequest {
+import { retrieve } from "@/lib/rag";
+
+export interface ToolDef {
+  name: string;
+  description: string;
+  parameters: Record<string, unknown>;
+}
+
+export interface LLMRequest {
   system: string;
   messages: { role: "user" | "assistant"; content: string }[];
   temperature?: number;
   maxTokens?: number;
+  tools?: ToolDef[];
 }
 
-interface LLMResponse {
+export interface LLMResponse {
   text: string;
   provider: string;
   model: string;
+  toolCalls?: Array<{
+    id: string;
+    name: string;
+    arguments: string;
+  }>;
 }
 
 const TIMEOUT_MS = 45_000;
+const MAX_AGENT_ITERATIONS = 3;
 
 async function withTimeout<T>(p: Promise<T>, ms: number): Promise<T> {
   return Promise.race([
@@ -26,9 +47,119 @@ async function withTimeout<T>(p: Promise<T>, ms: number): Promise<T> {
   ]);
 }
 
+// ---------- Formato conversación interno → formato por proveedor ----------
+
+interface ToolCall {
+  id: string;
+  name: string;
+  arguments: string;
+}
+
+interface ConvMessage {
+  role: "user" | "assistant" | "tool";
+  content: string;
+  toolCallId?: string;
+  toolName?: string;
+  toolArgs?: Record<string, unknown>;
+  toolCalls?: ToolCall[];
+}
+
+const DEFAULT_TOOLS: ToolDef[] = [
+  {
+    name: "search_knowledge",
+    description:
+      "Busca fragmentos relevantes en la base de conocimiento municipal y devuelve citas y respuestas.",
+    parameters: {
+      type: "object",
+      properties: {
+        query: { type: "string", description: "Pregunta o término de búsqueda" },
+      },
+      required: ["query"],
+    },
+  },
+];
+
+function toOpenAiMessages(messages: ConvMessage[]): object[] {
+  const out: object[] = [];
+  for (const m of messages) {
+    if (m.role === "tool") {
+      out.push({
+        role: "tool",
+        tool_call_id: m.toolCallId ?? "",
+        content: m.content,
+      });
+      continue;
+    }
+    if (m.role === "assistant" && m.toolCalls && m.toolCalls.length > 0) {
+      out.push({
+        role: "assistant",
+        content: m.content || "",
+        tool_calls: m.toolCalls.map((tc) => ({
+          id: tc.id,
+          type: "function",
+          function: { name: tc.name, arguments: tc.arguments },
+        })),
+      });
+      continue;
+    }
+    out.push({ role: m.role === "assistant" ? "assistant" : m.role, content: m.content });
+  }
+  return out;
+}
+
+function toGeminiContents(messages: ConvMessage[]): { role: string; parts: object[] }[] {
+  const out: { role: string; parts: object[] }[] = [];
+  for (const m of messages) {
+    if (m.role === "tool") {
+      out.push({
+        role: "user",
+        parts: [
+          {
+            functionResponse: {
+              name: m.toolName ?? "search_knowledge",
+              args: m.toolArgs ?? {},
+              response: { result: m.content },
+            },
+          },
+        ],
+      });
+      continue;
+    }
+    if (m.role === "assistant" && m.toolCalls && m.toolCalls.length > 0) {
+      out.push({
+        role: "model",
+        parts: m.toolCalls.map((tc) => ({
+          functionCall: { name: tc.name, args: safeJsonParse(tc.arguments) ?? {} },
+        })),
+      });
+      if (m.content) out[out.length - 1].parts.push({ text: m.content });
+      continue;
+    }
+    out.push({
+      role: m.role === "assistant" ? "model" : "user",
+      parts: [{ text: m.content }],
+    });
+  }
+  return out;
+}
+
+function safeJsonParse(s: string): Record<string, unknown> | undefined {
+  try {
+    const v = JSON.parse(s);
+    return v && typeof v === "object" ? (v as Record<string, unknown>) : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
 // ---------- OpenRouter ----------
 
-async function callOpenRouter(req: LLMRequest, model: string): Promise<LLMResponse> {
+async function callOpenRouter(
+  req: AgentTurn,
+  model: string,
+  tools: ToolDef[],
+  messages: ConvMessage[]
+): Promise<LLMResponse> {
   const key = process.env.OPENROUTER_API_KEY;
   if (!key) throw new Error("OPENROUTER_API_KEY no configurada");
 
@@ -45,7 +176,14 @@ async function callOpenRouter(req: LLMRequest, model: string): Promise<LLMRespon
         model,
         temperature: req.temperature ?? 0.2,
         max_tokens: req.maxTokens ?? 500,
-        messages: [{ role: "system", content: req.system }, ...req.messages],
+        tools: tools.map((t) => ({
+          type: "function",
+          function: { name: t.name, description: t.description, parameters: t.parameters },
+        })),
+        messages: [
+          { role: "system", content: req.system },
+          ...toOpenAiMessages(messages),
+        ],
       }),
     }),
     TIMEOUT_MS
@@ -56,21 +194,36 @@ async function callOpenRouter(req: LLMRequest, model: string): Promise<LLMRespon
     throw new Error(`OpenRouter ${res.status}: ${body.slice(0, 200)}`);
   }
   const data = await res.json();
-  const text: string | undefined = data?.choices?.[0]?.message?.content;
-  if (!text) throw new Error("OpenRouter: respuesta vacía");
-  return { text, provider: "openrouter", model: data?.model ?? model };
+  const message = data?.choices?.[0]?.message;
+  const text: string | undefined = message?.content;
+  const toolCalls: LLMResponse["toolCalls"] = (message?.tool_calls ?? []).map(
+    (tc: { id: string; type: string; function: { name: string; arguments: string } }) => ({
+      id: tc.id,
+      name: tc.function?.name,
+      arguments: tc.function?.arguments ?? "{}",
+    })
+  );
+  if (!text && (!toolCalls || toolCalls.length === 0)) throw new Error("OpenRouter: respuesta vacía");
+  return { text: text ?? "", provider: "openrouter", model: data?.model ?? model, toolCalls };
 }
 
 // ---------- Gemini (REST directo, sin dependencias) ----------
 
 interface GeminiPart {
   text?: string;
+  functionCall?: { name: string; args?: Record<string, unknown> };
+  functionResponse?: { name: string; args: Record<string, unknown>; response: Record<string, unknown> };
 }
 interface GeminiResponseJson {
   candidates?: { content?: { parts?: GeminiPart[] } }[];
 }
 
-async function callGemini(req: LLMRequest, model: string): Promise<LLMResponse> {
+async function callGemini(
+  req: AgentTurn,
+  model: string,
+  tools: ToolDef[],
+  messages: ConvMessage[]
+): Promise<LLMResponse> {
   const key = process.env.GEMINI_API_KEY;
   if (!key) throw new Error("GEMINI_API_KEY no configurada");
 
@@ -81,10 +234,18 @@ async function callGemini(req: LLMRequest, model: string): Promise<LLMResponse> 
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         system_instruction: { parts: [{ text: req.system }] },
-        contents: req.messages.map((m) => ({
-          role: m.role === "assistant" ? "model" : "user",
-          parts: [{ text: m.content }],
-        })),
+        contents: toGeminiContents(messages),
+        tools: tools
+          ? [
+              {
+                functionDeclarations: tools.map((t) => ({
+                  name: t.name,
+                  description: t.description,
+                  parameters: t.parameters,
+                })),
+              },
+            ]
+          : undefined,
         generationConfig: {
           temperature: req.temperature ?? 0.2,
           maxOutputTokens: req.maxTokens ?? 500,
@@ -99,9 +260,95 @@ async function callGemini(req: LLMRequest, model: string): Promise<LLMResponse> 
     throw new Error(`Gemini ${res.status}: ${body.slice(0, 200)}`);
   }
   const data = (await res.json()) as GeminiResponseJson;
-  const text = data?.candidates?.[0]?.content?.parts?.map((p) => p.text ?? "").join("") ?? "";
-  if (!text) throw new Error("Gemini: respuesta vacía");
-  return { text, provider: "gemini", model };
+  const parts = data?.candidates?.[0]?.content?.parts ?? [];
+  const text = parts.map((p) => p.text ?? "").join("");
+  const functionCalls = parts
+    .filter((p) => p.functionCall)
+    .map((p) => ({
+      id: `gemini_${Math.random().toString(36).slice(2, 10)}`,
+      name: p.functionCall!.name,
+      arguments: JSON.stringify(p.functionCall!.args ?? {}),
+    }));
+  if (!text && functionCalls.length === 0) throw new Error("Gemini: respuesta vacía");
+  return { text, provider: "gemini", model, toolCalls: functionCalls };
+}
+
+// ---------- Tool execution: Búsqueda en conocimiento (RAG) ----------
+
+export async function executeTool(
+  name: string,
+  args: Record<string, unknown>
+): Promise<string> {
+  if (name !== "search_knowledge") {
+    return JSON.stringify({ ok: false, error: `Herramienta desconocida: ${name}` });
+  }
+  const query = String(args?.query ?? "");
+  const { sources, hasEvidence } = retrieve(query, "es");
+  if (!hasEvidence || sources.length === 0) {
+    return JSON.stringify({
+      ok: true,
+      found: false,
+      answer:
+        "No se encontraron fragmentos relevantes en la base de conocimiento para esa consulta.",
+    });
+  }
+  const evidence = sources
+    .map((s) => `• [${s.ref}] ${s.title} (${s.dept}, vixente/publicado ${s.effective}): ${s.snippet}`)
+    .join("\n");
+  return JSON.stringify({ ok: true, found: true, evidence });
+}
+
+// ---------- Bucle agéntico: decisión → tool → razonamiento → respuesta ----------
+
+type AgentTurn = Omit<LLMRequest, "messages"> & { messages: ConvMessage[] };
+
+async function runAgentLoop(
+  fn: (req: AgentTurn) => Promise<LLMResponse>,
+  req: AgentTurn,
+  tools: ToolDef[],
+  maxIterations: number = MAX_AGENT_ITERATIONS
+): Promise<LLMResponse> {
+  const messages: ConvMessage[] = req.messages.map((m) => ({
+    role: m.role,
+    content: m.content,
+  }));
+  let out = await fn({ ...req, messages, tools });
+
+  for (let i = 0; i < maxIterations; i++) {
+    if (!out.toolCalls || out.toolCalls.length === 0) break;
+
+    const toolCall = out.toolCalls[0];
+    const args = safeJsonParse(toolCall.arguments) ?? {};
+    const result = await executeTool(toolCall.name, args);
+
+    const lastAssistant = [...messages].reverse().find((m) => m.role === "assistant") ?? {
+      role: "assistant" as const,
+      content: "",
+    };
+    messages.push({
+      role: "assistant",
+      content: lastAssistant.content,
+      toolCalls: out.toolCalls,
+      toolCallId: toolCall.id,
+      toolName: toolCall.name,
+      toolArgs: args,
+    });
+    messages.push({ role: "tool", content: result, toolCallId: toolCall.id, toolName: toolCall.name });
+
+    out = await fn({ ...req, messages, tools });
+  }
+
+  if (out.toolCalls && out.toolCalls.length > 0) {
+    // Límite de iteraciones alcanzado: sintetizamos una respuesta a partir de la evidencia.
+    const lastToolMsg = [...messages].reverse().find((m) => m.role === "tool");
+    out = {
+      ...out,
+      text: lastToolMsg?.content ?? out.text,
+      toolCalls: undefined,
+    };
+  }
+
+  return out;
 }
 
 // ---------- Orquestador con fallbacks ----------
@@ -109,17 +356,37 @@ async function callGemini(req: LLMRequest, model: string): Promise<LLMResponse> 
 export async function chatLLM(req: LLMRequest): Promise<LLMResponse> {
   const errors: string[] = [];
 
-  const openrouterModel = process.env.OPENROUTER_MODEL || "meta-llama/llama-3.3-70b-instruct:free";
-  const openrouterFallback = process.env.OPENROUTER_FALLBACK_MODEL || "google/gemma-3-27b-it:free";
-  const geminiModel = process.env.GEMINI_MODEL || "gemini-2.0-flash";
+  const openrouterModel = process.env.OPENROUTER_MODEL || "google/gemma-4-31b-it:free";
+  const openrouterFallback = process.env.OPENROUTER_FALLBACK_MODEL || "google/gemma-4-26b-a4b-it:free";
+  const geminiModel = process.env.GEMINI_MODEL || "gemini-3.8-flash";
 
-  for (const attempt of [
-    { name: "openrouter", model: openrouterModel, fn: callOpenRouter },
-    { name: "openrouter-fallback", model: openrouterFallback, fn: callOpenRouter },
-    { name: "gemini", model: geminiModel, fn: callGemini },
-  ]) {
+  const attempts: Array<{
+    name: string;
+    model: string;
+    fn: (r: AgentTurn) => Promise<LLMResponse>;
+  }> = [
+    {
+      name: "openrouter",
+      model: openrouterModel,
+      fn: (r) => runAgentLoop((turn) => callOpenRouter(turn, openrouterModel, turn.tools ?? DEFAULT_TOOLS, turn.messages), r, r.tools ?? DEFAULT_TOOLS),
+    },
+    {
+      name: "openrouter-fallback",
+      model: openrouterFallback,
+      fn: (r) =>
+        runAgentLoop((turn) => callOpenRouter(turn, openrouterFallback, turn.tools ?? DEFAULT_TOOLS, turn.messages), r, r.tools ?? DEFAULT_TOOLS),
+    },
+    {
+      name: "gemini",
+      model: geminiModel,
+      fn: (r) => runAgentLoop((turn) => callGemini(turn, geminiModel, turn.tools ?? DEFAULT_TOOLS, turn.messages), r, r.tools ?? DEFAULT_TOOLS),
+    },
+  ];
+
+  for (const attempt of attempts) {
     try {
-      return await attempt.fn(req, attempt.model);
+      const out = await attempt.fn(req);
+      return out;
     } catch (e) {
       const msg = e instanceof Error ? e.message : String(e);
       errors.push(`${attempt.name}[${attempt.model}]: ${msg}`);

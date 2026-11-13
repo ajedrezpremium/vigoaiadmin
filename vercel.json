@@ -1,0 +1,7 @@
+{
+  "framework": "nextjs",
+  "buildCommand": "next build",
+  "engines": {
+    "node": "22.x"
+  }
+}

@@ -1,6 +1,9 @@
 "use client";
 
-// Hero con carrusel de fotos de Vigo (Concello / Castro / Samil / Puerto) — Megaprompt §4
+// Hero con carrusel de fotos de Vigo (Puerto / Ría · Samil · Illas Cíes · Concello)
+// — Megaprompt §4
+// Las fotos son de Wikimedia Commons (licencia libre) y al hacer clic se abre
+// la imagen a tamaño original para compartir / descargar.
 
 import { useEffect, useState } from "react";
 import { I18N } from "@/lib/i18n";
@@ -9,6 +12,7 @@ import type { Lang } from "@/types";
 export interface HeroImage {
   src: string;
   alt: string;
+  name: string;
   caption: string;
 }
 
@@ -32,7 +36,6 @@ export default function Hero({ lang, images, theme = "dark" }: HeroProps) {
   const current = images[index];
 
   const sectionCls = isDark ? "bg-slate-950" : "bg-white";
-  const textMain = isDark ? "text-slate-100" : "text-slate-900";
   const textMuted = isDark ? "text-slate-300" : "text-slate-600";
   const overlayCls = isDark
     ? "bg-gradient-to-t from-slate-950 via-slate-950/70 to-slate-950/20"
@@ -57,7 +60,7 @@ export default function Hero({ lang, images, theme = "dark" }: HeroProps) {
       </div>
 
       {/* Contenido */}
-      <div className="relative mx-auto flex min-h-[70vh] max-w-5xl flex-col justify-end px-6 pb-24 pt-32 sm:pb-32">
+      <div className="relative z-20 mx-auto flex min-h-[70vh] max-w-5xl flex-col justify-end px-6 pb-40 pt-32 sm:pb-44">
         <div className="animate-fade-up">
           <p
             className={`mb-3 inline-block rounded-full border px-3 py-1 text-xs font-medium ${
@@ -93,18 +96,31 @@ export default function Hero({ lang, images, theme = "dark" }: HeroProps) {
         </div>
       </div>
 
-      {/* Caption del slide actual */}
-      <div className="absolute bottom-24 left-6 right-6 sm:bottom-28">
+      {/* Nombre / caption del slide actual — abajo a la izquierda */}
+      <div className="absolute bottom-24 left-6 z-20 sm:bottom-28">
         <p className={`text-sm font-medium drop-shadow-lg ${isDark ? "text-slate-200" : "text-slate-800"}`}>
           {current.caption} · {t.landingTitle}
         </p>
       </div>
 
+      {/* Imagen activa — al hacer clic se abre para compartir / descargar */}
+      <a
+        href={current.src}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`Ver imagen: ${current.name}`}
+        title="Ver / descargar imagen"
+        className="absolute inset-0 z-10"
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={current.src} alt={current.alt} className="h-full w-full object-cover" />
+      </a>
+
       {/* Flechas */}
       <button
         onClick={() => setIndex((index - 1 + count) % count)}
         aria-label="Anterior / Previous"
-        className={`absolute left-4 top-1/2 -translate-y-1/2 rounded-full border p-2 transition ${
+        className={`absolute left-4 top-1/2 z-20 -translate-y-1/2 rounded-full border p-2 transition ${
           isDark
             ? "border-slate-700 bg-slate-900/70 text-slate-200 hover:border-brand-400 hover:text-brand-300"
             : "border-slate-300 bg-white/70 text-slate-700 hover:border-brand-500 hover:text-brand-600"
@@ -115,7 +131,7 @@ export default function Hero({ lang, images, theme = "dark" }: HeroProps) {
       <button
         onClick={() => setIndex((index + 1) % count)}
         aria-label="Siguiente / Next"
-        className={`absolute right-4 top-1/2 -translate-y-1/2 rounded-full border p-2 transition ${
+        className={`absolute right-4 top-1/2 z-20 -translate-y-1/2 rounded-full border p-2 transition ${
           isDark
             ? "border-slate-700 bg-slate-900/70 text-slate-200 hover:border-brand-400 hover:text-brand-300"
             : "border-slate-300 bg-white/70 text-slate-700 hover:border-brand-500 hover:text-brand-600"
@@ -125,7 +141,7 @@ export default function Hero({ lang, images, theme = "dark" }: HeroProps) {
       </button>
 
       {/* Dots */}
-      <div className="absolute bottom-6 left-1/2 flex -translate-x-1/2 gap-2">
+      <div className="absolute bottom-6 left-1/2 z-20 flex -translate-x-1/2 gap-2">
         {images.map((_, i) => (
           <button
             key={i}
