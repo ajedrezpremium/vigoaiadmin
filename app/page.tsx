@@ -14,27 +14,27 @@ import type { AgentId, Lang } from "@/types";
 const HERO_IMAGES = [
   {
     src: "https://upload.wikimedia.org/wikipedia/commons/f/fe/Vigo_%2820363053434%29.jpg",
-    alt: "Puerto de Vigo y la ría",
+    alt: "Puerto de Vigo",
     name: "Puerto / Ría de Vigo",
     caption: "Puerto / Ría de Vigo",
   },
   {
+    src: "https://upload.wikimedia.org/wikipedia/commons/9/97/El_centro_urbano_de_Vigo_a_oscuras-_Rosal%C3%ADa_de_Castro_sin_alumbrado_p%C3%BAblico.jpg",
+    alt: "Centro urbano de Vigo",
+    name: "Castro",
+    caption: "Castro",
+  },
+  {
     src: "https://upload.wikimedia.org/wikipedia/commons/0/0e/Paseo_samil%2C_Vigo.jpg",
-    alt: "Paseo marítimo de Samil",
+    alt: "Paseo de Samil",
     name: "Samil",
     caption: "Samil",
   },
   {
-    src: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Illas_C%C3%ADes_dende_Patos_16VIII2015.jpg",
-    alt: "Islas Cíes",
-    name: "Illas Cíes",
-    caption: "Illas Cíes",
-  },
-  {
-    src: "https://upload.wikimedia.org/wikipedia/commons/3/39/Vigo_collage.jpg",
-    alt: "Vigo collage",
-    name: "Concello / Centro urbano",
-    caption: "Concello / Centro urbano",
+    src: "https://upload.wikimedia.org/wikipedia/commons/c/c5/Vigo_%2820363076034%29.jpg",
+    alt: "Puerto de Vigo",
+    name: "Mariscada / Puerto",
+    caption: "Mariscada / Puerto",
   },
 ];
 
