@@ -55,6 +55,37 @@ export interface ConversationLogInput {
 }
 
 /** Persistencia de la interacción (minimización de datos: sin PII) */
+export interface EscalationInput {
+  agent?: string;
+  context?: Record<string, unknown>;
+  language?: string;
+}
+
+/** Creación de escalación (Human-in-the-Loop — PRO AGENT) */
+export async function createEscalation(
+  input: EscalationInput
+): Promise<{ id: string; status: string } | null> {
+  const client = getServerSupabase();
+  if (!client) return null;
+  try {
+    const { data, error } = await client
+      .from("escalations")
+      .insert({
+        agent: input.agent ?? "master",
+        context: input.context ?? {},
+        status: "open",
+        language: input.language ?? "es",
+      })
+      .select("id,status")
+      .single();
+    if (error) throw error;
+    return data;
+  } catch (e) {
+    console.warn("[escalation] fallo registro:", e);
+    return null;
+  }
+}
+
 export async function logConversation(input: ConversationLogInput): Promise<void> {
   const client = getServerSupabase();
   if (!client) return;

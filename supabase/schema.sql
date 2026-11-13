@@ -36,6 +36,19 @@ create table if not exists public.audit_events (
   created_at timestamptz not null default now()
 );
 
+-- Escalaciones a personal municipal (Human-in-the-Loop — PRO AGENT)
+create table if not exists public.escalations (
+  id uuid primary key default gen_random_uuid(),
+  created_at timestamptz not null default now(),
+  agent text,
+  context jsonb,
+  status text not null default 'open',
+  language text not null default 'es'
+);
+
+create index if not exists idx_escalations_created
+  on public.escalations(created_at);
+
 -- ==============================================================
 -- NOTAS DE SEGURIDAD (DEMO):
 -- - En la demo solo se registran datos sintéticos/no personales.

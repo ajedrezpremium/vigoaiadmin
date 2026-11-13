@@ -45,6 +45,7 @@ export default function AssistantWidget() {
   const [loading, setLoading] = useState(false);
   const [tts, setTts] = useState(false);
   const [showHuman, setShowHuman] = useState(false);
+  const [escalation, setEscalation] = useState<{ id: string; status: string } | null>(null);
   const [error, setError] = useState<string | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const t = I18N[lang];
@@ -138,6 +139,7 @@ export default function AssistantWidget() {
   function resetChat() {
     setMessages([]);
     setShowHuman(false);
+    setEscalation(null);
     setError(null);
     pushWelcome(lang);
   }
@@ -268,11 +270,32 @@ export default function AssistantWidget() {
               </div>
             )}
 
-            {/* Escalación humana (simulada en demo) */}
+            {/* Escalación humana (Human-in-the-Loop real vía /api/escalate) */}
             {showHuman && (
               <div className="animate-fade-up rounded-lg border border-emerald-500/40 bg-emerald-500/10 px-3 py-2.5 text-xs text-emerald-200">
-                <p className="font-semibold">🙋 {t.humanHelpTitle}</p>
-                <p className="mt-1 leading-snug text-emerald-300/90">{t.humanHelpBody}</p>
+                {escalation ? (
+                  <>
+                    <p className="font-semibold">🙋 {t.humanHelpTitle}</p>
+                    <p className="mt-1 leading-snug text-emerald-300/90">
+                      {t.humanHelpBody} · ID: {escalation.id.slice(0, 8)}… · {t.tryAgain}:{" "}
+                      <button
+                        className="underline"
+                        onClick={() => setShowHuman(false)}
+                        type="button"
+                      >
+                        {t.tryAgain}
+                      </button>
+                    </p>
+                  </>
+                ) : (
+                  <p className="font-semibold">🙋 {t.humanHelpTitle}</p>
+                )}
+                {!escalation && <p className="mt-1 leading-snug text-emerald-300/90">{t.humanHelpBody}</p>}
+                {escalation && (
+                  <p className="mt-1 text-[10px] text-emerald-300/70">
+                    Status: {escalation.status} · registered at {new Date().toLocaleTimeString()}
+                  </p>
+                )}
               </div>
             )}
 
@@ -318,7 +341,20 @@ export default function AssistantWidget() {
                   🔄
                 </button>
                 <button
-                  onClick={() => setShowHuman(true)}
+                  onClick={async () => {
+                    // Human-in-the-Loop: crear escalación en backend
+                    try {
+                      const res = await fetch("/api/escalate", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ context: { lastMessages: messages.slice(-4) } }),
+                      });
+                      const data = await res.json();
+                      if (res.ok && data.escalationId) setEscalation({ id: data.escalationId, status: data.status ?? "open" });
+                    } catch {
+                      /* fallback silencioso: se muestra el aviso local */
+                    }
+                  }}
                   title={t.humanHelp}
                   className="rounded p-1 hover:bg-slate-800"
                   aria-label={t.humanHelp}
