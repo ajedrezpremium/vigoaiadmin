@@ -14,6 +14,7 @@ export interface HeroImage {
   alt: string;
   name: string;
   caption: string;
+  wiki?: string;
 }
 
 interface HeroProps {
@@ -36,10 +37,10 @@ export default function Hero({ lang, images, theme = "dark" }: HeroProps) {
   const current = images[index];
 
   const sectionCls = isDark ? "bg-slate-950" : "bg-white";
-  const textMuted = isDark ? "text-slate-300" : "text-slate-600";
+  const textMuted = isDark ? "text-slate-300" : "text-slate-800";
   const overlayCls = isDark
-    ? "bg-gradient-to-t from-slate-950 via-slate-950/70 to-slate-950/20"
-    : "bg-gradient-to-t from-white via-white/80 to-white/30";
+    ? "bg-gradient-to-t from-slate-950 via-slate-950/80 to-slate-950/30"
+    : "bg-gradient-to-t from-white via-white/90 to-white/40";
 
   return (
     <section className={`relative min-h-[70vh] w-full overflow-hidden ${sectionCls}`}>
@@ -63,17 +64,17 @@ export default function Hero({ lang, images, theme = "dark" }: HeroProps) {
       <div className="relative z-20 mx-auto flex min-h-[70vh] max-w-5xl flex-col justify-end px-6 pb-40 pt-32 sm:pb-44">
         <div className="animate-fade-up">
           <p
-            className={`mb-3 inline-block rounded-full border px-3 py-1 text-xs font-medium ${
+            className={`mb-3 inline-block rounded-full border px-3 py-1 text-xs font-semibold ${
               isDark
                 ? "border-brand-500/40 bg-brand-500/10 text-brand-300"
-                : "border-brand-500/40 bg-brand-500/10 text-brand-700"
+                : "border-brand-500/40 bg-brand-500/10 text-brand-800"
             }`}
           >
             🏛️ {t.landingBadge}
           </p>
-          <h1 className="text-4xl font-bold tracking-tight sm:text-6xl">
+          <h1 className="text-4xl font-bold tracking-tight drop-shadow-lg sm:text-6xl">
             <span
-              className={`bg-gradient-to-r bg-clip-text text-transparent ${
+              className={`bg-gradient-to-r bg-clip-text font-bold text-transparent drop-shadow-lg ${
                 isDark
                   ? "from-brand-300 via-brand-400 to-brand-600"
                   : "from-brand-700 via-brand-500 to-brand-600"
@@ -82,7 +83,7 @@ export default function Hero({ lang, images, theme = "dark" }: HeroProps) {
               {t.landingTitle}
             </span>
           </h1>
-          <p className={`mt-4 max-w-2xl text-lg ${textMuted}`}>{t.landingSubtitle}</p>
+          <p className={`mt-4 max-w-2xl text-lg font-medium drop-shadow-md ${textMuted}`}>{t.landingSubtitle}</p>
           <p className={`mt-3 text-sm font-medium ${isDark ? "text-amber-300" : "text-amber-600"}`}>
             {t.landingDemoBadge}
           </p>
@@ -96,11 +97,21 @@ export default function Hero({ lang, images, theme = "dark" }: HeroProps) {
         </div>
       </div>
 
-      {/* Nombre / caption del slide actual — abajo a la izquierda */}
+      {/* Nombre / caption del slide actual — abajo a la izquierda, enlace a Wikipedia */}
       <div className="absolute bottom-24 left-6 z-20 sm:bottom-28">
-        <p className={`text-sm font-medium drop-shadow-lg ${isDark ? "text-slate-200" : "text-slate-800"}`}>
-          {current.caption} · {t.landingTitle}
-        </p>
+        <a
+          href={current.wiki ?? current.src}
+          target="_blank"
+          rel="noopener noreferrer"
+          title="Ver imagen y fuente en Wikimedia Commons"
+          className={`inline-flex items-center gap-1.5 rounded-lg px-2 py-1 text-sm font-semibold drop-shadow-lg backdrop-blur-sm transition ${
+            isDark
+              ? "bg-slate-950/60 text-slate-100 hover:text-brand-300"
+              : "bg-white/70 text-slate-900 hover:text-brand-700"
+          }`}
+        >
+          📍 {current.caption} · {t.landingTitle}
+        </a>
       </div>
 
       {/* Imagen activa — al hacer clic se abre para compartir / descargar */}
