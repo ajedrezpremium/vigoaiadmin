@@ -102,12 +102,17 @@ export default function Home() {
           <h2 className="mt-3 text-3xl font-semibold">{t.landingRagTitle}</h2>
           <p className={`mt-3 mx-auto max-w-3xl ${bodyCls}`}>{t.landingRagNote}</p>
           <p className={`mt-4 ${bodyCls}`}>{t.landingCtaBody}</p>
-          <a
-            href="#demo"
+          <button
+            type="button"
+            onClick={() => {
+              if (typeof window !== "undefined") {
+                window.dispatchEvent(new CustomEvent("open-assistant"));
+              }
+            }}
             className="mt-6 inline-flex items-center gap-2 rounded-xl bg-brand-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-brand-500"
           >
             {t.landingCta} →
-          </a>
+          </button>
         </div>
       </section>
 

@@ -61,6 +61,14 @@ export default function AssistantWidget() {
   }, [open]);
 
   useEffect(() => {
+    function onOpen() {
+      setOpen(true);
+    }
+    window.addEventListener("open-assistant", onOpen);
+    return () => window.removeEventListener("open-assistant", onOpen);
+  }, []);
+
+  useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
   }, [messages, loading]);
 
