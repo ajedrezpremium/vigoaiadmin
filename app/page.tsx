@@ -214,8 +214,6 @@ export default function Home() {
       <footer
         className={`relative border-t py-8 text-center text-xs ${isDark ? "border-slate-800" : "border-slate-200"} ${mutedCls}`}
       >
-        <p className={`font-semibold ${headingCls}`}>CHESS AI AGENCY</p>
-        <p>AI · Innovation · Execution</p>
         <p className="mt-2">{t.landingFooter}</p>
         <p className="mt-3">
           <a href="/aviso-legal" className={linkCls}>
