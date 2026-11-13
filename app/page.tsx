@@ -214,8 +214,16 @@ export default function Home() {
       <footer
         className={`relative border-t py-8 text-center text-xs ${isDark ? "border-slate-800" : "border-slate-200"} ${mutedCls}`}
       >
-        <p className="mt-2">{t.landingFooter}</p>
-        <p className="mt-3">
+        {/* Logo + nombre + lema */}
+        <div className="mb-4 flex flex-col items-center gap-1">
+          <span className="text-2xl">🏛️</span>
+          <p className={`text-sm font-bold ${headingCls}`}>VIGO AI ADMINISTRATION</p>
+          <p className="text-[11px] font-medium tracking-wide">CHESS AI AGENCY · AI · Innovation · Execution</p>
+        </div>
+        {/* Disclaimer */}
+        <p className="mx-auto max-w-2xl leading-relaxed">{t.landingFooter}</p>
+        {/* Cierre + aviso legal + versión */}
+        <p className="mt-4">
           <a href="/aviso-legal" className={linkCls}>
             Aviso legal / Disclaimer
           </a>
