@@ -351,12 +351,48 @@ async function runAgentLoop(
   return out;
 }
 
+// ---------- Selección dinámica de modelos FREE de OpenRouter ----------
+
+const FREE_MODEL_TTL_MS = 60_000; // caché de 60s para no saturar el endpoint
+let freeModelCache: { model: string; ts: number } | null = null;
+
+export async function getBestFreeModel(): Promise<string> {
+  const now = Date.now();
+  if (freeModelCache && now - freeModelCache.ts < FREE_MODEL_TTL_MS) {
+    return freeModelCache.model;
+  }
+  try {
+    const res = await fetch("https://openrouter.ai/api/v1/models?limit=100", {
+      headers: {
+        Authorization: `Bearer ${process.env.OPENROUTER_API_KEY ?? ""}`,
+      },
+    });
+    if (res.ok) {
+      const data = (await res.json()) as { data?: Array<{ id: string; pricing?: { prompt?: number; completion?: number } }> };
+      const freeModels = (data.data ?? []).filter(
+        (m) => m.id.endsWith(":free") && (m.pricing?.prompt ?? 0) === 0 && (m.pricing?.completion ?? 0) === 0
+      );
+      const chatLike = freeModels.filter((m) => /instruct|chat|gemma|llama|qwen|deepseek|mistral|phi|glm/i.test(m.id));
+      const best = chatLike[0]?.id ?? freeModels[0]?.id;
+      if (best) {
+        freeModelCache = { model: best, ts: now };
+        return best;
+      }
+    }
+  } catch {
+    // si falla la consulta, usamos el fallback estático
+  }
+  const fallback = process.env.OPENROUTER_MODEL || "google/gemma-4-31b-it:free";
+  freeModelCache = { model: fallback, ts: now };
+  return fallback;
+}
+
 // ---------- Orquestador con fallbacks ----------
 
 export async function chatLLM(req: LLMRequest): Promise<LLMResponse> {
   const errors: string[] = [];
 
-  const openrouterModel = process.env.OPENROUTER_MODEL || "google/gemma-4-31b-it:free";
+  const openrouterModel = await getBestFreeModel();
   const openrouterFallback = process.env.OPENROUTER_FALLBACK_MODEL || "google/gemma-4-26b-a4b-it:free";
   const geminiModel = process.env.GEMINI_MODEL || "gemini-3.8-flash";
 
