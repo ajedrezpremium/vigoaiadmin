@@ -64,6 +64,8 @@ export default function Home() {
         <Hero lang={lang} images={HERO_IMAGES} />
       </div>
 
+      {/* v2 */}
+
       {/* Demo */}
       <section id="demo" className="relative mx-auto max-w-6xl px-6 py-16">
         <div className="rounded-2xl border border-slate-700 bg-slate-900/60 p-8 text-center">
