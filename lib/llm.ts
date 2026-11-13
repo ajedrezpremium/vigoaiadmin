@@ -67,7 +67,7 @@ interface ConvMessage {
   toolCalls?: ToolCall[];
 }
 
-const DEFAULT_TOOLS: ToolDef[] = [
+export const DEFAULT_TOOLS: ToolDef[] = [
   {
     name: "search_knowledge",
     description:
@@ -90,6 +90,18 @@ const DEFAULT_TOOLS: ToolDef[] = [
         reason: { type: "string", description: "Motivo breve de la escalación" },
       },
       required: ["reason"],
+    },
+  },
+  {
+    name: "solicitar_cita_previa",
+    description:
+      "Solicita cita previa en el Registro Municipal / Sede Electrónica (simulación de integración con el gestor de citas). Cuando el ciudadano lo necesite, registra la solicitud y devuelve la referencia.",
+    parameters: {
+      type: "object",
+      properties: {
+        motivo: { type: "string", description: "Motivo breve de la cita (opcional)" },
+      },
+      required: ["motivo"],
     },
   },
 ];
@@ -311,6 +323,19 @@ export async function executeTool(
       message: `Caso escalado con el equipo municipal. Referencia: ${id ?? "PENDIENTE"}. Un especialista humano se pondrá en contacto a través de los canales oficiales.`,
     });
   }
+  if (name === "solicitar_cita_previa") {
+    const motivo = String(args?.motivo ?? args?.reason ?? "Trámite general");
+    const ref = `CIT-${Date.now().toString(36).toUpperCase()}${Math.random().toString(36).slice(2, 6).toUpperCase()}`;
+    const message = `Solicitud de cita previa registrada (referencia ${ref}). El registro se ha completado en el gestor de citas del Concello (simulación de integración en demo). Recibirás la confirmación en los canales oficiales. No compartas datos personales sensibles en este chat.`;
+    return JSON.stringify({
+      ok: true,
+      tool: "solicitar_cita_previa",
+      requested: true,
+      reference: ref,
+      motivo,
+      message,
+    });
+  }
   if (name !== "search_knowledge") {
     return JSON.stringify({ ok: false, error: `Herramienta desconocida: ${name}` });
   }
@@ -353,9 +378,9 @@ async function runAgentLoop(
     const args = safeJsonParse(toolCall.arguments) ?? {};
     const result = await executeTool(toolCall.name, args);
 
-    // Human-in-the-Loop: si la herramienta decide escalar a personal municipal,
-    // finalizamos la respuesta con el mensaje de escalación (no seguimos al LLM).
-    if (toolCall.name === "escalate_to_human") {
+    // Human-in-the-Loop / Registro: si la herramienta termina la interacción
+    // (escalar o registrar cita), finalizamos la respuesta (no seguimos al LLM).
+    if (toolCall.name === "escalate_to_human" || toolCall.name === "solicitar_cita_previa") {
       let parsed: Record<string, unknown> = {};
       try {
         parsed = JSON.parse(result) as Record<string, unknown>;
@@ -368,7 +393,7 @@ async function runAgentLoop(
         provider: out.provider,
         model: out.model,
         toolCalls: undefined,
-        escalated: true,
+        escalated: toolCall.name === "escalate_to_human",
       };
     }
 

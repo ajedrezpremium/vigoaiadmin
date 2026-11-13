@@ -137,6 +137,17 @@ export const DEMO_CORPUS: DemoDoc[] = [
     content:
       "Cada trámite municipal tiene un servicio responsable. La guía de servicios relaciona cada procedimiento con el departamento, la unidad administrativa y el canal de presentación. Para localizar la unidad responsable de un trámite: 1) consulte la guía de trámites en la web municipal; 2) si no la localiza, el Servicio de Atención al Ciudadano (OAC) puede derivar su consulta; 3) las consultas escritas pueden presentarse en el Registro Municipal. El asistente virtual de información municipal no determina competencias ni responde por el servicio responsable en casos no publicados: en ese caso debe dirigirse al OAC o a la unidad municipal correspondiente.",
   },
+  {
+    id: "DOC-013",
+    title: "Solicitud de cita previa en el Registro y Sede Electrónica",
+    dept: "Registro y Sede Electrónica",
+    type: "guía",
+    lang: "multi",
+    published: "2026-09-10",
+    effective: "2026-09-10",
+    content:
+      "Para solicitar cita previa en el Concello de Vigo es necesario: 1) disponer del sistema de identificación admitido para la vía electrónica (certificado digital, identificación electrónica DNIe o clave de la plataforma de identificación pública); 2) identificar el servicio o unidad responsable del trámite; 3) seleccionar el canal (sede electrónica, Registro Municipal auxiliar, oficina de atención al ciudadano u oficina telefónica). Las citas del Servicio de Atención al Ciudadano (OAC) se realizan previa solicitud y se pueden gestionar telefónicamente o a través de la sede electrónica. El Registro Municipal auxiliar atiende de 9:00 a 14:00 de lunes a viernes. Las solicitudes presentadas por vía electrónica se registran a las 24 horas todos los días; para efectos de plazo se toma como fecha de presentación la recepción hasta las 14:30. El asistente virtual de información municipal orienta sobre los canales disponibles, pero la solicitud efectiva de cita se realiza a través de los canales oficiales del Concello.",
+  },
 ];
 
 /** Preguntas sugeridas por idioma para la interfaz */
@@ -146,17 +157,20 @@ export const SUGGESTED_QUESTIONS: Record<string, string[]> = {
     "Que documentación precisto para abrir unha tenda?",
     "Cando abre a biblioteca municipal?",
     "Como podo solicitar unha licenza de obras menores?",
+    "Como podo solicitar unha cita previa na sede electronica?",
   ],
   es: [
     "¿Cuál es el horario de atención al público?",
     "¿Qué documentación necesito para abrir un comercio?",
     "¿Cuándo abre la biblioteca municipal?",
     "¿Cómo solicito una licencia de obra menor?",
+    "¿Cómo solicito una cita previa en la sede electrónica?",
   ],
   en: [
     "What are the opening hours for municipal services?",
     "What documents do I need to open a shop?",
     "When is the municipal library open?",
     "How do I apply for a minor works permit?",
+    "How do I request a prior appointment at the registry?",
   ],
 };
