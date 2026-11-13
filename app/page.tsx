@@ -15,32 +15,32 @@ export const dynamic = "force-dynamic";
 
 const HERO_IMAGES = [
   {
-    src: "https://upload.wikimedia.org/wikipedia/commons/f/fe/Vigo_%2820363053434%29.jpg",
-    alt: "Puerto de Vigo y la ría",
-    name: "Puerto / Ría de Vigo",
-    caption: "Puerto / Ría de Vigo",
-    wiki: "https://commons.wikimedia.org/wiki/File:Vigo_(20363053434).jpg",
-  },
-  {
-    src: "https://upload.wikimedia.org/wikipedia/commons/0/0e/Paseo_samil%2C_Vigo.jpg",
-    alt: "Paseo marítimo de Samil",
-    name: "Samil",
-    caption: "Samil",
-    wiki: "https://commons.wikimedia.org/wiki/File:Paseo_samil,_Vigo.jpg",
-  },
-  {
-    src: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Illas_C%C3%ADes_dende_Patos_16VIII2015.jpg",
-    alt: "Islas Cíes",
+    src: "https://www.turismodevigo.org/sites/turismodevigo/files/vigo_islas_cies_0.jpg",
+    alt: "Islas Cíes — playas paradisíacas",
     name: "Illas Cíes",
     caption: "Illas Cíes",
-    wiki: "https://commons.wikimedia.org/wiki/File:Illas_C%C3%ADes_dende_Patos_16VIII2015.jpg",
+    link: "https://www.turismodevigo.org/es/10-visitas-imprescindibles",
   },
   {
-    src: "https://upload.wikimedia.org/wikipedia/commons/3/39/Vigo_collage.jpg",
-    alt: "Concello / Centro urbano",
-    name: "Concello / Centro urbano",
-    caption: "Concello / Centro urbano",
-    wiki: "https://commons.wikimedia.org/wiki/File:Vigo_collage.jpg",
+    src: "https://www.turismodevigo.org/sites/turismodevigo/files/vigo_navia_playa_samil.png",
+    alt: "Playa de Samil",
+    name: "Samil",
+    caption: "Playa de Samil",
+    link: "https://www.turismodevigo.org/es/10-visitas-imprescindibles",
+  },
+  {
+    src: "https://www.turismodevigo.org/sites/turismodevigo/files/vigo_puente_rande.jpg",
+    alt: "Puente de Rande",
+    name: "Puente de Rande",
+    caption: "Puente de Rande",
+    link: "https://www.turismodevigo.org/es/10-visitas-imprescindibles",
+  },
+  {
+    src: "https://www.turismodevigo.org/sites/turismodevigo/files/vigo_visita_imprescindible_o_castro.jpg",
+    alt: "O Castro — centro histórico",
+    name: "O Castro",
+    caption: "O Castro",
+    link: "https://www.turismodevigo.org/es/10-visitas-imprescindibles",
   },
 ];
 

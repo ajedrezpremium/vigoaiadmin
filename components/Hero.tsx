@@ -1,11 +1,9 @@
 "use client";
 
-// Hero con carrusel de fotos de Vigo (Puerto / Ría · Samil · Illas Cíes · Concello)
-// — Megaprompt §4
-// Las fotos son de Wikimedia Commons (licencia libre) y al hacer clic se abre
-// la imagen a tamaño original para compartir / descargar.
+// Hero de portada — VIGO AI ADMINISTRATION DEMO v1.0
+// 4 fotos estáticas de turismo (sin carrusel), fuente: Turismo de Vigo (oficial).
+// Cada foto enlaza a la página oficial de turismo de Vigo.
 
-import { useEffect, useState } from "react";
 import { I18N } from "@/lib/i18n";
 import type { Lang } from "@/types";
 
@@ -14,7 +12,7 @@ export interface HeroImage {
   alt: string;
   name: string;
   caption: string;
-  wiki?: string;
+  link: string;
 }
 
 interface HeroProps {
@@ -24,55 +22,57 @@ interface HeroProps {
 }
 
 export default function Hero({ lang, images, theme = "dark" }: HeroProps) {
-  const [index, setIndex] = useState(0);
-  const count = images.length;
   const t = I18N[lang];
   const isDark = theme === "dark";
 
-  useEffect(() => {
-    const id = setInterval(() => setIndex((i) => (i + 1) % count), 7000);
-    return () => clearInterval(id);
-  }, [count]);
-
-  const current = images[index];
-
-  const sectionCls = isDark ? "bg-slate-950" : "bg-white";
-  const textMuted = isDark ? "text-slate-300" : "text-slate-800";
+  const textMuted = isDark ? "text-slate-200" : "text-slate-800";
   const overlayCls = isDark
-    ? "bg-gradient-to-t from-slate-950 via-slate-950/80 to-slate-950/30"
-    : "bg-gradient-to-t from-white via-white/90 to-white/40";
+    ? "bg-gradient-to-t from-slate-950/90 via-slate-950/50 to-slate-950/30"
+    : "bg-gradient-to-t from-white/90 via-white/50 to-white/20";
 
   return (
-    <section className={`relative min-h-[70vh] w-full overflow-hidden ${sectionCls}`}>
-      {/* Slides */}
-      <div className="absolute inset-0">
+    <section className={`relative w-full overflow-hidden ${isDark ? "bg-slate-950" : "bg-white"}`}>
+      {/* Grid de 4 fotos estáticas (sin carrusel) */}
+      <div className="grid grid-cols-2 md:grid-cols-4">
         {images.map((img, i) => (
-          <div
+          <a
             key={i}
-            className={`absolute inset-0 transition-opacity duration-1500 ${
-              i === index ? "opacity-100" : "opacity-0"
-            }`}
+            href={img.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            title={`Ver en Turismo de Vigo: ${img.name}`}
+            className="group relative block aspect-[4/3] overflow-hidden"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={img.src} alt={img.alt} className="h-full w-full object-cover" />
-          </div>
+            <img
+              src={img.src}
+              alt={img.alt}
+              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+              loading={i === 0 ? "eager" : "lazy"}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-80 transition-opacity group-hover:opacity-90" />
+            <div className="absolute bottom-2 left-2 right-2">
+              <p className="text-xs font-semibold text-white drop-shadow-md sm:text-sm">
+                {img.caption}
+              </p>
+            </div>
+          </a>
         ))}
-        <div className={`absolute inset-0 ${overlayCls}`} />
       </div>
 
-      {/* Contenido */}
-      <div className="relative z-20 mx-auto flex min-h-[70vh] max-w-5xl flex-col justify-end px-6 pb-40 pt-32 sm:pb-44">
-        <div className="animate-fade-up">
+      {/* Contenido superpuesto */}
+      <div className={`absolute inset-0 flex flex-col items-center justify-center px-6 text-center ${overlayCls}`}>
+        <div className="animate-fade-up max-w-3xl">
           <p
-            className={`mb-3 inline-block rounded-full border px-3 py-1 text-xs font-semibold ${
+            className={`mb-3 inline-block rounded-full border px-3 py-1 text-xs font-semibold backdrop-blur-sm ${
               isDark
                 ? "border-brand-500/40 bg-brand-500/10 text-brand-300"
-                : "border-brand-500/40 bg-brand-500/10 text-brand-800"
+                : "border-brand-500/40 bg-white/80 text-brand-800"
             }`}
           >
             🏛️ {t.landingBadge}
           </p>
-          <h1 className="text-4xl font-bold tracking-tight drop-shadow-lg sm:text-6xl">
+          <h1 className="text-3xl font-bold tracking-tight drop-shadow-lg sm:text-5xl md:text-6xl">
             <span
               className={`bg-gradient-to-r bg-clip-text font-bold text-transparent drop-shadow-lg ${
                 isDark
@@ -83,86 +83,20 @@ export default function Hero({ lang, images, theme = "dark" }: HeroProps) {
               {t.landingTitle}
             </span>
           </h1>
-          <p className={`mt-4 max-w-2xl text-lg font-medium drop-shadow-md ${textMuted}`}>{t.landingSubtitle}</p>
-          <p className={`mt-3 text-sm font-medium ${isDark ? "text-amber-300" : "text-amber-600"}`}>
+          <p className={`mt-4 text-base font-medium drop-shadow-md sm:text-lg ${textMuted}`}>
+            {t.landingSubtitle}
+          </p>
+          <p className={`mt-3 text-sm font-medium ${isDark ? "text-amber-300" : "text-amber-700"}`}>
             {t.landingDemoBadge}
           </p>
-          <p className={`mt-4 ${textMuted}`}>{t.landingCtaBody}</p>
+          <p className={`mt-4 text-sm ${textMuted}`}>{t.landingCtaBody}</p>
           <a
             href="#demo"
-            className="mt-6 inline-flex items-center gap-2 rounded-xl bg-brand-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-brand-500"
+            className="mt-6 inline-flex items-center gap-2 rounded-xl bg-brand-600 px-5 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-brand-500"
           >
             {t.landingCta} →
           </a>
         </div>
-      </div>
-
-      {/* Nombre / caption del slide actual — abajo a la izquierda, enlace a Wikipedia */}
-      <div className="absolute bottom-24 left-6 z-20 sm:bottom-28">
-        <a
-          href={current.wiki ?? current.src}
-          target="_blank"
-          rel="noopener noreferrer"
-          title="Ver imagen y fuente en Wikimedia Commons"
-          className={`inline-flex items-center gap-1.5 rounded-lg px-2 py-1 text-sm font-semibold drop-shadow-lg backdrop-blur-sm transition ${
-            isDark
-              ? "bg-slate-950/60 text-slate-100 hover:text-brand-300"
-              : "bg-white/70 text-slate-900 hover:text-brand-700"
-          }`}
-        >
-          📍 {current.caption} · {t.landingTitle}
-        </a>
-      </div>
-
-      {/* Imagen activa — al hacer clic se abre para compartir / descargar */}
-      <a
-        href={current.src}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label={`Ver imagen: ${current.name}`}
-        title="Ver / descargar imagen"
-        className="absolute inset-0 z-10"
-      >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={current.src} alt={current.alt} className="h-full w-full object-cover" />
-      </a>
-
-      {/* Flechas */}
-      <button
-        onClick={() => setIndex((index - 1 + count) % count)}
-        aria-label="Anterior / Previous"
-        className={`absolute left-4 top-1/2 z-20 -translate-y-1/2 rounded-full border p-2 transition ${
-          isDark
-            ? "border-slate-700 bg-slate-900/70 text-slate-200 hover:border-brand-400 hover:text-brand-300"
-            : "border-slate-300 bg-white/70 text-slate-700 hover:border-brand-500 hover:text-brand-600"
-        }`}
-      >
-        ‹
-      </button>
-      <button
-        onClick={() => setIndex((index + 1) % count)}
-        aria-label="Siguiente / Next"
-        className={`absolute right-4 top-1/2 z-20 -translate-y-1/2 rounded-full border p-2 transition ${
-          isDark
-            ? "border-slate-700 bg-slate-900/70 text-slate-200 hover:border-brand-400 hover:text-brand-300"
-            : "border-slate-300 bg-white/70 text-slate-700 hover:border-brand-500 hover:text-brand-600"
-        }`}
-      >
-        ›
-      </button>
-
-      {/* Dots */}
-      <div className="absolute bottom-6 left-1/2 z-20 flex -translate-x-1/2 gap-2">
-        {images.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => setIndex(i)}
-            aria-label={`Slide ${i + 1}`}
-            className={`h-2.5 w-2.5 rounded-full transition ${
-              i === index ? "bg-brand-400" : "bg-slate-400/40"
-            }`}
-          />
-        ))}
       </div>
     </section>
   );
