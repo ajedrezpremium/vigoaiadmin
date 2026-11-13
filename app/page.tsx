@@ -215,6 +215,11 @@ export default function Home() {
         <p className={`font-semibold ${headingCls}`}>CHESS AI AGENCY</p>
         <p>AI · Innovation · Execution</p>
         <p className="mt-2">{t.landingFooter}</p>
+        <p className="mt-3">
+          <a href="/aviso-legal" className={linkCls}>
+            Aviso legal / Disclaimer
+          </a>
+        </p>
       </footer>
 
       <AssistantWidget />
