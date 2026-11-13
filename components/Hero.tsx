@@ -3,6 +3,7 @@
 // Hero de portada — VIGO AI ADMINISTRATION DEMO v1.0
 // 4 fotos estáticas de turismo (sin carrusel), fuente: Turismo de Vigo (oficial).
 // Cada foto enlaza a la página oficial de turismo de Vigo.
+// Fotos a pantalla completa, nítidas y brillantes.
 
 import { I18N } from "@/lib/i18n";
 import type { Lang } from "@/types";
@@ -25,15 +26,15 @@ export default function Hero({ lang, images, theme = "dark" }: HeroProps) {
   const t = I18N[lang];
   const isDark = theme === "dark";
 
-  const textMuted = isDark ? "text-slate-200" : "text-slate-800";
+  const textMuted = isDark ? "text-slate-100" : "text-slate-900";
   const overlayCls = isDark
-    ? "bg-gradient-to-t from-slate-950/90 via-slate-950/50 to-slate-950/30"
-    : "bg-gradient-to-t from-white/90 via-white/50 to-white/20";
+    ? "bg-gradient-to-t from-slate-950/85 via-slate-950/40 to-slate-950/20"
+    : "bg-gradient-to-t from-white/85 via-white/40 to-white/15";
 
   return (
-    <section className={`relative w-full overflow-hidden ${isDark ? "bg-slate-950" : "bg-white"}`}>
-      {/* Grid de 4 fotos estáticas (sin carrusel) */}
-      <div className="grid grid-cols-2 md:grid-cols-4">
+    <section className={`relative min-h-screen w-full overflow-hidden ${isDark ? "bg-slate-950" : "bg-white"}`}>
+      {/* Grid de 4 fotos a pantalla completa (sin carrusel) */}
+      <div className="absolute inset-0 grid grid-cols-2 md:grid-cols-4">
         {images.map((img, i) => (
           <a
             key={i}
@@ -41,16 +42,16 @@ export default function Hero({ lang, images, theme = "dark" }: HeroProps) {
             target="_blank"
             rel="noopener noreferrer"
             title={`Ver en Turismo de Vigo: ${img.name}`}
-            className="group relative block aspect-[4/3] overflow-hidden"
+            className="group relative block h-full w-full overflow-hidden"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={img.src}
               alt={img.alt}
-              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+              className="absolute inset-0 h-full w-full object-cover brightness-110 contrast-105 saturate-110 transition-transform duration-700 group-hover:scale-110"
               loading={i === 0 ? "eager" : "lazy"}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-80 transition-opacity group-hover:opacity-90" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-70 transition-opacity group-hover:opacity-80" />
             <div className="absolute bottom-2 left-2 right-2">
               <p className="text-xs font-semibold text-white drop-shadow-md sm:text-sm">
                 {img.caption}
@@ -61,7 +62,7 @@ export default function Hero({ lang, images, theme = "dark" }: HeroProps) {
       </div>
 
       {/* Contenido superpuesto */}
-      <div className={`absolute inset-0 flex flex-col items-center justify-center px-6 text-center ${overlayCls}`}>
+      <div className={`relative z-10 flex min-h-screen flex-col items-center justify-center px-6 text-center ${overlayCls}`}>
         <div className="animate-fade-up max-w-3xl">
           <p
             className={`mb-3 inline-block rounded-full border px-3 py-1 text-xs font-semibold backdrop-blur-sm ${
@@ -85,9 +86,6 @@ export default function Hero({ lang, images, theme = "dark" }: HeroProps) {
           </h1>
           <p className={`mt-4 text-base font-medium drop-shadow-md sm:text-lg ${textMuted}`}>
             {t.landingSubtitle}
-          </p>
-          <p className={`mt-3 text-sm font-medium ${isDark ? "text-amber-300" : "text-amber-700"}`}>
-            {t.landingDemoBadge}
           </p>
           <p className={`mt-4 text-sm ${textMuted}`}>{t.landingCtaBody}</p>
           <a

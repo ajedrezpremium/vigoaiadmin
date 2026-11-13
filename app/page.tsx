@@ -99,7 +99,6 @@ export default function Home() {
         <div
           className={`rounded-2xl border p-8 text-center ${cardCls}`}
         >
-          <p className={`text-amber-300 ${isDark ? "" : "text-amber-600"}`}>{t.landingDemoBadge}</p>
           <h2 className="mt-3 text-3xl font-semibold">{t.landingRagTitle}</h2>
           <p className={`mt-3 mx-auto max-w-3xl ${bodyCls}`}>{t.landingRagNote}</p>
           <p className={`mt-4 ${bodyCls}`}>{t.landingCtaBody}</p>
