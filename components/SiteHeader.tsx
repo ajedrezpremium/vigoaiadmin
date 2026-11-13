@@ -1,0 +1,73 @@
+"use client";
+
+// Header con navegación por iconos + tooltips + selector de idioma
+// Inspirado en https://vigo-ai-campus.vercel.app/ y https://vigo-port.vercel.app/es
+
+import { LANGUAGES } from "@/lib/i18n";
+import type { Lang } from "@/types";
+
+interface SiteHeaderProps {
+  lang: Lang;
+  onLangChange: (l: Lang) => void;
+}
+
+const NAV_ITEMS = [
+  { id: "inicio", icon: "🏛️", label: "Inicio" },
+  { id: "plataforma", icon: "🤖", label: "Plataforma" },
+  { id: "demo", icon: "💬", label: "Demo" },
+  { id: "seguridad", icon: "🔒", label: "Seguridad" },
+  { id: "precios", icon: "💰", label: "Precios" },
+];
+
+export default function SiteHeader({ lang, onLangChange }: SiteHeaderProps) {
+  return (
+    <header className="sticky top-0 z-40 border-b border-slate-800 bg-slate-950/80 backdrop-blur">
+      <div className="mx-auto flex max-w-6xl items-center gap-3 px-6 py-3">
+        <a href="#inicio" title="Inicio" className="flex items-center gap-2 font-bold">
+          <span className="text-xl">🏛️</span>
+          <span className="bg-gradient-to-r from-brand-300 to-brand-500 bg-clip-text text-transparent">
+            VIGO AI
+          </span>
+          <span className="text-slate-400">ADMINISTRATION</span>
+        </a>
+
+        <nav className="ml-6 hidden items-center gap-1 md:flex" aria-label="Navegación principal">
+          {NAV_ITEMS.map((item) => (
+            <a
+              key={item.id}
+              href={`#${item.id}`}
+              title={item.label}
+              className="flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-sm text-slate-300 transition hover:bg-slate-800 hover:text-brand-200"
+            >
+              <span aria-hidden>{item.icon}</span>
+              <span className="hidden lg:inline">{item.label}</span>
+            </a>
+          ))}
+        </nav>
+
+        <div className="ml-auto flex items-center gap-2">
+          <select
+            value={lang}
+            onChange={(e) => onLangChange(e.target.value as Lang)}
+            aria-label="Idioma"
+            title="Idioma / Language"
+            className="rounded-md border border-slate-600 bg-slate-800 px-1.5 py-1 text-xs text-slate-200 outline-none focus:border-brand-400"
+          >
+            {LANGUAGES.map((l) => (
+              <option key={l.id} value={l.id}>
+                {l.label}
+              </option>
+            ))}
+          </select>
+          <a
+            href="#demo"
+            title="Probar demo"
+            className="rounded-lg bg-brand-600 px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-brand-500"
+          >
+            💬 Probar demo
+          </a>
+        </div>
+      </div>
+    </header>
+  );
+}
