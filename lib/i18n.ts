@@ -89,7 +89,7 @@ export const I18N: Record<Lang, Dict> = {
     landingSubtitle:
       "Plataforma multiagente de Intelixencia Artificial para servizos públicos municipais.",
     landingDemoBadge: "⚠️ DEMO GRATUITA v1.0 — datos 100% sintéticos, non oficiais",
-    landingCta: "👉 Prueba a demo agora:",
+    landingCta: "👉 Proba a demo agora:",
     landingCtaBody:
       "Abre o asistente flotante (esquina inferior dereita) e pregunta por horarios, trámites, ordenanzas, subvenciones ou cultura. Sen rexistro, sen datos persoais.",
     landingEcosystemTitle: "Ecosistema multiagente",
@@ -108,7 +108,7 @@ export const I18N: Record<Lang, Dict> = {
     landingNextCta1: "🧭 Panel interno de demo (auth simple)",
     landingNextCta2: "Concello de Vigo — canles oficiais ↗",
     landingFooter:
-      "CHESS AI AGENCY · IA · Innovation · Execution · VIGO AI ADMINISTRATION — DEMO GRATUITA v1.0 · Novembro 2026 · Servizo de demostración con IA; non representa o Concello de Vigo nin ofrece información oficial.",
+      "DEMO GRATUITA v1.0 · Novembro 2026 · Servizo de demostración con IA; non representa o Concello de Vigo nin ofrece información oficial.",
   },
 
   es: {
@@ -164,7 +164,7 @@ export const I18N: Record<Lang, Dict> = {
     landingNextCta1: "🧭 Panel interno de demo (auth simple)",
     landingNextCta2: "Concello de Vigo — canales oficiales ↗",
     landingFooter:
-      "CHESS AI AGENCY · IA · Innovation · Execution · VIGO AI ADMINISTRATION — DEMO GRATUITA v1.0 · Noviembre 2026 · Servicio de demostración con IA; no representa el Concello de Vigo ni ofrece información oficial.",
+      "DEMO GRATUITA v1.0 · Noviembre 2026 · Servicio de demostración con IA; no representa el Concello de Vigo ni ofrece información oficial.",
   },
 
   en: {
@@ -220,7 +220,7 @@ export const I18N: Record<Lang, Dict> = {
     landingNextCta1: "🧭 Internal demo dashboard (simple auth)",
     landingNextCta2: "Vigo City Council — official channels ↗",
     landingFooter:
-      "CHESS AI AGENCY · AI · Innovation · Execution · VIGO AI ADMINISTRATION — FREE DEMO v1.0 · November 2026 · AI demo service; it does not represent the Vigo City Council nor provide official information.",
+      "FREE DEMO v1.0 · November 2026 · AI demo service; it does not represent the Vigo City Council nor provide official information.",
   },
 };
 
