@@ -9,6 +9,8 @@ import type { Lang } from "@/types";
 interface SiteHeaderProps {
   lang: Lang;
   onLangChange: (l: Lang) => void;
+  theme?: "light" | "dark";
+  onThemeChange?: (t: "light" | "dark") => void;
 }
 
 const NAV_ITEMS = [
@@ -19,7 +21,12 @@ const NAV_ITEMS = [
   { id: "precios", icon: "💰", label: "Precios" },
 ];
 
-export default function SiteHeader({ lang, onLangChange }: SiteHeaderProps) {
+export default function SiteHeader({
+  lang,
+  onLangChange,
+  theme = "dark",
+  onThemeChange,
+}: SiteHeaderProps) {
   return (
     <header className="sticky top-0 z-40 border-b border-slate-800 bg-slate-950/80 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center gap-3 px-6 py-3">
@@ -46,6 +53,14 @@ export default function SiteHeader({ lang, onLangChange }: SiteHeaderProps) {
         </nav>
 
         <div className="ml-auto flex items-center gap-2">
+          <button
+            onClick={() => onThemeChange?.(theme === "dark" ? "light" : "dark")}
+            title={theme === "dark" ? "Tema claro / Light theme" : "Tema oscuro / Dark theme"}
+            aria-label={theme === "dark" ? "Tema claro / Light theme" : "Tema oscuro / Dark theme"}
+            className="rounded-lg border border-slate-600 bg-slate-800 px-2 py-1.5 text-sm text-slate-200 transition hover:border-brand-400"
+          >
+            {theme === "dark" ? "☀️" : "🌙"}
+          </button>
           <select
             value={lang}
             onChange={(e) => onLangChange(e.target.value as Lang)}

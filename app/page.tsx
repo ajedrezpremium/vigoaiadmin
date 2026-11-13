@@ -3,13 +3,13 @@
 // Landing pública — VIGO AI ADMINISTRATION DEMO v1.0
 // CHESS AI AGENCY · AI · Innovation · Execution
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AssistantWidget from "@/components/AssistantWidget";
 import Hero from "@/components/Hero";
 import SiteHeader from "@/components/SiteHeader";
 import { AGENTS } from "@/lib/agents";
 import { I18N } from "@/lib/i18n";
-import type { AgentId } from "@/types";
+import type { AgentId, Lang } from "@/types";
 
 const HERO_IMAGES = [
   {
@@ -47,32 +47,50 @@ const AGENT_ORDER: AgentId[] = [
 ];
 
 export default function Home() {
-  const [lang, setLang] = useState<"gl" | "es" | "en">("gl");
+  const [lang, setLang] = useState<Lang>("gl");
+  const [theme, setTheme] = useState<"light" | "dark">("light");
   const t = I18N[lang];
+  const isDark = theme === "dark";
+
+  useEffect(() => {
+    if (typeof document !== "undefined") {
+      document.documentElement.classList.toggle("dark", theme === "dark");
+    }
+  }, [theme]);
+
+  const cardCls = isDark ? "border-slate-700 bg-slate-900/60" : "border-slate-200 bg-white";
+  const bodyCls = isDark ? "text-slate-300" : "text-slate-700";
+  const headingCls = isDark ? "text-slate-100" : "text-slate-900";
+  const mutedCls = isDark ? "text-slate-400" : "text-slate-600";
+  const linkCls = isDark ? "border-slate-600 bg-slate-800 text-slate-200" : "border-slate-300 bg-white text-slate-700";
 
   return (
-    <main className="relative overflow-hidden bg-slate-950 text-slate-100">
+    <main
+      className={`relative overflow-hidden ${
+        isDark ? "bg-slate-950 text-slate-100" : "bg-white text-slate-900"
+      }`}
+    >
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_50%_at_50%_0%,rgba(37,80,235,0.18),transparent)]"
       />
 
-      <SiteHeader lang={lang} onLangChange={setLang} />
+      <SiteHeader lang={lang} onLangChange={setLang} theme={theme} onThemeChange={setTheme} />
 
       {/* Hero */}
       <div id="inicio">
-        <Hero lang={lang} images={HERO_IMAGES} />
+        <Hero lang={lang} images={HERO_IMAGES} theme={theme} />
       </div>
-
-      {/* v2 */}
 
       {/* Demo */}
       <section id="demo" className="relative mx-auto max-w-6xl px-6 py-16">
-        <div className="rounded-2xl border border-slate-700 bg-slate-900/60 p-8 text-center">
-          <p className="text-amber-300">{t.landingDemoBadge}</p>
+        <div
+          className={`rounded-2xl border p-8 text-center ${cardCls}`}
+        >
+          <p className={`text-amber-300 ${isDark ? "" : "text-amber-600"}`}>{t.landingDemoBadge}</p>
           <h2 className="mt-3 text-3xl font-semibold">{t.landingRagTitle}</h2>
-          <p className="mt-3 mx-auto max-w-3xl text-slate-300">{t.landingRagNote}</p>
-          <p className="mt-4 text-slate-300">{t.landingCtaBody}</p>
+          <p className={`mt-3 mx-auto max-w-3xl ${bodyCls}`}>{t.landingRagNote}</p>
+          <p className={`mt-4 ${bodyCls}`}>{t.landingCtaBody}</p>
           <a
             href="#demo"
             className="mt-6 inline-flex items-center gap-2 rounded-xl bg-brand-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-brand-500"
@@ -84,9 +102,15 @@ export default function Home() {
 
       {/* Ecosistema multiagente + seguridad */}
       <section id="plataforma" className="relative mx-auto max-w-6xl px-6 py-16">
-        <h2 className="mb-8 text-center text-2xl font-semibold">{t.landingEcosystemTitle}</h2>
-        <div className="mb-8 rounded-2xl border border-slate-700 bg-slate-900/60 p-4 text-center text-sm text-slate-300">
-          <code className="text-brand-300">{t.landingMasterFlow}</code>
+        <h2 className={`mb-8 text-center text-2xl font-semibold ${headingCls}`}>
+          {t.landingEcosystemTitle}
+        </h2>
+        <div
+          className={`mb-8 rounded-2xl border p-4 text-center text-sm ${cardCls} ${bodyCls}`}
+        >
+          <code className={`text-sm ${isDark ? "text-brand-300" : "text-brand-700"}`}>
+            {t.landingMasterFlow}
+          </code>
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -95,22 +119,26 @@ export default function Home() {
             return (
               <div
                 key={id}
-                className="rounded-xl border border-slate-700/80 bg-slate-900/50 p-4 transition hover:border-brand-500/50 hover:bg-slate-900"
+                className={`rounded-xl border p-4 transition hover:border-brand-500/50 ${
+                  isDark ? "border-slate-700/80 bg-slate-900/50 hover:bg-slate-900" : "border-slate-200 bg-white hover:bg-slate-50"
+                }`}
               >
                 <p className="text-[10px] font-bold uppercase tracking-widest text-brand-400">
                   {a.code}
                 </p>
-                <p className="mt-1 font-semibold text-slate-100">{a.label.es}</p>
-                <p className="mt-2 text-xs leading-relaxed text-slate-400">{a.mission}</p>
+                <p className={`mt-1 font-semibold ${headingCls}`}>{a.label.es}</p>
+                <p className={`mt-2 text-xs leading-relaxed ${mutedCls}`}>{a.mission}</p>
               </div>
             );
           })}
-          <div className="rounded-xl border border-emerald-600/40 bg-emerald-950/30 p-4">
+          <div
+            className={`rounded-xl border p-4 ${isDark ? "border-emerald-600/40 bg-emerald-950/30" : "border-emerald-600/40 bg-emerald-50"}`}
+          >
             <p className="text-[10px] font-bold uppercase tracking-widest text-emerald-400">
               CAPA TRANSVERSAL
             </p>
-            <p className="mt-1 font-semibold text-slate-100">{t.landingSecurityTitle}</p>
-            <p className="mt-2 text-xs leading-relaxed text-slate-400">
+            <p className={`mt-1 font-semibold ${headingCls}`}>{t.landingSecurityTitle}</p>
+            <p className={`mt-2 text-xs leading-relaxed ${mutedCls}`}>
               Control de permisos, mínimos datos, defensa ante prompt injection, auditoría, abstención
               y revisión humana obligatoria (Megaprompt §3).
             </p>
@@ -120,7 +148,9 @@ export default function Home() {
 
       {/* Stack */}
       <section className="relative mx-auto max-w-6xl px-6 py-16">
-        <h2 className="mb-8 text-center text-2xl font-semibold">{t.landingStackTitle}</h2>
+        <h2 className={`mb-8 text-center text-2xl font-semibold ${headingCls}`}>
+          {t.landingStackTitle}
+        </h2>
         <div className="grid gap-4 text-center sm:grid-cols-2 lg:grid-cols-5">
           {[
             { n: "Next.js + React", d: "Frontend y API en un solo proyecto" },
@@ -129,9 +159,12 @@ export default function Home() {
             { n: "Supabase", d: "PostgreSQL: conversaciones + auditoría" },
             { n: "Vercel + GitHub", d: "Deploy gratuito y CI/CD en Git" },
           ].map((s) => (
-            <div key={s.n} className="rounded-xl border border-slate-700/70 bg-slate-900/50 p-4">
-              <p className="font-semibold text-slate-100">{s.n}</p>
-              <p className="mt-1 text-xs text-slate-400">{s.d}</p>
+            <div
+              key={s.n}
+              className={`rounded-xl border p-4 ${isDark ? "border-slate-700/70 bg-slate-900/50" : "border-slate-200 bg-white"}`}
+            >
+              <p className={`font-semibold ${headingCls}`}>{s.n}</p>
+              <p className={`mt-1 text-xs ${mutedCls}`}>{s.d}</p>
             </div>
           ))}
         </div>
@@ -139,15 +172,17 @@ export default function Home() {
 
       {/* Next step / proposal */}
       <section id="precios" className="relative mx-auto max-w-6xl px-6 py-16 pb-16">
-        <div className="rounded-2xl border border-slate-700 bg-gradient-to-b from-slate-900 to-slate-950 p-8">
-          <h2 className="text-2xl font-semibold">{t.landingNextTitle}</h2>
-          <p className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-400">
-            {t.landingNextBody}
-          </p>
+        <div
+          className={`rounded-2xl border p-8 ${cardCls} ${
+            isDark ? "bg-gradient-to-b from-slate-900 to-slate-950" : "bg-white"
+          }`}
+        >
+          <h2 className={`text-2xl font-semibold ${headingCls}`}>{t.landingNextTitle}</h2>
+          <p className={`mt-3 max-w-3xl text-sm leading-relaxed ${bodyCls}`}>{t.landingNextBody}</p>
           <div className="mt-6 flex flex-wrap gap-3">
             <a
               href="/admin"
-              className="rounded-lg border border-slate-600 bg-slate-800 px-4 py-2 text-sm font-medium text-slate-200 transition hover:border-brand-400 hover:text-brand-200"
+              className={`rounded-lg border px-4 py-2 text-sm font-medium transition ${linkCls}`}
             >
               {t.landingNextCta1}
             </a>
@@ -155,7 +190,7 @@ export default function Home() {
               href="https://www.vigo.org/"
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-lg border border-slate-700 px-4 py-2 text-sm text-slate-400 transition hover:text-slate-200"
+              className={`rounded-lg border px-4 py-2 text-sm transition ${linkCls}`}
             >
               {t.landingNextCta2}
             </a>
@@ -164,8 +199,10 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="relative border-t border-slate-800 py-8 text-center text-xs text-slate-500">
-        <p className="font-semibold text-slate-400">CHESS AI AGENCY</p>
+      <footer
+        className={`relative border-t py-8 text-center text-xs ${isDark ? "border-slate-800" : "border-slate-200"} ${mutedCls}`}
+      >
+        <p className={`font-semibold ${headingCls}`}>CHESS AI AGENCY</p>
         <p>AI · Innovation · Execution</p>
         <p className="mt-2">{t.landingFooter}</p>
       </footer>
