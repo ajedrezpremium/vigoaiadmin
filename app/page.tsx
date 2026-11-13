@@ -222,6 +222,7 @@ export default function Home() {
             Aviso legal / Disclaimer
           </a>
         </p>
+        <p className="mt-3 text-[10px] opacity-60">v1.1 — portada turismo PRO · {new Date().getFullYear()}</p>
       </footer>
 
       <AssistantWidget />
