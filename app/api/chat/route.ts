@@ -10,6 +10,7 @@ import { retrieve, evidenceBlock } from "@/lib/rag";
 import { chatLLM, llmConfigured } from "@/lib/llm";
 import { rateLimit } from "@/lib/rate-limit";
 import { getConversationHistory, logAudit, logConversation } from "@/lib/supabase";
+import { startSpan, endSpan } from "@/lib/observability";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -124,12 +125,21 @@ export async function POST(req: NextRequest) {
       ? body.language
       : detectLanguage(message, "es");
 
+  const rootSpan = startSpan("chat.request", {
+    ip,
+    messageLen: message.length,
+    language: lang,
+  });
+
   const route = classify(message);
   const agent = AGENTS[route.agent];
   const agentLabelStr = agentLabel(route.agent, lang);
 
+  void endSpan(startSpan("chat.classify", { agent: route.agent, score: route.score }));
+
   // --- RAG: recuperación de evidencia ---
   const { sources, hasEvidence } = retrieve(message, lang);
+  void endSpan(startSpan("chat.retrieve", { hasEvidence, sources: sources.length }));
   const system = buildSystemPrompt(agent, lang, evidenceBlock(sources));
 
   // --- Generación (OpenRouter → Gemini → modo local) ---
@@ -140,6 +150,7 @@ export async function POST(req: NextRequest) {
   let escalated = false;
 
   if (llmConfigured()) {
+    const llmStart = Date.now();
     try {
       const out = await chatLLM({
         system,
@@ -152,11 +163,30 @@ export async function POST(req: NextRequest) {
       model = out.model;
       demoMode = false;
       escalated = Boolean(out.escalated);
+      void endSpan(
+        startSpan("chat.llm", {
+          provider,
+          model,
+          demoMode,
+          escalated,
+          durationMs: Date.now() - llmStart,
+        })
+      );
     } catch {
       reply = localFallbackReply(message, lang, sources, hasEvidence, agentLabelStr);
+      void endSpan(
+        startSpan("chat.llm", {
+          provider: "demo-local",
+          model: "template-rag",
+          demoMode: true,
+          durationMs: Date.now() - llmStart,
+          error: "fallback",
+        })
+      );
     }
   } else {
     reply = localFallbackReply(message, lang, sources, hasEvidence, agentLabelStr);
+    void endSpan(startSpan("chat.llm", { provider: "demo-local", model: "template-rag", demoMode: true }));
   }
 
   // --- Validación básica de salida (Megaprompt §8) ---
@@ -191,6 +221,13 @@ export async function POST(req: NextRequest) {
     model,
     sources,
   });
+
+  rootSpan.attributes.provider = provider;
+  rootSpan.attributes.model = model;
+  rootSpan.attributes.demoMode = demoMode;
+  rootSpan.attributes.escalated = escalated;
+  rootSpan.attributes.hasEvidence = hasEvidence;
+  void endSpan(rootSpan);
 
   return NextResponse.json({ ...result, conversationId: persistedConversationId ?? conversationId ?? undefined });
 }

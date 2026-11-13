@@ -4,6 +4,7 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { runWorkflow, listFlows } from "@/lib/workflow";
+import { startSpan, endSpan } from "@/lib/observability";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -29,6 +30,11 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "flowId requerido" }, { status: 400 });
   }
 
+  const span = startSpan("workflow.run", { flowId });
   const run = await runWorkflow(flowId, input);
+  span.attributes.status = run.status;
+  span.attributes.steps = run.steps.length;
+  void endSpan(span);
+
   return NextResponse.json(run);
 }
