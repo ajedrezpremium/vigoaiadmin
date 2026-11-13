@@ -11,6 +11,8 @@ import { AGENTS } from "@/lib/agents";
 import { I18N } from "@/lib/i18n";
 import type { AgentId, Lang } from "@/types";
 
+export const dynamic = "force-dynamic";
+
 const HERO_IMAGES = [
   {
     src: "https://upload.wikimedia.org/wikipedia/commons/f/fe/Vigo_%2820363053434%29.jpg",
