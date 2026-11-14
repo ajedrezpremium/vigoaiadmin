@@ -55,7 +55,7 @@ export default function Hero({ lang, images, theme = "dark" }: HeroProps) {
 
       {/* Contenido superpuesto (centro) */}
       <div className="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 text-center">
-        <div className="animate-fade-up max-w-3xl">
+        <div className="animate-fade-up max-w-3xl rounded-2xl bg-black/40 px-6 py-8 backdrop-blur-md">
           <p
             className={`mb-3 inline-block rounded-full border px-3 py-1 text-xs font-semibold backdrop-blur-sm ${
               isDark
@@ -80,12 +80,6 @@ export default function Hero({ lang, images, theme = "dark" }: HeroProps) {
             {t.landingSubtitle}
           </p>
           <p className={`mt-4 text-sm ${textMuted}`}>{t.landingCtaBody}</p>
-          <a
-            href="#demo"
-            className="mt-6 inline-flex items-center gap-2 rounded-xl bg-brand-600 px-5 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-brand-500"
-          >
-            {t.landingCta} →
-          </a>
         </div>
       </div>
 
