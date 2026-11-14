@@ -111,6 +111,9 @@ export async function POST(req: NextRequest) {
       role: (m.role === "assistant" ? "assistant" : "user") as "user" | "assistant",
       content: m.content.slice(0, MAX_LEN),
     }));
+  // --- Retención de datos (GDPR/ENS): política documentada (demo) ---
+  // Las conversaciones se borran automáticamente si son más antiguas que DATA_RETENTION_DAYS
+  // (en demo: no se implementa TTL automático; solo se documenta la política)
 
   // --- Memoria persistente: reutilizar conversación existente o empezar nueva ---
   let conversationId: string | undefined;
