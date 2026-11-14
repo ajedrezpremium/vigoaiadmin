@@ -15,32 +15,32 @@ export const dynamic = "force-dynamic";
 
 const HERO_IMAGES = [
   {
-    src: "https://www.turismodevigo.org/sites/turismodevigo/files/vigo_islas_cies_0.jpg",
+    src: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Illas_C%C3%ADes_dende_Patos_16VIII2015.jpg",
     alt: "Islas Cíes — playas paradisíacas",
     name: "Illas Cíes",
     caption: "Illas Cíes",
-    link: "https://www.turismodevigo.org/sites/turismodevigo/files/vigo_islas_cies_0.jpg",
+    link: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Illas_C%C3%ADes_dende_Patos_16VIII2015.jpg",
   },
   {
-    src: "https://www.turismodevigo.org/sites/turismodevigo/files/vigo_navia_playa_samil.png",
+    src: "https://upload.wikimedia.org/wikipedia/commons/0/0e/Paseo_samil%2C_Vigo.jpg",
     alt: "Playa de Samil",
     name: "Samil",
     caption: "Playa de Samil",
-    link: "https://www.turismodevigo.org/sites/turismodevigo/files/vigo_navia_playa_samil.png",
+    link: "https://upload.wikimedia.org/wikipedia/commons/0/0e/Paseo_samil%2C_Vigo.jpg",
   },
   {
-    src: "https://www.turismodevigo.org/sites/turismodevigo/files/vigo_puente_rande.jpg",
+    src: "https://upload.wikimedia.org/wikipedia/commons/e/ec/Ponte_de_Rande_desde_A_Gu%C3%ADa_%28Teis%2C_Vigo%29.jpg",
     alt: "Puente de Rande",
     name: "Puente de Rande",
     caption: "Puente de Rande",
-    link: "https://www.turismodevigo.org/sites/turismodevigo/files/vigo_puente_rande.jpg",
+    link: "https://upload.wikimedia.org/wikipedia/commons/e/ec/Ponte_de_Rande_desde_A_Gu%C3%ADa_%28Teis%2C_Vigo%29.jpg",
   },
   {
-    src: "https://www.turismodevigo.org/sites/turismodevigo/files/vigo_visita_imprescindible_o_castro.jpg",
+    src: "https://upload.wikimedia.org/wikipedia/commons/d/d4/O_Castro%2C_Vigo.jpg",
     alt: "O Castro — centro histórico",
     name: "O Castro",
     caption: "O Castro",
-    link: "https://www.turismodevigo.org/sites/turismodevigo/files/vigo_visita_imprescindible_o_castro.jpg",
+    link: "https://upload.wikimedia.org/wikipedia/commons/d/d4/O_Castro%2C_Vigo.jpg",
   },
 ];
 

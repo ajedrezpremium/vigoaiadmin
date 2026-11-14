@@ -2,8 +2,8 @@
 
 // Hero de portada — VIGO AI ADMINISTRATION DEMO v1.0
 // 4 fotos estáticas de turismo (sin carrusel), fuente: Turismo de Vigo (oficial).
-// Cada foto enlaza a la página oficial de turismo de Vigo.
-// Fotos a pantalla completa, nítidas y brillantes.
+// Cada foto enlaza a la imagen original a tamaño completo.
+// El nombre/caption es texto plano (sin enlace).
 
 import { I18N } from "@/lib/i18n";
 import type { Lang } from "@/types";
@@ -36,28 +36,27 @@ export default function Hero({ lang, images, theme = "dark" }: HeroProps) {
       {/* Grid de 4 fotos a pantalla completa (sin carrusel) */}
       <div className="absolute inset-0 grid grid-cols-2 md:grid-cols-4">
         {images.map((img, i) => (
-          <a
-            key={i}
-            href={img.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            title={`Ver en Turismo de Vigo: ${img.name}`}
-            className="group relative block h-full w-full overflow-hidden"
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={img.src}
-              alt={img.alt}
-              className="absolute inset-0 h-full w-full object-cover brightness-110 contrast-105 saturate-110 transition-transform duration-700 group-hover:scale-110"
-              loading={i === 0 ? "eager" : "lazy"}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-70 transition-opacity group-hover:opacity-80" />
-            <div className="absolute bottom-2 left-2 right-2">
-              <p className="text-xs font-semibold text-white drop-shadow-md sm:text-sm">
-                {img.caption}
-              </p>
-            </div>
-          </a>
+          <div key={i} className="group relative block h-full w-full overflow-hidden">
+            <a
+              href={img.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              title={`Ver foto a tamaño completo: ${img.name}`}
+              className="block h-full w-full"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={img.src}
+                alt={img.alt}
+                className="absolute inset-0 h-full w-full object-cover brightness-125 contrast-110 saturate-110 transition-transform duration-700 group-hover:scale-110"
+                loading={i === 0 ? "eager" : "lazy"}
+              />
+            </a>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-70 transition-opacity group-hover:opacity-80 pointer-events-none" />
+            <p className="absolute bottom-2 left-2 right-2 text-xs font-semibold text-white drop-shadow-md sm:text-sm pointer-events-none">
+              {img.caption}
+            </p>
+          </div>
         ))}
       </div>
 
