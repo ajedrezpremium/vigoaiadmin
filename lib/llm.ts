@@ -20,6 +20,7 @@
 
 import { retrieve } from "@/lib/rag";
 import { createEscalation } from "@/lib/supabase";
+import { getSedeElectronicaAdapter } from "@/lib/sede-electronica";
 import {
   PROVIDERS,
   keyConfiguredProviders,
@@ -343,15 +344,15 @@ export async function executeTool(
   }
   if (name === "solicitar_cita_previa") {
     const motivo = String(args?.motivo ?? args?.reason ?? "Trámite general");
-    const ref = `CIT-${Date.now().toString(36).toUpperCase()}${Math.random().toString(36).slice(2, 6).toUpperCase()}`;
-    const message = `Solicitud de cita previa registrada (referencia ${ref}). El registro se ha completado en el gestor de citas del Concello (simulación de integración en demo). Recibirás la confirmación en los canales oficiales. No compartas datos personales sensibles en este chat.`;
+    const adapter = getSedeElectronicaAdapter();
+    const result = await adapter.solicitarCita(motivo, "es");
     return JSON.stringify({
-      ok: true,
+      ok: result.ok,
       tool: "solicitar_cita_previa",
-      requested: true,
-      reference: ref,
+      requested: result.ok,
+      reference: result.reference,
       motivo,
-      message,
+      message: result.message,
     });
   }
   if (name !== "search_knowledge") {
