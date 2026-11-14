@@ -92,10 +92,10 @@ export const PROVIDERS: Record<string, OpenAICompatProvider> = {
   ovh: {
     name: "ovh",
     endpoint: "https://oai.endpoints.kepler.ai.cloud.ovh.net/v1/chat/completions",
-    defaultModel: "gpt-oss-120b",
+    defaultModel: "Meta-Llama-3_3-70B-Instruct",
     envModelVar: "OVHAI_MODEL",
     freeTierNotes:
-      "Anónimo: 2 RPM por IP y modelo, sin registro. Hosting UE. Limites altos (400 RPM) requieren proyecto Public Cloud de pago.",
+      "Anónimo: 2 RPM por IP y modelo, sin registro. Hosting UE. Límites altos (400 RPM) requieren proyecto Public Cloud de pago.",
   },
 };
 

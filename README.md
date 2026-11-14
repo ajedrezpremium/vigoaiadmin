@@ -80,7 +80,7 @@ Modelos free por defecto (todos con override por `.env`, ver `.env.example`):
 - Gemini: `gemini-3.8-flash`
 - Cohere: `command-r7b-12-2024`
 - Cloudflare: `@cf/openai/gpt-oss-120b`
-- OVHcloud: `gpt-oss-120b`
+- OVHcloud: `Meta-Llama-3_3-70B-Instruct`
 
 > ⚠️ Los free tiers son para demo y desarrollo: varios proveedores registran los prompts para entrenar. Para producción municipal con datos de ciudadanos: modelo según la política de la entidad (Megaprompt §489).
 

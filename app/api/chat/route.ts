@@ -142,7 +142,7 @@ export async function POST(req: NextRequest) {
   // --- Multi-agente colaborativo (v1.2): agentes secundarios con solapamiento ---
   const allMatches = classifyAll(message, AGENTS);
   const secondaryAgents = allMatches
-    .filter((m) => m.agent !== route.agent && m.score >= 2)
+    .filter((m) => m.agent !== route.agent && m.score >= 1)
     .slice(0, 1); // máximo 1 agente colaborador para no alargar la respuesta
 
   void endSpan(startSpan("chat.classify", { agent: route.agent, score: route.score, collaborators: secondaryAgents.length }));
