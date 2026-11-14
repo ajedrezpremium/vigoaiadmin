@@ -1,9 +1,8 @@
 "use client";
 
 // Hero de portada — VIGO AI ADMINISTRATION DEMO v1.0
-// Una gran foto a pantalla completa + puntos (dots) abajo-izquierda para cambiar.
-// 8 fotografías de turismo de Vigo (Wikimedia Commons, CC).
-// Cada foto enlaza a la imagen original a tamaño completo (descarga).
+// Una gran foto a pantalla completa, luminosa y nítida.
+// Puntos (dots) abajo-izquierda para cambiar de imagen + descarga.
 
 import { useEffect, useState } from "react";
 import { I18N } from "@/lib/i18n";
@@ -36,28 +35,26 @@ export default function Hero({ lang, images, theme = "dark" }: HeroProps) {
     img.src = next.src;
   }, [index, images]);
 
-  const textMuted = isDark ? "text-slate-100" : "text-slate-900";
-  const overlayCls = isDark
-    ? "bg-gradient-to-t from-slate-950/80 via-slate-950/30 to-transparent"
-    : "bg-gradient-to-t from-white/80 via-white/30 to-transparent";
+  const textMuted = isDark ? "text-white" : "text-slate-900";
 
   return (
     <section className={`relative min-h-screen w-full overflow-hidden ${isDark ? "bg-slate-950" : "bg-white"}`}>
-      {/* Gran foto principal (pantalla completa) */}
+      {/* Gran foto principal (pantalla completa, luminosa) */}
       <div className="absolute inset-0">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           key={index}
           src={current.src}
           alt={current.alt}
-          className="h-full w-full object-cover brightness-110 contrast-105 saturate-110"
+          className="h-full w-full object-cover brightness-110 contrast-105"
           loading="eager"
         />
-        <div className={`absolute inset-0 ${overlayCls}`} />
+        {/* Overlay suave solo en la parte inferior para legibilidad del texto */}
+        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
       </div>
 
       {/* Contenido superpuesto (centro) */}
-      <div className={`relative z-10 flex min-h-screen flex-col items-center justify-center px-6 text-center`}>
+      <div className="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 text-center">
         <div className="animate-fade-up max-w-3xl">
           <p
             className={`mb-3 inline-block rounded-full border px-3 py-1 text-xs font-semibold backdrop-blur-sm ${
@@ -94,7 +91,6 @@ export default function Hero({ lang, images, theme = "dark" }: HeroProps) {
 
       {/* Puntos (dots) abajo-izquierda + nombre + descarga */}
       <div className="absolute bottom-6 left-6 z-20 flex items-center gap-3">
-        {/* Dots */}
         <div className="flex gap-2">
           {images.map((img, i) => (
             <button
@@ -111,12 +107,10 @@ export default function Hero({ lang, images, theme = "dark" }: HeroProps) {
           ))}
         </div>
 
-        {/* Nombre de la foto actual (con fondo para contraste) */}
         <span className="ml-2 inline-block rounded-md bg-black/60 px-2 py-1 text-xs font-bold text-white backdrop-blur-sm sm:text-sm">
           {current.name} ({index + 1}/{images.length})
         </span>
 
-        {/* Botón de descarga */}
         <a
           href={current.link}
           download
