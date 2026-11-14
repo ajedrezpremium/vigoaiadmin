@@ -4,7 +4,11 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import type { ChatResponse, Lang, SourceRef } from "@/types";
-import { AGENTS, buildSystemPrompt, agentLabel } from "@/lib/agents";
+import { AGENTS as FALLBACK_AGENTS, buildSystemPrompt, agentLabel } from "@/lib/agents";
+import { loadAgentConfig } from "@/lib/agents.loader";
+
+// Agentes: config externa (config/agents.json) con fallback hardcodeado
+const AGENTS = loadAgentConfig() ?? FALLBACK_AGENTS;
 import { classify, detectLanguage } from "@/lib/router";
 import { retrieve, evidenceBlock } from "@/lib/rag";
 import { chatLLM, llmConfigured } from "@/lib/llm";
@@ -131,7 +135,7 @@ export async function POST(req: NextRequest) {
     language: lang,
   });
 
-  const route = classify(message);
+  const route = classify(message, AGENTS);
   const agent = AGENTS[route.agent];
   const agentLabelStr = agentLabel(route.agent, lang);
 

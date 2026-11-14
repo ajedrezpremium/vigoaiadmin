@@ -4,6 +4,7 @@
 
 import type { AgentId, Lang } from "@/types";
 import { AGENTS } from "./agents";
+import type { AgentDef } from "./agents";
 
 // Stopwords multi-idioma mínimas para el router
 const STOP = new Set([
@@ -58,7 +59,7 @@ const AGENT_PRIORITY: AgentId[] = [
   "citizen",
 ];
 
-export function classify(query: string): RouteResult {
+export function classify(query: string, agents: Record<AgentId, AgentDef> = AGENTS): RouteResult {
   const tokens = tokenize(query);
   const q = query.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 

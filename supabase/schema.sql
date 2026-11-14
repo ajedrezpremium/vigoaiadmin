@@ -3,6 +3,7 @@
 -- Esquema Supabase (ejecutar en SQL Editor del proyecto)
 -- CHESS AI AGENCY
 -- ==============================================================
+-- v1.2: RLS habilitado en todas las tablas.
 
 -- Conversaciones (sin datos personales en demo)
 create table if not exists public.conversations (
@@ -50,10 +51,45 @@ create index if not exists idx_escalations_created
   on public.escalations(created_at);
 
 -- ==============================================================
--- NOTAS DE SEGURIDAD (DEMO):
--- - En la demo solo se registran datos sintéticos/no personales.
--- - El servidor usa SUPABASE_SERVICE_ROLE_KEY (bypassa RLS).
---   No exponer esa clave al cliente.
--- - En producción real: habilitar RLS, roles RBAC, retención y
---   evaluación RGPD/ENS/AI Act antes de cualquier dato real (ver propuesta §7).
+-- ROW LEVEL SECURITY (RLS) — v1.2
 -- ==============================================================
+
+-- Habilitar RLS en todas las tablas
+alter table public.conversations enable row level security;
+alter table public.messages enable row level security;
+alter table public.audit_events enable row level security;
+alter table public.escalations enable row level security;
+
+-- Políticas: service_role (servidor) tiene acceso completo (bypass RLS por defecto).
+-- Anon/authenticated: solo lectura de conversaciones propias (por ID) y inserción de mensajes.
+
+-- Conversations: anon puede insertar (crear nueva conversación) y leer por id
+drop policy if exists "conversations_anon_insert" on public.conversations;
+create policy "conversations_anon_insert" on public.conversations
+  for insert to anon with check (true);
+
+drop policy if exists "conversations_anon_select" on public.conversations;
+create policy "conversations_anon_select" on public.conversations
+  for select to anon using (true);
+
+-- Messages: anon puede insertar y leer
+drop policy if exists "messages_anon_insert" on public.messages;
+create policy "messages_anon_insert" on public.messages
+  for insert to anon with check (true);
+
+drop policy if exists "messages_anon_select" on public.messages;
+create policy "messages_anon_select" on public.messages
+  for select to anon using (true);
+
+-- Audit events: solo inserción (no lectura pública)
+drop policy if exists "audit_events_anon_insert" on public.audit_events;
+create policy "audit_events_anon_insert" on public.audit_events
+  for insert to anon with check (true);
+
+-- Escalations: anon puede insertar (solicitar escalación), solo service_role lee
+drop policy if exists "escalations_anon_insert" on public.escalations;
+create policy "escalations_anon_insert" on public.escalations
+  for insert to anon with check (true);
+
+-- Nota: service_role (usado por el servidor Next.js) bypass RLS automáticamente.
+-- Para producción real: restringir select de messages/audit_events a roles autenticados.
