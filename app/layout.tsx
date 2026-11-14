@@ -14,6 +14,10 @@ export const metadata: Metadata = {
     "CHESS AI AGENCY",
   ],
   authors: [{ name: "CHESS AI AGENCY" }],
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({
