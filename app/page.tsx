@@ -256,11 +256,21 @@ export default function Home() {
             <div className="overflow-hidden rounded-xl border border-slate-300 dark:border-slate-700">
               <iframe
                 title="Mapa de Vigo"
-                src="https://maps.google.com/maps?q=42.2406,-8.7207&z=13&output=embed"
-                className="h-64 w-full border-0"
+                src="https://maps.google.com/maps?q=42.2406,-8.7207&z=14&output=embed"
+                className="h-64 w-full border-0 md:h-96"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />
+            </div>
+            <div className="mt-4">
+              <a
+                href="https://www.google.com/maps?q=42.2406,-8.7207&z=14"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-brand-500 hover:text-brand-600 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-200"
+              >
+                🗺️ Abrir mapa en pantalla completa (Google Maps)
+              </a>
             </div>
           </div>
         </div>
