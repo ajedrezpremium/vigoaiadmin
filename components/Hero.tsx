@@ -1,11 +1,10 @@
 "use client";
 
 // Hero de portada — VIGO AI ADMINISTRATION DEMO v1.0
-// Una gran foto a pantalla completa, luminosa y nítida.
-// Puntos (dots) abajo-izquierda para cambiar de imagen + descarga.
+// Una gran foto a pantalla completa (sin texto). Puntos (dots) abajo-izquierda.
+// 8 fotografías de turismo de Vigo (Wikimedia Commons, CC).
 
 import { useEffect, useState } from "react";
-import { I18N } from "@/lib/i18n";
 import type { Lang } from "@/types";
 
 export interface HeroImage {
@@ -24,22 +23,18 @@ interface HeroProps {
 
 export default function Hero({ lang, images, theme = "dark" }: HeroProps) {
   const [index, setIndex] = useState(0);
-  const t = I18N[lang];
   const isDark = theme === "dark";
   const current = images[index];
 
-  // Precarga de la siguiente imagen para transición suave
   useEffect(() => {
     const next = images[(index + 1) % images.length];
     const img = new Image();
     img.src = next.src;
   }, [index, images]);
 
-  const textMuted = isDark ? "text-white" : "text-slate-900";
-
   return (
     <section className={`relative min-h-screen w-full overflow-hidden ${isDark ? "bg-slate-950" : "bg-white"}`}>
-      {/* Gran foto principal (pantalla completa, luminosa) */}
+      {/* Gran foto principal (pantalla completa) */}
       <div className="absolute inset-0">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -49,38 +44,8 @@ export default function Hero({ lang, images, theme = "dark" }: HeroProps) {
           className="h-full w-full object-cover brightness-110 contrast-105"
           loading="eager"
         />
-        {/* Overlay suave solo en la parte inferior para legibilidad del texto */}
-        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-      </div>
-
-      {/* Contenido superpuesto (centro) */}
-      <div className="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 text-center">
-        <div className="animate-fade-up max-w-3xl rounded-2xl bg-black/40 px-6 py-8 backdrop-blur-md">
-          <p
-            className={`mb-3 inline-block rounded-full border px-3 py-1 text-xs font-semibold backdrop-blur-sm ${
-              isDark
-                ? "border-brand-500/40 bg-brand-500/10 text-brand-300"
-                : "border-brand-500/40 bg-white/80 text-brand-800"
-            }`}
-          >
-            🏛️ {t.landingBadge}
-          </p>
-          <h1 className="text-3xl font-bold tracking-tight drop-shadow-lg sm:text-5xl md:text-6xl">
-            <span
-              className={`bg-gradient-to-r bg-clip-text font-bold text-transparent drop-shadow-lg ${
-                isDark
-                  ? "from-brand-300 via-brand-400 to-brand-600"
-                  : "from-brand-700 via-brand-500 to-brand-600"
-              }`}
-            >
-              {t.landingTitle}
-            </span>
-          </h1>
-          <p className={`mt-4 text-base font-medium drop-shadow-md sm:text-lg ${textMuted}`}>
-            {t.landingSubtitle}
-          </p>
-          <p className={`mt-4 text-sm ${textMuted}`}>{t.landingCtaBody}</p>
-        </div>
+        {/* Overlay suave solo en la parte inferior */}
+        <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/50 to-transparent" />
       </div>
 
       {/* Puntos (dots) abajo-izquierda + nombre + descarga */}
