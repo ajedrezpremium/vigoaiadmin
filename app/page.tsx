@@ -19,28 +19,28 @@ const HERO_IMAGES = [
     alt: "Islas Cíes — playas paradisíacas",
     name: "Illas Cíes",
     caption: "Illas Cíes",
-    link: "https://www.turismodevigo.org/es/10-visitas-imprescindibles",
+    link: "https://www.turismodevigo.org/sites/turismodevigo/files/vigo_islas_cies_0.jpg",
   },
   {
     src: "https://www.turismodevigo.org/sites/turismodevigo/files/vigo_navia_playa_samil.png",
     alt: "Playa de Samil",
     name: "Samil",
     caption: "Playa de Samil",
-    link: "https://www.turismodevigo.org/es/10-visitas-imprescindibles",
+    link: "https://www.turismodevigo.org/sites/turismodevigo/files/vigo_navia_playa_samil.png",
   },
   {
     src: "https://www.turismodevigo.org/sites/turismodevigo/files/vigo_puente_rande.jpg",
     alt: "Puente de Rande",
     name: "Puente de Rande",
     caption: "Puente de Rande",
-    link: "https://www.turismodevigo.org/es/10-visitas-imprescindibles",
+    link: "https://www.turismodevigo.org/sites/turismodevigo/files/vigo_puente_rande.jpg",
   },
   {
     src: "https://www.turismodevigo.org/sites/turismodevigo/files/vigo_visita_imprescindible_o_castro.jpg",
     alt: "O Castro — centro histórico",
     name: "O Castro",
     caption: "O Castro",
-    link: "https://www.turismodevigo.org/es/10-visitas-imprescindibles",
+    link: "https://www.turismodevigo.org/sites/turismodevigo/files/vigo_visita_imprescindible_o_castro.jpg",
   },
 ];
 
@@ -102,17 +102,6 @@ export default function Home() {
           <h2 className="mt-3 text-3xl font-semibold">{t.landingRagTitle}</h2>
           <p className={`mt-3 mx-auto max-w-3xl ${bodyCls}`}>{t.landingRagNote}</p>
           <p className={`mt-4 ${bodyCls}`}>{t.landingCtaBody}</p>
-          <button
-            type="button"
-            onClick={() => {
-              if (typeof window !== "undefined") {
-                window.dispatchEvent(new CustomEvent("open-assistant"));
-              }
-            }}
-            className="mt-6 inline-flex items-center gap-2 rounded-xl bg-brand-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-brand-500"
-          >
-            {t.landingCta} →
-          </button>
         </div>
       </section>
 
@@ -210,6 +199,40 @@ export default function Home() {
             >
               {t.landingNextCta2}
             </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Ubicación / VIGO + mapa */}
+      <section className="relative mx-auto max-w-6xl px-6 py-16">
+        <div
+          className={`rounded-2xl border p-8 ${cardCls} ${
+            isDark ? "bg-gradient-to-b from-slate-900 to-slate-950" : "bg-white"
+          }`}
+        >
+          <div className="grid gap-8 md:grid-cols-2">
+            <div>
+              <h2 className={`text-2xl font-bold ${headingCls}`}>VIGO</h2>
+              <p className={`mt-2 text-lg font-medium ${bodyCls}`}>
+                CHESS AI AGENCY · AI · Innovation · Execution
+              </p>
+              <p className={`mt-4 text-sm leading-relaxed ${bodyCls}`}>
+                Plataforma multiagente de Inteligencia Artificial para servizos públicos municipais.
+                Demo con agentes especializados, RAG con citas, multilingüe (galego/español/english).
+              </p>
+              <p className={`mt-4 text-sm ${mutedCls}`}>
+                📍 Praza do Rei, 1 — 36202 Vigo, Pontevedra, Galicia
+              </p>
+            </div>
+            <div className="overflow-hidden rounded-xl border border-slate-300 dark:border-slate-700">
+              <iframe
+                title="Mapa de Vigo"
+                src="https://maps.google.com/maps?q=42.2406,-8.7207&z=13&output=embed"
+                className="h-64 w-full border-0"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
           </div>
         </div>
       </section>
