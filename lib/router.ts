@@ -53,6 +53,7 @@ const AGENT_PRIORITY: AgentId[] = [
   "admin",
   "document",
   "culture",
+  "history",
   "language",
   "citizen",
 ];

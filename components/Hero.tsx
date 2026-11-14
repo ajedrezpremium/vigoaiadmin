@@ -101,17 +101,17 @@ export default function Hero({ lang, images, theme = "dark" }: HeroProps) {
               onClick={() => setIndex(i)}
               aria-label={`Ver foto: ${img.name}`}
               title={img.name}
-              className={`h-3 w-3 rounded-full border-2 transition-all ${
+              className={`h-4 w-4 rounded-full border-2 shadow-lg transition-all ${
                 i === index
                   ? "scale-125 border-white bg-brand-400"
-                  : "border-white/60 bg-white/30 hover:border-white hover:bg-white/60"
+                  : "border-white/80 bg-black/50 hover:border-white hover:bg-white/70"
               }`}
             />
           ))}
         </div>
 
-        {/* Nombre de la foto actual */}
-        <span className="ml-2 text-xs font-medium text-white drop-shadow-md">
+        {/* Nombre de la foto actual (con fondo para contraste) */}
+        <span className="ml-2 inline-block rounded-md bg-black/60 px-2 py-1 text-xs font-bold text-white backdrop-blur-sm">
           {current.name} ({index + 1}/{images.length})
         </span>
 

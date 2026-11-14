@@ -115,6 +115,20 @@ export const AGENTS: Record<AgentId, AgentDef> = {
     mission:
       "Culture, tourism and public events: agenda, facilities, schedules. Uses current official information and identifies publication date.",
   },
+  history: {
+    id: "history",
+    code: "AGENT 10 — HISTORY AI",
+    label: { gl: "Historia AI", es: "Historia AI", en: "History AI" },
+    keywords: [
+      "historia", "historico", "histórico", "hitos", "origen", "fundacion", "fundación",
+      "romano", "romanos", "medieval", "siglo", "época", "epoca", "antiguo", "antigua",
+      "evolucion", "evolución", "desarrollo", "batalla", "castro", "monte do castro",
+      "ria de vigo", "puerto", "reconquista", "galego", "vigo antiguo", "vixente",
+      "history", "historical", "milestones", "origin", "ancient", "medieval", "century",
+    ],
+    mission:
+      "Vigo history assistant: answer questions about Vigo's historical milestones, origins, evolution of the port and city, key events and heritage. Uses the authorized demo corpus as the only factual basis; never invents dates or facts.",
+  },
   language: {
     id: "language",
     code: "AGENT 09 — LANGUAGE AI",

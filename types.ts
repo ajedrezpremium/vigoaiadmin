@@ -12,7 +12,8 @@ export type AgentId =
   | "business"
   | "social"
   | "culture"
-  | "language";
+  | "language"
+  | "history";
 
 export interface DemoDoc {
   id: string;

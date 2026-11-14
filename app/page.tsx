@@ -81,6 +81,7 @@ const AGENT_ORDER: AgentId[] = [
   "business",
   "social",
   "culture",
+  "history",
   "language",
 ];
 

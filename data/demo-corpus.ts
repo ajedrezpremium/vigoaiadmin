@@ -148,6 +148,61 @@ export const DEMO_CORPUS: DemoDoc[] = [
     content:
       "Para solicitar cita previa en el Concello de Vigo es necesario: 1) disponer del sistema de identificación admitido para la vía electrónica (certificado digital, identificación electrónica DNIe o clave de la plataforma de identificación pública); 2) identificar el servicio o unidad responsable del trámite; 3) seleccionar el canal (sede electrónica, Registro Municipal auxiliar, oficina de atención al ciudadano u oficina telefónica). Las citas del Servicio de Atención al Ciudadano (OAC) se realizan previa solicitud y se pueden gestionar telefónicamente o a través de la sede electrónica. El Registro Municipal auxiliar atiende de 9:00 a 14:00 de lunes a viernes. Las solicitudes presentadas por vía electrónica se registran a las 24 horas todos los días; para efectos de plazo se toma como fecha de presentación la recepción hasta las 14:30. El asistente virtual de información municipal orienta sobre los canales disponibles, pero la solicitud efectiva de cita se realiza a través de los canales oficiales del Concello.",
   },
+  {
+    id: "DOC-014",
+    title: "Historia de Vigo: orígenes y época castreña",
+    dept: "Cultura e Patrimonio",
+    type: "información",
+    lang: "multi",
+    published: "2026-01-10",
+    effective: "2026-01-10",
+    content:
+      "Vigo tiene su origen en la época castreña. En el monte do Castro se han encontrado restos de un castro celta que demuestra la presencia humana en la zona desde hace más de 2.000 años. Los romanos también dejaron su huella: en el barrio de Bouzas se han encontrado restos de salazones romanas, lo que indica que Vigo ya era un enclave pesquero y comercial en la época del Imperio Romano. El nombre 'Vigo' podría derivar del latín 'vicus' (aldea) o de 'vicus spaccorum' (aldea de los espacenses). La ría de Vigo, con sus islas Cíes, fue un refugio natural para navegantes desde la antigüedad.",
+  },
+  {
+    id: "DOC-015",
+    title: "Historia de Vigo: Edad Media y señorío",
+    dept: "Cultura e Patrimonio",
+    type: "información",
+    lang: "multi",
+    published: "2026-01-10",
+    effective: "2026-01-10",
+    content:
+      "Durante la Edad Media, Vigo fue un pequeño núcleo de pescadores bajo el señorío de los obispos de Tui. En el siglo XII, el rey Fernando II de León otorgó fueros a la villa. El castillo de O Castro fue reconstruido en el siglo XVII para defender la ciudad de los ataques ingleses y holandeses. Vigo sufrió numerosos ataques: en 1585 y 1589 fue saqueada por el corsario inglés Francis Drake. En 1656, los ingleses bajo el mando de Robert Blake atacaron la ciudad. Estos ataques motivaron la construcción de fortificaciones que aún se conservan en el monte do Castro.",
+  },
+  {
+    id: "DOC-016",
+    title: "Historia de Vigo: la Batalla de Rande (1702) y el tesoro",
+    dept: "Cultura e Patrimonio",
+    type: "información",
+    lang: "multi",
+    published: "2026-01-10",
+    effective: "2026-01-10",
+    content:
+      "El 23 de octubre de 1702 tuvo lugar la Batalla de la Ría de Vigo (batalla de Rande), uno de los episodios más famosos de la historia de Vigo. Una flota hispano-francesa cargada con el tesoro de las Indias (oro y plata de América) fue atacada por la flota anglo-holandesa en la ría de Vigo. La flota aliada destruyó o capturó la mayor parte de los barcos. Parte del tesoro se hundió en la ría y ha sido objeto de numerosas búsquedas y leyendas. Este episodio inspiró la novela 'Veinte mil leguas de viaje submarino' de Julio Verne. El tesoro de Rande sigue siendo un mito vigués. En el lugar de la batalla, en la ensenada de San Simón, se puede visitar hoy un centro de interpretación.",
+  },
+  {
+    id: "DOC-017",
+    title: "Historia de Vigo: el puerto y la emigración",
+    dept: "Cultura e Patrimonio",
+    type: "información",
+    lang: "multi",
+    published: "2026-01-10",
+    effective: "2026-01-10",
+    content:
+      "El puerto de Vigo se convirtió en el motor de la ciudad a partir del siglo XIX. La pesca de la sardina y la industria conservera convirtieron a Vigo en la capital del marisqueo. En el siglo XX, Vigo se convirtió en uno de los principales puertos de emigración a América: miles de gallegos partieron desde Vigo hacia Argentina, Uruguay, Cuba y México. La Estación Marítima de Vigo fue el punto de partida de esa diáspora. Vigo también es conocida como la 'ciudad olívica' por sus olivos y como la 'ciudad del mar'. Hoy el puerto de Vigo es uno de los más importantes de España en tráfico de mercancías y pesca.",
+  },
+  {
+    id: "DOC-018",
+    title: "Historia de Vigo: siglo XX y actualidad",
+    dept: "Cultura e Patrimonio",
+    type: "información",
+    lang: "multi",
+    published: "2026-01-10",
+    effective: "2026-01-10",
+    content:
+      "En el siglo XX, Vigo experimentó un gran crecimiento industrial y demográfico. La industria automovilística (Citroën/PSA) se instaló en Vigo en 1958, convirtiendo a la ciudad en un importante centro industrial. La población creció de 40.000 habitantes a más de 300.000. Vigo es hoy la ciudad más poblada de Galicia. El monte do Castro, con su parque y las ruinas del castillo, es uno de los principales miradores de la ciudad. Las Islas Cíes, declaradas Parque Nacional en 2002, son el gran atractivo turístico. La ría de Vigo es una de las más bellas de Galicia, con sus bateas de mejillones y sus playas.",
+  },
 ];
 
 /** Preguntas sugeridas por idioma para la interfaz */
@@ -158,6 +213,7 @@ export const SUGGESTED_QUESTIONS: Record<string, string[]> = {
     "Cando abre a biblioteca municipal?",
     "Como podo solicitar unha licenza de obras menores?",
     "Como podo solicitar unha cita previa na sede electronica?",
+    "Cal foi a batalla de Rande?",
   ],
   es: [
     "¿Cuál es el horario de atención al público?",
@@ -165,6 +221,7 @@ export const SUGGESTED_QUESTIONS: Record<string, string[]> = {
     "¿Cuándo abre la biblioteca municipal?",
     "¿Cómo solicito una licencia de obra menor?",
     "¿Cómo solicito una cita previa en la sede electrónica?",
+    "¿Cuál fue la batalla de Rande?",
   ],
   en: [
     "What are the opening hours for municipal services?",
@@ -172,5 +229,6 @@ export const SUGGESTED_QUESTIONS: Record<string, string[]> = {
     "When is the municipal library open?",
     "How do I apply for a minor works permit?",
     "How do I request a prior appointment at the registry?",
+    "What was the Battle of Rande?",
   ],
 };
