@@ -29,6 +29,13 @@ const HERO_IMAGES = [
     link: "https://upload.wikimedia.org/wikipedia/commons/0/0e/Paseo_samil%2C_Vigo.jpg",
   },
   {
+    src: "https://upload.wikimedia.org/wikipedia/commons/d/d4/O_Castro%2C_Vigo.jpg",
+    alt: "Monte do Castro — panorámica",
+    name: "Monte do Castro",
+    caption: "Monte do Castro",
+    link: "https://upload.wikimedia.org/wikipedia/commons/d/d4/O_Castro%2C_Vigo.jpg",
+  },
+  {
     src: "https://upload.wikimedia.org/wikipedia/commons/e/ec/Ponte_de_Rande_desde_A_Gu%C3%ADa_%28Teis%2C_Vigo%29.jpg",
     alt: "Puente de Rande",
     name: "Puente de Rande",
@@ -36,11 +43,32 @@ const HERO_IMAGES = [
     link: "https://upload.wikimedia.org/wikipedia/commons/e/ec/Ponte_de_Rande_desde_A_Gu%C3%ADa_%28Teis%2C_Vigo%29.jpg",
   },
   {
-    src: "https://upload.wikimedia.org/wikipedia/commons/d/d4/O_Castro%2C_Vigo.jpg",
-    alt: "O Castro — centro histórico",
-    name: "O Castro",
-    caption: "O Castro",
-    link: "https://upload.wikimedia.org/wikipedia/commons/d/d4/O_Castro%2C_Vigo.jpg",
+    src: "https://upload.wikimedia.org/wikipedia/commons/0/08/Puerto_de_Vigo.jpg",
+    alt: "Puerto de Vigo",
+    name: "Puerto de Vigo",
+    caption: "Puerto de Vigo",
+    link: "https://upload.wikimedia.org/wikipedia/commons/0/08/Puerto_de_Vigo.jpg",
+  },
+  {
+    src: "https://upload.wikimedia.org/wikipedia/commons/6/6d/Real_Club_N%C3%A1utico_de_Vigo.jpg",
+    alt: "Real Club Náutico de Vigo",
+    name: "Real Club Náutico",
+    caption: "Real Club Náutico",
+    link: "https://upload.wikimedia.org/wikipedia/commons/6/6d/Real_Club_N%C3%A1utico_de_Vigo.jpg",
+  },
+  {
+    src: "https://upload.wikimedia.org/wikipedia/commons/1/10/Vigo_puesta_de_Sol.jpg",
+    alt: "Puesta de sol en Vigo",
+    name: "Puesta de sol",
+    caption: "Puesta de sol",
+    link: "https://upload.wikimedia.org/wikipedia/commons/1/10/Vigo_puesta_de_Sol.jpg",
+  },
+  {
+    src: "https://upload.wikimedia.org/wikipedia/commons/9/9b/R%C3%ADa_de_Vigo_e_islas_C%C3%ADes.jpg",
+    alt: "Ría de Vigo e Islas Cíes",
+    name: "Ría de Vigo",
+    caption: "Ría de Vigo",
+    link: "https://upload.wikimedia.org/wikipedia/commons/9/9b/R%C3%ADa_de_Vigo_e_islas_C%C3%ADes.jpg",
   },
 ];
 
