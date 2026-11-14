@@ -15,11 +15,11 @@ export const dynamic = "force-dynamic";
 
 const HERO_IMAGES = [
   {
-    src: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Illas_C%C3%ADes_dende_Patos_16VIII2015.jpg",
-    alt: "Islas Cíes — playas paradisíacas",
+    src: "/Vista%20Aerea%20Cies.png",
+    alt: "Islas Cíes — vista aérea",
     name: "Illas Cíes",
     caption: "Illas Cíes",
-    link: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Illas_C%C3%ADes_dende_Patos_16VIII2015.jpg",
+    link: "/Vista%20Aerea%20Cies.png",
   },
   {
     src: "https://upload.wikimedia.org/wikipedia/commons/0/0e/Paseo_samil%2C_Vigo.jpg",
