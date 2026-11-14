@@ -1,0 +1,194 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "VIGO AI ADMINISTRATION — DEMO API",
+    "description": "API multiagente de IA para servicios públicos municipales. Demo gratuita v1.0 por CHESS AI AGENCY.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "CHESS AI AGENCY",
+      "url": "https://vigo-ai-demo.vercel.app"
+    }
+  },
+  "servers": [
+    { "url": "https://vigo-ai-demo.vercel.app", "description": "Producción" },
+    { "url": "http://localhost:3000", "description": "Local" }
+  ],
+  "paths": {
+    "/api/chat": {
+      "post": {
+        "summary": "Consulta al agente IA",
+        "description": "Orquestación MASTER AGENT: clasifica intención, recupera evidencia RAG, genera respuesta con citas [S1][S2].",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["message"],
+                "properties": {
+                  "message": { "type": "string", "maxLength": 2000, "description": "Pregunta del ciudadano" },
+                  "history": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "role": { "type": "string", "enum": ["user", "assistant"] },
+                        "content": { "type": "string" }
+                      }
+                    }
+                  },
+                  "language": { "type": "string", "enum": ["gl", "es", "en"] },
+                  "conversationId": { "type": "string", "format": "uuid", "description": "ID de conversación para memoria persistente" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Respuesta del agente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "reply": { "type": "string" },
+                    "agent": { "type": "string" },
+                    "agentLabel": { "type": "string" },
+                    "sources": { "type": "array", "items": { "type": "object" } },
+                    "provider": { "type": "string" },
+                    "model": { "type": "string" },
+                    "demoMode": { "type": "boolean" },
+                    "conversationId": { "type": "string" },
+                    "escalated": { "type": "boolean" }
+                  }
+                }
+              }
+            }
+          },
+          "400": { "description": "Mensaje vacío o demasiado largo" },
+          "429": { "description": "Rate limit excedido" }
+        }
+      }
+    },
+    "/api/escalate": {
+      "post": {
+        "summary": "Escalar a personal municipal (Human-in-the-Loop)",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "agent": { "type": "string" },
+                  "context": { "type": "object" },
+                  "language": { "type": "string", "enum": ["gl", "es", "en"] },
+                  "conversationId": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Escalación creada", "content": { "application/json": { "schema": { "type": "object", "properties": { "escalationId": { "type": "string" }, "status": { "type": "string" } } } } } },
+          "503": { "description": "Persistencia no disponible" }
+        }
+      }
+    },
+    "/api/mcp": {
+      "post": {
+        "summary": "Fachada MCP (JSON-RPC 2.0)",
+        "description": "Métodos: ping, tools/list, tools/call. Herramientas: search_knowledge, escalate_to_human, solicitar_cita_previa.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "jsonrpc": { "type": "string", "example": "2.0" },
+                  "id": {},
+                  "method": { "type": "string", "enum": ["ping", "tools/list", "tools/call"] },
+                  "params": { "type": "object" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Respuesta JSON-RPC 2.0" }
+        }
+      },
+      "get": {
+        "summary": "Listar herramientas MCP",
+        "responses": {
+          "200": { "description": "Lista de herramientas disponibles" }
+        }
+      }
+    },
+    "/api/workflow": {
+      "get": {
+        "summary": "Listar flujos disponibles",
+        "responses": {
+          "200": { "description": "Lista de flujos (cita-previa, info-tramite)" }
+        }
+      },
+      "post": {
+        "summary": "Ejecutar un flujo multi-paso",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["flowId"],
+                "properties": {
+                  "flowId": { "type": "string", "enum": ["cita-previa", "info-tramite"] },
+                  "input": { "type": "object", "description": "Parámetros del flujo (query, motivo, escalate, etc.)" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Resultado del flujo con trazabilidad por paso" },
+          "400": { "description": "flowId requerido" }
+        }
+      }
+    },
+    "/api/admin/eval": {
+      "get": {
+        "summary": "Evaluación de calidad RAG",
+        "description": "Ejecuta el golden set (13 casos) y devuelve hit rate, abstención y detalles.",
+        "parameters": [
+          { "name": "token", "in": "query", "schema": { "type": "string" }, "description": "ADMIN_TOKEN (si configurado)" }
+        ],
+        "responses": {
+          "200": { "description": "Métricas de evaluación RAG" },
+          "401": { "description": "No autorizado" }
+        }
+      }
+    },
+    "/api/admin/stats": {
+      "get": {
+        "summary": "Estadísticas del panel admin",
+        "description": "Requiere header x-admin-key === ADMIN_TOKEN.",
+        "responses": {
+          "200": { "description": "Estadísticas de mensajes, agentes y proveedores" },
+          "401": { "description": "No autorizado" },
+          "503": { "description": "Supabase no configurado" }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ChatMessage": {
+        "type": "object",
+        "properties": {
+          "role": { "type": "string", "enum": ["user", "assistant"] },
+          "content": { "type": "string" }
+        }
+      }
+    }
+  }
+}

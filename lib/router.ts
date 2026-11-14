@@ -27,7 +27,7 @@ function tokenize(text: string): string[] {
 /** Detecta el idioma por marcadores gallegos; defecto: es */
 export function detectLanguage(text: string, fallback: Lang = "es"): Lang {
   const t = text.toLowerCase();
-  const glMarkers = /\b(que|cal|cando|precisto|podo|axudarche|horario|biblioteca|servizos|galego|mañá|obradoiro|atén|dispoñibles|decalaración)\b/;
+  const glMarkers = /\b(cal|cando|precisto|podo|axudarche|servizos|galego|mañá|obradoiro|atén|dispoñibles|decalaración)\b/;
   const enMarkers = /\b(what|when|where|how|open|need|can i|library|opening hours|documents)\b/;
   const esMarkers = /\b(cuál|cuando|cómo|qué|necesito|puedo|horario|biblioteca|servicios|galego)\b/;
   if (t.includes("galego") || glMarkers.test(t)) return "gl";
