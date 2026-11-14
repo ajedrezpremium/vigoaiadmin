@@ -30,12 +30,17 @@ export default function SiteHeader({
   return (
     <header className="sticky top-0 z-40 border-b border-slate-800 bg-slate-950/80 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center gap-3 px-6 py-3">
-        <a href="#inicio" title="Inicio" className="flex items-center gap-2 font-bold">
-          <span className="text-xl">🏛️</span>
-          <span className="bg-gradient-to-r from-brand-300 to-brand-500 bg-clip-text text-transparent">
-            VIGO AI
+        <a href="#inicio" title="Inicio" className="flex flex-col items-start gap-0.5 font-bold leading-tight">
+          <span className="flex items-center gap-2">
+            <span className="text-xl">🏛️</span>
+            <span className="bg-gradient-to-r from-brand-300 to-brand-500 bg-clip-text text-transparent">
+              VIGO AI
+            </span>
+            <span className="text-slate-400">ADMINISTRATION</span>
           </span>
-          <span className="text-slate-400">ADMINISTRATION</span>
+          <span className="ml-7 text-[10px] font-medium text-slate-400">
+            Plataforma inteligente para servizos públicos
+          </span>
         </a>
 
         <nav className="ml-6 hidden items-center gap-1 md:flex" aria-label="Navegación principal">
