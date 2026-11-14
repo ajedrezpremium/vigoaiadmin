@@ -105,6 +105,7 @@ export default function Home() {
 
   return (
     <main
+      id="main-content"
       className={`relative overflow-hidden ${
         isDark ? "bg-slate-950 text-slate-100" : "bg-white text-slate-900"
       }`}

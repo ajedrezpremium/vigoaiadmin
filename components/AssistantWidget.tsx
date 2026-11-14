@@ -68,6 +68,16 @@ export default function AssistantWidget() {
     return () => window.removeEventListener("open-assistant", onOpen);
   }, []);
 
+  // Escape cierra el widget (accesibilidad)
+  useEffect(() => {
+    if (!open) return;
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") setOpen(false);
+    }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
   }, [messages, loading]);
