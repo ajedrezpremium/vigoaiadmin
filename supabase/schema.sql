@@ -50,6 +50,19 @@ create table if not exists public.escalations (
 create index if not exists idx_escalations_created
   on public.escalations(created_at);
 
+-- Roles de usuario (RBAC — Semana 2 v1.2)
+create table if not exists public.user_roles (
+  user_id uuid primary key references auth.users(id) on delete cascade,
+  role text not null check (role in ('admin', 'editor', 'viewer')),
+  created_at timestamptz not null default now()
+);
+
+-- RLS para user_roles: solo el propio usuario puede leer su rol
+alter table public.user_roles enable row level security;
+drop policy if exists "user_roles_self_select" on public.user_roles;
+create policy "user_roles_self_select" on public.user_roles
+  for select to authenticated using (auth.uid() = user_id);
+
 -- ==============================================================
 -- ROW LEVEL SECURITY (RLS) — v1.2
 -- ==============================================================

@@ -1,25 +1,19 @@
 // API /api/admin/eval — Evaluación de calidad RAG (PRO AGENT / Observabilidad)
 // Ejecuta el golden set y devuelve métricas (hit rate, abstención).
-// Protegido por ADMIN_TOKEN (si está configurado; en demo abierto).
+// Protegido por ADMIN_TOKEN o Supabase Auth + RBAC.
 
 import { NextRequest, NextResponse } from "next/server";
 import { runRagEval } from "@/lib/rag.eval";
 import { logAudit } from "@/lib/supabase";
+import { checkAdminAuth } from "@/lib/admin-auth";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
 
-function isAuthorized(req: NextRequest): boolean {
-  const adminToken = process.env.ADMIN_TOKEN;
-  if (!adminToken || adminToken.startsWith("TU_TOKEN")) return true; // demo abierto
-  const provided =
-    req.headers.get("x-admin-token") ?? req.nextUrl.searchParams.get("token");
-  return provided === adminToken;
-}
-
 export async function GET(req: NextRequest) {
-  if (!isAuthorized(req)) {
-    return NextResponse.json({ error: "unauthorized" }, { status: 401 });
+  const auth = await checkAdminAuth(req);
+  if (!auth.authorized) {
+    return NextResponse.json({ error: "No autorizado" }, { status: 401 });
   }
   const result = runRagEval();
   await logAudit({

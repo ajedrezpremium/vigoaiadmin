@@ -21,7 +21,7 @@ Implementación de la **DEMO GRATUITA v1.0** descrita en `VIGO_AI_ADMINISTRATION
 | Seguridad y cumplimiento (§3) | ✅ rate limiting, anti prompt-injection, auditoría, minimización de datos |
 | Panel interno (§6) | ✅ versión demo en `/admin` (token simple) |
 | Persistencia | ✅ opcional vía Supabase (conversaciones + audit_events + escalations) |
-| **LLM Router PRO** | ✅ OpenRouter (free dinámico) → fallback → Gemini → modo local |
+| **LLM Router PRO** | ✅ OpenRouter (free dinámico) → Groq → Gemini → Cohere → Cloudflare → OVHcloud (UE) → modo local |
 | **Tool Calling** | ✅ `search_knowledge` · `escalate_to_human` · `solicitar_cita_previa` |
 | **Memoria persistente** | ✅ `conversationId` + historial entre turnos |
 | **Human-in-the-Loop** | ✅ `/api/escalate` + integración en loop agéntico |
@@ -33,12 +33,17 @@ Implementación de la **DEMO GRATUITA v1.0** descrita en `VIGO_AI_ADMINISTRATION
 ## Stack (todo en capa gratuita)
 
 - **Next.js 15 + React 19 + Tailwind** — frontend y API
-- **OpenRouter** — modelos gratuitos (`:free`), selección dinámica con fallback
-- **Gemini API** (Google AI Studio) — proveedor de respaldo directo
+- **Multi-proveedor FREE** (catálogo de [awesome-free-llm-apis](https://github.com/mnfst/awesome-free-llm-apis)) con fallback automático:
+  1. **OpenRouter** — mejor modelo `:free` dinámico + modelo de respaldo
+  2. **Groq** — inferencia LPU ultra-rápida (30 RPM · 1.000 req/día)
+  3. **Gemini API** (Google AI Studio) — respaldo directo nativo
+  4. **Cohere** — 1.000 llamadas/mes (multilingüe, buen gl/es)
+  5. **Cloudflare Workers AI** — 10.000 "neurons"/día (60+ modelos)
+  6. **OVHcloud AI Endpoints** — anónimo, hosting UE (RGPD), 2 RPM
 - **Supabase** — PostgreSQL (conversaciones, auditoría, escalaciones) — opcional
 - **GitHub + Vercel** — repositorio y despliegue gratuito
 
-Si no hay ninguna API key configurada, la app sigue funcionando en **MODO DEMO LOCAL** (respuestas RAG por plantilla) — ideal para probar el flujo completo sin claves.
+Cada proveedor sin clave en `.env` se salta automáticamente (ver `lib/providers.ts`). Si no hay ninguna API key configurada, la app sigue funcionando en **MODO DEMO LOCAL** (respuestas RAG por plantilla) — ideal para probar el flujo completo sin claves.
 
 ---
 
@@ -61,14 +66,23 @@ npm run dev
 | Servicio | Dónde | Variable |
 |---|---|---|
 | OpenRouter | https://openrouter.ai/keys | `OPENROUTER_API_KEY` |
+| Groq | https://console.groq.com/keys | `GROQ_API_KEY` |
 | Gemini | https://aistudio.google.com/apikey | `GEMINI_API_KEY` |
+| Cohere (Trial) | https://dashboard.cohere.com/api-keys | `COHERE_API_KEY` |
+| Cloudflare Workers AI | https://dash.cloudflare.com/profile/api-tokens | `CLOUDFLARE_API_KEY`, `CLOUDFLARE_ACCOUNT_ID` |
+| OVHcloud AI | sin clave (anónimo) | — |
 | Supabase | https://supabase.com/dashboard → Settings → API | `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY` |
 | Langfuse (opcional) | https://cloud.langfuse.com | `LANGFUSE_PUBLIC_KEY`, `LANGFUSE_SECRET_KEY`, `LANGFUSE_HOST` |
 
-Modelos free por defecto (selección dinámica en runtime):
-- Principal: mejor modelo `:free` disponible en OpenRouter (caché 60s)
-- Respaldo OpenRouter: `google/gemma-4-26b-a4b-it:free`
-- Respaldo directo Gemini: `gemini-3.8-flash`
+Modelos free por defecto (todos con override por `.env`, ver `.env.example`):
+- OpenRouter: mejor modelo `:free` disponible (caché 60s) + respaldo `google/gemma-4-26b-a4b-it:free`
+- Groq: `openai/gpt-oss-120b`
+- Gemini: `gemini-3.8-flash`
+- Cohere: `command-r7b-12-2024`
+- Cloudflare: `@cf/openai/gpt-oss-120b`
+- OVHcloud: `gpt-oss-120b`
+
+> ⚠️ Los free tiers son para demo y desarrollo: varios proveedores registran los prompts para entrenar. Para producción municipal con datos de ciudadanos: modelo según la política de la entidad (Megaprompt §489).
 
 ## 3. Base de datos Supabase
 
@@ -136,7 +150,7 @@ CIUDADANÍA ──► Widget flotante (React)
                  ├─► detectLanguage + classify (lib/router.ts)
                  ├─► retrieve() RAG léxico (lib/rag.ts) ──► corpus sintético (data/demo-corpus.ts)
                  ├─► buildSystemPrompt(agent) (lib/agents.ts)  ← guardrails §3/§10/§11
-                 ├─► chatLLM(): OpenRouter (free dinámico) → OpenRouter(fallback) → Gemini (lib/llm.ts)
+                 ├─► chatLLM(): OpenRouter(free) → OpenRouter(fallback) → Groq → Gemini → Cohere → Cloudflare → OVHcloud (lib/llm.ts + lib/providers.ts)
                  │        └─ Tool Calling: search_knowledge, escalate_to_human, solicitar_cita_previa
                  │        └─ (si todo falla) respuesta plantilla RAG local
                  ├─► validación de salida

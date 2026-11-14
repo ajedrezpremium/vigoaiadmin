@@ -1,17 +1,33 @@
 // Capa de abstracción de modelos (Megaprompt §9 — AI LAYER)
-// Orden de proveedores:
-//   1. OpenRouter (modelos ":free")
+// Orden de proveedores (catálogo FREE en lib/providers.ts, fuente:
+// github.com/mnfst/awesome-free-llm-apis). Los proveedores sin claves en .env
+// se saltan automáticamente:
+//   1. OpenRouter (modelos ":free", selección dinámica)
 //   2. OpenRouter (fallback)
-//   3. Gemini directo (Google AI Studio)
-//   4. Modo demo local sin LLM (respuestas plantilla a partir de la evidencia)
+//   3. Groq (inferencia LPU, 1.000 req/día free)
+//   4. Gemini directo (Google AI Studio)
+//   5. Cohere (1.000 llamadas/mes free)
+//   6. Cloudflare Workers AI (10.000 neurons/día free)
+//   7. OVHcloud AI Endpoints (anónimo, hosting UE, 2 RPM)
+//   8. Modo demo local sin LLM (respuestas plantilla a partir de la evidencia)
 //
 // Nivel PRO implementado (CHESS AI AGENCY · XG AI AGENT ENGINE):
 //   - LLM Router con fallback automático entre modelos/proveedores.
+//   - Caller genérico OpenAI-compatible: añadir un proveedor nuevo es solo
+//     añadir su entrada a lib/providers.ts (endpoint + key + modelo).
 //   - Tool Calling: el agente decide cuándo buscar en la base de conocimiento
 //     (tool `search_knowledge`) y ejecuta la búsqueda, iterando hasta responder.
 
 import { retrieve } from "@/lib/rag";
 import { createEscalation } from "@/lib/supabase";
+import {
+  PROVIDERS,
+  keyConfiguredProviders,
+  providerConfigured,
+  providerEndpoint,
+  providerModel,
+} from "@/lib/providers";
+import type { OpenAICompatProvider } from "@/lib/providers";
 
 export interface ToolDef {
   name: string;
@@ -179,26 +195,26 @@ function safeJsonParse(s: string): Record<string, unknown> | undefined {
   }
 }
 
-// ---------- OpenRouter ----------
+// ---------- Caller genérico OpenAI-compatible (OpenRouter, Groq, Cohere, Cloudflare, OVH…) ----------
 
-async function callOpenRouter(
-  req: AgentTurn,
+async function callOpenAICompat(
+  prov: OpenAICompatProvider,
   model: string,
+  req: AgentTurn,
   tools: ToolDef[],
   messages: ConvMessage[]
 ): Promise<LLMResponse> {
-  const key = process.env.OPENROUTER_API_KEY;
-  if (!key) throw new Error("OPENROUTER_API_KEY no configurada");
+  const key = prov.envKeyVar ? process.env[prov.envKeyVar] : undefined;
+  const headers: Record<string, string> = {
+    "Content-Type": "application/json",
+    ...(prov.headers ?? {}),
+  };
+  if (key) headers.Authorization = `Bearer ${key}`;
 
   const res = await withTimeout(
-    fetch("https://openrouter.ai/api/v1/chat/completions", {
+    fetch(providerEndpoint(prov), {
       method: "POST",
-      headers: {
-        Authorization: `Bearer ${key}`,
-        "Content-Type": "application/json",
-        "HTTP-Referer": "https://vigo-ai-demo.vercel.app",
-        "X-Title": "VIGO AI ADMINISTRATION DEMO",
-      },
+      headers,
       body: JSON.stringify({
         model,
         temperature: req.temperature ?? 0.2,
@@ -218,7 +234,7 @@ async function callOpenRouter(
 
   if (!res.ok) {
     const body = await res.text();
-    throw new Error(`OpenRouter ${res.status}: ${body.slice(0, 200)}`);
+    throw new Error(`${prov.name} ${res.status}: ${body.slice(0, 200)}`);
   }
   const data = await res.json();
   const message = data?.choices?.[0]?.message;
@@ -230,8 +246,10 @@ async function callOpenRouter(
       arguments: tc.function?.arguments ?? "{}",
     })
   );
-  if (!text && (!toolCalls || toolCalls.length === 0)) throw new Error("OpenRouter: respuesta vacía");
-  return { text: text ?? "", provider: "openrouter", model: data?.model ?? model, toolCalls };
+  if (!text && (!toolCalls || toolCalls.length === 0)) {
+    throw new Error(`${prov.name}: respuesta vacía`);
+  }
+  return { text: text ?? "", provider: prov.name, model: data?.model ?? model, toolCalls };
 }
 
 // ---------- Gemini (REST directo, sin dependencias) ----------
@@ -465,6 +483,29 @@ export async function getBestFreeModel(): Promise<string> {
 
 // ---------- Orquestador con fallbacks ----------
 
+interface LLMAttempt {
+  name: string;
+  model: string;
+  fn: (r: AgentTurn) => Promise<LLMResponse>;
+}
+
+/** Intento para un proveedor OpenAI-compatible del catálogo (null si no está configurado) */
+function compatAttempt(provName: string, modelOverride?: string): LLMAttempt | null {
+  const prov = PROVIDERS[provName];
+  if (!prov || !providerConfigured(prov)) return null;
+  const model = modelOverride ?? providerModel(prov);
+  return {
+    name: prov.name,
+    model,
+    fn: (r: AgentTurn) =>
+      runAgentLoop(
+        (turn) => callOpenAICompat(prov, model, turn, turn.tools ?? DEFAULT_TOOLS, turn.messages),
+        r,
+        r.tools ?? DEFAULT_TOOLS
+      ),
+  };
+}
+
 export async function chatLLM(req: LLMRequest): Promise<LLMResponse> {
   const errors: string[] = [];
 
@@ -472,28 +513,36 @@ export async function chatLLM(req: LLMRequest): Promise<LLMResponse> {
   const openrouterFallback = process.env.OPENROUTER_FALLBACK_MODEL || "google/gemma-4-26b-a4b-it:free";
   const geminiModel = process.env.GEMINI_MODEL || "gemini-3.8-flash";
 
-  const attempts: Array<{
-    name: string;
-    model: string;
-    fn: (r: AgentTurn) => Promise<LLMResponse>;
-  }> = [
-    {
-      name: "openrouter",
-      model: openrouterModel,
-      fn: (r) => runAgentLoop((turn) => callOpenRouter(turn, openrouterModel, turn.tools ?? DEFAULT_TOOLS, turn.messages), r, r.tools ?? DEFAULT_TOOLS),
-    },
-    {
-      name: "openrouter-fallback",
-      model: openrouterFallback,
-      fn: (r) =>
-        runAgentLoop((turn) => callOpenRouter(turn, openrouterFallback, turn.tools ?? DEFAULT_TOOLS, turn.messages), r, r.tools ?? DEFAULT_TOOLS),
-    },
-    {
-      name: "gemini",
-      model: geminiModel,
-      fn: (r) => runAgentLoop((turn) => callGemini(turn, geminiModel, turn.tools ?? DEFAULT_TOOLS, turn.messages), r, r.tools ?? DEFAULT_TOOLS),
-    },
-  ];
+  // Cadena de fallbacks: cada intento sin claves en .env se salta automáticamente
+  const geminiAttempt: LLMAttempt | null = process.env.GEMINI_API_KEY
+    ? {
+        name: "gemini",
+        model: geminiModel,
+        fn: (r) =>
+          runAgentLoop(
+            (turn) => callGemini(turn, geminiModel, turn.tools ?? DEFAULT_TOOLS, turn.messages),
+            r,
+            r.tools ?? DEFAULT_TOOLS
+          ),
+      }
+    : null;
+
+  const attempts: LLMAttempt[] = [
+    // 1. OpenRouter — mejor modelo ":free" disponible (selección dinámica)
+    compatAttempt("openrouter", openrouterModel),
+    // 2. OpenRouter — modelo de respaldo fijo
+    compatAttempt("openrouter", openrouterFallback),
+    // 3. Groq — inferencia LPU ultra-rápida (30 RPM · 1.000 req/día)
+    compatAttempt("groq"),
+    // 4. Gemini — respaldo directo nativo (Google AI Studio)
+    geminiAttempt,
+    // 5. Cohere — 1.000 llamadas/mes, buen multilingüe (gl/es/en)
+    compatAttempt("cohere"),
+    // 6. Cloudflare Workers AI — 10.000 neurons/día compartidas
+    compatAttempt("cloudflare"),
+    // 7. OVHcloud AI — anónimo, hosting UE (2 RPM), último recurso sin claves
+    compatAttempt("ovh"),
+  ].filter((a): a is LLMAttempt => a !== null);
 
   for (const attempt of attempts) {
     try {
@@ -510,5 +559,5 @@ export async function chatLLM(req: LLMRequest): Promise<LLMResponse> {
 }
 
 export function llmConfigured(): boolean {
-  return Boolean(process.env.OPENROUTER_API_KEY || process.env.GEMINI_API_KEY);
+  return keyConfiguredProviders().length > 0 || Boolean(process.env.GEMINI_API_KEY);
 }

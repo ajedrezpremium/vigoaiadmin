@@ -1,33 +1,32 @@
 // API /api/admin/knowledge — Gestión de conocimiento (PRO AGENT / Semana 2 v1.2)
 // CRUD básico de documentos del corpus de demostración.
-// Requiere header x-admin-key === ADMIN_TOKEN (si configurado; en demo abierto).
+// Protegido por ADMIN_TOKEN o Supabase Auth + RBAC.
 
 import { NextRequest, NextResponse } from "next/server";
 import { DEMO_CORPUS } from "@/data/demo-corpus";
 import type { DemoDoc } from "@/types";
+import { checkAdminAuth, hasRole } from "@/lib/admin-auth";
 
 // Almacén en memoria para la demo (no persiste entre deploys)
 const runtimeCorpus: DemoDoc[] = [...DEMO_CORPUS];
 
 export const runtime = "nodejs";
 
-function isAuthorized(req: NextRequest): boolean {
-  const adminToken = process.env.ADMIN_TOKEN;
-  if (!adminToken || adminToken.startsWith("TU_TOKEN")) return true;
-  const provided = req.headers.get("x-admin-key") ?? req.nextUrl.searchParams.get("token");
-  return provided === adminToken;
-}
-
 export async function GET(req: NextRequest) {
-  if (!isAuthorized(req)) {
-    return NextResponse.json({ error: "unauthorized" }, { status: 401 });
+  const auth = await checkAdminAuth(req);
+  if (!auth.authorized) {
+    return NextResponse.json({ error: "No autorizado" }, { status: 401 });
   }
   return NextResponse.json({ total: runtimeCorpus.length, documents: runtimeCorpus });
 }
 
 export async function POST(req: NextRequest) {
-  if (!isAuthorized(req)) {
-    return NextResponse.json({ error: "unauthorized" }, { status: 401 });
+  const auth = await checkAdminAuth(req);
+  if (!auth.authorized) {
+    return NextResponse.json({ error: "No autorizado" }, { status: 401 });
+  }
+  if (!hasRole(auth, "editor")) {
+    return NextResponse.json({ error: "Permisos insuficientes (editor requerido)" }, { status: 403 });
   }
   try {
     const body = await req.json();
@@ -49,8 +48,12 @@ export async function POST(req: NextRequest) {
 }
 
 export async function DELETE(req: NextRequest) {
-  if (!isAuthorized(req)) {
-    return NextResponse.json({ error: "unauthorized" }, { status: 401 });
+  const auth = await checkAdminAuth(req);
+  if (!auth.authorized) {
+    return NextResponse.json({ error: "No autorizado" }, { status: 401 });
+  }
+  if (!hasRole(auth, "admin")) {
+    return NextResponse.json({ error: "Permisos insuficientes (admin requerido)" }, { status: 403 });
   }
   const id = req.nextUrl.searchParams.get("id");
   if (!id) {

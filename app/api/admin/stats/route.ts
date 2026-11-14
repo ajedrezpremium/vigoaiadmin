@@ -3,21 +3,17 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSupabase, supabaseConfigured } from "@/lib/supabase";
+import { checkAdminAuth, hasRole } from "@/lib/admin-auth";
 
 export const runtime = "nodejs";
 
 export async function GET(req: NextRequest) {
-  const token = req.headers.get("x-admin-key");
-  const expected = process.env.ADMIN_TOKEN;
-
-  if (!expected) {
-    return NextResponse.json(
-      { error: "ADMIN_TOKEN no configurado en el servidor." },
-      { status: 503 }
-    );
-  }
-  if (!token || token !== expected) {
+  const auth = await checkAdminAuth(req);
+  if (!auth.authorized) {
     return NextResponse.json({ error: "No autorizado" }, { status: 401 });
+  }
+  if (!hasRole(auth, "viewer")) {
+    return NextResponse.json({ error: "Permisos insuficientes" }, { status: 403 });
   }
 
   const client = getServerSupabase();

@@ -9,7 +9,7 @@ import { loadAgentConfig } from "@/lib/agents.loader";
 
 // Agentes: config externa (config/agents.json) con fallback hardcodeado
 const AGENTS = loadAgentConfig() ?? FALLBACK_AGENTS;
-import { classify, detectLanguage } from "@/lib/router";
+import { classify, classifyAll, detectLanguage } from "@/lib/router";
 import { retrieve, evidenceBlock } from "@/lib/rag";
 import { chatLLM, llmConfigured } from "@/lib/llm";
 import { rateLimit } from "@/lib/rate-limit";
@@ -139,7 +139,13 @@ export async function POST(req: NextRequest) {
   const agent = AGENTS[route.agent];
   const agentLabelStr = agentLabel(route.agent, lang);
 
-  void endSpan(startSpan("chat.classify", { agent: route.agent, score: route.score }));
+  // --- Multi-agente colaborativo (v1.2): agentes secundarios con solapamiento ---
+  const allMatches = classifyAll(message, AGENTS);
+  const secondaryAgents = allMatches
+    .filter((m) => m.agent !== route.agent && m.score >= 2)
+    .slice(0, 1); // máximo 1 agente colaborador para no alargar la respuesta
+
+  void endSpan(startSpan("chat.classify", { agent: route.agent, score: route.score, collaborators: secondaryAgents.length }));
 
   // --- RAG: recuperación de evidencia ---
   const { sources, hasEvidence } = retrieve(message, lang);
@@ -193,7 +199,26 @@ export async function POST(req: NextRequest) {
     void endSpan(startSpan("chat.llm", { provider: "demo-local", model: "template-rag", demoMode: true }));
   }
 
-  // --- Validación básica de salida (Megaprompt §8) ---
+  // --- Multi-agente colaborativo: ejecutar agentes secundarios y combinar perspectivas ---
+  if (secondaryAgents.length > 0 && provider !== "demo-local") {
+    const collaborator = secondaryAgents[0];
+    const collabAgent = AGENTS[collaborator.agent];
+    const collabSystem = buildSystemPrompt(collabAgent, lang, evidenceBlock(sources));
+    try {
+      const collabOut = await chatLLM({
+        system: collabSystem,
+        messages: [...effectiveHistory, { role: "user", content: message }],
+        temperature: 0.2,
+        maxTokens: 300,
+      });
+      if (collabOut.text && collabOut.text.trim().length > 0) {
+        const collabLabel = agentLabel(collaborator.agent, lang);
+        reply = `${reply}\n\n---\n\n**Perspectiva adicional · ${collabLabel}:**\n${collabOut.text}`;
+      }
+    } catch {
+      // colaboración fallida: se mantiene la respuesta principal
+    }
+  }
   if (!hasEvidence && sources.length === 0 && provider === "demo-local") {
     // abstención ya marcada en la plantilla
   }

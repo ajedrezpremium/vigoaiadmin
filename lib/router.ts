@@ -66,7 +66,8 @@ export function classify(query: string, agents: Record<AgentId, AgentDef> = AGEN
   let best: { agent: AgentId; score: number; matched: string[] } | null = null;
 
   for (const agentId of AGENT_PRIORITY) {
-    const agent = AGENTS[agentId];
+    const agent = agents[agentId];
+    if (!agent) continue;
     const matched: string[] = [];
     let score = 0;
     for (const kw of agent.keywords) {
@@ -90,4 +91,37 @@ export function classify(query: string, agents: Record<AgentId, AgentDef> = AGEN
     return { agent: "citizen", score: 0, matched: [] }; // MASTER → AGENT 01 por defecto
   }
   return best;
+}
+
+/** Clasifica y devuelve TODOS los agentes que coinciden (para multiagente colaborativo). */
+export function classifyAll(query: string, agents: Record<AgentId, AgentDef> = AGENTS): Array<{ agent: AgentId; score: number; matched: string[] }> {
+  const tokens = tokenize(query);
+  const q = query.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+  const results: Array<{ agent: AgentId; score: number; matched: string[] }> = [];
+
+  for (const agentId of Object.keys(agents) as AgentId[]) {
+    if (agentId === "master") continue;
+    const agent = agents[agentId];
+    if (!agent) continue;
+    const matched: string[] = [];
+    let score = 0;
+    for (const kw of agent.keywords) {
+      const k = kw.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      if (k.includes(" ")) {
+        if (q.includes(k)) {
+          score += 3;
+          matched.push(kw);
+        }
+      } else if (tokens.includes(k) || q.includes(k)) {
+        score += 1;
+        matched.push(kw);
+      }
+    }
+    if (score > 0) {
+      results.push({ agent: agentId, score, matched });
+    }
+  }
+
+  return results.sort((a, b) => b.score - a.score);
 }
