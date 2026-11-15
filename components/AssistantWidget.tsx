@@ -66,6 +66,7 @@ export default function AssistantWidget() {
   const [escalation, setEscalation] = useState<{ id: string; status: string } | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [conversationId, setConversationId] = useState<string | null>(null);
+  const [expanded, setExpanded] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const recognitionRef = useRef<any>(null);
   const t = I18N[lang];
@@ -309,20 +310,24 @@ export default function AssistantWidget() {
         </button>
       )}
 
-      {/* Panel (tarjeta ampliada) */}
+      {/* Panel (tarjeta ampliada / expandible) */}
       {open && (
         <div
           role="dialog"
           aria-label="Asistente VIGO AI"
-          className="fixed bottom-5 right-5 z-50 flex h-[min(760px,92vh)] w-[min(520px,calc(100vw-2rem))]
-            animate-fade-up flex-col overflow-hidden rounded-2xl border border-slate-700
-            bg-slate-900 shadow-2xl shadow-black/50"
+          className={`fixed z-50 flex animate-fade-up flex-col overflow-hidden rounded-2xl border border-slate-700
+            bg-slate-900 text-slate-100 shadow-2xl shadow-black/50 transition-all duration-300
+            ${
+              expanded
+                ? "inset-4 h-auto w-auto"
+                : "bottom-5 right-5 h-[min(760px,92vh)] w-[min(520px,calc(100vw-2rem))]"
+            }`}
         >
           {/* Cabecera */}
           <div className="flex items-center gap-2 border-b border-slate-700 bg-gradient-to-r from-brand-900 to-slate-900 px-3 py-2.5">
             <span className="text-xl">🏛️</span>
             <div className="flex-1 min-w-0">
-              <p className="truncate text-sm font-semibold">VIGO AI ADMINISTRATION</p>
+              <p className="truncate text-sm font-semibold text-white">VIGO AI ADMINISTRATION</p>
               <p className="truncate text-[10px] text-slate-400">
                 <span className="rounded bg-amber-500/15 px-1 py-px text-amber-300 font-medium">
                   {t.demoBadge}
@@ -330,6 +335,15 @@ export default function AssistantWidget() {
                 · CHESS AI AGENCY
               </p>
             </div>
+            {/* Expandir / contraer */}
+            <button
+              onClick={() => setExpanded((v) => !v)}
+              aria-label={expanded ? "Contraer" : "Expandir"}
+              title={expanded ? "Contraer" : "Expandir a pantalla completa"}
+              className="rounded-md p-1.5 text-slate-400 hover:bg-slate-800 hover:text-white"
+            >
+              {expanded ? "🗗" : "⛶"}
+            </button>
             {/* Selector de género de voz (TTS) */}
             <select
               value={voiceGender}
@@ -373,7 +387,7 @@ export default function AssistantWidget() {
                     </p>
                   )}
                   <div className={m.role === "user" ? "bubble-user" : "bubble-ai"}>
-                    <p className="whitespace-pre-wrap text-sm leading-relaxed">
+                    <p className={`whitespace-pre-wrap text-sm leading-relaxed ${m.role === "assistant" ? "text-slate-100" : "text-white"}`}>
                       {renderContent(m.content, m.sources)}
                     </p>
                   </div>
