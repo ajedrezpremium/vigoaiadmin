@@ -82,6 +82,7 @@ Regla: **nunca vendas la implantación anual en el primer contacto.** Vende el p
 - [ ] **Dosier corto** de 4 páginas, no de 40
 - [ ] **Calculadora de ahorro**: consultas al mes × minutos × coste hora
 - [ ] **Hoja de cálculo CRM**: concello, alcaldía, secretaría, intervención, estado, fecha, siguiente paso
+      → ya generada: `CONTACTOS_PONTEVEDRA.csv` (25 concellos A y B, separador `;`, UTF-8)
 - [ ] **Firma de correo** con demo, teléfono y calendario de reuniones
 
 Sin landing no hay campaña: el correo necesita un destino donde ampliar información.
@@ -232,7 +233,7 @@ El coste real es tu tiempo: 4 horas al día durante dos semanas para la prospecc
 ## 14. Próximos cinco pasos
 
 1. ~~Publicar la landing `/ayuntamientos` con la oferta y el formulario.~~ **Hecho:** https://vigo-ai-demo.vercel.app/ayuntamientos
-2. Cerrar la lista de los 25 concellos de los segmentos A y B con contacto verificado.
+2. Cerrar la lista de los 25 concellos de los segmentos A y B con contacto verificado. **Base lista:** `CONTACTOS_PONTEVEDRA.csv` + `CONTACTOS_PONTEVEDRA.pdf`.
 3. Grabar el vídeo de 30 segundos con la demo real.
 4. Enviar los 10 primeros correos el martes por la mañana.
 5. Revisar métricas el viernes y ajustar el mensaje.
