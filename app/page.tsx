@@ -15,11 +15,20 @@ export const dynamic = "force-dynamic";
 
 const HERO_IMAGES = [
   {
+    src: "/Vigo_vista_aerea.jpg",
+    alt: "Vigo — vista aérea",
+    name: "Vigo — vista aérea",
+    caption: "Vigo — vista aérea",
+    link: "/Vigo_vista_aerea.jpg",
+    filterClass: "brightness-115 contrast-105 saturate-110",
+  },
+  {
     src: "/Vista%20Aerea%20Cies.png",
     alt: "Islas Cíes — vista aérea",
     name: "Illas Cíes",
     caption: "Illas Cíes",
     link: "/Vista%20Aerea%20Cies.png",
+    filterClass: "brightness-115 contrast-105 saturate-110",
   },
   {
     src: "https://upload.wikimedia.org/wikipedia/commons/0/0e/Paseo_samil%2C_Vigo.jpg",
@@ -41,6 +50,8 @@ const HERO_IMAGES = [
     name: "Puente de Rande",
     caption: "Puente de Rande",
     link: "https://upload.wikimedia.org/wikipedia/commons/e/ec/Ponte_de_Rande_desde_A_Gu%C3%ADa_%28Teis%2C_Vigo%29.jpg",
+    filterClass: "brightness-125 contrast-110 saturate-150",
+    tintClass: "bg-blue-500/25",
   },
   {
     src: "https://upload.wikimedia.org/wikipedia/commons/0/08/Puerto_de_Vigo.jpg",

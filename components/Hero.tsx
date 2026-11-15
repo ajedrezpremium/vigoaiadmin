@@ -13,6 +13,10 @@ export interface HeroImage {
   name: string;
   caption: string;
   link: string;
+  /** Clases extra de filtro Tailwind (p. ej. "brightness-125 saturate-150") */
+  filterClass?: string;
+  /** Tinte de color superpuesto (p. ej. "bg-blue-500/20") para dar tono azulado */
+  tintClass?: string;
 }
 
 interface HeroProps {
@@ -41,9 +45,13 @@ export default function Hero({ lang, images, theme = "dark" }: HeroProps) {
           key={index}
           src={current.src}
           alt={current.alt}
-          className="h-full w-full object-cover brightness-110 contrast-105"
+          className={`h-full w-full object-cover brightness-110 contrast-105 ${current.filterClass ?? ""}`}
           loading="eager"
         />
+        {/* Tinte de color opcional (p. ej. azulado para el Puente de Rande) */}
+        {current.tintClass && (
+          <div className={`pointer-events-none absolute inset-0 ${current.tintClass}`} />
+        )}
         {/* Overlay suave solo en la parte inferior */}
         <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/50 to-transparent" />
       </div>
