@@ -93,26 +93,39 @@ Modelos free por defecto (todos con override por `.env`, ver `.env.example`):
 
 > La persistencia usa la clave `service_role` **solo en servidor** (route handlers). Nunca se expone al navegador. Para producción real: RLS, RBAC, retención y evaluación RGPD/ENS/AI Act.
 
-## 4. Subir a GitHub
+## 4. Repositorio GitHub
+
+Repo privado del proyecto: <https://github.com/ajedrezpremium/vigoaiadmin>
 
 ```bash
-git init
-git add .
-git commit -m "VIGO AI ADMINISTRATION — DEMO GRATUITA v1.0"
-git branch -M main
-# crea el repo vacío en github.com y:
-git remote add origin https://github.com/TU-USUARIO/vigo-ai-demo.git
+git remote add origin https://github.com/ajedrezpremium/vigoaiadmin.git
 git push -u origin main
 ```
 
-El `.gitignore` excluye `.env.local` y secretos. Solo sube `.env.example` (sin valores).
+El `.gitignore` excluye `.env.local`, `.vercel` y secretos. Solo se sube `.env.example`
+(con placeholders, nunca claves reales).
 
-## 5. Desplegar en Vercel
+## 5. Despliegue en Vercel
 
-1. https://vercel.com → **Add New Project** → importa el repo de GitHub.
-2. Framework: **Next.js** (autodetectado). Build sin cambios.
-3. En **Environment Variables** añade las mismas variables del `.env.example`.
-4. Deploy → tu demo quedará en `https://TU-PROYECTO.vercel.app`.
+El proyecto de Vercel **vigo-ai-demo** está enlazado al repo de GitHub, así que
+**cada push a `main` despliega automáticamente a producción**:
+
+- Producción: <https://vigo-ai-demo.vercel.app>
+- Rama de producción: `main`
+- Variables de entorno: configuradas en el panel de Vercel (no en el repo)
+
+Flujo de trabajo habitual:
+
+```bash
+git add -A
+git commit -m "feat: descripción del cambio"
+git push            # Vercel construye y publica en ~1-2 min
+```
+
+Comprobaciones locales antes de subir: `npm run build` y `npm test`.
+
+Despliegue manual (solo si hace falta saltarse el pipeline):
+`npx vercel --prod`.
 
 ## 6. Panel interno de demo
 
