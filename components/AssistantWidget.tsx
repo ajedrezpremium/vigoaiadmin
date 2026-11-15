@@ -1,8 +1,10 @@
 "use client";
 
 // Widget flotante de asistente municipal — Megaprompt §4
-// Componentes: conversación, entrada, idiomas, voz (STT/TTS), sugerencias,
-// fuentes citadas, escalación humana, privacidad, accesibilidad.
+// Componentes: conversación, entrada, idiomas, voz (STT/TTS) con voces
+// masculina/femenina, sugerencias, fuentes citadas, escalación humana,
+// compartir en RRSS, copiar/pegar, privacidad, accesibilidad.
+// Nivel PRO: tarjeta ampliada + acciones por mensaje (copiar, hablar, compartir).
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { ChatResponse, Lang, SourceRef } from "@/types";
@@ -19,6 +21,7 @@ interface UIMessage {
 }
 
 const SPEECH_LANG: Record<Lang, string> = { gl: "gl-ES", es: "es-ES", en: "en-US" };
+const BCP47: Record<Lang, string> = { gl: "gl-ES", es: "es-ES", en: "en-US" };
 
 /** Renderiza [S1]/[S2] como citas con tooltip hacia la fuente */
 function renderContent(content: string, sources?: SourceRef[]) {
@@ -37,6 +40,16 @@ function renderContent(content: string, sources?: SourceRef[]) {
   });
 }
 
+function cleanForSpeech(text: string): string {
+  return text
+    .replace(/\[S\d\]/g, "")
+    .replace(/[⚠️✅❌🙋📚🔒🏛️👉⬇️🔄🎤🔊]/g, "")
+    .replace(/[*_`#>]/g, "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, 900);
+}
+
 export default function AssistantWidget() {
   const [open, setOpen] = useState(false);
   const [lang, setLang] = useState<Lang>("es");
@@ -44,15 +57,32 @@ export default function AssistantWidget() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [tts, setTts] = useState(false);
+  const [voiceGender, setVoiceGender] = useState<"female" | "male">("female");
+  const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
+  const [listening, setListening] = useState(false);
+  const [copiedIdx, setCopiedIdx] = useState<number | null>(null);
+  const [shareOpen, setShareOpen] = useState(false);
   const [showHuman, setShowHuman] = useState(false);
   const [escalation, setEscalation] = useState<{ id: string; status: string } | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [conversationId, setConversationId] = useState<string | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const recognitionRef = useRef<any>(null);
   const t = I18N[lang];
 
   const pushWelcome = useCallback((l: Lang) => {
     setMessages([{ role: "assistant", content: I18N[l].welcome }]);
+  }, []);
+
+  // Cargar voces del sistema (async)
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.speechSynthesis) return;
+    const load = () => setVoices(window.speechSynthesis.getVoices());
+    load();
+    window.speechSynthesis.onvoiceschanged = load;
+    return () => {
+      window.speechSynthesis.onvoiceschanged = null;
+    };
   }, []);
 
   useEffect(() => {
@@ -68,7 +98,6 @@ export default function AssistantWidget() {
     return () => window.removeEventListener("open-assistant", onOpen);
   }, []);
 
-  // Escape cierra el widget (accesibilidad)
   useEffect(() => {
     if (!open) return;
     function onKey(e: KeyboardEvent) {
@@ -82,15 +111,42 @@ export default function AssistantWidget() {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
   }, [messages, loading]);
 
-  const speak = (text: string, l: Lang) => {
-    if (typeof window === "undefined" || !window.speechSynthesis) return;
-    window.speechSynthesis.cancel();
-    const clean = text.replace(/\[S\d\]/g, "").slice(0, 600);
-    const u = new SpeechSynthesisUtterance(clean);
-    u.lang = SPEECH_LANG[l];
-    u.rate = 1.02;
-    window.speechSynthesis.speak(u);
-  };
+  /** Selecciona una voz del sistema según idioma y género preferido */
+  function pickVoice(l: Lang): SpeechSynthesisVoice | undefined {
+    const langTag = BCP47[l];
+    const langVoices = voices.filter((v) => v.lang?.toLowerCase().startsWith(l.slice(0, 2)));
+    if (langVoices.length === 0) return undefined;
+    const femaleHints = /female|mujer|femenino|maria|elena|monica|paulina|samantha|victoria|zira|helena|female/i;
+    const maleHints = /male|hombre|masculino|jorge|diego|carlos|pablo|enrique|daniel|alex|fred|male/i;
+    const preferred = voiceGender === "female" ? femaleHints : maleHints;
+    const other = voiceGender === "female" ? maleHints : femaleHints;
+    return (
+      langVoices.find((v) => preferred.test(v.name)) ??
+      langVoices.find((v) => !other.test(v.name)) ??
+      langVoices[0]
+    );
+  }
+
+  const speak = useCallback(
+    (text: string, l: Lang) => {
+      if (typeof window === "undefined" || !window.speechSynthesis) {
+        setError("Síntesis de voz no disponible en este navegador");
+        return;
+      }
+      window.speechSynthesis.cancel();
+      const clean = cleanForSpeech(text);
+      if (!clean) return;
+      const u = new SpeechSynthesisUtterance(clean);
+      u.lang = SPEECH_LANG[l];
+      u.rate = 1.0;
+      u.pitch = voiceGender === "female" ? 1.1 : 0.9;
+      const v = pickVoice(l);
+      if (v) u.voice = v;
+      window.speechSynthesis.speak(u);
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [voiceGender, voices]
+  );
 
   async function send(text: string) {
     const query = text.trim();
@@ -129,31 +185,90 @@ export default function AssistantWidget() {
     }
   }
 
-  /** Reconocimiento de voz (AGENT 10 — VOICE AI, opcional) */
-  function startListening() {
-    const w = window as unknown as Record<string, unknown>;
-    const SR = (w.SpeechRecognition ?? w.webkitSpeechRecognition) as
-      | (new () => {
-          lang: string;
-          interimResults: boolean;
-          onresult: ((e: { results: ArrayLike<ArrayLike<{ transcript: string }>> }) => void) | null;
-          onerror: (() => void) | null;
-          start: () => void;
-        })
-      | undefined;
-    if (!SR) {
-      setError("Voice recognition not available in this browser / navegador sin voz");
+  /** Copiar al portapapeles */
+  async function copyText(text: string, idx: number) {
+    try {
+      await navigator.clipboard.writeText(text.replace(/\[S\d\]/g, ""));
+      setCopiedIdx(idx);
+      setTimeout(() => setCopiedIdx(null), 2000);
+    } catch {
+      setError("No se pudo copiar (permiso denegado)");
+    }
+  }
+
+  /** Compartir en RRSS */
+  function shareTo(network: "whatsapp" | "x" | "linkedin" | "copy") {
+    const url = typeof window !== "undefined" ? window.location.href : "https://vigo-ai-demo.vercel.app";
+    const text = "VIGO AI ADMINISTRATION — Asistente municipal de IA (demo gratuita) 🏛️";
+    const enc = encodeURIComponent;
+    let shareUrl = "";
+    if (network === "whatsapp") shareUrl = `https://wa.me/?text=${enc(text + " " + url)}`;
+    if (network === "x") shareUrl = `https://twitter.com/intent/tweet?text=${enc(text)}&url=${enc(url)}`;
+    if (network === "linkedin")
+      shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${enc(url)}`;
+    if (network === "copy") {
+      navigator.clipboard?.writeText(url).then(() => {
+        setCopiedIdx(-1);
+        setTimeout(() => setCopiedIdx(null), 2000);
+      });
+      setShareOpen(false);
       return;
     }
-    const rec = new SR();
-    rec.lang = SPEECH_LANG[lang];
-    rec.interimResults = false;
-    rec.onresult = (e) => {
-      const transcript = e.results[0][0].transcript;
-      setInput((prev) => (prev ? prev + " " : "") + transcript);
-    };
-    rec.onerror = () => setError("Voice error / erro de voz");
-    rec.start();
+    if (shareUrl) window.open(shareUrl, "_blank", "noopener,noreferrer");
+    setShareOpen(false);
+  }
+
+  /** Reconocimiento de voz (STT) mejorado */
+  function startListening() {
+    const w = window as unknown as Record<string, any>;
+    const SR = (w.SpeechRecognition ?? w.webkitSpeechRecognition) as
+      | (new () => any)
+      | undefined;
+    if (!SR) {
+      setError(
+        "Voz a texto no soportada en este navegador. Usa Chrome, Edge o Safari (Firefox no soporta Web Speech API). / Voice input not supported in this browser."
+      );
+      return;
+    }
+    setError(null);
+    try {
+      const rec = new SR();
+      recognitionRef.current = rec;
+      rec.lang = SPEECH_LANG[lang];
+      rec.interimResults = false;
+      rec.maxAlternatives = 1;
+      rec.onstart = () => setListening(true);
+      rec.onresult = (e: any) => {
+        const transcript = e.results[0][0].transcript as string;
+        setInput((prev) => (prev ? prev + " " : "") + transcript);
+      };
+      rec.onerror = (e: any) => {
+        setListening(false);
+        if (e?.error === "not-allowed" || e?.error === "service-not-allowed") {
+          setError("Permiso de micrófono denegado. Habilítalo en la barra de direcciones del navegador.");
+        } else if (e?.error === "no-speech") {
+          setError("No se detectó voz. Inténtalo de nuevo.");
+        } else if (e?.error === "network") {
+          setError("Error de red al reconocer voz. Revisa la conexión.");
+        } else {
+          setError(`Error de voz: ${e?.error ?? "desconocido"}`);
+        }
+      };
+      rec.onend = () => setListening(false);
+      rec.start();
+    } catch {
+      setListening(false);
+      setError("No se pudo iniciar el reconocimiento de voz.");
+    }
+  }
+
+  function stopListening() {
+    try {
+      recognitionRef.current?.stop();
+    } catch {
+      /* noop */
+    }
+    setListening(false);
   }
 
   function resetChat() {
@@ -162,6 +277,7 @@ export default function AssistantWidget() {
     setEscalation(null);
     setError(null);
     setConversationId(null);
+    setShareOpen(false);
     pushWelcome(lang);
   }
 
@@ -169,6 +285,10 @@ export default function AssistantWidget() {
     setLang(l);
     if (messages.length <= 1) pushWelcome(l);
   }
+
+  const isSupportedSTT =
+    typeof window !== "undefined" &&
+    Boolean((window as unknown as Record<string, any>).SpeechRecognition || (window as unknown as Record<string, any>).webkitSpeechRecognition);
 
   return (
     <>
@@ -189,12 +309,12 @@ export default function AssistantWidget() {
         </button>
       )}
 
-      {/* Panel */}
+      {/* Panel (tarjeta ampliada) */}
       {open && (
         <div
           role="dialog"
           aria-label="Asistente VIGO AI"
-          className="fixed bottom-5 right-5 z-50 flex h-[min(640px,85vh)] w-[min(420px,calc(100vw-2.5rem))]
+          className="fixed bottom-5 right-5 z-50 flex h-[min(760px,92vh)] w-[min(520px,calc(100vw-2rem))]
             animate-fade-up flex-col overflow-hidden rounded-2xl border border-slate-700
             bg-slate-900 shadow-2xl shadow-black/50"
         >
@@ -210,6 +330,17 @@ export default function AssistantWidget() {
                 · CHESS AI AGENCY
               </p>
             </div>
+            {/* Selector de género de voz (TTS) */}
+            <select
+              value={voiceGender}
+              onChange={(e) => setVoiceGender(e.target.value as "female" | "male")}
+              aria-label="Género de voz / Voice gender"
+              title="Género de voz (texto a voz)"
+              className="rounded-md border border-slate-600 bg-slate-800 px-1.5 py-1 text-xs text-slate-200 outline-none focus:border-brand-400"
+            >
+              <option value="female">👩 Femenina</option>
+              <option value="male">👨 Masculina</option>
+            </select>
             <select
               value={lang}
               onChange={(e) => changeLang(e.target.value as Lang)}
@@ -247,9 +378,69 @@ export default function AssistantWidget() {
                     </p>
                   </div>
 
+                  {/* Acciones por mensaje (copiar / hablar / compartir) */}
+                  <div className="flex flex-wrap items-center gap-1 pl-1">
+                    <button
+                      onClick={() => copyText(m.content, i)}
+                      title="Copiar mensaje"
+                      aria-label="Copiar mensaje"
+                      className="rounded p-1 text-[10px] text-slate-400 hover:bg-slate-800 hover:text-white"
+                    >
+                      {copiedIdx === i ? "✅ Copiado" : "📋 Copiar"}
+                    </button>
+                    {m.role === "assistant" && (
+                      <button
+                        onClick={() => speak(m.content, lang)}
+                        title="Escuchar en voz alta (texto a voz)"
+                        aria-label="Escuchar mensaje"
+                        className="rounded p-1 text-[10px] text-slate-400 hover:bg-slate-800 hover:text-white"
+                      >
+                        🔊 Escuchar
+                      </button>
+                    )}
+                    <button
+                      onClick={() => setShareOpen((v) => !v)}
+                      title="Compartir"
+                      aria-label="Compartir"
+                      className="rounded p-1 text-[10px] text-slate-400 hover:bg-slate-800 hover:text-white"
+                    >
+                      🔗 Compartir
+                    </button>
+                  </div>
+
+                  {/* Menú de compartir RRSS */}
+                  {shareOpen && (
+                    <div className="flex flex-wrap gap-1 rounded-lg border border-slate-700 bg-slate-800/70 p-1.5">
+                      <button
+                        onClick={() => shareTo("whatsapp")}
+                        className="rounded px-2 py-1 text-[11px] text-emerald-300 hover:bg-slate-700"
+                      >
+                        🟢 WhatsApp
+                      </button>
+                      <button
+                        onClick={() => shareTo("x")}
+                        className="rounded px-2 py-1 text-[11px] text-slate-200 hover:bg-slate-700"
+                      >
+                        ✖ X / Twitter
+                      </button>
+                      <button
+                        onClick={() => shareTo("linkedin")}
+                        className="rounded px-2 py-1 text-[11px] text-blue-300 hover:bg-slate-700"
+                      >
+                        💼 LinkedIn
+                      </button>
+                      <button
+                        onClick={() => shareTo("copy")}
+                        className="rounded px-2 py-1 text-[11px] text-slate-200 hover:bg-slate-700"
+                      >
+                        {copiedIdx === -1 ? "✅ Enlace copiado" : "🔗 Copiar enlace"}
+                      </button>
+                    </div>
+                  )}
+
                   {/* Fuentes citadas */}
                   {m.role === "assistant" && m.sources && m.sources.length > 0 && (
-                    <details className="rounded-lg border border-slate-700 bg-slate-850 bg-slate-800/60 px-2.5 py-1.5">
+                    <details className="rounded-lg border border-slate-700 bg-slate-800/60 px-2.5 py-1.5">
                       <summary className="cursor-pointer text-[11px] font-medium text-slate-300">
                         📚 {t.sources} ({m.sources.length})
                       </summary>
@@ -285,6 +476,15 @@ export default function AssistantWidget() {
               </div>
             )}
 
+            {listening && (
+              <div className="flex justify-start">
+                <div className="flex items-center gap-2 rounded-lg border border-red-500/40 bg-red-500/10 px-3 py-2 text-xs text-red-200">
+                  <span className="inline-block h-2.5 w-2.5 animate-ping rounded-full bg-red-500" />
+                  🎤 Escuchando… habla ahora
+                </div>
+              </div>
+            )}
+
             {error && (
               <div className="rounded-lg border border-red-500/40 bg-red-500/10 px-3 py-2 text-xs text-red-300">
                 {t.errorGeneric} <span className="block truncate text-red-400/70">({error})</span>
@@ -299,11 +499,7 @@ export default function AssistantWidget() {
                     <p className="font-semibold">🙋 {t.humanHelpTitle}</p>
                     <p className="mt-1 leading-snug text-emerald-300/90">
                       {t.humanHelpBody} · ID: {escalation.id.slice(0, 8)}… · {t.tryAgain}:{" "}
-                      <button
-                        className="underline"
-                        onClick={() => setShowHuman(false)}
-                        type="button"
-                      >
+                      <button className="underline" onClick={() => setShowHuman(false)} type="button">
                         {t.tryAgain}
                       </button>
                     </p>
@@ -340,19 +536,26 @@ export default function AssistantWidget() {
             )}
           </div>
 
-          {/* Pie: privacidad + entrada */}
+          {/* Pie: privacidad + acciones + entrada */}
           <div className="border-t border-slate-700 bg-slate-900/95">
             <div className="flex items-center justify-between gap-2 px-3 pt-2 text-[10px] text-slate-500">
               <p className="truncate">🔒 {t.privacy}</p>
               <div className="flex shrink-0 items-center gap-1.5">
+                {/* TTS on/off */}
                 <button
-                  onClick={() => setTts((v) => !v)}
+                  onClick={() => {
+                    if (tts) {
+                      window.speechSynthesis?.cancel();
+                    }
+                    setTts((v) => !v);
+                  }}
                   title={t.speak}
-                  className="rounded p-1 hover:bg-slate-800"
                   aria-label={t.speak}
+                  className="rounded p-1 hover:bg-slate-800"
                 >
                   {tts ? t.ttsOn : t.ttsOff}
                 </button>
+                {/* Nuevo chat */}
                 <button
                   onClick={resetChat}
                   title={t.newChat}
@@ -361,9 +564,9 @@ export default function AssistantWidget() {
                 >
                   🔄
                 </button>
+                {/* Escalación humana */}
                 <button
                   onClick={async () => {
-                    // Human-in-the-Loop: crear escalación en backend
                     try {
                       const res = await fetch("/api/escalate", {
                         method: "POST",
@@ -371,9 +574,10 @@ export default function AssistantWidget() {
                         body: JSON.stringify({ context: { lastMessages: messages.slice(-4) }, conversationId }),
                       });
                       const data = await res.json();
-                      if (res.ok && data.escalationId) setEscalation({ id: data.escalationId, status: data.status ?? "open" });
+                      if (res.ok && data.escalationId)
+                        setEscalation({ id: data.escalationId, status: data.status ?? "open" });
                     } catch {
-                      /* fallback silencioso: se muestra el aviso local */
+                      /* fallback silencioso */
                     }
                   }}
                   title={t.humanHelp}
@@ -391,13 +595,27 @@ export default function AssistantWidget() {
               }}
               className="flex items-center gap-2 px-3 pb-3 pt-1.5"
             >
+              {/* Micrófono: voz a texto */}
               <button
                 type="button"
-                onClick={startListening}
+                onClick={listening ? stopListening : startListening}
+                title={
+                  isSupportedSTT
+                    ? listening
+                      ? "Detener dictado"
+                      : "Dictar por voz (voz a texto)"
+                    : "Voz no soportada en este navegador (usa Chrome/Edge/Safari)"
+                }
                 aria-label={t.listen}
-                className="shrink-0 rounded-lg border border-slate-600 bg-slate-800 px-2 py-2 text-sm hover:border-brand-400"
+                className={`shrink-0 rounded-lg border px-2 py-2 text-sm transition ${
+                  listening
+                    ? "animate-pulse border-red-500 bg-red-500/20 text-red-200"
+                    : isSupportedSTT
+                    ? "border-slate-600 bg-slate-800 hover:border-brand-400"
+                    : "cursor-not-allowed border-slate-700 bg-slate-800/50 text-slate-500"
+                }`}
               >
-                {t.listen}
+                {listening ? "⏹" : "🎤"}
               </button>
               <input
                 value={input}
