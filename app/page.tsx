@@ -61,13 +61,6 @@ const HERO_IMAGES = [
     link: "https://upload.wikimedia.org/wikipedia/commons/0/08/Puerto_de_Vigo.jpg",
   },
   {
-    src: "https://upload.wikimedia.org/wikipedia/commons/6/6d/Real_Club_N%C3%A1utico_de_Vigo.jpg",
-    alt: "Real Club Náutico de Vigo",
-    name: "Real Club Náutico",
-    caption: "Real Club Náutico",
-    link: "https://upload.wikimedia.org/wikipedia/commons/6/6d/Real_Club_N%C3%A1utico_de_Vigo.jpg",
-  },
-  {
     src: "https://upload.wikimedia.org/wikipedia/commons/1/10/Vigo_puesta_de_Sol.jpg",
     alt: "Puesta de sol en Vigo",
     name: "Puesta de sol",
