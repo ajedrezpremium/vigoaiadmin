@@ -21,6 +21,15 @@ export const maxDuration = 60;
 
 const MAX_HISTORY = 8; // límite de contexto (privacidad + coste)
 const MAX_LEN = 2000; // validación de entrada
+const COLLAB_TIMEOUT_MS = 6_000; // el agente colaborador nunca bloquea la respuesta
+
+/** Carrera con tiempo máximo: evita que un proveedor lento agote la función serverless */
+function withTimeout<T>(p: Promise<T>, ms: number): Promise<T> {
+  return Promise.race([
+    p,
+    new Promise<T>((_, reject) => setTimeout(() => reject(new Error("timeout")), ms)),
+  ]);
+}
 
 interface ChatBody {
   message?: string;
@@ -71,7 +80,27 @@ function localFallbackReply(
   return `${head}\n\n${body}`;
 }
 
+/**
+ * Envoltorio: garantiza que esta ruta SIEMPRE devuelve JSON.
+ * Antes, un timeout de Vercel devolvía texto plano ("An error occurred…")
+ * y el widget fallaba con «Unexpected token 'A'».
+ */
 export async function POST(req: NextRequest) {
+  try {
+    return await handleChat(req);
+  } catch (e) {
+    console.error("[chat] error no controlado:", e);
+    return NextResponse.json(
+      {
+        error:
+          "No he podido completar la respuesta por un fallo interno. Inténtalo de nuevo en unos segundos.",
+      },
+      { status: 500, headers: { "Cache-Control": "no-store" } }
+    );
+  }
+}
+
+async function handleChat(req: NextRequest) {
   // --- Rate limiting (seguridad transversal) ---
   const ip =
     req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
@@ -208,12 +237,15 @@ export async function POST(req: NextRequest) {
     const collabAgent = AGENTS[collaborator.agent];
     const collabSystem = buildSystemPrompt(collabAgent, lang, evidenceBlock(sources));
     try {
-      const collabOut = await chatLLM({
-        system: collabSystem,
-        messages: [...effectiveHistory, { role: "user", content: message }],
-        temperature: 0.2,
-        maxTokens: 300,
-      });
+      const collabOut = await withTimeout(
+        chatLLM({
+          system: collabSystem,
+          messages: [...effectiveHistory, { role: "user", content: message }],
+          temperature: 0.2,
+          maxTokens: 300,
+        }),
+        COLLAB_TIMEOUT_MS
+      );
       if (collabOut.text && collabOut.text.trim().length > 0) {
         const collabLabel = agentLabel(collaborator.agent, lang);
         reply = `${reply}\n\n---\n\n**Perspectiva adicional · ${collabLabel}:**\n${collabOut.text}`;

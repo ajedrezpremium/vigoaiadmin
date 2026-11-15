@@ -67,6 +67,7 @@ export default function AssistantWidget() {
   const [error, setError] = useState<string | null>(null);
   const [conversationId, setConversationId] = useState<string | null>(null);
   const [expanded, setExpanded] = useState(false);
+  const [lastQuery, setLastQuery] = useState<string | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const recognitionRef = useRef<any>(null);
   const t = I18N[lang];
@@ -154,17 +155,43 @@ export default function AssistantWidget() {
     if (!query || loading) return;
     setError(null);
     setInput("");
+    setLastQuery(query);
     const history = messages.slice(1).map((m) => ({ role: m.role, content: m.content }));
     setMessages((prev) => [...prev, { role: "user", content: query }]);
     setLoading(true);
 
     try {
-      const res = await fetch("/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: query, history, language: lang, conversationId: conversationId ?? undefined }),
-      });
-      const data: ChatResponse & { error?: string } = await res.json();
+      // Tope de cliente: si el servidor no contesta en 50 s, cortamos y avisamos
+      // (el backend ya está limitado a ~35 s para devolver siempre JSON).
+      const ctrl = new AbortController();
+      const timer = setTimeout(() => ctrl.abort(), 50_000);
+      let res: Response;
+      try {
+        res = await fetch("/api/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          signal: ctrl.signal,
+          body: JSON.stringify({ message: query, history, language: lang, conversationId: conversationId ?? undefined }),
+        });
+      } finally {
+        clearTimeout(timer);
+      }
+
+      // Nunca asumimos JSON: Vercel devuelve texto plano en 502/504.
+      const raw = await res.text();
+      let data: (ChatResponse & { error?: string }) | null = null;
+      try {
+        data = raw ? (JSON.parse(raw) as ChatResponse & { error?: string }) : null;
+      } catch {
+        data = null;
+      }
+
+      if (!data) {
+        if (res.status === 504 || res.status === 502 || res.status === 408) {
+          throw new Error("El servidor tardó demasiado (timeout). Reintenta en unos segundos.");
+        }
+        throw new Error(`Respuesta no válida del servidor (HTTP ${res.status}). Reintenta.`);
+      }
       if (!res.ok || data.error) throw new Error(data.error ?? `HTTP ${res.status}`);
       if (data.conversationId) setConversationId(data.conversationId);
       setMessages((prev) => [
@@ -180,7 +207,11 @@ export default function AssistantWidget() {
       ]);
       if (tts) speak(data.reply, lang);
     } catch (e) {
-      setError(e instanceof Error ? e.message : t.errorGeneric);
+      if (e instanceof DOMException && e.name === "AbortError") {
+        setError("Tiempo de espera agotado. Reintenta o acorta la pregunta.");
+      } else {
+        setError(e instanceof Error ? e.message : t.errorGeneric);
+      }
     } finally {
       setLoading(false);
     }
@@ -501,7 +532,17 @@ export default function AssistantWidget() {
 
             {error && (
               <div className="rounded-lg border border-red-500/40 bg-red-500/10 px-3 py-2 text-xs text-red-300">
-                {t.errorGeneric} <span className="block truncate text-red-400/70">({error})</span>
+                {t.errorGeneric} <span className="block break-words text-red-400/70">({error})</span>
+                {lastQuery && (
+                  <button
+                    type="button"
+                    onClick={() => send(lastQuery)}
+                    disabled={loading}
+                    className="mt-2 rounded-md border border-red-400/50 bg-red-500/20 px-2.5 py-1 text-[11px] font-semibold text-red-100 hover:bg-red-500/30 disabled:opacity-40"
+                  >
+                    🔄 Reintentar
+                  </button>
+                )}
               </div>
             )}
 

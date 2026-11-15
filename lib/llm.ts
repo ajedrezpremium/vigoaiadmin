@@ -57,8 +57,12 @@ export interface LLMResponse {
   escalated?: boolean;
 }
 
-const TIMEOUT_MS = 45_000;
-const MAX_AGENT_ITERATIONS = 3;
+// Presupuesto de tiempo: la función serverless de Vercel corta a los 60 s.
+// Cada llamada individual y el conjunto deben quedar MUY por debajo para
+// poder devolver JSON (nunca un 504 en texto plano).
+const TIMEOUT_MS = 7_000; // por llamada a un proveedor
+const TOTAL_BUDGET_MS = 16_000; // suma de todos los proveedores
+const MAX_AGENT_ITERATIONS = 2;
 
 async function withTimeout<T>(p: Promise<T>, ms: number): Promise<T> {
   return Promise.race([
@@ -216,6 +220,7 @@ async function callOpenAICompat(
     fetch(providerEndpoint(prov), {
       method: "POST",
       headers,
+      signal: AbortSignal.timeout(TIMEOUT_MS),
       body: JSON.stringify({
         model,
         temperature: req.temperature ?? 0.2,
@@ -278,6 +283,7 @@ async function callGemini(
     fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
+      signal: AbortSignal.timeout(TIMEOUT_MS),
       body: JSON.stringify({
         system_instruction: { parts: [{ text: req.system }] },
         contents: toGeminiContents(messages),
@@ -461,6 +467,7 @@ export async function getBestFreeModel(): Promise<string> {
       headers: {
         Authorization: `Bearer ${process.env.OPENROUTER_API_KEY ?? ""}`,
       },
+      signal: AbortSignal.timeout(3_000),
     });
     if (res.ok) {
       const data = (await res.json()) as { data?: Array<{ id: string; pricing?: { prompt?: number; completion?: number } }> };
@@ -545,9 +552,18 @@ export async function chatLLM(req: LLMRequest): Promise<LLMResponse> {
     compatAttempt("ovh"),
   ].filter((a): a is LLMAttempt => a !== null);
 
+  // Presupuesto global: si el reloj se agota, dejamos de intentar proveedores
+  // y lanzamos el fallback local (respuesta JSON en < 25 s, nunca un 504).
+  const deadline = Date.now() + TOTAL_BUDGET_MS;
+
   for (const attempt of attempts) {
+    const remaining = deadline - Date.now();
+    if (remaining < 1_500) {
+      errors.push(`${attempt.name}: omitido por presupuesto de tiempo`);
+      break;
+    }
     try {
-      const out = await attempt.fn(req);
+      const out = await withTimeout(attempt.fn(req), remaining);
       return out;
     } catch (e) {
       const msg = e instanceof Error ? e.message : String(e);
