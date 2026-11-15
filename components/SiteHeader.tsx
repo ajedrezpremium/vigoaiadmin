@@ -87,13 +87,6 @@ export default function SiteHeader({
               </option>
             ))}
           </select>
-          <a
-            href="#demo"
-            title="Probar demo"
-            className="rounded-lg bg-brand-600 px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-brand-500"
-          >
-            💬 Probar demo
-          </a>
         </div>
       </div>
     </header>

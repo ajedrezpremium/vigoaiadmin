@@ -18,8 +18,8 @@ VIGO AI ADMINISTRATION es una plataforma de demostración de inteligencia artifi
 
 ### 2.1 Abrir el asistente
 - Haz clic en el **botón flotante** (esquina inferior derecha, icono 🏛️).
-- O pulsa el botón **"Probar demo"** en la cabecera.
 - O usa el botón en la sección de demostración de la portada.
+- O pulsa el ítem **"Demo"** del menú de navegación de la cabecera.
 
 ### 2.2 Hacer una pregunta
 1. Escribe tu pregunta en el campo de texto.
