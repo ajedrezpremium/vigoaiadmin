@@ -269,4 +269,141 @@ Anota nombre de la persona, hora y contenido de la respuesta. Envíalo después 
 
 Este dosier es una guía operativa, no asesoramiento jurídico. Los pliegos del expediente prevalecen sobre cualquier indicación de este documento. Antes de firmar una oferta de 130.000 €, revísala con un abogado especializado en contratación pública. Un error formal no se corrige después.
 
+## 15. Diagnóstico con tus datos reales
+
+Datos confirmados el 15/11/2026: **no inscrito en ROLECE**, **sin proveedor de hardware**, **facturación anual de 80.000 €**.
+
+| Requisito del contrato de 130.000 € | Tu situación | Resultado |
+|---|---|---|
+| Solvencia económica (habitual 1,5× = 195.000 €) | 80.000 € | No cumple ni con el criterio de 1× |
+| Inscripción en ROLECE (si el PCAP la exige) | No inscrito | Excluido |
+| Suministro de servidores, GPU y almacenamiento | Sin proveedor | Fuera del objeto |
+| Experiencia acreditable en suministros TIC similares | Limitada | Poca puntuación técnica |
+
+**Conclusión: no te presentes en solitario.** No es una opinión de prudencia: son tres causas de exclusión y una de falta de encaje. Presentar una oferta que será excluida no solo pierde el contrato, quema tu credibilidad ante el Servicio de Contratación para la siguiente convocatoria.
+
+La buena noticia: tu producto sí encaja en el **software** que ese hardware va a ejecutar. La estrategia correcta es entrar por la puerta de atrás del contrato grande y por la puerta pequeña del contrato menor.
+
+---
+
+## 16. Ruta A — UTE con un integrador (la vía para el contrato de 130.000 €)
+
+Una **unión temporal de empresas** (art. 69 LCSP) permite sumar solvencia y capacidades. Tú aportas la capa de IA y el conocimiento del dominio; el socio aporta hardware, ROLECE y solvencia.
+
+**Reparto recomendado:** socio integrador 70 % (líder y representante único) · CHESS AI AGENCY 30 %.
+
+**Qué aporta cada parte:**
+
+| Socio integrador | CHESS AI AGENCY |
+|---|---|
+| Inscripción ROLECE | Demo funcionando en producción |
+| Solvencia económica (facturación) | Arquitectura RAG y multiagente |
+| Suministro y garantía del hardware | Asistente normativo, borradores, voz |
+| Certificaciones y seguro RC | Memoria técnica del bloque de IA |
+| Relación con el Concello | Transferencia de conocimiento y formación |
+
+**No hace falta constituir la UTE antes de presentarse.** Basta un **compromiso de constitución** firmado por ambos, con porcentajes y representante único. La escritura notarial se formaliza después, antes de la adjudicación o firma según fije el PCAP.
+
+**Plan de 72 horas:**
+
+1. **Lunes 09:00** — descargar PCAP y comprobar la cláusula de solvencia: si exige umbral individual por miembro, la UTE tampoco te salva con 80.000 €. Es el dato decisivo.
+2. **Lunes 10:00** — llamar a 3 integradores de Vigo y Galicia. Perfil: que vendan servidores y GPU, tengan ROLECE y facturen por encima de 500.000 €.
+3. **Lunes 14:00** — enviar el correo del apartado 16.1 a los tres.
+4. **Martes** — reunión de 30 minutos con el que responda. Lleva la demo abierta y una hoja con tres casos de uso.
+5. **Miércoles** — firmar compromiso de UTE y repartir la memoria técnica por bloques.
+6. **Jueves** — oferta económica conjunta y revisión del PCAP.
+7. **Viernes** — presentar con 24 horas de margen.
+
+**Candidatos a explorar (verifica siempre interlocutor y solvencia):** integradores TIC gallegos con presencia en Vigo como Altia, Plexus, Cinfo, Imatia, Balidea, Bahía Software o Teimas; distribuidores de hardware como Ingram Micro, TD SYNNEX o Also para la parte de suministro.
+
+### 16.1 Correo para el integrador
+
+> **Asunto:** UTE para la licitación de IA del Concello de Vigo (130.000 €)
+>
+> Hola [nombre]:
+>
+> Soy [tu nombre], de CHESS AI AGENCY. Hemos desarrollado VIGO AI ADMINISTRATION, un asistente municipal con IA que ya funciona en producción: RAG con citas de fuentes, diez agentes especializados, voz a texto y texto a voz, y cumplimiento RGPD/ENS/AI Act documentado. Puedes verlo en https://vigo-ai-demo.vercel.app
+>
+> El Concello acaba de licitar 130.000 € de equipamiento para desarrollar su IA interna. El objeto es suministro de hardware, así que no nos presentamos solos: buscamos un integrador que aporte equipos, ROLECE y solvencia, y nosotros aportamos la capa de IA, la memoria técnica y la implantación.
+>
+> Proponemos una UTE 70/30 con ustedes como líderes y representante único. ¿Te encaja una llamada de 30 minutos esta semana? Puedo enviarte el borrador de memoria técnica antes.
+>
+> Un saludo,
+> [nombre] · [teléfono] · [correo]
+
+### 16.2 Documentos que debe firmar la UTE
+
+- [ ] Compromiso de constitución con porcentajes y representante único
+- [ ] Declaración de cada miembro de no estar incursa en prohibiciones (art. 71 LCSP)
+- [ ] Solvencia de cada miembro y acumulada de la UTE
+- [ ] Designación del representante único con poder suficiente
+- [ ] Compromiso de formalización notarial antes del plazo del PCAP
+- [ ] Reparto de responsabilidades y cláusula de salida
+
+**Advertencia:** no presentes solvencia que no tienes ni utilices la inscripción de otro como propia. Es causa de exclusión y, según el caso, infracción grave.
+
+---
+
+## 17. Ruta B — contrato menor (la vía realista para empezar)
+
+Los contratos menores de servicios (menos de 15.000 €, IVA excluido) no se licitan en PLACSP: se adjudican por invitación desde el área municipal. Es la forma más rápida de que el Concello te pruebe y de construir el historial que hoy te falta.
+
+**Propuesta de piloto: 12.500 € · 6 semanas**
+
+| Fase | Entregable | Semanas |
+|---|---|---|
+| 1 | Asistente normativo con 100 documentos reales y citas verificables | 1–2 |
+| 2 | Generación de borradores de informes con plantilla municipal | 3–4 |
+| 3 | Voz a texto y texto a voz en gallego y castellano | 5 |
+| 4 | Formación, manual y medición de tiempos ahorrados | 6 |
+
+**Métricas de éxito que debes proponer:** tiempo medio de respuesta a consultas internas, número de borradores generados y validados, porcentaje de respuestas con fuente correcta, satisfacción del personal.
+
+**A quién escribir:** al Servicio de Contratación y al área de Modernización/Informática. Adjunta una hoja de una página, no un dosier de 40.
+
+### 17.1 Correo para el contrato menor
+
+> **Asunto:** Piloto de asistente normativo con IA para el Concello (12.500 €)
+>
+> Buenos días:
+>
+> Me pongo en contacto con ustedes tras el anuncio de la licitación de equipamiento para IA del 12 de noviembre. Somos una empresa especializada en asistentes municipales con IA y tenemos una demo funcionando: https://vigo-ai-demo.vercel.app
+>
+> Entendemos que el contrato de 130.000 € es de equipamiento. Por eso les propongo un paso previo de bajo riesgo: un piloto de 12.500 € en seis semanas para un asistente normativo interno, con citas de fuentes y generación de borradores, medido en horas ahorradas. Si funciona, el software estará listo para ejecutarse sobre el hardware que adquieran.
+>
+> ¿Podríamos mantener una reunión de 30 minutos? Adjunto una hoja con el alcance y los entregables.
+>
+> Gracias y un saludo,
+> [nombre] · [teléfono] · [correo]
+
+---
+
+## 18. Ruta C — subcontrata con el adjudicatario
+
+Si el contrato se adjudica a un integrador grande, ofrece tu capa de IA como subcontrata (20–30 % del importe). No necesitas solvencia ni ROLECE. Se negocia después de la adjudicación, pero puedes sembrarla ahora: escribe a los integradores que se presenten y preséntate como especialista en el bloque de IA.
+
+---
+
+## 19. ROLECE: inscríbete aunque no haya licitación
+
+Aunque no llegues a este expediente, **inicia la inscripción esta semana**. Es gratuita, se hace con certificado digital y tarda de días a tres semanas. Tenerla hecha te permite:
+
+- Presentarte al siguiente contrato sin depender de nadie.
+- Acreditar solvencia con un documento oficial.
+- Figurar como proveedor cuando el Concello busque empresas para contratos menores.
+
+Mientras tu facturación sea de 80.000 €, la UTE seguirá siendo tu vía para contratos de más de 80.000 €. Eso no es un defecto: es la estructura normal del mercado.
+
+---
+
+## 20. Decisión final recomendada
+
+| Escenario | Decisión |
+|---|---|
+| Vas solo al contrato de 130.000 € | **No.** Tres causas de exclusión |
+| UTE con integrador y PCAP lo permite | **Sí.** Es tu mejor opción para este expediente |
+| Contrato menor de 12.500 € | **Sí, en paralelo.** Es la vía que sí controlas |
+| Subcontrata con el adjudicatario | **Sí, como refuerzo.** Bajo coste, alto retorno |
+| Inscripción en ROLECE | **Sí, esta semana.** Inversión de futuro |
+
 **Documento preparado por CHESS AI AGENCY · VIGO AI ADMINISTRATION · 15/11/2026**
