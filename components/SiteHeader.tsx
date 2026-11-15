@@ -55,6 +55,14 @@ export default function SiteHeader({
               <span className="hidden lg:inline">{item.label}</span>
             </a>
           ))}
+          <a
+            href="/ayuntamientos"
+            title="Para concellos"
+            className="flex items-center gap-1.5 rounded-lg border border-brand-500/40 px-2.5 py-1.5 text-sm text-brand-200 transition hover:bg-brand-500/10"
+          >
+            <span aria-hidden>🏘️</span>
+            <span className="hidden lg:inline">Concellos</span>
+          </a>
         </nav>
 
         <div className="ml-auto flex items-center gap-2">

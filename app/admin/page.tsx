@@ -13,6 +13,20 @@ interface Stats {
   recentQuestions: { content: string; created_at: string }[];
 }
 
+interface Lead {
+  id?: string;
+  created_at: string;
+  concello: string;
+  nome: string;
+  cargo?: string | null;
+  email: string;
+  telefono?: string | null;
+  tramo?: string | null;
+  interese?: string | null;
+  mensaxe?: string | null;
+  estado?: string | null;
+}
+
 export default function AdminPage() {
   const [token, setToken] = useState("");
   const [email, setEmail] = useState("");
@@ -21,6 +35,7 @@ export default function AdminPage() {
   const [accessToken, setAccessToken] = useState<string | null>(null);
   const [role, setRole] = useState<string | null>(null);
   const [stats, setStats] = useState<Stats | null>(null);
+  const [leads, setLeads] = useState<Lead[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -90,8 +105,23 @@ export default function AdminPage() {
     }
   }
 
-  const isLoggedIn = Boolean(accessToken || (token && !token.startsWith("TU_TOKEN")));
+  async function loadLeads() {
+    setLoading(true);
+    setError(null);
+    try {
+      const res = await fetch("/api/admin/leads", { headers: authHeaders() });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error ?? `HTTP ${res.status}`);
+      setLeads(data.leads as Lead[]);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Error");
+      setLeads(null);
+    } finally {
+      setLoading(false);
+    }
+  }
 
+  const isLoggedIn = Boolean(accessToken || (token && !token.startsWith("TU_TOKEN")));
   return (
     <main className="mx-auto min-h-screen max-w-4xl px-6 py-12">
       <p className="text-xs uppercase tracking-widest text-brand-400">
@@ -182,6 +212,13 @@ export default function AdminPage() {
               {loading ? "Cargando…" : "Ver estadísticas"}
             </button>
             <button
+              onClick={loadLeads}
+              disabled={loading}
+              className="rounded-lg border border-brand-500/50 bg-brand-500/10 px-4 py-2 text-sm font-semibold text-brand-200 hover:bg-brand-500/20 disabled:opacity-40"
+            >
+              🏘️ Ver contactos de concellos
+            </button>
+            <button
               onClick={logout}
               className="rounded-lg border border-slate-600 px-3 py-1.5 text-xs text-slate-300 hover:border-brand-400"
             >
@@ -263,6 +300,55 @@ export default function AdminPage() {
                 </ul>
               </section>
             </div>
+          )}
+
+          {leads && (
+            <section className="mt-10">
+              <h2 className="mb-3 text-lg font-semibold">
+                Contactos de concellos ({leads.length})
+              </h2>
+              <p className="mb-4 text-xs text-slate-500">
+                Solicitudes recibidas desde la landing /ayuntamientos. Si aparece vacío, revisa que
+                exista la tabla <code>leads</code> o el evento <code>lead_ayuntamiento</code>.
+              </p>
+              <div className="space-y-3">
+                {leads.map((l) => (
+                  <article
+                    key={l.id ?? `${l.email}-${l.created_at}`}
+                    className="rounded-xl border border-slate-700 bg-slate-900/50 p-4"
+                  >
+                    <div className="flex flex-wrap items-baseline justify-between gap-2">
+                      <p className="font-semibold text-slate-100">
+                        {l.concello}
+                        <span className="ml-2 text-xs font-normal text-slate-400">{l.nome}</span>
+                      </p>
+                      <p className="text-[11px] text-slate-500">
+                        {new Date(l.created_at).toLocaleString("es-ES")}
+                      </p>
+                    </div>
+                    <p className="mt-1 text-xs text-slate-400">
+                      {[l.cargo, l.tramo, l.interese].filter(Boolean).join(" · ") || "Sin clasificar"}
+                    </p>
+                    <p className="mt-2 text-sm">
+                      <a href={`mailto:${l.email}`} className="text-brand-300 hover:underline">
+                        {l.email}
+                      </a>
+                      {l.telefono && <span className="ml-3 text-slate-300">{l.telefono}</span>}
+                    </p>
+                    {l.mensaxe && (
+                      <p className="mt-2 rounded-lg bg-slate-950/60 px-3 py-2 text-xs text-slate-300">
+                        {l.mensaxe}
+                      </p>
+                    )}
+                  </article>
+                ))}
+                {leads.length === 0 && (
+                  <p className="rounded-xl border border-slate-700 bg-slate-900/40 px-4 py-3 text-sm text-slate-400">
+                    Aún no hay solicitudes registradas.
+                  </p>
+                )}
+              </div>
+            </section>
           )}
         </>
       )}

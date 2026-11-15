@@ -50,8 +50,31 @@ create table if not exists public.escalations (
 create index if not exists idx_escalations_created
   on public.escalations(created_at);
 
--- Roles de usuario (RBAC — Semana 2 v1.2)
-create table if not exists public.user_roles (
+-- Leads comerciales (landing /ayuntamientos — v1.2)
+create table if not exists public.leads (
+  id uuid primary key default gen_random_uuid(),
+  created_at timestamptz not null default now(),
+  concello text not null,
+  nome text not null,
+  cargo text,
+  email text not null,
+  telefono text,
+  tramo text,
+  interese text,
+  mensaxe text,
+  orixe text not null default 'landing_ayuntamientos',
+  idioma text,
+  estado text not null default 'novo',
+  user_agent text
+);
+
+create index if not exists idx_leads_created
+  on public.leads(created_at desc);
+
+-- Sin políticas para anon: solo el servidor (service_role) escribe y lee.
+alter table public.leads enable row level security;
+
+-- Roles de usuario (RBAC — Semana 2 v1.2)create table if not exists public.user_roles (
   user_id uuid primary key references auth.users(id) on delete cascade,
   role text not null check (role in ('admin', 'editor', 'viewer')),
   created_at timestamptz not null default now()

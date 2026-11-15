@@ -75,7 +75,8 @@ Regla: **nunca vendas la implantación anual en el primer contacto.** Vende el p
 
 ## 5. Activos que necesitas
 
-- [ ] **Landing `/ayuntamientos`** con propuesta, precios y formulario (recomendado: hacerla esta semana)
+- [x] **Landing `/ayuntamientos`** publicada: https://vigo-ai-demo.vercel.app/ayuntamientos
+      Incluye escalera de precios, FAQ, formulario bilingüe gl/es y captación de leads en Supabase.
 - [ ] **Hoja de una página** del piloto (ya generada: `PILOTO_12500_VIGO.pdf`)
 - [ ] **Vídeo de 30 segundos** con la demo real
 - [ ] **Dosier corto** de 4 páginas, no de 40
@@ -230,7 +231,7 @@ El coste real es tu tiempo: 4 horas al día durante dos semanas para la prospecc
 
 ## 14. Próximos cinco pasos
 
-1. Publicar la landing `/ayuntamientos` con la oferta y el formulario.
+1. ~~Publicar la landing `/ayuntamientos` con la oferta y el formulario.~~ **Hecho:** https://vigo-ai-demo.vercel.app/ayuntamientos
 2. Cerrar la lista de los 25 concellos de los segmentos A y B con contacto verificado.
 3. Grabar el vídeo de 30 segundos con la demo real.
 4. Enviar los 10 primeros correos el martes por la mañana.
