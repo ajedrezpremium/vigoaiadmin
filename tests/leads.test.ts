@@ -138,7 +138,7 @@ describe("plantillas de correo", () => {
 
 describe("finalEmail", () => {
   const lead = {
-    concello: "Concello de Moaña",
+    concello: "Concello de Vigo",
     nome: "Ana Pérez",
     cargo: "Secretaría Xeral",
     email: "ana.perez@concellodemoana.org",
@@ -149,22 +149,23 @@ describe("finalEmail", () => {
     idioma: "gl",
   } as const;
 
-  it("es la version final del piloto con por que contratar y proyecto", () => {
+  it("es la version final del piloto con propuesta mejorada", () => {
     const { html, subject, text } = finalEmail(lead);
-    expect(subject).toContain("Concello de Moaña");
+    expect(subject).toContain("Concello de Vigo");
     expect(html).toContain("VIGO AI ADMINISTRATION");
     expect(html).toContain("12.500");
     expect(html).toContain("https://vigo-ai-demo.vercel.app/administracion-local");
     expect(html).toContain("https://chess-ai-agency.vercel.app/nosotros.html");
     expect(html).toContain("29 proxectos en curso");
-    expect(html).toContain("Por que contratar agora");
-    expect(html).toContain("Borrador");
     expect(html).toContain("CHESS AI AGENCY");
     expect(html).toContain("IA PARA CONCELLOS");
     expect(html).toContain("Praza do Rei");
     expect(html).toContain("maps.google.com/maps");
     expect(html).toContain("Tarxada sobre a cidade");
     expect(html).toContain("Interese sobre a cidade");
+    expect(html).toContain("Un piloto práctico, medible e sen permanencia");
+    expect(html).toContain("A IA axuda. As persoas deciden.");
+    expect(html).toContain("Coñeza a proposta");
     expect(text).toContain("12.500 €");
     expect(text).toContain("https://chess-ai-agency.vercel.app/nosotros.html");
   });

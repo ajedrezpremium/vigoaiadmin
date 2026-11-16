@@ -349,97 +349,177 @@ export function finalEmail(lead: LeadInput): { subject: string; html: string; te
     ? `Proposta de pilot · ${lead.concello}`
     : `Proposta de piloto · ${lead.concello}`;
 
-  const copy = es
-    ? {
-        kicker: "Proposta de piloto",
-        title: "VIGO AI ADMINISTRATION",
-        subtitle: `Piloto para el Ayuntamiento de ${lead.concello} · 12.500 EUR · 6 semanas`,
-        body: [
-          "<p style='margin:0;font:16px/1.6 Arial,Helvetica,sans-serif;color:#334155;'>La necesidad:</p>",
-          "<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'>Un concello atiende a tres perfiles con necesidades distintas: personal municipal, proveedores y ciudadanía. Cada uno con un punto de dolor distinto, y ninguna responde a la duda del otro.</p>",
-          "<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'>La solución de CHESS AI AGENCY: un motor principal con subagentes especializados — información pública, trámites, normativa, empresa, urbanismo, cultura, social — que redacta, resume y transcribe con fuentes; la revisión humana la hace el personal.</p>",
-          "<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'>Seguridad y solvencia: respuestas con fuentes verificadas, revisión humana obligatoria, cumplimiento RGPD, ENS y AI Act; no automatizamos lo que no debe.</p>",
-          "<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'><b>EL PILOTO · Por qué contratar ahora:</b></p>",
-          "<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'>Un asistente que responde con fuentes citadas, redacta borradores marcados como Borrador y transcribe reuniones. No sustituye la decisión humana: la revisión y la firma las mantiene el personal del concello.</p>",
-          "<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'>Empezamos por una unidad real: documentación, expedientes o trámites. Si el piloto no funciona, no se continúa: te quedas con el informe y la experiencia.</p>",
-          "<p style='margin:18px 0 0;font:16px/1.4 Arial,Helvetica,sans-serif;color:#172052;'><b>Tarjeta sobre la ciudad:</b></p>",
-          "<p style='margin:8px 0 0;font:14px/1.6 Arial,Helvetica,sans-serif;color:#334155;'><a href='https://maps.google.com/?q=Praza+do+Rei+Vigo' style='color:#2550eb;text-decoration:none;'>📍 Praza do Rei, 1 — 36202 Vigo, Pontevedra, Galicia</a></p>",
-          "<img src=\"https://maps.google.com/maps?q=Praza+do+Rei+Vigo&z=14&ie=UTF8&iwloc=&output=embed\" width=\"552\" alt=\"Mapa de Vigo — Praza do Rei 1\" style=\"display:block;width:100%;max-width:552px;height:auto;border:0;outline:none;text-decoration:none;margin:10px 0;\" />",
-          "<p style='margin:12px 0 0;font:14px/1.6 Arial,Helvetica,sans-serif;color:#334155;'>Interés sobre la ciudad (<a href='https://es.wikipedia.org/wiki/Vigo' style='color:#2550eb;text-decoration:none;'>fuentes Wikipedia</a>):</p>",
-          "<ol style='margin:10px 0 0;padding-left:20px;font:13px/1.8 Arial,Helvetica,sans-serif;color:#475569;'>" +
-          "<li><b>Extensión / superficie</b></li>" +
-          "<li><b>Población</b></li>" +
-          "<li><b>Clima</b></li>" +
-          "<li><b>Presupuesto municipal</b></li>" +
-          "<li><b>Gobierno municipal</b></li>" +
-          "<li><b>Web oficial</b></li>" +
-          "<li>Densidad / demografía</li>" +
-          "<li><b>Distritos administrativos</b></li>" +
-          "</ol>",
-        ].join("\n"),
-        cta: "Comenzar el piloto",
-        note: "Sin compromiso · Sin permanencia · Con datos del concello · Con métricas acordadas por escrito.",
-        legal:
-          "Proposta comercial CHESS AI AGENCY · VIGO AI ADMINISTRATION · Piloto 6 semanas · 12.500 EUR · Quienes somos: https://chess-ai-agency.vercel.app/nosotros.html · 29 proxectos en curso.",
-        preheader: "Comenzamos con una unidad real. Sin compromiso.",
-      }
-    : {
-        kicker: "Proposta de piloto",
-        title: "VIGO AI ADMINISTRATION",
-        subtitle: `Piloto para o Concello de ${lead.concello} · 12.500 € · 6 semanas`,
-        body: [
-          "<p style='margin:0;font:16px/1.6 Arial,Helvetica,sans-serif;color:#334155;'>A necesidade:</p>",
-          "<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'>Un concello atende a tres perfiles con necesidades distintas: persoal municipal, provedores e cidadanía. Cada un un punto de dolor distinto, e ningun responde á duda do outro.</p>",
-          "<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'>A solución de CHESS AI AGENCY: un motor principal co subequipo de subagentes especializados — información pública, trámites, normativa, empresa, urbanismo, cultura, social — que redacta, resume e transcribe con fontes; a revisión humana faise o persoal.</p>",
-          "<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'>Segureza e solvencia: respostas con fontes verificadas, revisión humana obrigatoria, cumprimento RGPD, ENS e AI Act; non automaticemos o que non debe.</p>",
-          "<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'><b>EL PILOTO · Por que contratar agora:</b></p>",
-          "<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'>Un asistente que responde con fontes citadas, redacta borradores marcados como Borrador e transcribe reunións. Non sustitúe a decisión humana: a revisión e a firma quedarán sempre co persoal do concello.</p>",
-          "<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'>Empiezan cunha unidade real: documentación, expedientes ou trámites. Si non funciona, no se continua: quédao co informe e coa aprendizaxe.</p>",
-          "<p style='margin:18px 0 0;font:16px/1.4 Arial,Helvetica,sans-serif;color:#172052;'><b>Tarxada sobre a cidade:</b></p>",
-          "<p style='margin:8px 0 0;font:14px/1.6 Arial,Helvetica,sans-serif;color:#334155;'><a href='https://maps.google.com/?q=Praza+do+Rei+Vigo' style='color:#2550eb;text-decoration:none;'>📍 Praza do Rei, 1 — 36202 Vigo, Pontevedra, Galicia</a></p>",
-          "<img src=\"https://maps.google.com/maps?q=Praza+do+Rei+Vigo&z=14&ie=UTF8&iwloc=&output=embed\" width=\"552\" alt=\"Mapa de Vigo — Praza do Rei 1\" style=\"display:block;width:100%;max-width:552px;height:auto;border:0;outline:none;text-decoration:none;margin:10px 0;\" />",
-          "<p style='margin:12px 0 0;font:14px/1.6 Arial,Helvetica,sans-serif;color:#334155;'>Interese sobre a cidade (<a href='https://gl.wikipedia.org/wiki/Vigo' style='color:#2550eb;text-decoration:none;'>fonte Wikipedia</a>):</p>",
-          "<ol style='margin:10px 0 0;padding-left:20px;font:13px/1.8 Arial,Helvetica,sans-serif;color:#475569;'>" +
-          "<li><b>Extensión / superficie</b></li>" +
-          "<li><b>Población</b></li>" +
-          "<li><b>Clima</b></li>" +
-          "<li><b>Presupuesto municipal</b></li>" +
-          "<li><b>Gobierno municipal</b></li>" +
-          "<li><b>Web oficial</b></li>" +
-          "<li><b>Densidade / demografía</b></li>" +
-          "<li><b>Distritos administrativos</b></li>" +
-          "</ol>",
-        ].join("\n"),
-        cta: "Comenzar o piloto",
-        note: "Sen compromiso · Sen permanencia · Con datos do concello · Con métricas acordadas por escrito.",
-        legal:
-          "Proposta comercial CHESS AI AGENCY · VIGO AI ADMINISTRATION · Piloto 6 semanas · 12.500 € · Quen somos: https://chess-ai-agency.vercel.app/nosotros.html · 29 proxectos en curso.",
-        preheader: "Comenzamos con una unidad real. Sen compromiso.",
-      };
+  const mapsUrl = "https://maps.google.com/?q=Praza+do+Rei+Vigo";
+  const mapsEmbed = "https://maps.google.com/maps?q=Praza+do+Rei+Vigo&z=14&ie=UTF8&iwloc=&output=embed";
+  const wikiUrl = es ? "https://es.wikipedia.org/wiki/Vigo" : "https://gl.wikipedia.org/wiki/Vigo";
+  const ciudadAddr = "📍 Praza do Rei, 1 — 36202 Vigo, Pontevedra, Galicia";
+  const ciudadT = es ? "Tarjeta sobre la ciudad:" : "Tarxada sobre a cidade:";
+  const ciudadFactsT = es
+    ? "Interés sobre la ciudad (fuentes Wikipedia):"
+    : "Interese sobre a cidade (fonte Wikipedia):";
+  const facts = [
+    "Extensión / superficie",
+    "Población",
+    "Clima",
+    "Presupuesto municipal",
+    "Gobierno municipal",
+    "Web oficial",
+    es ? "Densidad / demografía" : "Densidade / demografía",
+    "Distritos administrativos",
+  ];
 
-  const body = `${copy.body}\n${button(LANDING, copy.cta)}\n<p style="margin:18px 0 0;font:13px/1.6 Arial,Helvetica,sans-serif;color:#94a3b8;">${esc(copy.note)}</p>`;
+  const intro = es
+    ? "Estimados/as responsables del Ayuntamiento de Vigo:"
+    : "Estimados/as responsables do Concello de Vigo:";
+  const saludo = es
+    ? "Desde <b>CHESS AI AGENCY</b>, queremos presentarles una propuesta de colaboración para explorar las posibilidades de la Inteligencia Artificial en la modernización y mejora de los servicios municipales."
+    : "Desde <b>CHESS AI AGENCY</b>, queremos presentarlles unha proposta de colaboración para explorar as posibilidades da Intelixencia Artificial na modernización e mellora dos servizos municipais.";
+  const piloto = es
+    ? "Proponemos la implantación de un proyecto piloto de 6 semanas, con una inversión de <b>12.500 €</b>, orientado a mejorar tres ámbitos fundamentales:"
+    : "Propoñemos a implantación dun proxecto piloto de 6 semanas, cun investimento de <b>12.500 €</b>, orientado a mellorar tres ámbitos fundamentais:";
+  const scopes: Array<[string, string]> = es
+    ? [
+        ["Personal municipal", "asistencia en la consulta de documentación, normativa, elaboración de informes, redacción de borradores y transcripción de reuniones."],
+        ["Empresas y proveedores", "acceso más ágil a la información pública, procedimientos, contratación y servicios municipales."],
+        ["Ciudadanía", "información y orientación sobre servicios, trámites, actividades y recursos municipales."],
+      ]
+    : [
+        ["Persoal municipal", "asistencia na consulta de documentación, normativa, elaboración de informes, redacción de borradores e transcripción de reunións."],
+        ["Empresas e provedores", "acceso máis áxil á información pública, procedementos, contratación e servizos municipais."],
+        ["Cidadanía", "información e orientación sobre servizos, trámites, actividades e recursos municipais."],
+      ];
+  const solT = es ? "Una solución de IA especializada" : "Unha solución de IA especializada";
+  const sol1 = es
+    ? "Nuestra propuesta combina un motor central de Inteligencia Artificial con un equipo de agentes especializados en diferentes áreas de la Administración: información pública, trámites, normativa, urbanismo, actividad empresarial, cultura y servicios sociales."
+    : "A nosa proposta combina un motor central de Intelixencia Artificial cun equipo de axentes especializados en diferentes áreas da Administración: información pública, trámites, normativa, urbanismo, actividade empresarial, cultura e servizos sociais.";
+  const sol2 = es
+    ? "El sistema permite consultar información con referencias a las fuentes, preparar documentos y asistir al personal municipal en sus tareas habituales."
+    : "O sistema permite consultar información con referencias ás fontes, preparar documentos e asistir ao persoal municipal nas súas tarefas habituais.";
+  const ia = es
+    ? "<b>La IA ayuda. Las personas deciden.</b> La supervisión, validación y firma de los documentos permanecen siempre bajo la responsabilidad del personal autorizado."
+    : "<b>A IA axuda. As persoas deciden.</b> A supervisión, validación e sinatura dos documentos permanecen sempre baixo responsabilidade do persoal autorizado.";
+  const pilotT = es ? "Un piloto práctico, medible y sin permanencia" : "Un piloto práctico, medible e sen permanencia";
+  const pilot1 = es
+    ? "Proponemos comenzar con una área o unidad municipal concreta, trabajando con documentación y necesidades reales del Concello."
+    : "Propoñemos comezar cunha área ou unidade municipal concreta, traballando con documentación e necesidades reais do Concello.";
+  const pilotM = es
+    ? "Durante las seis semanas se establecerán objetivos e indicadores para evaluar:"
+    : "Durante as seis semanas estableceranse obxectivos e indicadores para avaliar:";
+  const metrics: string[] = es
+    ? [
+        "Reducción de los tiempos de consulta y gestión.",
+        "Mejora de la productividad administrativa.",
+        "Calidad y precisión de las respuestas.",
+        "Utilidad para el personal y los usuarios de los servicios municipales.",
+      ]
+    : [
+        "Redución dos tempos de consulta e xestión.",
+        "Mellora da produtividade administrativa.",
+        "Calidade e precisión das respostas.",
+        "Utilidade para o persoal e os usuarios dos servizos municipais.",
+      ];
+  const seg = es
+    ? "El proyecto se incorpora con criterios de seguridad, protección de datos (RGPD), adecuación al Esquema Nacional de Seguridad (ENS) y al Reglamento Europeo de Inteligencia Artificial (AI Act), según el alcance y los requisitos aplicables."
+    : "O proxecto incorpórase con criterios de segureza, protección de datos (RGPD), adecuación ao Esquema Nacional de Seguridade (ENS) e ao Regulamento Europeo de Intelixencia Artificial (AI Act), segundo o alcance e os requisitos aplicables.";
+  const cierre = es
+    ? "Al finalizar, el Concello dispondrá de una evaluación de los resultados y de una propuesta de posibles fases de ampliación. La continuidad será una decisión municipal, sin compromiso de permanencia."
+    : "Ao finalizar, o Concello disporá dunha avaliación dos resultados e dunha proposta de posibles fases de ampliación. A continuidade será unha decisión municipal, sen compromiso de permanencia.";
+  const demoT = es ? "Conozca la propuesta" : "Coñeza a proposta";
+  const demo = es
+    ? "Puede acceder a la presentación interactiva y conocer una demostración del proyecto en:"
+    : "Pode acceder á presentación interactiva e coñecer unha demostración do proxecto nesta ligazón:";
+  const demoUrl = `${SITE}/`;
+  const cierra2 = es
+    ? "Nos gustaría tener la oportunidad de realizar una breve presentación y valorar conjuntamente una primera área de aplicación en el Ayuntamiento de Vigo."
+    : "Gustaríanos ter a oportunidade de realizar unha breve presentación e valorar conxuntamente unha primeira área de aplicación no Concello de Vigo.";
+  const cierra3 = es
+    ? "Agradecemos su atención y quedamos a su disposición."
+    : "Agradecemos a súa atención e quedamos á súa disposición.";
+
+  const P = "margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;";
+  const H = "margin:18px 0 0;font:16px/1.4 Arial,Helvetica,sans-serif;color:#172052;";
+  const UL = "margin:10px 0 0;padding-left:20px;font:15px/1.8 Arial,Helvetica,sans-serif;color:#334155;";
+
+  const body = [
+    `<p style='margin:0;font:16px/1.6 Arial,Helvetica,sans-serif;color:#334155;'>${intro}</p>`,
+    `<p style='${P}'>${saludo}</p>`,
+    `<p style='${P}'>${piloto}</p>`,
+    `<ul style='${UL}'>${scopes.map(([t, d]) => `<li><b>${t}:</b> ${d}</li>`).join("")}</ul>`,
+    `<p style='${H}'><b>${solT}</b></p>`,
+    `<p style='${P}'>${sol1}</p>`,
+    `<p style='${P}'>${sol2}</p>`,
+    `<p style='${P}'>${ia}</p>`,
+    `<p style='${H}'><b>${pilotT}</b></p>`,
+    `<p style='${P}'>${pilot1}</p>`,
+    `<p style='${P}'>${pilotM}</p>`,
+    `<ul style='${UL}'>${metrics.map((m) => `<li>${m}</li>`).join("")}</ul>`,
+    `<p style='${P}'>${seg}</p>`,
+    `<p style='${P}'>${cierre}</p>`,
+    `<p style='${H}'><b>${demoT}</b></p>`,
+    `<p style='${P}'>${demo}</p>`,
+    `<p style='${P}'><a href='${demoUrl}' style='color:#2550eb;text-decoration:none;'>${demoUrl}</a></p>`,
+    `<p style='${P}'>${cierra2}</p>`,
+    `<p style='${P}'>${cierra3}</p>`,
+    `<p style='${H}'><b>${ciudadT}</b></p>`,
+    `<p style='margin:8px 0 0;font:14px/1.6 Arial,Helvetica,sans-serif;color:#334155;'><a href='${mapsUrl}' style='color:#2550eb;text-decoration:none;'>${ciudadAddr}</a></p>`,
+    `<img src='${mapsEmbed}' width='552' alt='Mapa de Vigo — Praza do Rei 1' style='display:block;width:100%;max-width:552px;height:auto;border:0;outline:none;text-decoration:none;margin:10px 0;' />`,
+    `<p style='margin:12px 0 0;font:14px/1.6 Arial,Helvetica,sans-serif;color:#334155;'>${ciudadFactsT.replace("Wikipedia", "")}<a href='${wikiUrl}' style='color:#2550eb;text-decoration:none;'>Wikipedia</a>):</p>`.replace("))", ")"),
+    `<ol style='margin:10px 0 0;padding-left:20px;font:13px/1.8 Arial,Helvetica,sans-serif;color:#475569;'>${facts.map((f) => `<li><b>${f}</b></li>`).join("")}</ol>`,
+  ].join("\n");
+
+  const copy = {
+    cta: es ? "Ver la presentación" : "Ver a presentación",
+    note: es
+      ? "Sin compromiso · Sin permanencia · Con datos del concello · Con métricas acordadas por escrito."
+      : "Sen compromiso · Sen permanencia · Con datos do concello · Con métricas acordadas por escrito.",
+    legal: es
+      ? "Proposta comercial CHESS AI AGENCY · VIGO AI ADMINISTRATION · Piloto 6 semanas · 12.500 EUR · Quienes somos: https://chess-ai-agency.vercel.app/nosotros.html · 29 proxectos en curso."
+      : "Proposta comercial CHESS AI AGENCY · VIGO AI ADMINISTRATION · Piloto 6 semanas · 12.500 € · Quen somos: https://chess-ai-agency.vercel.app/nosotros.html · 29 proxectos en curso.",
+    preheader: es
+      ? "Piloto de 6 semanas con métricas acordadas. Sin compromiso."
+      : "Piloto de 6 semanas con métricas acordadas. Sen compromiso.",
+  };
+
+  const fullBody = `${body}\n${button(demoUrl, copy.cta)}\n<p style="margin:18px 0 0;font:13px/1.6 Arial,Helvetica,sans-serif;color:#94a3b8;">${esc(copy.note)}</p>`;
 
   const text = [
     `Proposta comercial — ${lead.concello}`,
     "",
-    es ? `Piloto para el Ayuntamiento de ${lead.concello} · 12.500 EUR · 6 semanas` : `Piloto para o Concello de ${lead.concello} · 12.500 € · 6 semanas`,
+    intro,
     "",
-    es ? "La necesidad:" : "A necessidade:",
-    es
-      ? "Un concello atiende a tres perfiles con necesidades distintas: personal municipal, proveedores y ciudadanía. Cada uno con un punto de dolor distinto, y ninguna responde a la duda del otro."
-      : "Un concello atende a tres perfiles con necesidades distintas: persoal municipal, provedores e cidadanía. Cada un un punto de dolor distinto, e ningun responde á duda do outro.",
-    es
-      ? "La solución CHESS AI AGENCY: un motor principal con subagentes especializados..."
-      : "A solución CHESS AI AGENCY: ...",
-    es ? "Seguridad y solvencia: ..." : "Segureza e solvencia: ...",
+    saludo.replace(/<[^>]+>/g, ""),
     "",
-    es ? "EL PILOTO · Por qué contratar ahora:" : "EL PILOTO · Por que contratar agora:",
-    es
-      ? "Un asistente que responde con fuentes citadas, redacta borradores marcados como Borrador y transcribe reuniones. No sustituye la decisión humana: la revisión y la firma las mantiene el personal del concello."
-      : "Un asistente que responde con fontes citadas, redacta borradores marcados como Borrador e transcribe reunións. Non sustitúe a decisión humana: a revisión e a firma quedarán sempre co persoal do concello.",
-    es
-      ? "Empezamos por una unidad real: documentación, expedientes o trámites. Si el piloto no funciona, no se continúa: te quedas con el informe y la experiencia."
-      : "Empiezan cunha unidade real: documentación, expedientes ou trámites. Si non funciona, no se continua: quédao co informe e coa aprendizaxe.",
+    piloto.replace(/<[^>]+>/g, ""),
+    ...scopes.map(([t, d]) => `- ${t}: ${d}`),
+    "",
+    solT,
+    sol1,
+    "",
+    sol2,
+    "",
+    ia.replace(/<[^>]+>/g, ""),
+    "",
+    pilotT,
+    pilot1,
+    pilotM,
+    ...metrics.map((m) => `- ${m}`),
+    "",
+    seg,
+    "",
+    cierre,
+    "",
+    demoT,
+    demo,
+    demoUrl,
+    "",
+    cierra2,
+    cierra3,
+    "",
+    ciudadT,
+    ciudadAddr,
+    mapsUrl,
+    ciudadFactsT,
+    ...facts.map((f) => `- ${f}`),
     "",
     copy.cta,
     copy.note,
@@ -457,16 +537,19 @@ export function finalEmail(lead: LeadInput): { subject: string; html: string; te
     html: layout({
       lang: es ? "es" : "gl",
       preheader: copy.preheader,
-      kicker: copy.kicker,
-      title: copy.title,
-      subtitle: copy.subtitle,
-      body,
+      kicker: es ? "Proposta de pilot" : "Proposta de piloto",
+      title: "VIGO AI ADMINISTRATION",
+      subtitle: es
+        ? `Piloto para el Ayuntamiento de ${lead.concello} · 12.500 EUR · 6 semanas`
+        : `Piloto para o Concello de ${lead.concello} · 12.500 € · 6 semanas`,
+      body: fullBody,
       legal: copy.legal,
       titleTag: subject,
     }),
     text,
   };
 }
+
 
 /* ---------------------------------------------------------------- */
 /* Versión primer contacto: solución de modernización IA para la     */
