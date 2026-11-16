@@ -106,7 +106,7 @@ function layout(o: LayoutOptions): string {
              style="display:block;border:0;outline:none;text-decoration:none;width:248px;max-width:100%;height:auto;">
         <div style="height:10px;line-height:10px;font-size:0;">&nbsp;</div>
         <div style="font:13px/1.4 ${FONT};color:${BRAND_SOFT};">
-          VIGO AI ADMINISTRATION &nbsp;·&nbsp; IA para concellos
+          CHESS AI AGENCY &nbsp;·&nbsp; IA PARA CONCELLOS
         </div>
       </td>
     </tr>
@@ -351,13 +351,18 @@ export function finalEmail(lead: LeadInput): { subject: string; html: string; te
 
   const copy = es
     ? {
-        kicker: "Propuesta de piloto",
+        kicker: "Proposta de piloto",
         title: "VIGO AI ADMINISTRATION",
         subtitle: `Piloto para el Ayuntamiento de ${lead.concello} · 12.500 EUR · 6 semanas`,
-        body:
-          "<p style='margin:0;font:16px/1.6 Arial,Helvetica,sans-serif;color:#334155;'>Por qué contratar ahora:</p>" +
-          "<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'>Un asistente que responde con fuentes citadas, redacta borradores marcados como Borrador y transcribe reuniones. No sustituye la decisión humana: la revisión y la firma las mantiene el personal del concello.</p>" +
+        body: [
+          "<p style='margin:0;font:16px/1.6 Arial,Helvetica,sans-serif;color:#334155;'>La necesidad:</p>",
+          "<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'>Un concello atiende a tres perfiles con necesidades distintas: personal municipal, proveedores y ciudadanía. Cada uno con un punto de dolor distinto, y ninguna responde a la duda del otro.</p>",
+          "<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'>La solución de CHESS AI AGENCY: un motor principal con subagentes especializados — información pública, trámites, normativa, empresa, urbanismo, cultura, social — que redacta, resume y transcribe con fuentes; la revisión humana la hace el personal.</p>",
+          "<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'>Seguridad y solvencia: respuestas con fuentes verificadas, revisión humana obligatoria, cumplimiento RGPD, ENS y AI Act; no automatizamos lo que no debe.</p>",
+          "<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'><b>EL PILOTO · Por qué contratar ahora:</b></p>",
+          "<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'>Un asistente que responde con fuentes citadas, redacta borradores marcados como Borrador y transcribe reuniones. No sustituye la decisión humana: la revisión y la firma las mantiene el personal del concello.</p>",
           "<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'>Empezamos por una unidad real: documentación, expedientes o trámites. Si el piloto no funciona, no se continúa: te quedas con el informe y la experiencia.</p>",
+        ].join("\n"),
         cta: "Comenzar el piloto",
         note: "Sin compromiso · Sin permanencia · Con datos del concello · Con métricas acordadas por escrito.",
         legal:
@@ -368,28 +373,39 @@ export function finalEmail(lead: LeadInput): { subject: string; html: string; te
         kicker: "Proposta de piloto",
         title: "VIGO AI ADMINISTRATION",
         subtitle: `Piloto para o Concello de ${lead.concello} · 12.500 € · 6 semanas`,
-        body:
-          "<p style='margin:0;font:16px/1.6 Arial,Helvetica,sans-serif;color:#334155;'>Por que contratar agora:</p>" +
-          "<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'>Un asistente que responde con fontes citadas, redacta borradores marcados como Borrador e transcribe reunións. Non sustitúe a decisión humana: a revisión e a firma quedarán sempre co persoal do concello.</p>" +
-          "<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'>Empiezan cunha unidade real: documentación, expedientes ou trámites. Si no funciona, no se continua: quédao co informe e coa aprendizaxe.</p>",
+        body: [
+          "<p style='margin:0;font:16px/1.6 Arial,Helvetica,sans-serif;color:#334155;'>A necesidade:</p>",
+          "<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'>Un concello atende a tres perfiles con necesidades distintas: persoal municipal, provedores e cidadanía. Cada un un punto de dolor distinto, e ningun responde á duda do outro.</p>",
+          "<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'>A solución de CHESS AI AGENCY: un motor principal co subequipo de subagentes especializados — información pública, trámites, normativa, empresa, urbanismo, cultura, social — que redacta, resume e transcribe con fontes; a revisión humana faise o persoal.</p>",
+          "<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'>Segureza e solvencia: respostas con fontes verificadas, revisión humana obrigatoria, cumprimento RGPD, ENS e AI Act; non automaticemos o que non debe.</p>",
+          "<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'><b>EL PILOTO · Por que contratar agora:</b></p>",
+          "<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'>Un asistente que responde con fontes citadas, redacta borradores marcados como Borrador e transcribe reunións. Non sustitúe a decisión humana: a revisión e a firma quedarán sempre co persoal do concello.</p>",
+          "<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'>Empiezan cunha unidade real: documentación, expedientes ou trámites. Si non funciona, no se continua: quédao co informe e coa aprendizaxe.</p>",
+        ].join("\n"),
         cta: "Comenzar o piloto",
         note: "Sen compromiso · Sen permanencia · Con datos do concello · Con métricas acordadas por escrito.",
         legal:
-          "Proposta comercial CHESS AI AGENCY · VIGO AI ADMINISTRATION · Piloto 6 semanas · 12.500 EUR · Quen somos: https://chess-ai-agency.vercel.app/nosotros.html · 29 proxectos en curso.",
-        preheader: "Comenzamos cunha unidade real. Sen compromiso.",
+          "Proposta comercial CHESS AI AGENCY · VIGO AI ADMINISTRATION · Piloto 6 semanas · 12.500 € · Quen somos: https://chess-ai-agency.vercel.app/nosotros.html · 29 proxectos en curso.",
+        preheader: "Comenzamos con una unidad real. Sen compromiso.",
       };
 
-  const body = `
-    ${copy.body}
-    ${button(LANDING, copy.cta)}
-    <p style="margin:18px 0 0;font:13px/1.6 Arial,Helvetica,sans-serif;color:#94a3b8;">${esc(copy.note)}</p>`;
+  const body = `${copy.body}\n${button(LANDING, copy.cta)}\n<p style="margin:18px 0 0;font:13px/1.6 Arial,Helvetica,sans-serif;color:#94a3b8;">${esc(copy.note)}</p>`;
 
   const text = [
     `Proposta comercial — ${lead.concello}`,
     "",
     es ? `Piloto para el Ayuntamiento de ${lead.concello} · 12.500 EUR · 6 semanas` : `Piloto para o Concello de ${lead.concello} · 12.500 € · 6 semanas`,
     "",
-    es ? "Por qué contratar ahora:" : "Por que contratar agora:",
+    es ? "La necesidad:" : "A necessidade:",
+    es
+      ? "Un concello atiende a tres perfiles con necesidades distintas: personal municipal, proveedores y ciudadanía. Cada uno con un punto de dolor distinto, y ninguna responde a la duda del otro."
+      : "Un concello atende a tres perfiles con necesidades distintas: persoal municipal, provedores e cidadanía. Cada un un punto de dolor distinto, e ningun responde á duda do outro.",
+    es
+      ? "La solución CHESS AI AGENCY: un motor principal con subagentes especializados..."
+      : "A solución CHESS AI AGENCY: ...",
+    es ? "Seguridad y solvencia: ..." : "Segureza e solvencia: ...",
+    "",
+    es ? "EL PILOTO · Por qué contratar ahora:" : "EL PILOTO · Por que contratar agora:",
     es
       ? "Un asistente que responde con fuentes citadas, redacta borradores marcados como Borrador y transcribe reuniones. No sustituye la decisión humana: la revisión y la firma las mantiene el personal del concello."
       : "Un asistente que responde con fontes citadas, redacta borradores marcados como Borrador e transcribe reunións. Non sustitúe a decisión humana: a revisión e a firma quedarán sempre co persoal do concello.",
