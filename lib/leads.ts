@@ -192,7 +192,7 @@ async function sendEmail(msg: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: process.env.LEAD_FROM_EMAIL ?? "VIGO AI <onboarding@resend.dev>",
+        from: process.env.LEAD_FROM_EMAIL ?? "CHESS AI AGENCY <onboarding@resend.dev>",
         to: [msg.to],
         reply_to: msg.replyTo,
         subject: msg.subject,
