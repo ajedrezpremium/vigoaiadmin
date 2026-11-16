@@ -198,6 +198,30 @@ const COPY = {
         q: "Como se xustifica o gasto?",
         a: "Como contrato menor de servizos, cun informe de horas aforradas e respostas con fonte. Axudámosche coa memoria xustificativa.",
       },
+      {
+        q: "Canto tempo leva ver resultados?",
+        a: "O piloto dura 6 semanas: na primeira semana configuramos o caso de uso, na segunda xa responde coas fontes do teu concello, e ao final entregamos o informe de horas aforradas.",
+      },
+      {
+        q: "O persoal necesita formación?",
+        a: "Non. Úsase dende o correo e as reunións; incluímos unha sesión de presentación e materiais de apoio para o equipo.",
+      },
+      {
+        q: "Que decisións non automatiza?",
+        a: "Ningunha con efecto xurídico ou económico: a revisión, validación e sinatura son sempre do persoal autorizado do Concello.",
+      },
+      {
+        q: "E se o piloto non funciona?",
+        a: "Non se continua: quédate co informe de resultados, as métricas e a experiencia, sen compromiso de permanencia.",
+      },
+      {
+        q: "Serve para mancomunidades ou concellos pequenos?",
+        a: "Si. Configúrase por área e por volume de documentación; hai opción para mancomunidades e concellos de menos de 5.000 habitantes.",
+      },
+      {
+        q: "Cumpre RGPD, ENS e AI Act?",
+        a: "Si. Deseñase con criterios de seguridade e protección de datos, con supervisión humana e rexistro de eventos, segundo o alcance de cada implantación.",
+      },
     ],
     formTitle: "Pide un diagnóstico gratuíto",
     formSub:
@@ -436,6 +460,30 @@ const COPY = {
       {
         q: "¿Cómo se justifica el gasto?",
         a: "Como contrato menor de servicios, con un informe de horas ahorradas y respuestas con fuente. Te ayudamos con la memoria justificativa.",
+      },
+      {
+        q: "¿Cuánto tiempo hasta ver resultados?",
+        a: "El piloto dura 6 semanas: en la primera semana configuramos el caso de uso, en la segunda ya responde con las fuentes de tu ayuntamiento, y al final entregamos el informe de horas ahorradas.",
+      },
+      {
+        q: "¿El personal necesita formación?",
+        a: "No. Se usa desde el correo y las reuniones; incluimos una sesión de presentación y materiales de apoyo para el equipo.",
+      },
+      {
+        q: "¿Qué decisiones no automatiza?",
+        a: "Ninguna con efecto jurídico o económico: la revisión, validación y firma son siempre del personal autorizado del Ayuntamiento.",
+      },
+      {
+        q: "¿Y si el piloto no funciona?",
+        a: "No se continúa: te quedas con el informe de resultados, las métricas y la experiencia, sin compromiso de permanencia.",
+      },
+      {
+        q: "¿Sirve para mancomunidades o ayuntamientos pequeños?",
+        a: "Sí. Se configura por área y por volumen de documentación; hay opción para mancomunidades y ayuntamientos de menos de 5.000 habitantes.",
+      },
+      {
+        q: "¿Cumple RGPD, ENS y AI Act?",
+        a: "Sí. Se diseña con criterios de seguridad y protección de datos, con supervisión humana y registro de eventos, según el alcance de cada implantación.",
       },
     ],
     formTitle: "Pide un diagnóstico gratuito",
