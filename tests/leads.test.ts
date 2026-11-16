@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, afterEach } from "vitest";
 import { normalizeTramo, notifyLead, validateLead } from "@/lib/leads";
-import { leadAckEmail, leadAlertEmail } from "@/lib/email-templates";
+import { finalEmail, leadAckEmail, leadAlertEmail } from "@/lib/email-templates";
 
 const base = {
   concello: "Concello de Moaña",
@@ -133,6 +133,34 @@ describe("plantillas de correo", () => {
     expect(text).toContain("607 869 278");
     expect(text).toContain("https://vigo-ai-demo.vercel.app/ayuntamientos");
     expect(text).not.toContain("<");
+  });
+});
+
+describe("finalEmail", () => {
+  const lead = {
+    concello: "Concello de Moaña",
+    nome: "Ana Pérez",
+    cargo: "Secretaría Xeral",
+    email: "ana.perez@concellodemoana.org",
+    telefono: "986 310 100",
+    tramo: "B",
+    interese: "Borradores e informes",
+    mensaxe: "Temos expedientes sen indexar.",
+    idioma: "gl",
+  } as const;
+
+  it("es la version final del piloto con por que contratar y proyecto", () => {
+    const { html, subject, text } = finalEmail(lead);
+    expect(subject).toContain("Concello de Moaña");
+    expect(html).toContain("VIGO AI ADMINISTRATION");
+    expect(html).toContain("12.500");
+    expect(html).toContain("https://vigo-ai-demo.vercel.app/ayuntamientos");
+    expect(html).toContain("https://chess-ai-agency.vercel.app/nosotros.html");
+    expect(html).toContain("29 proxectos en curso");
+    expect(html).toContain("Por que contratar agora");
+    expect(html).toContain("Borrador");
+    expect(text).toContain("12.500 €");
+    expect(text).toContain("https://chess-ai-agency.vercel.app/nosotros.html");
   });
 });
 

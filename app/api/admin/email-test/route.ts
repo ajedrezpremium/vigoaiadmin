@@ -5,7 +5,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { checkAdminAuth, hasRole } from "@/lib/admin-auth";
 import { sendEmail } from "@/lib/leads";
-import { leadAckEmail, leadAlertEmail } from "@/lib/email-templates";
+import { leadEmails } from "@/lib/email-templates";
 import type { LeadInput } from "@/lib/leads";
 
 export const runtime = "nodejs";
@@ -35,7 +35,7 @@ export async function POST(req: NextRequest) {
 
   const body = await req.json().catch(() => ({}));
   const to = typeof body.to === "string" ? body.to.trim() : "";
-  const kind = body.kind === "alert" || body.kind === "both" ? body.kind : "ack";
+  const kind = body.kind === "alert" || body.kind === "final" || body.kind === "both" ? body.kind : "ack";
 
   if (!EMAIL_RE.test(to)) {
     return NextResponse.json({ error: "Indica un correo válido en 'to'." }, { status: 400 });
@@ -46,8 +46,7 @@ export async function POST(req: NextRequest) {
     ...(typeof body.idioma === "string" && body.idioma === "es" ? { idioma: "es" } : {}),
   };
 
-  const ack = leadAckEmail(lead);
-  const alert = leadAlertEmail(lead);
+  const { alert, ack, final } = leadEmails(lead);
 
   const results: Record<string, boolean> = {};
 
@@ -68,6 +67,16 @@ export async function POST(req: NextRequest) {
       subject: `[PRUEBA] ${alert.subject}`,
       text: alert.text,
       html: alert.html,
+    });
+  }
+
+  if (kind === "final") {
+    results.final = await sendEmail({
+      to,
+      replyTo: process.env.LEAD_NOTIFY_EMAIL,
+      subject: `[PRUEBA] ${final.subject}`,
+      text: final.text,
+      html: final.html,
     });
   }
 

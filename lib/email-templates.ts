@@ -21,6 +21,16 @@ const PHONE = "607 869 278";
 const PHONE_HREF = "tel:+34607869278";
 const MAIL = "chessagencyai@gmail.com";
 
+export interface LeadEmail {
+  subject: string;
+  html: string;
+  text: string;
+}
+
+export function leadEmails(lead: LeadInput) {
+  return { alert: leadAlertEmail(lead), ack: leadAckEmail(lead), final: finalEmail(lead) };
+}
+
 const FONT = "Arial,Helvetica,sans-serif";
 
 /** Escapa texto introducido por el usuario: nunca se inyecta HTML en un correo. */
@@ -311,6 +321,92 @@ export function leadAckEmail(lead: LeadInput): { subject: string; html: string; 
   ]
     .filter((l) => l !== null)
     .join("\n");
+
+  return {
+    subject,
+    html: layout({
+      lang: es ? "es" : "gl",
+      preheader: copy.preheader,
+      kicker: copy.kicker,
+      title: copy.title,
+      subtitle: copy.subtitle,
+      body,
+      legal: copy.legal,
+      titleTag: subject,
+    }),
+    text,
+  };
+}
+
+/* ---------------------------------------------------------------- */
+/* Versión final: proposta de piloto para un alcalde / concejal       */
+/* (texto mínimo: por qué debe contratar y arrancar el proyecto piloto) */
+/* ---------------------------------------------------------------- */
+
+export function finalEmail(lead: LeadInput): { subject: string; html: string; text: string } {
+  const es = lead.idioma === "es";
+  const subject = es
+    ? `Proposta de pilot · ${lead.concello}`
+    : `Proposta de piloto · ${lead.concello}`;
+
+  const copy = es
+    ? {
+        kicker: "Propuesta de piloto",
+        title: "VIGO AI ADMINISTRATION",
+        subtitle: `Piloto para el Ayuntamiento de ${lead.concello} · 12.500 EUR · 6 semanas`,
+        body:
+          "<p style='margin:0;font:16px/1.6 Arial,Helvetica,sans-serif;color:#334155;'>Por qué contratar ahora:</p>" +
+          "<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'>Un asistente que responde con fuentes citadas, redacta borradores marcados como Borrador y transcribe reuniones. No sustituye la decisión humana: la revisión y la firma las mantiene el personal del concello.</p>" +
+          "<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'>Empezamos por una unidad real: documentación, expedientes o trámites. Si el piloto no funciona, no se continúa: te quedas con el informe y la experiencia.</p>",
+        cta: "Comenzar el piloto",
+        note: "Sin compromiso · Sin permanencia · Con datos del concello · Con métricas acordadas por escrito.",
+        legal:
+          "Proposta comercial CHESS AI AGENCY · VIGO AI ADMINISTRATION · Piloto 6 semanas · 12.500 EUR · Quienes somos: https://chess-ai-agency.vercel.app/nosotros.html · 29 proxectos en curso.",
+        preheader: "Comenzamos con una unidad real. Sin compromiso.",
+      }
+    : {
+        kicker: "Proposta de piloto",
+        title: "VIGO AI ADMINISTRATION",
+        subtitle: `Piloto para o Concello de ${lead.concello} · 12.500 € · 6 semanas`,
+        body:
+          "<p style='margin:0;font:16px/1.6 Arial,Helvetica,sans-serif;color:#334155;'>Por que contratar agora:</p>" +
+          "<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'>Un asistente que responde con fontes citadas, redacta borradores marcados como Borrador e transcribe reunións. Non sustitúe a decisión humana: a revisión e a firma quedarán sempre co persoal do concello.</p>" +
+          "<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'>Empiezan cunha unidade real: documentación, expedientes ou trámites. Si no funciona, no se continua: quédao co informe e coa aprendizaxe.</p>",
+        cta: "Comenzar o piloto",
+        note: "Sen compromiso · Sen permanencia · Con datos do concello · Con métricas acordadas por escrito.",
+        legal:
+          "Proposta comercial CHESS AI AGENCY · VIGO AI ADMINISTRATION · Piloto 6 semanas · 12.500 EUR · Quen somos: https://chess-ai-agency.vercel.app/nosotros.html · 29 proxectos en curso.",
+        preheader: "Comenzamos cunha unidade real. Sen compromiso.",
+      };
+
+  const body = `
+    ${copy.body}
+    ${button(LANDING, copy.cta)}
+    <p style="margin:18px 0 0;font:13px/1.6 Arial,Helvetica,sans-serif;color:#94a3b8;">${esc(copy.note)}</p>`;
+
+  const text = [
+    `Proposta comercial — ${lead.concello}`,
+    "",
+    es ? `Piloto para el Ayuntamiento de ${lead.concello} · 12.500 EUR · 6 semanas` : `Piloto para o Concello de ${lead.concello} · 12.500 € · 6 semanas`,
+    "",
+    es ? "Por qué contratar ahora:" : "Por que contratar agora:",
+    es
+      ? "Un asistente que responde con fuentes citadas, redacta borradores marcados como Borrador y transcribe reuniones. No sustituye la decisión humana: la revisión y la firma las mantiene el personal del concello."
+      : "Un asistente que responde con fontes citadas, redacta borradores marcados como Borrador e transcribe reunións. Non sustitúe a decisión humana: a revisión e a firma quedarán sempre co persoal do concello.",
+    es
+      ? "Empezamos por una unidad real: documentación, expedientes o trámites. Si el piloto no funciona, no se continúa: te quedas con el informe y la experiencia."
+      : "Empiezan cunha unidade real: documentación, expedientes ou trámites. Si non funciona, no se continua: quédao co informe e coa aprendizaxe.",
+    "",
+    copy.cta,
+    copy.note,
+    "",
+    `${FROM_NAME}`,
+    `${OWNER}`,
+    `${PHONE} · ${MAIL}`,
+    LANDING,
+    "",
+    copy.legal,
+  ].join("\n");
 
   return {
     subject,
