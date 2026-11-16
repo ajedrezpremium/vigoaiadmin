@@ -806,6 +806,26 @@ export default function AyuntamientosLanding() {
               </ul>
 
               <p className="mt-6 text-xs text-slate-500">{t.privacyNote}</p>
+
+              <div className="mt-6 space-y-2 rounded-xl border border-slate-800 bg-slate-950/60 p-4 text-sm">
+                <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">
+                  {lang === "gl" ? "Contacto directo" : "Contacto directo"}
+                </p>
+                <p>
+                  <a
+                    href="mailto:chessagencyai@gmail.com"
+                    className="text-brand-300 hover:underline"
+                  >
+                    chessagencyai@gmail.com
+                  </a>
+                </p>
+                <p>
+                  <a href="tel:+34607869278" className="text-slate-200 hover:text-white">
+                    607 869 278
+                  </a>
+                  <span className="ml-2 text-slate-500">· Roberto Páramos</span>
+                </p>
+              </div>
             </div>
 
             <div className="rounded-2xl border border-slate-800 bg-slate-950/70 p-6">
@@ -1008,6 +1028,15 @@ export default function AyuntamientosLanding() {
           </p>
         </div>
         <p className="mx-auto max-w-2xl leading-relaxed">{t.footerNote}</p>
+        <p className="mt-3">
+          <a href="mailto:chessagencyai@gmail.com" className="text-slate-300 hover:text-white">
+            chessagencyai@gmail.com
+          </a>
+          <span className="mx-2 opacity-40">·</span>
+          <a href="tel:+34607869278" className="text-slate-300 hover:text-white">
+            607 869 278
+          </a>
+        </p>
         <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
           <a href="/aviso-legal" className="rounded-lg border border-slate-700 px-3 py-1.5 text-slate-300 transition hover:border-brand-400">
             {t.footerLinks.legal}

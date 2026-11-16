@@ -329,7 +329,7 @@ Una **unión temporal de empresas** (art. 69 LCSP) permite sumar solvencia y cap
 > Proponemos una UTE 70/30 con ustedes como líderes y representante único. ¿Te encaja una llamada de 30 minutos esta semana? Puedo enviarte el borrador de memoria técnica antes.
 >
 > Un saludo,
-> [nombre] · [teléfono] · [correo]
+> Roberto Páramos · 607 869 278 · chessagencyai@gmail.com
 
 ### 16.2 Documentos que debe firmar la UTE
 
@@ -374,7 +374,7 @@ Los contratos menores de servicios (menos de 15.000 €, IVA excluido) no se lic
 > ¿Podríamos mantener una reunión de 30 minutos? Adjunto una hoja con el alcance y los entregables.
 >
 > Gracias y un saludo,
-> [nombre] · [teléfono] · [correo]
+> Roberto Páramos · 607 869 278 · chessagencyai@gmail.com
 
 ---
 

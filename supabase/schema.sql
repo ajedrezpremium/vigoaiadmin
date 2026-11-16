@@ -74,7 +74,8 @@ create index if not exists idx_leads_created
 -- Sin políticas para anon: solo el servidor (service_role) escribe y lee.
 alter table public.leads enable row level security;
 
--- Roles de usuario (RBAC — Semana 2 v1.2)create table if not exists public.user_roles (
+-- Roles de usuario (RBAC — Semana 2 v1.2)
+create table if not exists public.user_roles (
   user_id uuid primary key references auth.users(id) on delete cascade,
   role text not null check (role in ('admin', 'editor', 'viewer')),
   created_at timestamptz not null default now()

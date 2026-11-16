@@ -127,8 +127,12 @@ export default function AvisoLegalPage() {
             <h2 className={`text-lg font-semibold ${headingCls}`}>7. Contacto</h2>
             <p className={`mt-2 text-sm leading-relaxed ${mutedCls}`}>
               Para consultas sobre esta demostración: <strong>CHESS AI AGENCY</strong> (AI ·
-              Innovation · Execution). Para trámites oficiales del Concello de Vigo, diríjase a la
-              Oficina de Atención al Ciudadano (OAC) o a la sede electrónica municipal.
+              Innovation · Execution) · Roberto Páramos ·{" "}
+              <a href="mailto:chessagencyai@gmail.com" className="underline">
+                chessagencyai@gmail.com
+              </a>{" "}
+              · 607 869 278. Para trámites oficiales del Concello de Vigo, diríjase a la Oficina de
+              Atención al Ciudadano (OAC) o a la sede electrónica municipal.
             </p>
           </section>
         </div>

@@ -126,7 +126,7 @@ Si no responden a los cuatro, se archiva y se reintenta en tres meses. Sin excep
 >
 > Bo día:
 >
-> Son [nome], de CHESS AI AGENCY. Axudamos a concellos a poñer a súa información administrativa a unha pregunta de distancia: un asistente que responde con fontes citadas, redacta borradores e transcribe reunións, en galego e castelán, cos datos baixo control municipal.
+> Son Roberto Páramos, de CHESS AI AGENCY. Axudamos a concellos a poñer a súa información administrativa a unha pregunta de distancia: un asistente que responde con fontes citadas, redacta borradores e transcribe reunións, en galego e castelán, cos datos baixo control municipal.
 >
 > Podes probalo agora aquí: https://vigo-ai-demo.vercel.app
 >
@@ -135,7 +135,7 @@ Si no responden a los cuatro, se archiva y se reintenta en tres meses. Sin excep
 > ¿Tes 30 minutos esta semana ou a próxima para que cho ensine con datos do teu concello?
 >
 > Un saúdo,
-> [nome] · [teléfono] · [correo]
+> Roberto Páramos · CHESS AI AGENCY · 607 869 278 · chessagencyai@gmail.com
 
 ### 8.2 Seguimiento (día 7)
 
@@ -159,7 +159,7 @@ Si no responden a los cuatro, se archiva y se reintenta en tres meses. Sin excep
 
 ### 8.4 Guion telefónico (45 segundos)
 
-> "Bo día, chámome [nome], de CHESS AI AGENCY. Traballamos cun asistente de IA para concellos que responde consultas internas citando a normativa e redacta borradores. Chamo porque fixemos unha demo que xa funciona e quero ensinarcha en 30 minutos, sen compromiso. ¿Con quen debería falar, con Secretaría ou con Modernización?"
+> "Bo día, chámome Roberto Páramos, de CHESS AI AGENCY. Traballamos cun asistente de IA para concellos que responde consultas internas citando a normativa e redacta borradores. Chamo porque fixemos unha demo que xa funciona e quero ensinarcha en 30 minutos, sen compromiso. ¿Con quen debería falar, con Secretaría ou con Modernización?"
 
 Objetivo de la llamada: **nombre, correo y cargo**. No vender por teléfono.
 

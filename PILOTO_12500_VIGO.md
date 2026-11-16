@@ -47,4 +47,4 @@ Un interlocutor técnico, 100 documentos públicos, dos sesiones de validación 
 
 El Concello ya aprobó 130.000 € de equipamiento para IA interna. Este piloto pone el software en marcha sobre datos reales en seis semanas y permite llegar al despliegue con el modelo ya validado, no con una promesa.
 
-**Contacto:** [tu correo] · [tu teléfono] · CHESS AI AGENCY
+**Contacto:** chessagencyai@gmail.com · 607 869 278 · Roberto Páramos · CHESS AI AGENCY
