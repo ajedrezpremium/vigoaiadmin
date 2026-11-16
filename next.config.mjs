@@ -28,7 +28,7 @@ const nextConfig = {
               "font-src 'self' https://fonts.gstatic.com",
               "img-src 'self' data: https://upload.wikimedia.org https://www.turismodevigo.org https://images.openai.com",
               "connect-src 'self' https://*.supabase.co https://openrouter.ai https://generativelanguage.googleapis.com https://cloud.langfuse.com",
-              "frame-src 'self' https://www.google.com",
+              "frame-src 'self' https://www.google.com https://maps.google.com",
               "object-src 'none'",
               "base-uri 'self'",
               "form-action 'self'",
