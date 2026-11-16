@@ -362,6 +362,20 @@ export function finalEmail(lead: LeadInput): { subject: string; html: string; te
           "<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'><b>EL PILOTO · Por qué contratar ahora:</b></p>",
           "<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'>Un asistente que responde con fuentes citadas, redacta borradores marcados como Borrador y transcribe reuniones. No sustituye la decisión humana: la revisión y la firma las mantiene el personal del concello.</p>",
           "<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'>Empezamos por una unidad real: documentación, expedientes o trámites. Si el piloto no funciona, no se continúa: te quedas con el informe y la experiencia.</p>",
+          "<p style='margin:18px 0 0;font:16px/1.4 Arial,Helvetica,sans-serif;color:#172052;'><b>Tarjeta sobre la ciudad:</b></p>",
+          "<p style='margin:8px 0 0;font:14px/1.6 Arial,Helvetica,sans-serif;color:#334155;'>📍 Praza do Rei, 1 — 36202 Vigo, Pontevedra, Galicia</p>",
+          "<img src=\"https://maps.google.com/maps?q=Praza+do+Rei+Vigo&z=14&ie=UTF8&iwloc=&output=embed\" width=\"552\" alt=\"Mapa de Vigo — Praza do Rei 1\" style=\"display:block;width:100%;max-width:552px;height:auto;border:0;outline:none;text-decoration:none;margin:10px 0;\" />",
+          "<p style='margin:12px 0 0;font:14px/1.6 Arial,Helvetica,sans-serif;color:#334155;'>Interés sobre la ciudad (fuentes Wikipedia):</p>",
+          "<ol style='margin:10px 0 0;padding-left:20px;font:13px/1.8 Arial,Helvetica,sans-serif;color:#475569;'>" +
+          "<li>Extensión / superficie</li>" +
+          "<li>Población</li>" +
+          "<li>Clima</li>" +
+          "<li>Presupuesto municipal</li>" +
+          "<li>Gobierno municipal</li>" +
+          "<li>Web oficial</li>" +
+          "<li>Densidad / demografía</li>" +
+          "<li>Distritos administrativos</li>" +
+          "</ol>",
         ].join("\n"),
         cta: "Comenzar el piloto",
         note: "Sin compromiso · Sin permanencia · Con datos del concello · Con métricas acordadas por escrito.",
@@ -381,6 +395,20 @@ export function finalEmail(lead: LeadInput): { subject: string; html: string; te
           "<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'><b>EL PILOTO · Por que contratar agora:</b></p>",
           "<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'>Un asistente que responde con fontes citadas, redacta borradores marcados como Borrador e transcribe reunións. Non sustitúe a decisión humana: a revisión e a firma quedarán sempre co persoal do concello.</p>",
           "<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'>Empiezan cunha unidade real: documentación, expedientes ou trámites. Si non funciona, no se continua: quédao co informe e coa aprendizaxe.</p>",
+          "<p style='margin:18px 0 0;font:16px/1.4 Arial,Helvetica,sans-serif;color:#172052;'><b>Tarxada sobre a cidade:</b></p>",
+          "<p style='margin:8px 0 0;font:14px/1.6 Arial,Helvetica,sans-serif;color:#334155;'>📍 Praza do Rei, 1 — 36202 Vigo, Pontevedra, Galicia</p>",
+          "<img src=\"https://maps.google.com/maps?q=Praza+do+Rei+Vigo&z=14&ie=UTF8&iwloc=&output=embed\" width=\"552\" alt=\"Mapa de Vigo — Praza do Rei 1\" style=\"display:block;width:100%;max-width:552px;height:auto;border:0;outline:none;text-decoration:none;margin:10px 0;\" />",
+          "<p style='margin:12px 0 0;font:14px/1.6 Arial,Helvetica,sans-serif;color:#334155;'>Interese sobre a cidade (fonte Wikipedia):</p>",
+          "<ol style='margin:10px 0 0;padding-left:20px;font:13px/1.8 Arial,Helvetica,sans-serif;color:#475569;'>" +
+          "<li>Extensión / superficie</li>" +
+          "<li>Población</li>" +
+          "<li>Clima</li>" +
+          "<li>Presupuesto municipal</li>" +
+          "<li>Gobierno municipal</li>" +
+          "<li>Web oficial</li>" +
+          "<li>Densidade / demografía</li>" +
+          "<li>Distritos administrativos</li>" +
+          "</ol>",
         ].join("\n"),
         cta: "Comenzar o piloto",
         note: "Sen compromiso · Sen permanencia · Con datos do concello · Con métricas acordadas por escrito.",
@@ -434,6 +462,167 @@ export function finalEmail(lead: LeadInput): { subject: string; html: string; te
       subtitle: copy.subtitle,
       body,
       legal: copy.legal,
+      titleTag: subject,
+    }),
+    text,
+  };
+}
+
+/* ---------------------------------------------------------------- */
+/* Versión primer contacto: solución de modernización IA para la     */
+/* Administración Local. Sin nombrar el piloto, sin precio, sin       */
+/* producto cerrado. CTA: solicitar demostración.                    */
+/* ---------------------------------------------------------------- */
+
+type Solucion = [string, string];
+
+export function firstContactEmail(lead: LeadInput): { subject: string; html: string; text: string } {
+  const es = lead.idioma === "es";
+  const subject = es
+    ? `Proposta de demo · ${lead.concello}`
+    : `Proposta de demostración · ${lead.concello}`;
+
+  const kicker = es ? "IA PARA LA ADMINISTRACIÓN LOCAL" : "IA PARA A ADMINISTRACIÓN LOCAL";
+  const title = "CHESS AI AGENCY";
+  const subtitle = es
+    ? "Inteligencia Artificial para la Administración Local"
+    : "Intelixencia Artificial para a Administración Local";
+  const intro = es
+    ? "Un nuevo modo de trabajar, gestionar y atender a la ciudadanía."
+    : "Un novo xeito de traballar, xestionar e atender á cidadanía.";
+  const seccionOportunidad = es ? "La oportunidad:" : "A oportunidade:";
+  const oportunidad = es
+    ? "Los concellos gestionan diariamente grandes volúmenes de información, documentación, consultas y trámites. El personal municipal dedica una parte importante de su tiempo a tareas administrativas que podrían ser más ágiles, eficientes e inteligentes."
+    : "Os concellos xestionan diariamente grandes volumes de información, documentación, consultas e trámites. O persoal municipal dedica unha parte importante do seu tempo a tarefas administrativas que poderían ser máis áxiles, eficientes e intelixentes.";
+  const ia = es
+    ? "La Inteligencia Artificial permite dar un paso adelante en esta transformación."
+    : "A Intelixencia Artificial permite dar un paso adiante nesta transformación.";
+  const seccionPropuesta = es ? "Nuestra propuesta:" : "A nosa proposta:";
+  const proposta = es
+    ? "En CHESS AI AGENCY desarrollamos soluciones profesionales de Inteligencia Artificial para la Administración Local, mediante una arquitectura de agentes especializados que colaboran entre sí."
+    : "En CHESS AI AGENCY desenvolvemos solucións profesionais de Inteligencia Artificial para a Administración Local, mediante unha arquitectura de axentes especializados que colaboran entre si.";
+  const seccionPlataforma = es ? "Una plataforma capaz de:" : "Unha plataforma capaz de:";
+  const soluciones: Solucion[] = [
+    [
+      "Información municipal",
+      es
+        ? "consultar documentación, normativa e información pública con fuentes de referencia."
+        : "consultar documentación, normativa e información pública con fontes de referencia.",
+    ],
+    [
+      "Tramitación administrativa",
+      es
+        ? "facilitar la localización de documentos y la preparación de borradores."
+        : "facilitar a localización de documentos e a preparación de borradores.",
+    ],
+    [
+      "Asistencia al personal",
+      es
+        ? "resumir expedientes, elaborar informes y optimizar tareas habituales."
+        : "resumir expedientes, elaborar informes e optimizar tarefas habituais.",
+    ],
+    [
+      "Atención ciudadana",
+      es
+        ? "responder consultas y facilitar el acceso a la información municipal."
+        : "responder consultas e facilitar o acceso á información municipal.",
+    ],
+    [
+      "Empresa y comercio",
+      es
+        ? "ofrecer información y asistencia a empresas, autónomos y proveedores."
+        : "ofrecer información e asistencia a empresas, autónomos e provedores.",
+    ],
+    [
+      "Servicios municipales",
+      es
+        ? "apoyar las áreas de urbanismo, cultura, servicios sociales y otras unidades."
+        : "apoiar as áreas de urbanismo, cultura, servizos sociais e outras unidades.",
+    ],
+  ];
+  const seccionHumana = es ? "Tecnología con supervisión humana:" : "Tecnoloxía con supervisión humana:";
+  const humana = es
+    ? "Una solución diseñada con criterios de seguridad, protección de datos y adecuación normativa (RGPD, ENS y AI Act), según el alcance de cada implantación. La IA ayuda, analiza y propone. Las decisiones, validaciones y firmas corresponden siempre al personal autorizado del Concello."
+    : "Unha solución deseñada con criterios de segureza, protección de datos e adecuación normativa (RGPD, ENS e AI Act), segundo o alcance de cada implantación. A IA axuda, analiza e propón. As decisións, validacións e sinaturas corresponden sempre ao persoal autorizado do Concello.";
+  const seccionPiloto = es ? "Una propuesta para su concejo:" : "UNHA PROPOSTA PARA O SEU CONCELLO:";
+  const piloto = es
+    ? "Proponemos conocer la solución mediante una demostración práctica, sin compromiso, y valorar posteriormente un posible proyecto piloto adaptado a las necesidades reales del municipio."
+    : "Propoñemos coñecer a solución mediante unha demostración práctica, sen compromiso, e valorar posteriormente un posible proxecto piloto adaptado ás necesidades reais do municipio.";
+  const cta = es ? "SOLICITAR DEMOSTRACIÓN" : "SOLICITAR UNHA DEMOSTRACIÓN";
+  const note = es
+    ? "Sin compromiso · Adaptable a cada Concello · Implantación progresiva."
+    : "Sen compromiso · Adaptable a cada Concello · Implantación progresiva.";
+  const legal = es
+    ? "Proposta comercial CHESS AI AGENCY · Solución de IA para la Administración Local · Demostración sin compromiso."
+    : "Proposta comercial CHESS AI AGENCY · Solución de IA para a Administración Local · Demostración sen compromiso.";
+  const preheader = es
+    ? "Una solución de IA para la Administración Local. Sin compromiso."
+    : "Unha solución de IA para a Administración Local. Sen compromiso.";
+
+  const body = [
+    `<p style='margin:0;font:16px/1.6 Arial,Helvetica,sans-serif;color:#334155;'>${esc(intro)}</p>`,
+    `<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'>${esc(seccionOportunidad)}</p>`,
+    `<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'>${esc(oportunidad)}</p>`,
+    `<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'>${esc(ia)}</p>`,
+    `<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'><b>${esc(seccionPropuesta)}</b></p>`,
+    `<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'>${esc(proposta)}</p>`,
+    `<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'>${esc(seccionPlataforma)}</p>`,
+    `<ul style='margin:10px 0 0;padding-left:20px;font:15px/1.8 Arial,Helvetica,sans-serif;color:#334155;'>` +
+      soluciones.map(([t, d]) => `<li><b>${t}:</b> ${d}</li>`).join("") +
+      `</ul>`,
+    `<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'><b>${esc(seccionHumana)}</b></p>`,
+    `<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'>${esc(humana)}</p>`,
+    `<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'>${esc(seccionPiloto)}</p>`,
+    `<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'>${esc(piloto)}</p>`,
+  ].join("\n");
+
+  const fullBody = `${body}\n${button(`${SITE}/ayuntamientos#contacto`, cta)}\n<p style="margin:18px 0 0;font:13px/1.6 Arial,Helvetica,sans-serif;color:#94a3b8;">${esc(note)}</p>`;
+
+  const text = [
+    `Proposta comercial — ${lead.concello}`,
+    "",
+    es ? "Solución de IA para la Administración Local · Demostración sin compromiso." : "Solución de IA para a Administración Local · Demostración sen compromiso.",
+    "",
+    intro,
+    "",
+    seccionOportunidad,
+    oportunidad,
+    "",
+    ia,
+    "",
+    seccionPropuesta,
+    proposta,
+    "",
+    seccionPlataforma,
+    ...soluciones.map(([t, d]) => `- ${t}: ${d}`),
+    "",
+    seccionHumana,
+    humana,
+    "",
+    seccionPiloto,
+    piloto,
+    "",
+    cta,
+    note,
+    "",
+    `${FROM_NAME}`,
+    `${OWNER}`,
+    `${PHONE} · ${MAIL}`,
+    LANDING,
+    "",
+    legal,
+  ].join("\n");
+
+  return {
+    subject,
+    html: layout({
+      lang: es ? "es" : "gl",
+      preheader,
+      kicker,
+      title,
+      subtitle,
+      body: fullBody,
+      legal,
       titleTag: subject,
     }),
     text,

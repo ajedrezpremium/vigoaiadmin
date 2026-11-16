@@ -5,7 +5,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { checkAdminAuth, hasRole } from "@/lib/admin-auth";
 import { sendEmail } from "@/lib/leads";
-import { leadEmails } from "@/lib/email-templates";
+import { firstContactEmail, leadEmails } from "@/lib/email-templates";
 import type { LeadInput } from "@/lib/leads";
 
 export const runtime = "nodejs";
@@ -35,7 +35,7 @@ export async function POST(req: NextRequest) {
 
   const body = await req.json().catch(() => ({}));
   const to = typeof body.to === "string" ? body.to.trim() : "";
-  const kind = body.kind === "alert" || body.kind === "final" || body.kind === "both" ? body.kind : "ack";
+  const kind = body.kind === "alert" || body.kind === "final" || body.kind === "first" || body.kind === "both" ? body.kind : "ack";
 
   if (!EMAIL_RE.test(to)) {
     return NextResponse.json({ error: "Indica un correo válido en 'to'." }, { status: 400 });
@@ -47,6 +47,7 @@ export async function POST(req: NextRequest) {
   };
 
   const { alert, ack, final } = leadEmails(lead);
+  const first = firstContactEmail(lead);
 
   const results: Record<string, boolean> = {};
 
@@ -77,6 +78,16 @@ export async function POST(req: NextRequest) {
       subject: `[PRUEBA] ${final.subject}`,
       text: final.text,
       html: final.html,
+    });
+  }
+
+  if (kind === "first" || kind === "both") {
+    results.first = await sendEmail({
+      to,
+      replyTo: process.env.LEAD_NOTIFY_EMAIL,
+      subject: `[PRUEBA] ${first.subject}`,
+      text: first.text,
+      html: first.html,
     });
   }
 

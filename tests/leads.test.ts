@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, afterEach } from "vitest";
 import { normalizeTramo, notifyLead, validateLead } from "@/lib/leads";
-import { finalEmail, leadAckEmail, leadAlertEmail } from "@/lib/email-templates";
+import { finalEmail, firstContactEmail, leadAckEmail, leadAlertEmail } from "@/lib/email-templates";
 
 const base = {
   concello: "Concello de Moaña",
@@ -159,8 +159,45 @@ describe("finalEmail", () => {
     expect(html).toContain("29 proxectos en curso");
     expect(html).toContain("Por que contratar agora");
     expect(html).toContain("Borrador");
+    expect(html).toContain("CHESS AI AGENCY");
+    expect(html).toContain("IA PARA CONCELLOS");
+    expect(html).toContain("Praza do Rei");
+    expect(html).toContain("maps.google.com/maps");
+    expect(html).toContain("Tarxada sobre a cidade");
+    expect(html).toContain("Interese sobre a cidade");
     expect(text).toContain("12.500 €");
     expect(text).toContain("https://chess-ai-agency.vercel.app/nosotros.html");
+  });
+});
+
+describe("firstContactEmail", () => {
+  const lead = {
+    concello: "Concello de Moaña",
+    nome: "Ana Pérez",
+    cargo: "Secretaría Xeral",
+    email: "ana.perez@concellodemoana.org",
+    telefono: "986 310 100",
+    tramo: "B",
+    interese: "Borradores e informes",
+    mensaxe: "Temos expedientes sen indexar.",
+    idioma: "gl",
+  } as const;
+
+  it("es el primer contacto sin nombrar el piloto, sin producto cerrado ni precio", () => {
+    const { html, subject, text } = firstContactEmail(lead);
+    expect(subject).toContain("Concello de Moaña");
+    expect(html).toContain("CHESS AI AGENCY");
+    expect(html).toContain("IA PARA");
+    expect(html).toContain("SOLICITAR UNHA DEMOSTRACIÓN");
+    expect(html).toContain("https://vigo-ai-demo.vercel.app/ayuntamientos#contacto");
+    expect(html).toContain("A oportunidade");
+    expect(html).toContain("A nosa proposta");
+    expect(html).toContain("Tecnoloxía con supervisión humana");
+    expect(html).toContain("UNHA PROPOSTA PARA O SEU CONCELLO:");
+    expect(html).not.toContain("12.500");
+    expect(html).not.toContain("VIGO AI ADMINISTRATION");
+    expect(text).not.toContain("<");
+    expect(text).toContain("Concello de Moaña");
   });
 });
 

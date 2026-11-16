@@ -21,6 +21,21 @@ const COPY = {
     ctaSecondary: "Ver a plataforma",
     heroNote: "30 minutos · sen compromiso · con datos do teu concello",
     badges: ["Datos aloxados na UE", "RGPD · ENS · AI Act", "Galego e castelán"],
+    cityTag: "A cidade",
+    cityTitle: "Vigo, a capital da cultura galega",
+    cityAddress: "📍 Praza do Rei, 1 — 36202 Vigo, Pontevedra, Galicia",
+    cityMapLabel: "Mapa · Praza do Rei, 1",
+    cityFactsTitle: "Interese sobre a cidade (fonte Wikipedia):",
+    cityFacts: [
+      "Extensión / superficie",
+      "Población",
+      "Clima",
+      "Presupuesto municipal",
+      "Gobierno municipal",
+      "Web oficial",
+      "Densidade / demografía",
+      "Distritos administrativos",
+    ],
     stats: [
       { v: "−60 %", l: "tempo en consultas internas" },
       { v: "100 %", l: "respostas con fonte citada" },
@@ -245,6 +260,21 @@ const COPY = {
     ctaSecondary: "Ver la plataforma",
     heroNote: "30 minutos · sin compromiso · con datos de tu concello",
     badges: ["Datos alojados en la UE", "RGPD · ENS · AI Act", "Gallego y castellano"],
+    cityTag: "La ciudad",
+    cityTitle: "Vigo, la capital de la cultura gallega",
+    cityAddress: "📍 Praza do Rei, 1 — 36202 Vigo, Pontevedra, Galicia",
+    cityMapLabel: "Mapa · Praza do Rei, 1",
+    cityFactsTitle: "Interés sobre la ciudad (fuente Wikipedia):",
+    cityFacts: [
+      "Extensión / superficie",
+      "Población",
+      "Clima",
+      "Presupuesto municipal",
+      "Gobierno municipal",
+      "Web oficial",
+      "Densidad / demografía",
+      "Distritos administrativos",
+    ],
     stats: [
       { v: "−60 %", l: "tiempo en consultas internas" },
       { v: "100 %", l: "respuestas con fuente citada" },
@@ -629,6 +659,55 @@ export default function AyuntamientosLanding() {
             </li>
           ))}
         </ul>
+      </section>
+
+      {/* Tarjeta sobre a cidade / la ciudad */}
+      <section id="ciudad" className="relative mx-auto max-w-6xl px-6 pb-6 pt-0">
+        <div className="overflow-hidden rounded-2xl border border-slate-800 bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800">
+          <div className="grid gap-6 p-6 md:grid-cols-2 md:gap-8 md:p-8">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-wider text-brand-300">
+                {t.cityTag}
+              </p>
+              <h2 className="mt-2 text-2xl font-semibold text-slate-100 md:text-3xl">
+                {t.cityTitle}
+              </h2>
+              <p className="mt-3 text-sm leading-relaxed text-slate-300">{t.cityAddress}</p>
+              <a
+                href="https://www.google.com/maps?q=42.2406,-8.7207&z=14"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-flex items-center gap-2 rounded-lg border border-slate-600 bg-slate-800 px-4 py-2 text-sm font-medium text-slate-200 transition hover:border-brand-400"
+              >
+                🗺️ {t.cityMapLabel}
+              </a>
+            </div>
+            <div className="overflow-hidden rounded-xl border border-slate-700">
+              <iframe
+                title="Mapa de Vigo"
+                src="https://maps.google.com/maps?q=42.2406,-8.7207&z=14&output=embed"
+                className="h-56 w-full border-0 md:h-72"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
+          </div>
+          <div className="border-t border-slate-800 p-6 md:p-8">
+            <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+              {t.cityFactsTitle}
+            </p>
+            <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
+              {t.cityFacts.map((f) => (
+                <div
+                  key={f}
+                  className="rounded-lg border border-slate-800 bg-slate-900/60 px-3 py-2 text-xs text-slate-300"
+                >
+                  {f}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* Cifras */}
