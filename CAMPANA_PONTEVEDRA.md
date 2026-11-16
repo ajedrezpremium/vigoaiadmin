@@ -193,6 +193,30 @@ Objetivo de la llamada: **nombre, correo y cargo**. No vender por teléfono.
 
 ---
 
+### 10.1 Circuito del lead (ya funcionando)
+
+```
+Landing /ayuntamientos → POST /api/leads → tabla public.leads
+                                        ↘ aviso interno a chessagencyai@gmail.com
+                                        ↘ acuse de recibo al concello, en su idioma
+```
+
+| Paso | Dónde | Qué ocurre |
+|---|---|---|
+| 1 | `/ayuntamientos` | El concello rellena el formulario (tramo A–D, interés, mensaje) con consentimiento |
+| 2 | `/api/leads` | Validación, honeypot y límite de 10 solicitudes/minuto por IP |
+| 3 | Supabase | Fila en `leads` con `estado = 'novo'` |
+| 4 | Correo | Aviso interno (responder va al concello) + acuse automático con la promesa de 24 h |
+| 5 | `/admin` | Botón «🏘️ Ver contactos de concellos»: email, teléfono, tramo e interés |
+
+**Estados del lead:** `novo` → `contactado` → `reunion` → `proposta` → `pechado` / `descartado`.
+
+**Regla de respuesta:** el acuse ya promete 24 horas laborables. Si un lead entra un viernes, se contesta el lunes antes de las 10:00. Es la única promesa que no se puede incumplir.
+
+**Higiene:** un lead que no encaja se marca `descartado` el mismo día. No se deja en `novo` para que no ensucie las métricas.
+
+---
+
 ## 11. Presupuesto de campaña
 
 | Concepto | Importe |
