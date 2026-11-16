@@ -43,6 +43,7 @@ export async function POST(req: NextRequest) {
 
   const lead: LeadInput = {
     ...SAMPLE,
+    ...(typeof body.concello === "string" && body.concello.trim() ? { concello: body.concello.trim() } : {}),
     ...(typeof body.idioma === "string" && body.idioma === "es" ? { idioma: "es" } : {}),
   };
 
