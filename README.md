@@ -72,6 +72,7 @@ npm run dev
 | Cloudflare Workers AI | https://dash.cloudflare.com/profile/api-tokens | `CLOUDFLARE_API_KEY`, `CLOUDFLARE_ACCOUNT_ID` |
 | OVHcloud AI | sin clave (anónimo) | — |
 | Supabase | https://supabase.com/dashboard → Settings → API | `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY` |
+| Resend (aviso de leads) | https://resend.com/api-keys | `RESEND_API_KEY`, `LEAD_NOTIFY_EMAIL`, `LEAD_FROM_EMAIL` |
 | Langfuse (opcional) | https://cloud.langfuse.com | `LANGFUSE_PUBLIC_KEY`, `LANGFUSE_SECRET_KEY`, `LANGFUSE_HOST` |
 
 Modelos free por defecto (todos con override por `.env`, ver `.env.example`):

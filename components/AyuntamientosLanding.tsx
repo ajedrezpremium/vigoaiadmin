@@ -206,11 +206,11 @@ const COPY = {
       mensaxe: "Un caso de uso, un problema concreto ou unha dúbida…",
     },
     tramoOptions: [
-      "Menos de 5.000 habitantes",
-      "5.000 – 10.000",
-      "10.000 – 20.000",
-      "Máis de 20.000",
-      "Mancomunidade ou outro",
+      { v: "D", l: "Menos de 5.000 habitantes" },
+      { v: "C", l: "5.000 – 10.000" },
+      { v: "B", l: "10.000 – 20.000" },
+      { v: "A", l: "Máis de 20.000" },
+      { v: "outro", l: "Mancomunidade ou outro" },
     ],
     intereseOptions: [
       "Asistente normativo",
@@ -430,11 +430,11 @@ const COPY = {
       mensaxe: "Un caso de uso, un problema concreto o una duda…",
     },
     tramoOptions: [
-      "Menos de 5.000 habitantes",
-      "5.000 – 10.000",
-      "10.000 – 20.000",
-      "Más de 20.000",
-      "Mancomunidad u otro",
+      { v: "D", l: "Menos de 5.000 habitantes" },
+      { v: "C", l: "5.000 – 10.000" },
+      { v: "B", l: "10.000 – 20.000" },
+      { v: "A", l: "Más de 20.000" },
+      { v: "outro", l: "Mancomunidad u otro" },
     ],
     intereseOptions: [
       "Asistente normativo",
@@ -927,8 +927,8 @@ export default function AyuntamientosLanding() {
                       >
                         <option value="">—</option>
                         {t.tramoOptions.map((o) => (
-                          <option key={o} value={o}>
-                            {o}
+                          <option key={o.v} value={o.v}>
+                            {o.l}
                           </option>
                         ))}
                       </select>

@@ -9,6 +9,32 @@ const NOTIFY_TIMEOUT_MS = 4_000;
 export const TRAMOS = ["A", "B", "C", "D", "outro"] as const;
 export type Tramo = (typeof TRAMOS)[number];
 
+/**
+ * Normaliza el tamaño del concello. El formulario puede enviar el código ("C")
+ * o la etiqueta visible ("5.000 – 10.000"), y las APIs externas, cualquier variante.
+ * Sin esto, el tramo se descartaba en silencio y el lead llegaba sin clasificar.
+ */
+export function normalizeTramo(raw: string): Tramo | undefined {
+  const value = raw.trim();
+  if (!value) return undefined;
+  const code = value.toUpperCase();
+  if (TRAMOS.includes(code as Tramo)) return code as Tramo;
+
+  const k = value
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[–—−]/g, "-")
+    .replace(/\s+/g, " ");
+
+  if (/mancomun|outro|otro|outra/.test(k)) return "outro";
+  if (k.includes("10.000") && k.includes("20.000")) return "B";
+  if (k.includes("5.000") && k.includes("10.000")) return "C";
+  if (k.includes("mais de 20") || k.includes("mas de 20")) return "A";
+  if (k.includes("menos de 5") || /^d$/.test(k)) return "D";
+  return undefined;
+}
+
 export interface LeadInput {
   concello: string;
   nome: string;
@@ -75,7 +101,7 @@ export function validateLead(raw: unknown): ValidationResult {
       cargo: clean(body.cargo, 120) || undefined,
       email,
       telefono: clean(body.telefono, 40) || undefined,
-      tramo: TRAMOS.includes(tramo as Tramo) ? tramo : undefined,
+      tramo: normalizeTramo(tramo),
       interese: clean(body.interese, 80) || undefined,
       mensaxe: clean(body.mensaxe, 1_500) || undefined,
       idioma: clean(body.idioma, 5) || "gl",

@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, afterEach } from "vitest";
-import { notifyLead, validateLead } from "@/lib/leads";
+import { normalizeTramo, notifyLead, validateLead } from "@/lib/leads";
 
 const base = {
   concello: "Concello de Moaña",
@@ -47,6 +47,31 @@ describe("validateLead", () => {
     const r = validateLead({ ...base, tramo: "Z" });
     expect(r.ok).toBe(true);
     if (r.ok) expect(r.lead.tramo).toBeUndefined();
+  });
+});
+
+describe("normalizeTramo", () => {
+  it.each([
+    ["A", "A"],
+    ["  c  ", "C"],
+    ["D", "D"],
+    ["outro", "outro"],
+    ["Menos de 5.000 habitantes", "D"],
+    ["5.000 – 10.000", "C"],
+    ["10.000 – 20.000", "B"],
+    ["Máis de 20.000", "A"],
+    ["Más de 20.000", "A"],
+    ["Mancomunidade ou outro", "outro"],
+    ["Mancomunidad u otro", "outro"],
+    ["Z", undefined],
+  ])("%s → %s", (input, expected) => {
+    expect(normalizeTramo(input as string)).toBe(expected);
+  });
+
+  it("validateLead convierte la etiqueta del formulario en código", () => {
+    const r = validateLead({ ...base, tramo: "10.000 – 20.000" });
+    expect(r.ok).toBe(true);
+    if (r.ok) expect(r.lead.tramo).toBe("B");
   });
 });
 
