@@ -355,8 +355,8 @@ export function finalEmail(lead: LeadInput): { subject: string; html: string; te
   const ciudadAddr = "📍 Praza do Rei, 1 — 36202 Vigo, Pontevedra, Galicia";
   const ciudadT = es ? "Tarjeta sobre la ciudad:" : "Tarxada sobre a cidade:";
   const ciudadFactsT = es
-    ? "Interés sobre la ciudad (fuentes Wikipedia):"
-    : "Interese sobre a cidade (fonte Wikipedia):";
+    ? "Interés sobre la ciudad (fuentes"
+    : "Interese sobre a cidade (fonte";
   const facts = [
     "Extensión / superficie",
     "Población",
@@ -463,7 +463,7 @@ export function finalEmail(lead: LeadInput): { subject: string; html: string; te
     `<p style='${H}'><b>${ciudadT}</b></p>`,
     `<p style='margin:8px 0 0;font:14px/1.6 Arial,Helvetica,sans-serif;color:#334155;'><a href='${mapsUrl}' style='color:#2550eb;text-decoration:none;'>${ciudadAddr}</a></p>`,
     `<img src='${mapsEmbed}' width='552' alt='Mapa de Vigo — Praza do Rei 1' style='display:block;width:100%;max-width:552px;height:auto;border:0;outline:none;text-decoration:none;margin:10px 0;' />`,
-    `<p style='margin:12px 0 0;font:14px/1.6 Arial,Helvetica,sans-serif;color:#334155;'>${ciudadFactsT.replace("Wikipedia", "")}<a href='${wikiUrl}' style='color:#2550eb;text-decoration:none;'>Wikipedia</a>):</p>`.replace("))", ")"),
+    `<p style='margin:12px 0 0;font:14px/1.6 Arial,Helvetica,sans-serif;color:#334155;'>${ciudadFactsT} <a href='${wikiUrl}' style='color:#2550eb;text-decoration:none;'>Wikipedia</a>):</p>`,
     `<ol style='margin:10px 0 0;padding-left:20px;font:13px/1.8 Arial,Helvetica,sans-serif;color:#475569;'>${facts.map((f) => `<li><b>${f}</b></li>`).join("")}</ol>`,
   ].join("\n");
 
@@ -519,6 +519,7 @@ export function finalEmail(lead: LeadInput): { subject: string; html: string; te
     ciudadAddr,
     mapsUrl,
     ciudadFactsT,
+    "Wikipedia):",
     ...facts.map((f) => `- ${f}`),
     "",
     copy.cta,
@@ -549,7 +550,6 @@ export function finalEmail(lead: LeadInput): { subject: string; html: string; te
     text,
   };
 }
-
 
 /* ---------------------------------------------------------------- */
 /* Versión primer contacto: solución de modernización IA para la     */
