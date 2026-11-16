@@ -87,9 +87,15 @@ Modelos free por defecto (todos con override por `.env`, ver `.env.example`):
 ## 3. Base de datos Supabase
 
 1. Crea un proyecto en Supabase (región europea, p. ej. `eu-west`).
-2. Abre **SQL Editor** y ejecuta el contenido de `supabase/schema.sql` (tablas: `conversations`, `messages`, `audit_events`, `escalations`).
+2. Abre **SQL Editor → New query**, pega el contenido completo de `supabase/schema.sql` y pulsa **Run**.
+   Crea las 6 tablas: `conversations`, `messages`, `audit_events`, `escalations`, `leads` y `user_roles`.
+   Es el **único** archivo SQL del proyecto: no hay ni hace falta un `seed.sql` ni migraciones separadas.
 3. Copia las 3 claves al `.env.local`.
 4. Sin Supabase la demo funciona igualmente (sin persistencia; `/admin` mostrará el aviso correspondiente).
+
+> Es idempotente (`create table if not exists`, `drop policy if exists`): puedes volver a ejecutarlo entero cuando se añada una tabla nueva, sin borrar datos.
+>
+> La tabla `leads` guarda las solicitudes de la landing `/ayuntamientos`. Si aún no existe, la app no pierde el contacto: lo escribe en `audit_events` con `event_type = 'lead_ayuntamiento'` y lo muestra igualmente en `/admin` → «Ver contactos de concellos».
 
 > La persistencia usa la clave `service_role` **solo en servidor** (route handlers). Nunca se expone al navegador. Para producción real: RLS, RBAC, retención y evaluación RGPD/ENS/AI Act.
 
