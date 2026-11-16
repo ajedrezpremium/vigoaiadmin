@@ -517,11 +517,15 @@ function compatAttempt(provName: string, modelOverride?: string): LLMAttempt | n
 export async function chatLLM(req: LLMRequest): Promise<LLMResponse> {
   const errors: string[] = [];
 
-  const openrouterModel = await getBestFreeModel();
-  const openrouterFallback = process.env.OPENROUTER_FALLBACK_MODEL || "google/gemma-4-26b-a4b-it:free";
+  // 1) Modelo fijo de .env (verificado que responde en la fecha actual)
+  const openrouterModel = process.env.OPENROUTER_MODEL || "particle-ai/particle-1:free";
+  // 2) Rotacion dinamica entre los ":free" disponibles (cache 60s)
+  const openrouterDynamic = await getBestFreeModel();
+  // 3) Respaldo fijo
+  const openrouterFallback = process.env.OPENROUTER_FALLBACK_MODEL || "baidu/ernie-5.5-flash-preview:free";
   const geminiModel = process.env.GEMINI_MODEL || "gemini-3.8-flash";
 
-  // Cadena de fallbacks: cada intento sin claves en .env se salta automáticamente
+  // Cadena de fallbacks: cada intento sin claves en .env se salta automaticamente
   const geminiAttempt: LLMAttempt | null = process.env.GEMINI_API_KEY
     ? {
         name: "gemini",
@@ -536,19 +540,21 @@ export async function chatLLM(req: LLMRequest): Promise<LLMResponse> {
     : null;
 
   const attempts: LLMAttempt[] = [
-    // 1. OpenRouter — mejor modelo ":free" disponible (selección dinámica)
+    // 1. OpenRouter — modelo fijo configurado (verificado que responde)
     compatAttempt("openrouter", openrouterModel),
-    // 2. OpenRouter — modelo de respaldo fijo
+    // 2. OpenRouter — rotacion dinamica entre modelos :free
+    compatAttempt("openrouter", openrouterDynamic),
+    // 3. OpenRouter — modelo de respaldo fijo
     compatAttempt("openrouter", openrouterFallback),
-    // 3. Groq — inferencia LPU ultra-rápida (30 RPM · 1.000 req/día)
+    // 4. Groq — inferencia LPU ultra-rapida (30 RPM · 1.000 req/dia)
     compatAttempt("groq"),
-    // 4. Gemini — respaldo directo nativo (Google AI Studio)
+    // 5. Gemini — respaldo directo nativo (Google AI Studio)
     geminiAttempt,
-    // 5. Cohere — 1.000 llamadas/mes, buen multilingüe (gl/es/en)
+    // 6. Cohere — 1.000 llamadas/mes, buen multilingue (gl/es/en)
     compatAttempt("cohere"),
-    // 6. Cloudflare Workers AI — 10.000 neurons/día compartidas
+    // 7. Cloudflare Workers AI — 10.000 neurons/dia compartidas
     compatAttempt("cloudflare"),
-    // 7. OVHcloud AI — anónimo, hosting UE (2 RPM), último recurso sin claves
+    // 8. OVHcloud AI — anonimo, hosting UE (2 RPM), ultimo recurso sin claves
     compatAttempt("ovh"),
   ].filter((a): a is LLMAttempt => a !== null);
 
