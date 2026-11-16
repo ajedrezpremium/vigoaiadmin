@@ -146,40 +146,136 @@ function leadSummary(lead: LeadInput): string {
 }
 
 /**
+ * Envía un correo con Resend. Nunca lanza: si falla, el lead ya está guardado y
+ * solo queda una línea en el log. `false` significa "no entregado", no "error fatal".
+ */
+async function sendEmail(msg: {
+  to: string;
+  subject: string;
+  text: string;
+  replyTo?: string;
+}): Promise<boolean> {
+  const key = process.env.RESEND_API_KEY;
+  if (!key) return false;
+
+  try {
+    const res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${key}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: process.env.LEAD_FROM_EMAIL ?? "VIGO AI <onboarding@resend.dev>",
+        to: [msg.to],
+        reply_to: msg.replyTo,
+        subject: msg.subject,
+        text: msg.text,
+      }),
+      signal: AbortSignal.timeout(NOTIFY_TIMEOUT_MS),
+    });
+
+    if (!res.ok) {
+      const detail = await res.text().catch(() => "");
+      console.warn("[leads] Resend respondió", res.status, detail.slice(0, 200));
+      return false;
+    }
+    return true;
+  } catch (e) {
+    console.warn("[leads] fallo enviando correo:", e);
+    return false;
+  }
+}
+
+/** Acuse de recibo al concello, en su idioma. Refuerza la promesa de responder en 24 h. */
+function autoReply(lead: LeadInput): { subject: string; text: string } {
+  const demo = "https://vigo-ai-demo.vercel.app";
+  const detalle = [
+    `Concello: ${lead.concello}`,
+    lead.interese ? `Interese: ${lead.interese}` : null,
+    lead.tramo ? `Tamaño: ${lead.tramo}` : null,
+    lead.mensaxe ? `Mensaxe: ${lead.mensaxe}` : null,
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  if (lead.idioma === "es") {
+    return {
+      subject: `Solicitud recibida · ${lead.concello}`,
+      text: [
+        `Buenos días, ${lead.nome}:`,
+        "",
+        "Hemos recibido tu solicitud desde la web de VIGO AI ADMINISTRATION. Gracias por escribirnos.",
+        "",
+        "Resumen de lo que nos cuentas:",
+        detalle,
+        "",
+        "Te respondemos en menos de 24 horas laborables a este mismo correo. Si prefieres hablar antes, llama al 607 869 278.",
+        "",
+        `Mientras tanto puedes probar la demo, sin registro: ${demo}`,
+        "",
+        "Un saludo,",
+        "Roberto Páramos",
+        "CHESS AI AGENCY · VIGO AI ADMINISTRATION",
+        "607 869 278 · chessagencyai@gmail.com",
+      ].join("\n"),
+    };
+  }
+
+  return {
+    subject: `Solicitude recibida · ${lead.concello}`,
+    text: [
+      `Bo día, ${lead.nome}:`,
+      "",
+      "Recibimos a túa solicitude desde a web de VIGO AI ADMINISTRATION. Grazas por escribirnos.",
+      "",
+      "Resumo do que nos contas:",
+      detalle,
+      "",
+      "Respondémosche en menos de 24 horas laborables a este mesmo correo. Se prefires falar antes, chama ao 607 869 278.",
+      "",
+      `Mentres tanto podes probar a demo, sen rexistro: ${demo}`,
+      "",
+      "Un saúdo,",
+      "Roberto Páramos",
+      "CHESS AI AGENCY · VIGO AI ADMINISTRATION",
+      "607 869 278 · chessagencyai@gmail.com",
+    ].join("\n"),
+  };
+}
+
+/**
  * Aviso inmediato del lead. Dos canales opcionales, configurables por entorno:
- *  - RESEND_API_KEY + LEAD_NOTIFY_EMAIL → correo
+ *  - RESEND_API_KEY + LEAD_NOTIFY_EMAIL → correo interno + acuse de recibo al concello
  *  - LEAD_WEBHOOK_URL → POST JSON (Slack, Discord, Make, n8n…)
  * Si no hay ninguno, el lead queda igualmente guardado.
  */
 export async function notifyLead(lead: LeadInput): Promise<boolean> {
   const text = leadSummary(lead);
-  let sent = false;
 
-  const resendKey = process.env.RESEND_API_KEY;
-  const to = process.env.LEAD_NOTIFY_EMAIL;
-  if (resendKey && to) {
-    try {
-      const res = await fetch("https://api.resend.com/emails", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${resendKey}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          from: process.env.LEAD_FROM_EMAIL ?? "VIGO AI <onboarding@resend.dev>",
-          to: [to],
-          reply_to: lead.email,
-          subject: `Novo lead · ${lead.concello} · ${lead.tramo ?? "sen tramo"}`,
-          text,
-        }),
-        signal: AbortSignal.timeout(NOTIFY_TIMEOUT_MS),
+  const [notified] = await Promise.all([
+    (async () => {
+      const to = process.env.LEAD_NOTIFY_EMAIL;
+      if (!to) return false;
+      return sendEmail({
+        to,
+        replyTo: lead.email,
+        subject: `Novo lead · ${lead.concello} · ${lead.tramo ?? "sen tramo"}`,
+        text,
       });
-      if (res.ok) sent = true;
-      else console.warn("[leads] Resend respondió", res.status);
-    } catch (e) {
-      console.warn("[leads] fallo enviando correo:", e);
-    }
-  }
+    })(),
+    (async () => {
+      const ack = autoReply(lead);
+      return sendEmail({
+        to: lead.email,
+        replyTo: process.env.LEAD_NOTIFY_EMAIL,
+        subject: ack.subject,
+        text: ack.text,
+      });
+    })(),
+  ]);
+
+  let sent = notified;
 
   const webhook = process.env.LEAD_WEBHOOK_URL;
   if (webhook) {
