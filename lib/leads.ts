@@ -2,6 +2,7 @@
 // Capa comercial separada del asistente: no toca el corpus ni el chat.
 
 import { getServerSupabase } from "@/lib/supabase";
+import { leadAckEmail, leadAlertEmail } from "@/lib/email-templates";
 
 const DB_TIMEOUT_MS = 4_000;
 const NOTIFY_TIMEOUT_MS = 4_000;
@@ -157,28 +158,15 @@ export async function saveLead(lead: LeadInput): Promise<LeadStore> {
   return "none";
 }
 
-function leadSummary(lead: LeadInput): string {
-  return [
-    `Novo contacto desde a landing: ${lead.concello}`,
-    `Nome: ${lead.nome}${lead.cargo ? ` (${lead.cargo})` : ""}`,
-    `Correo: ${lead.email}`,
-    lead.telefono ? `Teléfono: ${lead.telefono}` : null,
-    lead.tramo ? `Tramo: ${lead.tramo}` : null,
-    lead.interese ? `Interese: ${lead.interese}` : null,
-    lead.mensaxe ? `Mensaxe: ${lead.mensaxe}` : null,
-  ]
-    .filter(Boolean)
-    .join("\n");
-}
-
 /**
  * Envía un correo con Resend. Nunca lanza: si falla, el lead ya está guardado y
  * solo queda una línea en el log. `false` significa "no entregado", no "error fatal".
  */
-async function sendEmail(msg: {
+export async function sendEmail(msg: {
   to: string;
   subject: string;
   text: string;
+  html?: string;
   replyTo?: string;
 }): Promise<boolean> {
   const key = process.env.RESEND_API_KEY;
@@ -197,6 +185,7 @@ async function sendEmail(msg: {
         reply_to: msg.replyTo,
         subject: msg.subject,
         text: msg.text,
+        html: msg.html,
       }),
       signal: AbortSignal.timeout(NOTIFY_TIMEOUT_MS),
     });
@@ -213,63 +202,6 @@ async function sendEmail(msg: {
   }
 }
 
-/** Acuse de recibo al concello, en su idioma. Refuerza la promesa de responder en 24 h. */
-function autoReply(lead: LeadInput): { subject: string; text: string } {
-  const demo = "https://vigo-ai-demo.vercel.app";
-  const detalle = [
-    `Concello: ${lead.concello}`,
-    lead.interese ? `Interese: ${lead.interese}` : null,
-    lead.tramo ? `Tamaño: ${lead.tramo}` : null,
-    lead.mensaxe ? `Mensaxe: ${lead.mensaxe}` : null,
-  ]
-    .filter(Boolean)
-    .join("\n");
-
-  if (lead.idioma === "es") {
-    return {
-      subject: `Solicitud recibida · ${lead.concello}`,
-      text: [
-        `Buenos días, ${lead.nome}:`,
-        "",
-        "Hemos recibido tu solicitud desde la web de VIGO AI ADMINISTRATION. Gracias por escribirnos.",
-        "",
-        "Resumen de lo que nos cuentas:",
-        detalle,
-        "",
-        "Te respondemos en menos de 24 horas laborables a este mismo correo. Si prefieres hablar antes, llama al 607 869 278.",
-        "",
-        `Mientras tanto puedes probar la demo, sin registro: ${demo}`,
-        "",
-        "Un saludo,",
-        "Roberto Páramos",
-        "CHESS AI AGENCY · VIGO AI ADMINISTRATION",
-        "607 869 278 · chessagencyai@gmail.com",
-      ].join("\n"),
-    };
-  }
-
-  return {
-    subject: `Solicitude recibida · ${lead.concello}`,
-    text: [
-      `Bo día, ${lead.nome}:`,
-      "",
-      "Recibimos a túa solicitude desde a web de VIGO AI ADMINISTRATION. Grazas por escribirnos.",
-      "",
-      "Resumo do que nos contas:",
-      detalle,
-      "",
-      "Respondémosche en menos de 24 horas laborables a este mesmo correo. Se prefires falar antes, chama ao 607 869 278.",
-      "",
-      `Mentres tanto podes probar a demo, sen rexistro: ${demo}`,
-      "",
-      "Un saúdo,",
-      "Roberto Páramos",
-      "CHESS AI AGENCY · VIGO AI ADMINISTRATION",
-      "607 869 278 · chessagencyai@gmail.com",
-    ].join("\n"),
-  };
-}
-
 /**
  * Aviso inmediato del lead. Dos canales opcionales, configurables por entorno:
  *  - RESEND_API_KEY + LEAD_NOTIFY_EMAIL → correo interno + acuse de recibo al concello
@@ -277,7 +209,8 @@ function autoReply(lead: LeadInput): { subject: string; text: string } {
  * Si no hay ninguno, el lead queda igualmente guardado.
  */
 export async function notifyLead(lead: LeadInput): Promise<boolean> {
-  const text = leadSummary(lead);
+  const alert = leadAlertEmail(lead);
+  const ack = leadAckEmail(lead);
 
   const [notified] = await Promise.all([
     (async () => {
@@ -286,19 +219,18 @@ export async function notifyLead(lead: LeadInput): Promise<boolean> {
       return sendEmail({
         to,
         replyTo: lead.email,
-        subject: `Novo lead · ${lead.concello} · ${lead.tramo ?? "sen tramo"}`,
-        text,
+        subject: alert.subject,
+        text: alert.text,
+        html: alert.html,
       });
     })(),
-    (async () => {
-      const ack = autoReply(lead);
-      return sendEmail({
-        to: lead.email,
-        replyTo: process.env.LEAD_NOTIFY_EMAIL,
-        subject: ack.subject,
-        text: ack.text,
-      });
-    })(),
+    sendEmail({
+      to: lead.email,
+      replyTo: process.env.LEAD_NOTIFY_EMAIL,
+      subject: ack.subject,
+      text: ack.text,
+      html: ack.html,
+    }),
   ]);
 
   let sent = notified;
@@ -309,7 +241,7 @@ export async function notifyLead(lead: LeadInput): Promise<boolean> {
       const res = await fetch(webhook, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text, content: text, lead }),
+        body: JSON.stringify({ text: alert.text, content: alert.text, lead }),
         signal: AbortSignal.timeout(NOTIFY_TIMEOUT_MS),
       });
       if (res.ok) sent = true;

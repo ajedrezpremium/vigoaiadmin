@@ -1,5 +1,6 @@
 import { describe, it, expect, vi, afterEach } from "vitest";
 import { normalizeTramo, notifyLead, validateLead } from "@/lib/leads";
+import { leadAckEmail, leadAlertEmail } from "@/lib/email-templates";
 
 const base = {
   concello: "Concello de Moaña",
@@ -75,6 +76,66 @@ describe("normalizeTramo", () => {
   });
 });
 
+describe("plantillas de correo", () => {
+  const lead = {
+    concello: "Concello de Moaña",
+    nome: "Ana Pérez",
+    cargo: "Secretaría Xeral",
+    email: "ana.perez@concellodemoana.org",
+    telefono: "986 310 100",
+    tramo: "B",
+    interese: "Borradores e informes",
+    mensaxe: "Temos expedientes sen indexar.",
+    idioma: "gl",
+  } as const;
+
+  it("el aviso interno lleva logo, marca, lema y los datos del lead", () => {
+    const { html, subject } = leadAlertEmail(lead);
+    expect(subject).toContain("Moaña");
+    expect(html).toContain("logo-email.png");
+    expect(html).toContain("CHESS AI AGENCY");
+    expect(html).toContain("AI · Innovation · Execution");
+    expect(html).toContain("Ana Pérez");
+    expect(html).toContain("986 310 100");
+    expect(html).toContain("mailto:ana.perez@concellodemoana.org");
+    expect(html).toContain('<html lang="gl">');
+  });
+
+  it("el acuse cambia de idioma y mantiene el compromiso de 24 h", () => {
+    const gl = leadAckEmail({ ...lead, idioma: "gl" });
+    expect(gl.subject).toBe("Solicitude recibida · Concello de Moaña");
+    expect(gl.html).toContain("Grazas, Ana Pérez");
+    expect(gl.html).toContain("24 horas laborables");
+
+    const es = leadAckEmail({ ...lead, idioma: "es" });
+    expect(es.subject).toBe("Solicitud recibida · Concello de Moaña");
+    expect(es.html).toContain("Gracias, Ana Pérez");
+    expect(es.html).toContain('<html lang="es">');
+  });
+
+  it("escapa el HTML del usuario: no se inyecta nada en el correo", () => {
+    const { html } = leadAlertEmail({
+      ...lead,
+      nome: '<script>alert("x")</script>',
+      mensaxe: '<img src=x onerror="alert(1)">',
+      concello: "Moaña & Cía",
+    });
+    expect(html).not.toContain("<script>");
+    expect(html).not.toContain("<img src=x");
+    expect(html).toContain("&lt;script&gt;");
+    expect(html).toContain("&lt;img src=x");
+    expect(html).toContain("Moaña &amp; Cía");
+  });
+
+  it("el texto plano sigue siendo legible sin HTML", () => {
+    const { text } = leadAckEmail(lead);
+    expect(text).toContain("Bo día, Ana Pérez:");
+    expect(text).toContain("607 869 278");
+    expect(text).toContain("https://vigo-ai-demo.vercel.app/ayuntamientos");
+    expect(text).not.toContain("<");
+  });
+});
+
 describe("notifyLead", () => {
   afterEach(() => {
     vi.unstubAllGlobals();
@@ -120,7 +181,7 @@ describe("notifyLead", () => {
     const acuse = bodies.find((b) => b.to[0] === "ana.perez@concello.gal");
     expect(acuse.from).toBe("VIGO AI <leads@ajedrezpremium.com>");
     expect(acuse.subject).toContain("Moaña");
-    expect(acuse.text).toContain("Recibimos a túa solicitude");
+    expect(acuse.text).toContain("Recibimos a solicitude");
     expect(acuse.text).toContain("24 horas laborables");
     expect(acuse.text).toContain("607 869 278");
   });
@@ -136,8 +197,8 @@ describe("notifyLead", () => {
       .map((c) => JSON.parse((c[1] as RequestInit).body as string))
       .find((b) => b.to[0] === "ana.perez@concello.gal");
 
-    expect(acuse.text).toContain("Hemos recibido tu solicitud");
-    expect(acuse.text).not.toContain("Recibimos a túa");
+    expect(acuse.text).toContain("Hemos recibido la solicitud");
+    expect(acuse.text).not.toContain("Recibimos a solicitude");
   });
 
   it("un error de Resend no lanza: devuelve false", async () => {
