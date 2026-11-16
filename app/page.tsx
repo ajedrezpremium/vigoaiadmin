@@ -296,7 +296,7 @@ export default function Home() {
         <p className="mx-auto max-w-2xl leading-relaxed">{t.landingFooter}</p>
         {/* Cierre + aviso legal + versión */}
         <p className="mt-4 flex flex-wrap items-center justify-center gap-3">
-          <a href="/ayuntamientos" className={linkCls}>
+          <a href="/administracion-local" className={linkCls}>
             🏘️ IA para concellos
           </a>
           <a href="/aviso-legal" className={linkCls}>

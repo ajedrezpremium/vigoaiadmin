@@ -5,7 +5,7 @@
 import type { LeadInput } from "@/lib/leads";
 
 const SITE = "https://vigo-ai-demo.vercel.app";
-const LANDING = `${SITE}/ayuntamientos`;
+const LANDING = `${SITE}/administracion-local`;
 const LOGO = `${SITE}/logo-email.png`;
 
 const BRAND = "#2550eb";
@@ -136,7 +136,7 @@ function layout(o: LayoutOptions): string {
           <a href="mailto:${MAIL}" style="color:#cbd5e1;text-decoration:none;">${esc(MAIL)}</a>
         </div>
         <div style="font:13px/1.7 ${FONT};margin-top:4px;">
-          <a href="${LANDING}" style="color:#93b4fd;text-decoration:none;">vigo-ai-demo.vercel.app/ayuntamientos</a>
+          <a href="${LANDING}" style="color:#93b4fd;text-decoration:none;">vigo-ai-demo.vercel.app/administracion-local</a>
         </div>
       </td>
     </tr>
@@ -576,7 +576,7 @@ export function firstContactEmail(lead: LeadInput): { subject: string; html: str
     `<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'>${esc(piloto)}</p>`,
   ].join("\n");
 
-  const fullBody = `${body}\n${button(`${SITE}/ayuntamientos#contacto`, cta)}\n<p style="margin:18px 0 0;font:13px/1.6 Arial,Helvetica,sans-serif;color:#94a3b8;">${esc(note)}</p>`;
+  const fullBody = `${body}\n${button(`${SITE}/demo`, cta)}\n<p style="margin:18px 0 0;font:13px/1.6 Arial,Helvetica,sans-serif;color:#94a3b8;">${esc(note)}</p>`;
 
   const text = [
     `Proposta comercial — ${lead.concello}`,

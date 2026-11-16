@@ -56,7 +56,7 @@ export default function SiteHeader({
             </a>
           ))}
           <a
-            href="/ayuntamientos"
+            href="/administracion-local"
             title="Para concellos"
             className="flex items-center gap-1.5 rounded-lg border border-brand-500/40 px-2.5 py-1.5 text-sm text-brand-200 transition hover:bg-brand-500/10"
           >
