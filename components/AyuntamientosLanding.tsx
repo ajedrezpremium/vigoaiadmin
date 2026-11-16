@@ -672,7 +672,7 @@ export default function AyuntamientosLanding() {
               <h2 className="mt-2 text-2xl font-semibold text-slate-100 md:text-3xl">
                 {t.cityTitle}
               </h2>
-              <p className="mt-3 text-sm leading-relaxed text-slate-300">{t.cityAddress}</p>
+              <p className="mt-3 text-sm leading-relaxed text-slate-300"><a href="https://maps.google.com/?q=Praza+do+Rei+Vigo">{t.cityAddress}</a></p>
               <a
                 href="https://www.google.com/maps?q=42.2406,-8.7207&z=14"
                 target="_blank"
@@ -694,7 +694,9 @@ export default function AyuntamientosLanding() {
           </div>
           <div className="border-t border-slate-800 p-6 md:p-8">
             <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">
-              {t.cityFactsTitle}
+              <a href="https://es.wikipedia.org/wiki/Vigo" className="text-slate-400 underline decoration-brand-400">
+                {t.cityFactsTitle}
+              </a>
             </p>
             <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
               {t.cityFacts.map((f) => (

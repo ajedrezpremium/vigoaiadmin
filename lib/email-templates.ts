@@ -363,18 +363,18 @@ export function finalEmail(lead: LeadInput): { subject: string; html: string; te
           "<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'>Un asistente que responde con fuentes citadas, redacta borradores marcados como Borrador y transcribe reuniones. No sustituye la decisión humana: la revisión y la firma las mantiene el personal del concello.</p>",
           "<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'>Empezamos por una unidad real: documentación, expedientes o trámites. Si el piloto no funciona, no se continúa: te quedas con el informe y la experiencia.</p>",
           "<p style='margin:18px 0 0;font:16px/1.4 Arial,Helvetica,sans-serif;color:#172052;'><b>Tarjeta sobre la ciudad:</b></p>",
-          "<p style='margin:8px 0 0;font:14px/1.6 Arial,Helvetica,sans-serif;color:#334155;'>📍 Praza do Rei, 1 — 36202 Vigo, Pontevedra, Galicia</p>",
+          "<p style='margin:8px 0 0;font:14px/1.6 Arial,Helvetica,sans-serif;color:#334155;'><a href='https://maps.google.com/?q=Praza+do+Rei+Vigo' style='color:#2550eb;text-decoration:none;'>📍 Praza do Rei, 1 — 36202 Vigo, Pontevedra, Galicia</a></p>",
           "<img src=\"https://maps.google.com/maps?q=Praza+do+Rei+Vigo&z=14&ie=UTF8&iwloc=&output=embed\" width=\"552\" alt=\"Mapa de Vigo — Praza do Rei 1\" style=\"display:block;width:100%;max-width:552px;height:auto;border:0;outline:none;text-decoration:none;margin:10px 0;\" />",
-          "<p style='margin:12px 0 0;font:14px/1.6 Arial,Helvetica,sans-serif;color:#334155;'>Interés sobre la ciudad (fuentes Wikipedia):</p>",
+          "<p style='margin:12px 0 0;font:14px/1.6 Arial,Helvetica,sans-serif;color:#334155;'>Interés sobre la ciudad (<a href='https://es.wikipedia.org/wiki/Vigo' style='color:#2550eb;text-decoration:none;'>fuentes Wikipedia</a>):</p>",
           "<ol style='margin:10px 0 0;padding-left:20px;font:13px/1.8 Arial,Helvetica,sans-serif;color:#475569;'>" +
-          "<li>Extensión / superficie</li>" +
-          "<li>Población</li>" +
-          "<li>Clima</li>" +
-          "<li>Presupuesto municipal</li>" +
-          "<li>Gobierno municipal</li>" +
-          "<li>Web oficial</li>" +
+          "<li><b>Extensión / superficie</b></li>" +
+          "<li><b>Población</b></li>" +
+          "<li><b>Clima</b></li>" +
+          "<li><b>Presupuesto municipal</b></li>" +
+          "<li><b>Gobierno municipal</b></li>" +
+          "<li><b>Web oficial</b></li>" +
           "<li>Densidad / demografía</li>" +
-          "<li>Distritos administrativos</li>" +
+          "<li><b>Distritos administrativos</b></li>" +
           "</ol>",
         ].join("\n"),
         cta: "Comenzar el piloto",
@@ -396,18 +396,18 @@ export function finalEmail(lead: LeadInput): { subject: string; html: string; te
           "<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'>Un asistente que responde con fontes citadas, redacta borradores marcados como Borrador e transcribe reunións. Non sustitúe a decisión humana: a revisión e a firma quedarán sempre co persoal do concello.</p>",
           "<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'>Empiezan cunha unidade real: documentación, expedientes ou trámites. Si non funciona, no se continua: quédao co informe e coa aprendizaxe.</p>",
           "<p style='margin:18px 0 0;font:16px/1.4 Arial,Helvetica,sans-serif;color:#172052;'><b>Tarxada sobre a cidade:</b></p>",
-          "<p style='margin:8px 0 0;font:14px/1.6 Arial,Helvetica,sans-serif;color:#334155;'>📍 Praza do Rei, 1 — 36202 Vigo, Pontevedra, Galicia</p>",
+          "<p style='margin:8px 0 0;font:14px/1.6 Arial,Helvetica,sans-serif;color:#334155;'><a href='https://maps.google.com/?q=Praza+do+Rei+Vigo' style='color:#2550eb;text-decoration:none;'>📍 Praza do Rei, 1 — 36202 Vigo, Pontevedra, Galicia</a></p>",
           "<img src=\"https://maps.google.com/maps?q=Praza+do+Rei+Vigo&z=14&ie=UTF8&iwloc=&output=embed\" width=\"552\" alt=\"Mapa de Vigo — Praza do Rei 1\" style=\"display:block;width:100%;max-width:552px;height:auto;border:0;outline:none;text-decoration:none;margin:10px 0;\" />",
-          "<p style='margin:12px 0 0;font:14px/1.6 Arial,Helvetica,sans-serif;color:#334155;'>Interese sobre a cidade (fonte Wikipedia):</p>",
+          "<p style='margin:12px 0 0;font:14px/1.6 Arial,Helvetica,sans-serif;color:#334155;'>Interese sobre a cidade (<a href='https://gl.wikipedia.org/wiki/Vigo' style='color:#2550eb;text-decoration:none;'>fonte Wikipedia</a>):</p>",
           "<ol style='margin:10px 0 0;padding-left:20px;font:13px/1.8 Arial,Helvetica,sans-serif;color:#475569;'>" +
-          "<li>Extensión / superficie</li>" +
-          "<li>Población</li>" +
-          "<li>Clima</li>" +
-          "<li>Presupuesto municipal</li>" +
-          "<li>Gobierno municipal</li>" +
-          "<li>Web oficial</li>" +
-          "<li>Densidade / demografía</li>" +
-          "<li>Distritos administrativos</li>" +
+          "<li><b>Extensión / superficie</b></li>" +
+          "<li><b>Población</b></li>" +
+          "<li><b>Clima</b></li>" +
+          "<li><b>Presupuesto municipal</b></li>" +
+          "<li><b>Gobierno municipal</b></li>" +
+          "<li><b>Web oficial</b></li>" +
+          "<li><b>Densidade / demografía</b></li>" +
+          "<li><b>Distritos administrativos</b></li>" +
           "</ol>",
         ].join("\n"),
         cta: "Comenzar o piloto",
