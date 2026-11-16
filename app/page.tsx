@@ -241,42 +241,68 @@ export default function Home() {
       {/* Ubicación / VIGO + mapa */}
       <section className="relative mx-auto max-w-6xl px-6 py-16">
         <div
-          className={`rounded-2xl border p-8 ${cardCls} ${
-            isDark ? "bg-gradient-to-b from-slate-900 to-slate-950" : "bg-white"
+          className={`overflow-hidden rounded-2xl border ${
+            isDark ? "border-slate-800 bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800" : "border-slate-200 bg-white"
           }`}
         >
-          <div className="grid gap-8 md:grid-cols-2">
+          <div className="grid gap-6 p-6 md:grid-cols-2 md:gap-8 md:p-8">
             <div>
-              <h2 className={`text-2xl font-bold ${headingCls}`}>VIGO</h2>
-              <p className={`mt-2 text-lg font-medium ${bodyCls}`}>
-                CHESS AI AGENCY · AI · Innovation · Execution
+              <p className={`text-xs font-semibold uppercase tracking-wider ${isDark ? "text-brand-300" : "text-brand-600"}`}>
+                A cidade
               </p>
-              <p className={`mt-4 text-sm leading-relaxed ${bodyCls}`}>
-                Plataforma multiagente de Inteligencia Artificial para servizos públicos municipais.
-                Demo con agentes especializados, RAG con citas, multilingüe (galego/español/english).
+              <h2 className={`mt-2 text-2xl font-semibold md:text-3xl ${headingCls}`}>
+                Vigo, a capital da cultura galega
+              </h2>
+              <p className={`mt-3 text-sm leading-relaxed ${bodyCls}`}>
+                <a href="https://maps.google.com/?q=Praza+do+Rei+Vigo">
+                  📍 Praza do Rei, 1 — 36202 Vigo, Pontevedra, Galicia
+                </a>
               </p>
-              <p className={`mt-4 text-sm ${mutedCls}`}>
-                📍 Praza do Rei, 1 — 36202 Vigo, Pontevedra, Galicia
-              </p>
-            </div>
-            <div className="overflow-hidden rounded-xl border border-slate-300 dark:border-slate-700">
-              <iframe
-                title="Mapa de Vigo"
-                src="https://maps.google.com/maps?q=42.2406,-8.7207&z=14&output=embed"
-                className="h-64 w-full border-0 md:h-96"
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
-            </div>
-            <div className="md:col-span-2">
               <a
                 href="https://www.google.com/maps?q=42.2406,-8.7207&z=14"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-brand-500 hover:text-brand-600 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-200"
+                className={`mt-4 inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-medium transition ${linkCls}`}
               >
-                🗺️ Abrir mapa en pantalla completa (Google Maps)
+                🗺️ Mapa · Praza do Rei, 1
               </a>
+            </div>
+            <div className={`overflow-hidden rounded-xl border ${isDark ? "border-slate-700" : "border-slate-300"}`}>
+              <iframe
+                title="Mapa de Vigo"
+                src="https://maps.google.com/maps?q=42.2406,-8.7207&z=14&output=embed"
+                className="h-56 w-full border-0 md:h-72"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
+          </div>
+          <div className={`border-t p-6 md:p-8 ${isDark ? "border-slate-800" : "border-slate-200"}`}>
+            <p className={`text-xs font-semibold uppercase tracking-wider ${mutedCls}`}>
+              <a href="https://gl.wikipedia.org/wiki/Vigo" className={mutedCls}>
+                Interese sobre a cidade (fonte Wikipedia):
+              </a>
+            </p>
+            <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
+              {[
+                "Extensión / superficie",
+                "Población",
+                "Clima",
+                "Presupuesto municipal",
+                "Gobierno municipal",
+                "Web oficial",
+                "Densidade / demografía",
+                "Distritos administrativos",
+              ].map((f) => (
+                <div
+                  key={f}
+                  className={`rounded-lg border px-3 py-2 text-xs ${
+                    isDark ? "border-slate-800 bg-slate-900/60 text-slate-300" : "border-slate-200 bg-slate-50 text-slate-700"
+                  }`}
+                >
+                  <b>{f}</b>
+                </div>
+              ))}
             </div>
           </div>
         </div>
