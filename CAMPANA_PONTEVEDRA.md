@@ -120,6 +120,30 @@ Si no responden a los cuatro, se archiva y se reintenta en tres meses. Sin excep
 
 ## 8. Plantillas
 
+### 8.0 Cómo enviar y contestar (Gmail + firma)
+
+Los correos de la campaña se envían desde `chessagencyai@gmail.com`, con el nombre visible **CHESS AI AGENCY** y la firma de `FIRMA_GMAIL.html`. No hace falta dominio propio para empezar: lo que sí hace falta es que el correo parezca de una empresa, no de una persona improvisando.
+
+**Pasos, una sola vez (5 minutos):**
+
+1. Gmail → ⚙️ **Configuración** → **General** → **Firma** → Crear.
+2. Abre `FIRMA_GMAIL.html` en el navegador, selecciona todo (Ctrl+A), copia y pega en la caja de firma.
+3. En **Cuentas e importación** → «Enviar mensajes como» → edita tu dirección y pon como nombre: `Roberto Páramos · CHESS AI AGENCY`.
+4. Activa la firma por defecto para nuevos correos **y** para respuestas.
+
+**Lo que ya está automatizado (no lo toques):**
+
+| Elemento | Valor |
+|---|---|
+| Remitente de los avisos de la landing | `CHESS AI AGENCY <leads@ajedrezpremium.com>` |
+| Responder a un aviso interno | va directo al correo del concello |
+| Responder al acuse automático | va a `chessagencyai@gmail.com` |
+| Dominio | `ajedrezpremium.com`, verificado en Resend (SPF + DKIM) |
+
+**Regla de oro:** cuando contestes a un concello, responde **desde el aviso interno**, no crees un correo nuevo. Así el hilo conserva el asunto que ya leyó y llega con `Re:` delante, que es la señal más fuerte de que hay una conversación y no un envío masivo.
+
+**Cuando quieras dar el salto** (`hola@chessagencyai.com` o `leads@ajedrezpremium.com` como buzón real): se cambia `LEAD_NOTIFY_EMAIL` y la firma, sin tocar código. Los correos automáticos ya salen del dominio verificado.
+
 ### 8.1 Correo inicial (gallego)
 
 > **Asunto:** Un asistente de IA para o Concello de [nome], en 6 semanas
