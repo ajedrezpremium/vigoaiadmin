@@ -77,6 +77,8 @@ interface LayoutOptions {
   body: string;
   legal: string;
   titleTag: string;
+  role?: string;
+  somos?: string;
 }
 
 function layout(o: LayoutOptions): string {
@@ -131,10 +133,11 @@ function layout(o: LayoutOptions): string {
         <div style="font:bold 14px/1.4 ${FONT};color:#ffffff;">${esc(FROM_NAME)}</div>
         <div style="font:12px/1.6 ${FONT};color:#94a3b8;margin-top:2px;">AI · Innovation · Execution</div>
         <div style="font:13px/1.7 ${FONT};color:#cbd5e1;margin-top:10px;">
-          ${esc(OWNER)} &nbsp;·&nbsp;
+          ${esc(OWNER)}${o.role ? ` &nbsp;·&nbsp; ${esc(o.role)}` : ""} &nbsp;·&nbsp;
           <a href="${PHONE_HREF}" style="color:#cbd5e1;text-decoration:none;">${esc(PHONE)}</a> &nbsp;·&nbsp;
           <a href="mailto:${MAIL}" style="color:#cbd5e1;text-decoration:none;">${esc(MAIL)}</a>
         </div>
+        ${o.somos ? `<div style="font:13px/1.7 ${FONT};margin-top:4px;"><a href="${esc(o.somos)}" style="color:#93b4fd;text-decoration:none;">${esc(o.somos)}</a></div>` : ""}
         <div style="font:13px/1.7 ${FONT};margin-top:4px;">
           <a href="${LANDING}" style="color:#93b4fd;text-decoration:none;">vigo-ai-demo.vercel.app/administracion-local</a>
         </div>
@@ -349,25 +352,6 @@ export function finalEmail(lead: LeadInput): { subject: string; html: string; te
     ? `Proposta de pilot · ${lead.concello}`
     : `Proposta de piloto · ${lead.concello}`;
 
-  const mapsUrl = "https://maps.google.com/?q=Praza+do+Rei+Vigo";
-  const mapsEmbed = "https://maps.google.com/maps?q=Praza+do+Rei+Vigo&z=14&ie=UTF8&iwloc=&output=embed";
-  const wikiUrl = es ? "https://es.wikipedia.org/wiki/Vigo" : "https://gl.wikipedia.org/wiki/Vigo";
-  const ciudadAddr = "📍 Praza do Rei, 1 — 36202 Vigo, Pontevedra, Galicia";
-  const ciudadT = es ? "Tarjeta sobre la ciudad:" : "Tarxada sobre a cidade:";
-  const ciudadFactsT = es
-    ? "Interés sobre la ciudad (fuentes"
-    : "Interese sobre a cidade (fonte";
-  const facts = [
-    "Extensión / superficie",
-    "Población",
-    "Clima",
-    "Presupuesto municipal",
-    "Gobierno municipal",
-    "Web oficial",
-    es ? "Densidad / demografía" : "Densidade / demografía",
-    "Distritos administrativos",
-  ];
-
   const intro = es
     ? "Estimados/as responsables del Ayuntamiento de Vigo:"
     : "Estimados/as responsables do Concello de Vigo:";
@@ -384,7 +368,7 @@ export function finalEmail(lead: LeadInput): { subject: string; html: string; te
         ["Ciudadanía", "información y orientación sobre servicios, trámites, actividades y recursos municipales."],
       ]
     : [
-        ["Persoal municipal", "asistencia na consulta de documentación, normativa, elaboración de informes, redacción de borradores e transcripción de reunións."],
+        ["Persoal municipal", "asistencia na consulta de documentación, normativa, elaboración de informes, redacción de borradores e transcrición de reunións."],
         ["Empresas e provedores", "acceso máis áxil á información pública, procedementos, contratación e servizos municipais."],
         ["Cidadanía", "información e orientación sobre servizos, trámites, actividades e recursos municipais."],
       ];
@@ -420,21 +404,23 @@ export function finalEmail(lead: LeadInput): { subject: string; html: string; te
       ];
   const seg = es
     ? "El proyecto se incorpora con criterios de seguridad, protección de datos (RGPD), adecuación al Esquema Nacional de Seguridad (ENS) y al Reglamento Europeo de Inteligencia Artificial (AI Act), según el alcance y los requisitos aplicables."
-    : "O proxecto incorpórase con criterios de segureza, protección de datos (RGPD), adecuación ao Esquema Nacional de Seguridade (ENS) e ao Regulamento Europeo de Intelixencia Artificial (AI Act), segundo o alcance e os requisitos aplicables.";
+    : "O proxecto incorporarase con criterios de seguridade, protección de datos (RGPD), adecuación ao Esquema Nacional de Seguridade (ENS) e ao Regulamento Europeo de Intelixencia Artificial (AI Act), segundo o alcance e os requisitos aplicables.";
   const cierre = es
     ? "Al finalizar, el Concello dispondrá de una evaluación de los resultados y de una propuesta de posibles fases de ampliación. La continuidad será una decisión municipal, sin compromiso de permanencia."
     : "Ao finalizar, o Concello disporá dunha avaliación dos resultados e dunha proposta de posibles fases de ampliación. A continuidade será unha decisión municipal, sen compromiso de permanencia.";
   const demoT = es ? "Conozca la propuesta" : "Coñeza a proposta";
   const demo = es
-    ? "Puede acceder a la presentación interactiva y conocer una demostración del proyecto en:"
+    ? "Puede acceder a la presentación interactiva y conocer una demostración del proyecto en esta ligazón:"
     : "Pode acceder á presentación interactiva e coñecer unha demostración do proxecto nesta ligazón:";
-  const demoUrl = `${SITE}/`;
+  const demoUrl = `${SITE}/administracion-local`;
   const cierra2 = es
-    ? "Nos gustaría tener la oportunidad de realizar una breve presentación y valorar conjuntamente una primera área de aplicación en el Ayuntamiento de Vigo."
+    ? "Nos gustaría tener la oportunidad de realizar una breve presentación y valorar conjuntamente una primera área de aplicación en el Concello de Vigo."
     : "Gustaríanos ter a oportunidade de realizar unha breve presentación e valorar conxuntamente unha primeira área de aplicación no Concello de Vigo.";
   const cierra3 = es
     ? "Agradecemos su atención y quedamos a su disposición."
     : "Agradecemos a súa atención e quedamos á súa disposición.";
+  const atentamente = "Atentamente,";
+  const role = es ? "Dirección de proyectos" : "Dirección de proxectos";
 
   const P = "margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;";
   const H = "margin:18px 0 0;font:16px/1.4 Arial,Helvetica,sans-serif;color:#172052;";
@@ -460,27 +446,17 @@ export function finalEmail(lead: LeadInput): { subject: string; html: string; te
     `<p style='${P}'><a href='${demoUrl}' style='color:#2550eb;text-decoration:none;'>${demoUrl}</a></p>`,
     `<p style='${P}'>${cierra2}</p>`,
     `<p style='${P}'>${cierra3}</p>`,
-    `<p style='${H}'><b>${ciudadT}</b></p>`,
-    `<p style='margin:8px 0 0;font:14px/1.6 Arial,Helvetica,sans-serif;color:#334155;'><a href='${mapsUrl}' style='color:#2550eb;text-decoration:none;'>${ciudadAddr}</a></p>`,
-    `<img src='${mapsEmbed}' width='552' alt='Mapa de Vigo — Praza do Rei 1' style='display:block;width:100%;max-width:552px;height:auto;border:0;outline:none;text-decoration:none;margin:10px 0;' />`,
-    `<p style='margin:12px 0 0;font:14px/1.6 Arial,Helvetica,sans-serif;color:#334155;'>${ciudadFactsT} <a href='${wikiUrl}' style='color:#2550eb;text-decoration:none;'>Wikipedia</a>):</p>`,
-    `<ol style='margin:10px 0 0;padding-left:20px;font:13px/1.8 Arial,Helvetica,sans-serif;color:#475569;'>${facts.map((f) => `<li><b>${f}</b></li>`).join("")}</ol>`,
+    `<p style='margin:18px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'>${atentamente}</p>`,
   ].join("\n");
 
   const copy = {
-    cta: es ? "Ver la presentación" : "Ver a presentación",
-    note: es
-      ? "Sin compromiso · Sin permanencia · Con datos del concello · Con métricas acordadas por escrito."
-      : "Sen compromiso · Sen permanencia · Con datos do concello · Con métricas acordadas por escrito.",
     legal: es
-      ? "Proposta comercial CHESS AI AGENCY · VIGO AI ADMINISTRATION · Piloto 6 semanas · 12.500 EUR · Quienes somos: https://chess-ai-agency.vercel.app/nosotros.html · 29 proxectos en curso."
-      : "Proposta comercial CHESS AI AGENCY · VIGO AI ADMINISTRATION · Piloto 6 semanas · 12.500 € · Quen somos: https://chess-ai-agency.vercel.app/nosotros.html · 29 proxectos en curso.",
+      ? "Proposta comercial: VIGO AI ADMINISTRATION · Piloto de 6 semanas · 12.500 EUR · Quienes somos: https://chess-ai-agency.vercel.app/nosotros.html · 29 proxectos en curso."
+      : "Proposta comercial: VIGO AI ADMINISTRATION · Piloto de 6 semanas · 12.500 € · Quen somos: https://chess-ai-agency.vercel.app/nosotros.html · 29 proxectos en curso.",
     preheader: es
       ? "Piloto de 6 semanas con métricas acordadas. Sin compromiso."
       : "Piloto de 6 semanas con métricas acordadas. Sen compromiso.",
   };
-
-  const fullBody = `${body}\n${button(demoUrl, copy.cta)}\n<p style="margin:18px 0 0;font:13px/1.6 Arial,Helvetica,sans-serif;color:#94a3b8;">${esc(copy.note)}</p>`;
 
   const text = [
     `Proposta comercial — ${lead.concello}`,
@@ -515,19 +491,17 @@ export function finalEmail(lead: LeadInput): { subject: string; html: string; te
     cierra2,
     cierra3,
     "",
-    ciudadT,
-    ciudadAddr,
-    mapsUrl,
-    ciudadFactsT,
-    "Wikipedia):",
-    ...facts.map((f) => `- ${f}`),
+    atentamente,
     "",
-    copy.cta,
-    copy.note,
+    FROM_NAME,
+    "AI · Innovation · Execution",
     "",
-    `${FROM_NAME}`,
-    `${OWNER}`,
-    `${PHONE} · ${MAIL}`,
+    OWNER,
+    role,
+    `Tel. ${PHONE}`,
+    MAIL,
+    "https://chess-ai-agency.vercel.app/nosotros.html",
+    "",
     LANDING,
     "",
     copy.legal,
@@ -541,11 +515,13 @@ export function finalEmail(lead: LeadInput): { subject: string; html: string; te
       kicker: es ? "Proposta de pilot" : "Proposta de piloto",
       title: "VIGO AI ADMINISTRATION",
       subtitle: es
-        ? `Piloto para el Ayuntamiento de ${lead.concello} · 12.500 EUR · 6 semanas`
-        : `Piloto para o Concello de ${lead.concello} · 12.500 € · 6 semanas`,
-      body: fullBody,
+        ? "Inteligencia Artificial al servicio de la Administración local."
+        : "Intelixencia Artificial ao servizo da Administración local.",
+      body,
       legal: copy.legal,
       titleTag: subject,
+      role,
+      somos: "https://chess-ai-agency.vercel.app/nosotros.html",
     }),
     text,
   };
@@ -568,129 +544,144 @@ export function firstContactEmail(lead: LeadInput): { subject: string; html: str
   const kicker = es ? "IA PARA LA ADMINISTRACIÓN LOCAL" : "IA PARA A ADMINISTRACIÓN LOCAL";
   const title = "CHESS AI AGENCY";
   const subtitle = es
-    ? "Inteligencia Artificial para la Administración Local"
-    : "Intelixencia Artificial para a Administración Local";
+    ? "Inteligencia Artificial para transformar la gestión municipal y mejorar la atención a la ciudadanía."
+    : "Intelixencia Artificial para transformar a xestión municipal e mellorar a atención á cidadanía.";
   const intro = es
-    ? "Un nuevo modo de trabajar, gestionar y atender a la ciudadanía."
-    : "Un novo xeito de traballar, xestionar e atender á cidadanía.";
-  const seccionOportunidad = es ? "La oportunidad:" : "A oportunidade:";
-  const oportunidad = es
-    ? "Los concellos gestionan diariamente grandes volúmenes de información, documentación, consultas y trámites. El personal municipal dedica una parte importante de su tiempo a tareas administrativas que podrían ser más ágiles, eficientes e inteligentes."
-    : "Os concellos xestionan diariamente grandes volumes de información, documentación, consultas e trámites. O persoal municipal dedica unha parte importante do seu tempo a tarefas administrativas que poderían ser máis áxiles, eficientes e intelixentes.";
-  const ia = es
-    ? "La Inteligencia Artificial permite dar un paso adelante en esta transformación."
-    : "A Intelixencia Artificial permite dar un paso adiante nesta transformación.";
-  const seccionPropuesta = es ? "Nuestra propuesta:" : "A nosa proposta:";
-  const proposta = es
-    ? "En CHESS AI AGENCY desarrollamos soluciones profesionales de Inteligencia Artificial para la Administración Local, mediante una arquitectura de agentes especializados que colaboran entre sí."
-    : "En CHESS AI AGENCY desenvolvemos solucións profesionais de Inteligencia Artificial para a Administración Local, mediante unha arquitectura de axentes especializados que colaboran entre si.";
-  const seccionPlataforma = es ? "Una plataforma capaz de:" : "Unha plataforma capaz de:";
-  const soluciones: Solucion[] = [
-    [
-      "Información municipal",
-      es
-        ? "consultar documentación, normativa e información pública con fuentes de referencia."
-        : "consultar documentación, normativa e información pública con fontes de referencia.",
-    ],
-    [
-      "Tramitación administrativa",
-      es
-        ? "facilitar la localización de documentos y la preparación de borradores."
-        : "facilitar a localización de documentos e a preparación de borradores.",
-    ],
-    [
-      "Asistencia al personal",
-      es
-        ? "resumir expedientes, elaborar informes y optimizar tareas habituales."
-        : "resumir expedientes, elaborar informes e optimizar tarefas habituais.",
-    ],
-    [
-      "Atención ciudadana",
-      es
-        ? "responder consultas y facilitar el acceso a la información municipal."
-        : "responder consultas e facilitar o acceso á información municipal.",
-    ],
-    [
-      "Empresa y comercio",
-      es
-        ? "ofrecer información y asistencia a empresas, autónomos y proveedores."
-        : "ofrecer información e asistencia a empresas, autónomos e provedores.",
-    ],
-    [
-      "Servicios municipales",
-      es
-        ? "apoyar las áreas de urbanismo, cultura, servicios sociales y otras unidades."
-        : "apoiar as áreas de urbanismo, cultura, servizos sociais e outras unidades.",
-    ],
-  ];
-  const seccionHumana = es ? "Tecnología con supervisión humana:" : "Tecnoloxía con supervisión humana:";
-  const humana = es
-    ? "Una solución diseñada con criterios de seguridad, protección de datos y adecuación normativa (RGPD, ENS y AI Act), según el alcance de cada implantación. La IA ayuda, analiza y propone. Las decisiones, validaciones y firmas corresponden siempre al personal autorizado del Concello."
-    : "Unha solución deseñada con criterios de segureza, protección de datos e adecuación normativa (RGPD, ENS e AI Act), segundo o alcance de cada implantación. A IA axuda, analiza e propón. As decisións, validacións e sinaturas corresponden sempre ao persoal autorizado do Concello.";
-  const seccionPiloto = es ? "Una propuesta para su concejo:" : "UNHA PROPOSTA PARA O SEU CONCELLO:";
-  const piloto = es
-    ? "Proponemos conocer la solución mediante una demostración práctica, sin compromiso, y valorar posteriormente un posible proyecto piloto adaptado a las necesidades reales del municipio."
-    : "Propoñemos coñecer a solución mediante unha demostración práctica, sen compromiso, e valorar posteriormente un posible proxecto piloto adaptado ás necesidades reais do municipio.";
-  const cta = es ? "SOLICITAR DEMOSTRACIÓN" : "SOLICITAR UNHA DEMOSTRACIÓN";
+    ? "Una nueva forma de trabajar, gestionar y prestar servicios públicos."
+    : "Un novo xeito de traballar, xestionar e prestar servizos públicos.";
+  const oppT = es ? "La oportunidad" : "A oportunidade";
+  const opp1 = es
+    ? "Los concellos gestionan diariamente grandes volúmenes de información, documentación, consultas y trámites. El personal municipal dedica una parte importante de su tiempo a tareas administrativas y procesos repetitivos que podrían realizarse de manera más ágil y eficiente."
+    : "Os concellos xestionan diariamente grandes volumes de información, documentación, consultas e trámites. O persoal municipal dedica unha parte importante do seu tempo a tarefas administrativas e procesos repetitivos que poderían realizarse de maneira máis áxil e eficiente.";
+  const opp2 = es
+    ? "La Inteligencia Artificial abre una nueva oportunidad para optimizar recursos, mejorar la productividad y ofrecer servicios públicos más accesibles e inteligentes."
+    : "A Intelixencia Artificial abre unha nova oportunidade para optimizar recursos, mellorar a produtividade e ofrecer servizos públicos máis accesibles e intelixentes.";
+  const propT = es ? "Nuestra propuesta" : "A nosa proposta";
+  const prop1 = es
+    ? "En <b>CHESS AI AGENCY</b> desarrollamos soluciones profesionales de Inteligencia Artificial para la Administración Local, mediante una arquitectura avanzada de agentes especializados que colaboran entre sí."
+    : "En <b>CHESS AI AGENCY</b> desenvolvemos solucións profesionais de Inteligencia Artificial para a Administración Local, mediante unha arquitectura avanzada de axentes especializados que colaboran entre si.";
+  const prop2 = es ? "Una plataforma capaz de:" : "Unha plataforma capaz de:";
+  const soluciones: Array<[string, string]> = es
+    ? [
+        ["Información municipal", "consultar documentación, normativa e información pública con referencias a las fuentes."],
+        ["Gestión administrativa", "localizar documentos, analizar información y preparar borradores."],
+        ["Asistencia al personal", "resumir expedientes, elaborar informes y optimizar tareas habituales."],
+        ["Atención a la ciudadanía", "responder consultas y facilitar el acceso a la información y a los servicios municipales."],
+        ["Empresa y comercio", "ofrecer información y asistencia a empresas, autónomos y proveedores."],
+        ["Servicios municipales", "apoyar áreas como urbanismo, cultura, servicios sociales y otras unidades administrativas."],
+      ]
+    : [
+        ["Información municipal", "consultar documentación, normativa e información pública con referencias ás fontes."],
+        ["Xestión administrativa", "localizar documentos, analizar información e preparar borradores."],
+        ["Asistencia ao persoal", "resumir expedientes, elaborar informes e optimizar tarefas habituais."],
+        ["Atención á cidadanía", "responder consultas e facilitar o acceso á información e aos servizos municipais."],
+        ["Empresa e comercio", "ofrecer información e asistencia a empresas, autónomos e provedores."],
+        ["Servizos municipais", "apoiar áreas como urbanismo, cultura, servizos sociais e outras unidades administrativas."],
+      ];
+  const tecT = es ? "Tecnología avanzada con supervisión humana" : "Tecnoloxía avanzada con supervisión humana";
+  const tec1 = es
+    ? "Una solución desarrollada con criterios de seguridad, privacidad y protección de datos, contemplando la adecuación al RGPD, al Esquema Nacional de Seguridad (ENS) y al Reglamento Europeo de Inteligencia Artificial (AI Act), según los requisitos aplicables."
+    : "Unha solución desenvolvida con criterios de seguridade, privacidade e protección de datos, contemplando a adecuación ao RGPD, ao Esquema Nacional de Seguridade (ENS) e ao Regulamento Europeo de Inteligencia Artificial (AI Act), segundo os requisitos aplicables.";
+  const tec2 = es
+    ? "<b>La IA analiza, asiste y propone. Las personas supervisan, validan y deciden.</b>"
+    : "<b>A IA analiza, asiste e propón. As persoas supervisan, validan e deciden.</b>";
+  const tec3 = es
+    ? "Las decisiones administrativas, validaciones y firmas permanecen siempre bajo la responsabilidad del personal municipal autorizado."
+    : "As decisións administrativas, validacións e sinaturas permanecen sempre baixo a responsabilidade do persoal municipal autorizado.";
+  const uniT = es ? "Una propuesta para su Ayuntamiento" : "Unha proposta para o seu Concello";
+  const uni1 = es
+    ? "Proponemos conocer las posibilidades de la solución mediante una demostración práctica y sin compromiso."
+    : "Propoñemos coñecer as posibilidades da solución mediante unha demostración práctica e sen compromiso.";
+  const uni2 = es
+    ? "A partir de las necesidades identificadas, podremos valorar una implantación progresiva y un posible proyecto piloto adaptado a la realidad de cada municipio."
+    : "A partir das necesidades identificadas, poderemos valorar unha implantación progresiva e un posible proxecto piloto adaptado á realidade de cada municipio.";
+  const cta = es ? "SOLICITE UNA DEMOSTRACIÓN" : "SOLICITE UNHA DEMOSTRACIÓN";
   const note = es
-    ? "Sin compromiso · Adaptable a cada Concello · Implantación progresiva."
+    ? "Sin compromiso · Adaptable a cada Ayuntamiento · Implantación progresiva."
     : "Sen compromiso · Adaptable a cada Concello · Implantación progresiva.";
+  const tagline = es
+    ? "Soluciones profesionales de Inteligencia Artificial para la Administración Local."
+    : "Solucións profesionais de Intelixencia Artificial para a Administración Local.";
+  const role = es ? "Dirección de proyectos" : "Dirección de proxectos";
+  const demoUrl = `${SITE}/demo`;
   const legal = es
-    ? "Proposta comercial CHESS AI AGENCY · Solución de IA para la Administración Local · Demostración sin compromiso."
-    : "Proposta comercial CHESS AI AGENCY · Solución de IA para a Administración Local · Demostración sen compromiso.";
+    ? "Proposta comercial CHESS AI AGENCY · IA para la Administración Local · Demostración sin compromiso · Quienes somos: https://chess-ai-agency.vercel.app/nosotros.html · 29 proxectos en curso."
+    : "Proposta comercial CHESS AI AGENCY · IA para a Administración Local · Demostración sen compromiso · Quen somos: https://chess-ai-agency.vercel.app/nosotros.html · 29 proxectos en curso.";
   const preheader = es
-    ? "Una solución de IA para la Administración Local. Sin compromiso."
-    : "Unha solución de IA para a Administración Local. Sen compromiso.";
+    ? "Unha demostración práctica e sen compromiso."
+    : "Unha demostración práctica e sen compromiso.";
+
+  const P = "margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;";
+  const H = "margin:18px 0 0;font:16px/1.4 Arial,Helvetica,sans-serif;color:#172052;";
+  const UL = "margin:10px 0 0;padding-left:20px;font:15px/1.8 Arial,Helvetica,sans-serif;color:#334155;";
 
   const body = [
-    `<p style='margin:0;font:16px/1.6 Arial,Helvetica,sans-serif;color:#334155;'>${esc(intro)}</p>`,
-    `<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'>${esc(seccionOportunidad)}</p>`,
-    `<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'>${esc(oportunidad)}</p>`,
-    `<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'>${esc(ia)}</p>`,
-    `<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'><b>${esc(seccionPropuesta)}</b></p>`,
-    `<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'>${esc(proposta)}</p>`,
-    `<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'>${esc(seccionPlataforma)}</p>`,
-    `<ul style='margin:10px 0 0;padding-left:20px;font:15px/1.8 Arial,Helvetica,sans-serif;color:#334155;'>` +
-      soluciones.map(([t, d]) => `<li><b>${t}:</b> ${d}</li>`).join("") +
-      `</ul>`,
-    `<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'><b>${esc(seccionHumana)}</b></p>`,
-    `<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'>${esc(humana)}</p>`,
-    `<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'>${esc(seccionPiloto)}</p>`,
-    `<p style='margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;'>${esc(piloto)}</p>`,
+    `<p style='margin:0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#475569;font-style:italic;'>${esc(intro)}</p>`,
+    `<p style='${H}'><b>${esc(oppT)}</b></p>`,
+    `<p style='${P}'>${esc(opp1)}</p>`,
+    `<p style='${P}'>${esc(opp2)}</p>`,
+    `<p style='${H}'><b>${esc(propT)}</b></p>`,
+    `<p style='${P}'>${prop1}</p>`,
+    `<p style='${P}'>${esc(prop2)}</p>`,
+    `<ul style='${UL}'>${soluciones.map(([t, d]) => `<li><b>${esc(t)}:</b> ${esc(d)}</li>`).join("")}</ul>`,
+    `<p style='${H}'><b>${esc(tecT)}</b></p>`,
+    `<p style='${P}'>${esc(tec1)}</p>`,
+    `<p style='${P}'>${tec2}</p>`,
+    `<p style='${P}'>${esc(tec3)}</p>`,
+    `<p style='${H}'><b>${esc(uniT)}</b></p>`,
+    `<p style='${P}'>${esc(uni1)}</p>`,
+    `<p style='${P}'>${esc(uni2)}</p>`,
+    button(demoUrl, cta),
+    `<p style="margin:14px 0 0;font:13px/1.6 Arial,Helvetica,sans-serif;color:#94a3b8;font-style:italic;">${esc(note)}</p>`,
+    `<p style="margin:18px 0 0;font:13px/1.6 Arial,Helvetica,sans-serif;color:#64748b;font-style:italic;">${esc(tagline)}</p>`,
   ].join("\n");
-
-  const fullBody = `${body}\n${button(`${SITE}/demo`, cta)}\n<p style="margin:18px 0 0;font:13px/1.6 Arial,Helvetica,sans-serif;color:#94a3b8;">${esc(note)}</p>`;
 
   const text = [
     `Proposta comercial — ${lead.concello}`,
     "",
-    es ? "Solución de IA para la Administración Local · Demostración sin compromiso." : "Solución de IA para a Administración Local · Demostración sen compromiso.",
+    subtitle,
     "",
     intro,
     "",
-    seccionOportunidad,
-    oportunidad,
+    `${oppT}:`,
+    opp1,
     "",
-    ia,
+    opp2,
     "",
-    seccionPropuesta,
-    proposta,
+    `${propT}:`,
+    prop1.replace(/<[^>]+>/g, ""),
     "",
-    seccionPlataforma,
+    prop2,
     ...soluciones.map(([t, d]) => `- ${t}: ${d}`),
     "",
-    seccionHumana,
-    humana,
+    `${tecT}:`,
+    tec1,
     "",
-    seccionPiloto,
-    piloto,
+    tec2.replace(/<[^>]+>/g, ""),
+    "",
+    tec3,
+    "",
+    `${uniT}:`,
+    uni1,
+    "",
+    uni2,
     "",
     cta,
+    demoUrl,
+    "",
     note,
     "",
-    `${FROM_NAME}`,
-    `${OWNER}`,
-    `${PHONE} · ${MAIL}`,
+    tagline,
+    "",
+    FROM_NAME,
+    "AI · Innovation · Execution",
+    "",
+    OWNER,
+    role,
+    `Tel. ${PHONE}`,
+    MAIL,
+    "https://chess-ai-agency.vercel.app/nosotros.html",
+    "",
     LANDING,
     "",
     legal,
@@ -704,9 +695,11 @@ export function firstContactEmail(lead: LeadInput): { subject: string; html: str
       kicker,
       title,
       subtitle,
-      body: fullBody,
+      body,
       legal,
       titleTag: subject,
+      role,
+      somos: "https://chess-ai-agency.vercel.app/nosotros.html",
     }),
     text,
   };

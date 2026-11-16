@@ -149,23 +149,26 @@ describe("finalEmail", () => {
     idioma: "gl",
   } as const;
 
-  it("es la version final del piloto con propuesta mejorada", () => {
+  it("es la proposta de piloto para Vigo con solucion, supervisor humana y firma completa", () => {
     const { html, subject, text } = finalEmail(lead);
     expect(subject).toContain("Concello de Vigo");
     expect(html).toContain("VIGO AI ADMINISTRATION");
     expect(html).toContain("12.500");
+    expect(html).toContain("Estimados/as responsables do Concello de Vigo");
+    expect(html).toContain("Intelixencia Artificial ao servizo da Administración local.");
+    expect(html).toContain("A IA axuda. As persoas deciden.");
+    expect(html).toContain("Un piloto práctico, medible e sen permanencia");
+    expect(html).toContain("Coñeza a proposta");
+    expect(html).toContain("Pode acceder á presentación interactiva");
     expect(html).toContain("https://vigo-ai-demo.vercel.app/administracion-local");
+    expect(html).toContain("Atentamente,");
+    expect(html).toContain("Dirección de proxectos");
     expect(html).toContain("https://chess-ai-agency.vercel.app/nosotros.html");
     expect(html).toContain("29 proxectos en curso");
     expect(html).toContain("CHESS AI AGENCY");
     expect(html).toContain("IA PARA CONCELLOS");
-    expect(html).toContain("Praza do Rei");
-    expect(html).toContain("maps.google.com/maps");
-    expect(html).toContain("Tarxada sobre a cidade");
-    expect(html).toContain("Interese sobre a cidade");
-    expect(html).toContain("Un piloto práctico, medible e sen permanencia");
-    expect(html).toContain("A IA axuda. As persoas deciden.");
-    expect(html).toContain("Coñeza a proposta");
+    expect(html).not.toContain("Tarxada sobre a cidade");
+    expect(html).not.toContain("maps.google.com/maps");
     expect(text).toContain("12.500 €");
     expect(text).toContain("https://chess-ai-agency.vercel.app/nosotros.html");
   });
@@ -184,17 +187,20 @@ describe("firstContactEmail", () => {
     idioma: "gl",
   } as const;
 
-  it("es el primer contacto sin nombrar el piloto, sin producto cerrado ni precio", () => {
+  it("es el primer contacto de los 61 concellos sin producto cerrado ni precio", () => {
     const { html, subject, text } = firstContactEmail(lead);
     expect(subject).toContain("Concello de Moaña");
     expect(html).toContain("CHESS AI AGENCY");
-    expect(html).toContain("IA PARA");
-    expect(html).toContain("SOLICITAR UNHA DEMOSTRACIÓN");
+    expect(html).toContain("IA PARA A ADMINISTRACIÓN LOCAL");
+    expect(html).toContain("SOLICITE UNHA DEMOSTRACIÓN");
     expect(html).toContain("https://vigo-ai-demo.vercel.app/demo");
     expect(html).toContain("A oportunidade");
     expect(html).toContain("A nosa proposta");
-    expect(html).toContain("Tecnoloxía con supervisión humana");
-    expect(html).toContain("UNHA PROPOSTA PARA O SEU CONCELLO:");
+    expect(html).toContain("Tecnoloxía avanzada con supervisión humana");
+    expect(html).toContain("Unha proposta para o seu Concello");
+    expect(html).toContain("A IA analiza, asiste e propón. As persoas supervisan, validan e deciden.");
+    expect(html).toContain("Solucións profesionais de Intelixencia Artificial para a Administración Local.");
+    expect(html).toContain("Dirección de proxectos");
     expect(html).not.toContain("12.500");
     expect(html).not.toContain("VIGO AI ADMINISTRATION");
     expect(text).not.toContain("<");
