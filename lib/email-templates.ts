@@ -610,7 +610,7 @@ export function firstContactEmail(lead: LeadInput): { subject: string; html: str
     ? "Soluciones profesionales de Inteligencia Artificial para la Administración Local."
     : "Solucións profesionais de Intelixencia Artificial para a Administración Local.";
   const role = es ? "Dirección de proyectos" : "Dirección de proxectos";
-  const demoUrl = `${CAMPAIGN_SITE}/ayuntamientos`;
+  const demoUrl = `${CAMPAIGN_SITE}/campana`;
   const campaignLanding = demoUrl;
   const legal = es
     ? "Proposta comercial CHESS AI AGENCY · IA para la Administración Local · Demostración sin compromiso · Quienes somos: https://chess-ai-agency.vercel.app/nosotros.html · 29 proxectos en curso."

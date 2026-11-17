@@ -5,6 +5,9 @@ const nextConfig = {
     return [
       { source: "/administracion-local", destination: "/ayuntamientos" },
       { source: "/demo", destination: "/" },
+      // La campaña usa /campana; aceptamos también la grafía con eñe y el inglés.
+      { source: "/campaña", destination: "/campana" },
+      { source: "/campaign", destination: "/campana" },
     ];
   },
   async headers() {

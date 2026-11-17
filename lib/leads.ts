@@ -94,6 +94,8 @@ export function validateLead(raw: unknown): ValidationResult {
   if (!consent) return { ok: false, error: "Precisamos o teu consentimento para responder." };
 
   const tramo = clean(body.tramo, 20);
+  // Origen permitido: la landing pública o la variante de campaña (/campana).
+  const orixe = body.orixe === "landing_campana" ? "landing_campana" : "landing_ayuntamientos";
   return {
     ok: true,
     lead: {
@@ -106,7 +108,7 @@ export function validateLead(raw: unknown): ValidationResult {
       interese: clean(body.interese, 80) || undefined,
       mensaxe: clean(body.mensaxe, 1_500) || undefined,
       idioma: clean(body.idioma, 5) || "gl",
-      orixe: "landing_ayuntamientos",
+      orixe,
       userAgent: clean(body.userAgent, 300) || undefined,
     },
   };
