@@ -326,7 +326,9 @@ Límite del día consumido: 10/10. Mañana no se envía nada a estos concellos; 
 
 ### 15.3 Dominio neutro de campaña
 
-Los correos de fase 1 enlazan a `https://ia-administracion-local.vercel.app/ayuntamientos`, no a `vigo-ai-demo.vercel.app`.
-Es un proyecto Vercel gemelo con el mismo código y las mismas variables. Hay que desplegar en los dos.
+Los correos de fase 1 enlazan a `https://ia-administracion-local.vercel.app/campana`, no a `vigo-ai-demo.vercel.app`.
 
-Pendiente: la landing sigue mostrando el bloque de precio (12.500 €) y la ficha de Vigo. Decidir si se publica una variante sin precio para campaña.
+Es un proyecto Vercel gemelo con el mismo codigo y las mismas variables. Hay que desplegar en los dos.
+
+La pagina `/campana` es la variante neutra de `/ayuntamientos`: sin marca de Vigo, sin precios, sin "piloto" ni plazos comerciales.
+El formulario registra el lead con `orixe = landing_campana` para distinguirlo del trafico organico.
