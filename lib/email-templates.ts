@@ -5,6 +5,8 @@
 import type { LeadInput } from "@/lib/leads";
 
 const SITE = "https://vigo-ai-demo.vercel.app";
+// Dominio neutro para la campaña: en fase 1 no debe verse "vigo" en el enlace.
+const CAMPAIGN_SITE = process.env.CAMPAIGN_SITE_URL || "https://ia-administracion-local.vercel.app";
 const LANDING = `${SITE}/ayuntamientos`;
 const LOGO = `${SITE}/logo-email.png`;
 
@@ -79,6 +81,9 @@ interface LayoutOptions {
   titleTag: string;
   role?: string;
   somos?: string;
+  siteUrl?: string;
+  siteLabel?: string;
+  logo?: string;
 }
 
 function layout(o: LayoutOptions): string {
@@ -104,7 +109,7 @@ function layout(o: LayoutOptions): string {
     <!-- Cabecera de marca -->
     <tr>
       <td bgcolor="${BRAND}" style="background:${BRAND};padding:26px 32px 22px;">
-        <img src="${LOGO}" width="248" height="62" alt="CHESS AI AGENCY"
+        <img src="${esc(o.logo ?? LOGO)}" width="248" height="62" alt="CHESS AI AGENCY"
              style="display:block;border:0;outline:none;text-decoration:none;width:248px;max-width:100%;height:auto;">
         <div style="height:10px;line-height:10px;font-size:0;">&nbsp;</div>
         <div style="font:13px/1.4 ${FONT};color:${BRAND_SOFT};">
@@ -139,7 +144,9 @@ function layout(o: LayoutOptions): string {
         </div>
         ${o.somos ? `<div style="font:13px/1.7 ${FONT};margin-top:4px;"><a href="${esc(o.somos)}" style="color:#93b4fd;text-decoration:none;">${esc(o.somos)}</a></div>` : ""}
         <div style="font:13px/1.7 ${FONT};margin-top:4px;">
-          <a href="${LANDING}" style="color:#93b4fd;text-decoration:none;">vigo-ai-demo.vercel.app/administracion-local</a>
+          <a href="${esc(o.siteUrl ?? LANDING)}" style="color:#93b4fd;text-decoration:none;">${esc(
+            o.siteLabel ?? "vigo-ai-demo.vercel.app/administracion-local"
+          )}</a>
         </div>
       </td>
     </tr>
@@ -538,7 +545,7 @@ type Solucion = [string, string];
 export function firstContactEmail(lead: LeadInput): { subject: string; html: string; text: string } {
   const es = lead.idioma === "es";
   const subject = es
-    ? `Proposta de demo · ${lead.concello}`
+    ? `Propuesta de demostración · ${lead.concello}`
     : `Proposta de demostración · ${lead.concello}`;
 
   const kicker = es ? "IA PARA LA ADMINISTRACIÓN LOCAL" : "IA PARA A ADMINISTRACIÓN LOCAL";
@@ -603,7 +610,8 @@ export function firstContactEmail(lead: LeadInput): { subject: string; html: str
     ? "Soluciones profesionales de Inteligencia Artificial para la Administración Local."
     : "Solucións profesionais de Intelixencia Artificial para a Administración Local.";
   const role = es ? "Dirección de proyectos" : "Dirección de proxectos";
-  const demoUrl = `${SITE}/demo`;
+  const demoUrl = `${CAMPAIGN_SITE}/ayuntamientos`;
+  const campaignLanding = demoUrl;
   const legal = es
     ? "Proposta comercial CHESS AI AGENCY · IA para la Administración Local · Demostración sin compromiso · Quienes somos: https://chess-ai-agency.vercel.app/nosotros.html · 29 proxectos en curso."
     : "Proposta comercial CHESS AI AGENCY · IA para a Administración Local · Demostración sen compromiso · Quen somos: https://chess-ai-agency.vercel.app/nosotros.html · 29 proxectos en curso.";
@@ -682,7 +690,7 @@ export function firstContactEmail(lead: LeadInput): { subject: string; html: str
     MAIL,
     "https://chess-ai-agency.vercel.app/nosotros.html",
     "",
-    LANDING,
+    campaignLanding,
     "",
     legal,
   ].join("\n");
@@ -700,6 +708,9 @@ export function firstContactEmail(lead: LeadInput): { subject: string; html: str
       titleTag: subject,
       role,
       somos: "https://chess-ai-agency.vercel.app/nosotros.html",
+      siteUrl: campaignLanding,
+      siteLabel: "ia-administracion-local.vercel.app/ayuntamientos",
+      logo: `${CAMPAIGN_SITE}/logo-email.png`,
     }),
     text,
   };

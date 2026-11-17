@@ -287,3 +287,46 @@ El coste real es tu tiempo: 4 horas al día durante dos semanas para la prospecc
 5. Revisar métricas el viernes y ajustar el mensaje.
 
 **Documento preparado por CHESS AI AGENCY · VIGO AI ADMINISTRATION · 15/11/2026**
+
+---
+
+## 15. Registro de envíos y criterio de buzón
+
+### 15.1 A qué dirección se escribe
+
+| Buzón | Cuándo | Motivo |
+|---|---|---|
+| `alcaldia@` / `gabinete.alcaldia@` | Primera opción | Decide o influye en el contrato menor; el correo llega a quien tiene la llave del presupuesto. |
+| `contacto@` / `info@` | Solo si no hay alcaldía verificada | Buzón general del concello: sirve, pero se mezcla con el registro de entrada ciudadano. |
+| `010@` (atención ciudadana) | Evitar salvo que sea el único | Enruta como solicitud ciudadana y suele morir en la cola de quejas. |
+| Informática / TI | Nunca en fase 1 | No decide compra; sirve en fase 3, cuando ya hay interés político. |
+
+Regla: un solo destinatario por concello en el primer contacto. Nada de enviar a tres buzones a la vez.
+
+### 15.2 Envío del 17/11/2026 (día 1)
+
+Remitente: `CHESS AI AGENCY <leads@ajedrezpremium.com>` · responder a `chessagencyai@gmail.com`.
+
+| Concello | Destinatario | Asunto | Resend |
+|---|---|---|---|
+| Vigo | 010@vigo.org | Proposta de piloto | 01a1e907 |
+| Pontevedra | contacto@pontevedra.gal | Proposta de demostración | 01a1e910-d65e |
+| Vilagarcía de Arousa | alcaldia@vilagarcia.es | Proposta de demostración | 01a1e910-f394 |
+| Redondela | alcaldia@redondela.gal | Proposta de demostración | 01a1e911-106b |
+| Cangas de Morrazo | alcaldia@cangas.gal | Proposta de demostración | 01a1e911-2d66 |
+| Marín | alcaldia@concellodemarin.es | Proposta de demostración | 01a1e911-4a4d |
+| Ponteareas | info@ponteareas.es | Proposta de demostración | 01a1e911-671d |
+| O Porriño | gabinete.alcaldia@oporrino.org | Proposta de demostración | 01a1e911-83f8 |
+| Lalín | lalin@lalin.org | Proposta de demostración | 01a1e911-a0d0 |
+| A Estrada | info@aestrada.gal | Proposta de demostración | 01a1e911-bdc8 |
+
+Los 10 con estado `delivered` en Resend. Copia de control a `gmparamos@gmail.com` (BCC en cada envío + copia del correo de Vigo).
+
+Límite del día consumido: 10/10. Mañana no se envía nada a estos concellos; toca teléfono el 20/11 (toque 2).
+
+### 15.3 Dominio neutro de campaña
+
+Los correos de fase 1 enlazan a `https://ia-administracion-local.vercel.app/ayuntamientos`, no a `vigo-ai-demo.vercel.app`.
+Es un proyecto Vercel gemelo con el mismo código y las mismas variables. Hay que desplegar en los dos.
+
+Pendiente: la landing sigue mostrando el bloque de precio (12.500 €) y la ficha de Vigo. Decidir si se publica una variante sin precio para campaña.

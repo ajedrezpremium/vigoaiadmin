@@ -193,7 +193,10 @@ describe("firstContactEmail", () => {
     expect(html).toContain("CHESS AI AGENCY");
     expect(html).toContain("IA PARA A ADMINISTRACIÓN LOCAL");
     expect(html).toContain("SOLICITE UNHA DEMOSTRACIÓN");
-    expect(html).toContain("https://vigo-ai-demo.vercel.app/demo");
+    expect(html).toContain("https://ia-administracion-local.vercel.app/ayuntamientos");
+    // Fase 1: ni Vigo, ni el producto, ni el piloto, ni el precio.
+    expect(html).not.toContain("vigo-ai-demo");
+    expect(html.toLowerCase()).not.toContain("vigo");
     expect(html).toContain("A oportunidade");
     expect(html).toContain("A nosa proposta");
     expect(html).toContain("Tecnoloxía avanzada con supervisión humana");

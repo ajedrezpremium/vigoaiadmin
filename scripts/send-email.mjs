@@ -34,6 +34,7 @@ const kind = arg("kind", "final");
 const idioma = arg("idioma", "gl") === "es" ? "es" : "gl";
 const concello = arg("concello", "Concello de Vigo");
 const replyTo = arg("reply-to", "chessagencyai@gmail.com");
+const bcc = arg("bcc", "");
 const subjectPrefix = arg("subject-prefix", "");
 
 if (!to) {
@@ -74,6 +75,7 @@ const payload = {
   text: mail.text,
   html: mail.html,
 };
+if (bcc) payload.bcc = bcc.split(",").map((s) => s.trim()).filter(Boolean);
 
 if (!commit) {
   console.log(
