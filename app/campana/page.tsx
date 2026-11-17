@@ -8,6 +8,16 @@ export const metadata: Metadata = {
   title: "IA para la Administración Local · CHESS AI AGENCY",
   description:
     "Asistencia de inteligencia artificial para el personal municipal: consultas con fuentes citadas, borradores de informes y transcripción de reuniones.",
+  keywords: [
+    "inteligencia artificial",
+    "administración local",
+    "ayuntamiento",
+    "concello",
+    "RGPD",
+    "ENS",
+    "AI Act",
+    "CHESS AI AGENCY",
+  ],
   robots: { index: false, follow: false },
 };
 

@@ -353,7 +353,10 @@ export function leadAckEmail(lead: LeadInput): { subject: string; html: string; 
 /* (texto mínimo: por qué debe contratar y arrancar el proyecto piloto) */
 /* ---------------------------------------------------------------- */
 
-export function finalEmail(lead: LeadInput): { subject: string; html: string; text: string } {
+export function finalEmail(
+  lead: LeadInput,
+  opts: { intro?: string } = {}
+): { subject: string; html: string; text: string } {
   const es = lead.idioma === "es";
   const subject = es
     ? `Propuesta de piloto · ${lead.concello}`
@@ -419,7 +422,7 @@ export function finalEmail(lead: LeadInput): { subject: string; html: string; te
   const demo = es
     ? "Puede acceder a la presentación interactiva y conocer una demostración del proyecto en esta ligazón:"
     : "Pode acceder á presentación interactiva e coñecer unha demostración do proxecto nesta ligazón:";
-  const demoUrl = `${SITE}/administracion-local`;
+  const demoUrl = `${SITE}/ayuntamientos`;
   const cierra2 = es
     ? "Nos gustaría tener la oportunidad de realizar una breve presentación y valorar conjuntamente una primera área de aplicación en el Concello de Vigo."
     : "Gustaríanos ter a oportunidade de realizar unha breve presentación e valorar conxuntamente unha primeira área de aplicación no Concello de Vigo.";
@@ -436,6 +439,13 @@ export function finalEmail(lead: LeadInput): { subject: string; html: string; te
   const body = [
     `<p style='margin:0;font:16px/1.6 Arial,Helvetica,sans-serif;color:#334155;'>${intro}</p>`,
     `<p style='${P}'>${saludo}</p>`,
+    ...(opts.intro
+      ? [
+          `<p style='margin:12px 0 0;padding:12px 14px;background:#eef2f7;border-left:3px solid #2550eb;font:15px/1.6 Arial,Helvetica,sans-serif;color:#334155;'>${esc(
+            opts.intro
+          )}</p>`,
+        ]
+      : []),
     `<p style='${P}'>${piloto}</p>`,
     `<ul style='${UL}'>${scopes.map(([t, d]) => `<li><b>${t}:</b> ${d}</li>`).join("")}</ul>`,
     `<p style='${H}'><b>${solT}</b></p>`,
@@ -472,6 +482,7 @@ export function finalEmail(lead: LeadInput): { subject: string; html: string; te
     "",
     saludo.replace(/<[^>]+>/g, ""),
     "",
+    ...(opts.intro ? [opts.intro, ""] : []),
     piloto.replace(/<[^>]+>/g, ""),
     ...scopes.map(([t, d]) => `- ${t}: ${d}`),
     "",

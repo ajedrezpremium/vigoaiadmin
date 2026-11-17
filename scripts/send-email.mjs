@@ -36,6 +36,7 @@ const concello = arg("concello", "Concello de Vigo");
 const replyTo = arg("reply-to", "chessagencyai@gmail.com");
 const bcc = arg("bcc", "");
 const subjectPrefix = arg("subject-prefix", "");
+const intro = arg("intro", "");
 
 if (!to) {
   console.error("Falta --to. Ejemplo: --to 010@vigo.org --kind final --commit");
@@ -64,7 +65,7 @@ const lead = {
   orixe: "campana",
 };
 
-const mail = kind === "first" ? firstContactEmail(lead) : finalEmail(lead);
+const mail = kind === "first" ? firstContactEmail(lead) : finalEmail(lead, { intro: intro || undefined });
 const subject = `${subjectPrefix}${mail.subject}`;
 
 const payload = {
