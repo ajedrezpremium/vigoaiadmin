@@ -13,20 +13,24 @@ interface SiteHeaderProps {
   onThemeChange?: (t: "light" | "dark") => void;
 }
 
-const NAV_ITEMS = [
-  { id: "inicio", icon: "🏛️", label: "Inicio" },
-  { id: "plataforma", icon: "🤖", label: "Plataforma" },
-  { id: "demo", icon: "💬", label: "Demo" },
-  { id: "seguridad", icon: "🔒", label: "Seguridad" },
-  { id: "precios", icon: "💰", label: "Precios" },
-];
+const NAV_LABELS: Record<string, { gl: string; es: string; en: string }> = {
+  inicio: { gl: "Inicio", es: "Inicio", en: "Home" },
+  plataforma: { gl: "Plataforma", es: "Plataforma", en: "Platform" },
+  demo: { gl: "Demo", es: "Demo", en: "Demo" },
+  seguridad: { gl: "Seguridade", es: "Seguridad", en: "Security" },
+  precios: { gl: "Prezos", es: "Precios", en: "Pricing" },
+};
 
-export default function SiteHeader({
-  lang,
-  onLangChange,
-  theme = "dark",
-  onThemeChange,
-}: SiteHeaderProps) {
+export default function SiteHeader({ lang, onLangChange, theme = "dark", onThemeChange }: SiteHeaderProps) {
+  const t = (key: string) => NAV_LABELS[key]?.[lang as "gl" | "es" | "en"] ?? key;
+  const navItems = [
+    { id: "inicio", icon: "🏛️" },
+    { id: "plataforma", icon: "🤖" },
+    { id: "demo", icon: "💬" },
+    { id: "seguridad", icon: "🔒" },
+    { id: "precios", icon: "💰" },
+  ];
+
   return (
     <header className="sticky top-0 z-40 border-b border-slate-800 bg-slate-950/80 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center gap-3 px-6 py-3">
@@ -44,15 +48,15 @@ export default function SiteHeader({
         </a>
 
         <nav className="ml-6 hidden items-center gap-1 md:flex" aria-label="Navegación principal">
-          {NAV_ITEMS.map((item) => (
+          {navItems.map((item) => (
             <a
               key={item.id}
               href={`#${item.id}`}
-              title={item.label}
+              title={t(item.id)}
               className="flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-sm text-slate-300 transition hover:bg-slate-800 hover:text-brand-200"
             >
               <span aria-hidden>{item.icon}</span>
-              <span className="hidden lg:inline">{item.label}</span>
+              <span className="hidden lg:inline">{t(item.id)}</span>
             </a>
           ))}
           <a
