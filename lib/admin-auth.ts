@@ -54,3 +54,14 @@ export function hasRole(auth: AdminAuthResult, required: "admin" | "editor" | "v
   const hierarchy: Record<string, number> = { viewer: 0, editor: 1, admin: 2 };
   return (hierarchy[auth.role] ?? 0) >= (hierarchy[required] ?? 0);
 }
+
+/**
+ * true cuando ADMIN_TOKEN no está configurado (o sigue con el valor de ejemplo)
+ * y por tanto el panel funciona en modo demostración sin autenticación real.
+ * Las rutas que envían correo deben cerrarse en ese caso: si no, cualquiera
+ * podría usar nuestro dominio verificado para enviar spam.
+ */
+export function isDemoAdminMode(): boolean {
+  const token = process.env.ADMIN_TOKEN;
+  return !token || token.startsWith("TU_TOKEN");
+}

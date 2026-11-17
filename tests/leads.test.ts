@@ -131,7 +131,7 @@ describe("plantillas de correo", () => {
     const { text } = leadAckEmail(lead);
     expect(text).toContain("Bo día, Ana Pérez:");
     expect(text).toContain("607 869 278");
-    expect(text).toContain("https://vigo-ai-demo.vercel.app/administracion-local");
+    expect(text).toContain("https://vigo-ai-demo.vercel.app/ayuntamientos");
     expect(text).not.toContain("<");
   });
 });
@@ -160,7 +160,7 @@ describe("finalEmail", () => {
     expect(html).toContain("Un piloto práctico, medible e sen permanencia");
     expect(html).toContain("Coñeza a proposta");
     expect(html).toContain("Pode acceder á presentación interactiva");
-    expect(html).toContain("https://vigo-ai-demo.vercel.app/administracion-local");
+    expect(html).toContain("https://vigo-ai-demo.vercel.app/ayuntamientos");
     expect(html).toContain("Atentamente,");
     expect(html).toContain("Dirección de proxectos");
     expect(html).toContain("https://chess-ai-agency.vercel.app/nosotros.html");

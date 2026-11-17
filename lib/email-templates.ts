@@ -5,7 +5,7 @@
 import type { LeadInput } from "@/lib/leads";
 
 const SITE = "https://vigo-ai-demo.vercel.app";
-const LANDING = `${SITE}/administracion-local`;
+const LANDING = `${SITE}/ayuntamientos`;
 const LOGO = `${SITE}/logo-email.png`;
 
 const BRAND = "#2550eb";
@@ -349,7 +349,7 @@ export function leadAckEmail(lead: LeadInput): { subject: string; html: string; 
 export function finalEmail(lead: LeadInput): { subject: string; html: string; text: string } {
   const es = lead.idioma === "es";
   const subject = es
-    ? `Proposta de pilot · ${lead.concello}`
+    ? `Propuesta de piloto · ${lead.concello}`
     : `Proposta de piloto · ${lead.concello}`;
 
   const intro = es

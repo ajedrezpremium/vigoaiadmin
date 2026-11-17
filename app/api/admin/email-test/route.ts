@@ -3,7 +3,7 @@
 // Protegido con ADMIN_TOKEN (x-admin-key), igual que el resto del panel.
 
 import { NextRequest, NextResponse } from "next/server";
-import { checkAdminAuth, hasRole } from "@/lib/admin-auth";
+import { checkAdminAuth, hasRole, isDemoAdminMode } from "@/lib/admin-auth";
 import { sendEmail } from "@/lib/leads";
 import { firstContactEmail, leadEmails } from "@/lib/email-templates";
 import type { LeadInput } from "@/lib/leads";
@@ -28,6 +28,14 @@ const SAMPLE: LeadInput = {
 };
 
 export async function POST(req: NextRequest) {
+  // Sin ADMIN_TOKEN real no hay autenticación posible: no se envía nada.
+  if (isDemoAdminMode()) {
+    return NextResponse.json(
+      { error: "Envío de correo desactivado: configura ADMIN_TOKEN en el entorno." },
+      { status: 503 }
+    );
+  }
+
   const auth = await checkAdminAuth(req);
   if (!hasRole(auth, "admin")) {
     return NextResponse.json({ error: "No autorizado" }, { status: 401 });

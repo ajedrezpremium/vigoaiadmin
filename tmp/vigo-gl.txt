@@ -1,0 +1,51 @@
+Proposta comercial — Concello de Vigo
+
+Estimados/as responsables do Concello de Vigo:
+
+Desde CHESS AI AGENCY, queremos presentarlles unha proposta de colaboración para explorar as posibilidades da Intelixencia Artificial na modernización e mellora dos servizos municipais.
+
+Propoñemos a implantación dun proxecto piloto de 6 semanas, cun investimento de 12.500 €, orientado a mellorar tres ámbitos fundamentais:
+- Persoal municipal: asistencia na consulta de documentación, normativa, elaboración de informes, redacción de borradores e transcrición de reunións.
+- Empresas e provedores: acceso máis áxil á información pública, procedementos, contratación e servizos municipais.
+- Cidadanía: información e orientación sobre servizos, trámites, actividades e recursos municipais.
+
+Unha solución de IA especializada
+A nosa proposta combina un motor central de Intelixencia Artificial cun equipo de axentes especializados en diferentes áreas da Administración: información pública, trámites, normativa, urbanismo, actividade empresarial, cultura e servizos sociais.
+
+O sistema permite consultar información con referencias ás fontes, preparar documentos e asistir ao persoal municipal nas súas tarefas habituais.
+
+A IA axuda. As persoas deciden. A supervisión, validación e sinatura dos documentos permanecen sempre baixo responsabilidade do persoal autorizado.
+
+Un piloto práctico, medible e sen permanencia
+Propoñemos comezar cunha área ou unidade municipal concreta, traballando con documentación e necesidades reais do Concello.
+Durante as seis semanas estableceranse obxectivos e indicadores para avaliar:
+- Redución dos tempos de consulta e xestión.
+- Mellora da produtividade administrativa.
+- Calidade e precisión das respostas.
+- Utilidade para o persoal e os usuarios dos servizos municipais.
+
+O proxecto incorporarase con criterios de seguridade, protección de datos (RGPD), adecuación ao Esquema Nacional de Seguridade (ENS) e ao Regulamento Europeo de Intelixencia Artificial (AI Act), segundo o alcance e os requisitos aplicables.
+
+Ao finalizar, o Concello disporá dunha avaliación dos resultados e dunha proposta de posibles fases de ampliación. A continuidade será unha decisión municipal, sen compromiso de permanencia.
+
+Coñeza a proposta
+Pode acceder á presentación interactiva e coñecer unha demostración do proxecto nesta ligazón:
+https://vigo-ai-demo.vercel.app/administracion-local
+
+Gustaríanos ter a oportunidade de realizar unha breve presentación e valorar conxuntamente unha primeira área de aplicación no Concello de Vigo.
+Agradecemos a súa atención e quedamos á súa disposición.
+
+Atentamente,
+
+CHESS AI AGENCY
+AI · Innovation · Execution
+
+Roberto Páramos
+Dirección de proxectos
+Tel. 607 869 278
+chessagencyai@gmail.com
+https://chess-ai-agency.vercel.app/nosotros.html
+
+https://vigo-ai-demo.vercel.app/administracion-local
+
+Proposta comercial: VIGO AI ADMINISTRATION · Piloto de 6 semanas · 12.500 € · Quen somos: https://chess-ai-agency.vercel.app/nosotros.html · 29 proxectos en curso.
