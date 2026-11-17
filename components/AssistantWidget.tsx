@@ -65,6 +65,9 @@ export default function AssistantWidget() {
   const [showHuman, setShowHuman] = useState(false);
   const [escalation, setEscalation] = useState<{ id: string; status: string } | null>(null);
   const [error, setError] = useState<string | null>(null);
+  // Errores de acciones (voz, copia, TTS) — se muestran aparte para no
+  // enmascararlos con el genérico «Hubo un problema al generar la respuesta».
+  const [actionError, setActionError] = useState<string | null>(null);
   const [conversationId, setConversationId] = useState<string | null>(null);
   const [expanded, setExpanded] = useState(false);
   const [lastQuery, setLastQuery] = useState<string | null>(null);
@@ -132,7 +135,7 @@ export default function AssistantWidget() {
   const speak = useCallback(
     (text: string, l: Lang) => {
       if (typeof window === "undefined" || !window.speechSynthesis) {
-        setError("Síntesis de voz no disponible en este navegador");
+        setActionError("Síntesis de voz no disponible en este navegador");
         return;
       }
       window.speechSynthesis.cancel();
@@ -154,6 +157,7 @@ export default function AssistantWidget() {
     const query = text.trim();
     if (!query || loading) return;
     setError(null);
+    setActionError(null);
     setInput("");
     setLastQuery(query);
     const history = messages.slice(1).map((m) => ({ role: m.role, content: m.content }));
@@ -224,7 +228,7 @@ export default function AssistantWidget() {
       setCopiedIdx(idx);
       setTimeout(() => setCopiedIdx(null), 2000);
     } catch {
-      setError("No se pudo copiar (permiso denegado)");
+      setActionError("No se pudo copiar (permiso denegado)");
     }
   }
 
@@ -257,12 +261,13 @@ export default function AssistantWidget() {
       | (new () => any)
       | undefined;
     if (!SR) {
-      setError(
+      setActionError(
         "Voz a texto no soportada en este navegador. Usa Chrome, Edge o Safari (Firefox no soporta Web Speech API). / Voice input not supported in this browser."
       );
       return;
     }
     setError(null);
+    setActionError(null);
     try {
       const rec = new SR();
       recognitionRef.current = rec;
@@ -277,20 +282,24 @@ export default function AssistantWidget() {
       rec.onerror = (e: any) => {
         setListening(false);
         if (e?.error === "not-allowed" || e?.error === "service-not-allowed") {
-          setError("Permiso de micrófono denegado. Habilítalo en la barra de direcciones del navegador.");
+          setActionError(
+            "Micrófono bloqueado. Pulsa el candado 🔒 de la barra de direcciones → Permisos del sitio → Micrófono → Permitir, y reintenta."
+          );
         } else if (e?.error === "no-speech") {
-          setError("No se detectó voz. Inténtalo de nuevo.");
+          setActionError("No se detectó voz. Acércate al micrófono e inténtalo de nuevo.");
+        } else if (e?.error === "audio-capture") {
+          setActionError("No se encontró ningún micrófono conectado.");
         } else if (e?.error === "network") {
-          setError("Error de red al reconocer voz. Revisa la conexión.");
+          setActionError("Error de red al reconocer voz. Revisa la conexión.");
         } else {
-          setError(`Error de voz: ${e?.error ?? "desconocido"}`);
+          setActionError(`Error de voz: ${e?.error ?? "desconocido"}`);
         }
       };
       rec.onend = () => setListening(false);
       rec.start();
     } catch {
       setListening(false);
-      setError("No se pudo iniciar el reconocimiento de voz.");
+      setActionError("No se pudo iniciar el reconocimiento de voz.");
     }
   }
 
@@ -526,6 +535,22 @@ export default function AssistantWidget() {
                 <div className="flex items-center gap-2 rounded-lg border border-red-500/40 bg-red-500/10 px-3 py-2 text-xs text-red-200">
                   <span className="inline-block h-2.5 w-2.5 animate-ping rounded-full bg-red-500" />
                   🎤 Escuchando… habla ahora
+                </div>
+              </div>
+            )}
+
+            {actionError && (
+              <div className="flex items-start gap-2 rounded-lg border border-amber-500/40 bg-amber-500/10 px-3 py-2 text-xs text-amber-200">
+                <span aria-hidden>⚠️</span>
+                <div className="flex-1">
+                  <p className="break-words leading-snug">{actionError}</p>
+                  <button
+                    type="button"
+                    onClick={() => setActionError(null)}
+                    className="mt-1.5 text-[11px] font-semibold text-amber-100/80 underline hover:text-amber-50"
+                  >
+                    Cerrar
+                  </button>
                 </div>
               </div>
             )}
