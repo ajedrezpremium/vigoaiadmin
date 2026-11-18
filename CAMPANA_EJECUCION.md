@@ -1,0 +1,168 @@
+# CAMPAÑA PROVINCIA DE PONTEVEDRA — EJECUCIÓN
+
+> Secuencia de contacto, embudo, presupuesto, legal, riesgos, registro de envíos y próximos pasos.
+
+## 7. Secuencia de contacto (4 toques)
+
+| Toque | Cuándo | Canal | Contenido |
+|---|---|---|---|
+| 1 | Día 0 | Correo | Presentación + demo + oferta de diagnóstico |
+| 2 | Día 3 | Teléfono | Confirmar recepción, buscar la persona correcta |
+| 3 | Día 7 | Correo | Caso de uso concreto para su tamaño de concello |
+| 4 | Día 14 | Correo | Cierre de cortesía: "¿lo dejo para el próximo trimestre?" |
+
+Si no responden a los cuatro, se archiva y se reintenta en tres meses. Sin excepciones.
+
+---
+
+
+## 9. Objeciones y respuestas
+
+| Objeción | Respuesta |
+|---|---|
+| "Xa temos Vigo25 AI" | "Vigo25 é un buscador e chatbot de cara ao cidadán. Isto é distinto: asistente interno para o persoal, con borradores e normativa. Non compite, complementa." |
+| "Non temos orzamento" | "Por iso o piloto é contrato menor. 4.900 € nun concello pequeno, con informe de resultados. Se non hai partida, axúdoche a xustificala." |
+| "Isto é seguro?" | "Os datos quedan na UE, con acordo de encargado de tratamento e análise RGPD, ENS e AI Act. Podo ensinarte o documento." |
+| "Como sei que funciona?" | "A demo está aberta. E o piloto mídese: horas aforradas, respostas con fonte, borradores validados. Se non se cumpre, non continúas." |
+| "Vou consultalo" | "Perfecto. Mándoche a hoja de una página e o venres volvo chamar. ¿Parece ben?" |
+
+---
+
+
+## 10. Embudo y objetivos
+
+| Etapa | Volumen | Conversión |
+|---|---|---|
+| Concellos contactados | 61 | — |
+| Respuestas | 18 | 30 % |
+| Conversaciones telefónicas | 12 | 20 % |
+| Demos realizadas | 8 | 13 % |
+| Propuestas enviadas | 5 | 8 % |
+| Pilotos firmados | 3 | 5 % |
+
+**Ingreso esperado:** 3 pilotos × 10.000 € de media = 30.000 € en 90 días.
+**Cartera 2027:** 10 municipios en implantación anual = 120.000–180.000 € recurrentes.
+
+---
+
+### 10.1 Circuito del lead (ya funcionando)
+
+```
+Landing /ayuntamientos → POST /api/leads → tabla public.leads
+                                        ↘ aviso interno a chessagencyai@gmail.com
+                                        ↘ acuse de recibo al concello, en su idioma
+```
+
+| Paso | Dónde | Qué ocurre |
+|---|---|---|
+| 1 | `/ayuntamientos` | El concello rellena el formulario (tramo A–D, interés, mensaje) con consentimiento |
+| 2 | `/api/leads` | Validación, honeypot y límite de 10 solicitudes/minuto por IP |
+| 3 | Supabase | Fila en `leads` con `estado = 'novo'` |
+| 4 | Correo | Aviso interno (responder va al concello) + acuse automático con la promesa de 24 h |
+| 5 | `/admin` | Botón «🏘️ Ver contactos de concellos»: email, teléfono, tramo e interés |
+
+**Estados del lead:** `novo` → `contactado` → `reunion` → `proposta` → `pechado` / `descartado`.
+
+**Regla de respuesta:** el acuse ya promete 24 horas laborables. Si un lead entra un viernes, se contesta el lunes antes de las 10:00. Es la única promesa que no se puede incumplir.
+
+**Higiene:** un lead que no encaja se marca `descartado` el mismo día. No se deja en `novo` para que no ensucie las métricas.
+
+---
+
+
+## 11. Presupuesto de campaña
+
+| Concepto | Importe |
+|---|---|
+| Landing en Vercel (proyecto existente) | 0 € |
+| Vídeo de 30 s grabado con la demo | 0 € |
+| Correo (buzón profesional existente) | 0 € |
+| LinkedIn Premium ocasional | 60 €/mes |
+| Publicidad local en medios digitales | 200 € |
+| **Total primeros 90 días** | **≈ 380 €** |
+
+El coste real es tu tiempo: 4 horas al día durante dos semanas para la prospección inicial.
+
+---
+
+
+## 12. Legal y buenas prácticas
+
+- **RGPD:** los correos de alcaldía, secretaría e intervención son datos profesionales de cargos públicos. Base jurídica: interés legítimo (art. 6.1.f). Minimiza, no almacenes más de lo necesario y atiende cualquier oposición.
+- **LSSI:** incluye siempre forma de darse de baja y evita envíos masivos sin relación previa.
+- **Sin listas compradas.** Los contactos se obtienen de sedes electrónicas, portales de transparencia y del directorio de la FEGAMP.
+- **Contratación:** los pilotos por debajo de 15.000 € son contrato menor. No los presentes como licitación ni prometas adjudicaciones.
+- **Publicidad:** no uses escudos ni logotipos municipales sin autorización. No afirmes que un concello es cliente si no lo es.
+
+---
+
+
+## 13. Riesgos
+
+| Riesgo | Mitigación |
+|---|---|
+| Buzón marcado como spam | 10 correos/día, dominio con SPF/DKIM, texto personalizado |
+| Baja tasa de respuesta | Llamada al tercer día; el correo solo no vende |
+| "Non hai orzamento" | Escalón micro de 2.900 € y reparto en dos anualidades |
+| Competencia de grandes integradores | Velocidad, trato directo y precio de contrato menor |
+| Dependencia de un único concello | Cartera de 10 municipios, no de uno |
+
+---
+
+
+## 14. Próximos cinco pasos
+
+1. ~~Publicar la landing `/ayuntamientos` con la oferta y el formulario.~~ **Hecho:** https://vigo-ai-demo.vercel.app/ayuntamientos
+2. Cerrar la lista de los 25 concellos de los segmentos A y B con contacto verificado. **Base lista:** `CONTACTOS_PONTEVEDRA.csv` + `CONTACTOS_PONTEVEDRA.pdf`.
+3. Grabar el vídeo de 30 segundos con la demo real.
+4. Enviar los 10 primeros correos el martes por la mañana.
+5. Revisar métricas el viernes y ajustar el mensaje.
+
+**Documento preparado por CHESS AI AGENCY · VIGO AI ADMINISTRATION · 15/11/2026**
+
+---
+
+
+## 15. Registro de envíos y criterio de buzón
+
+### 15.1 A qué dirección se escribe
+
+| Buzón | Cuándo | Motivo |
+|---|---|---|
+| `alcaldia@` / `gabinete.alcaldia@` | Primera opción | Decide o influye en el contrato menor; el correo llega a quien tiene la llave del presupuesto. |
+| `contacto@` / `info@` | Solo si no hay alcaldía verificada | Buzón general del concello: sirve, pero se mezcla con el registro de entrada ciudadano. |
+| `010@` (atención ciudadana) | Evitar salvo que sea el único | Enruta como solicitud ciudadana y suele morir en la cola de quejas. |
+| Informática / TI | Nunca en fase 1 | No decide compra; sirve en fase 3, cuando ya hay interés político. |
+
+Regla: un solo destinatario por concello en el primer contacto. Nada de enviar a tres buzones a la vez.
+
+### 15.2 Envío del 17/11/2026 (día 1)
+
+Remitente: `CHESS AI AGENCY <leads@ajedrezpremium.com>` · responder a `chessagencyai@gmail.com`.
+
+| Concello | Destinatario | Asunto | Resend |
+|---|---|---|---|
+| Vigo | 010@vigo.org | Proposta de piloto | 01a1e907 |
+| Pontevedra | contacto@pontevedra.gal | Proposta de demostración | 01a1e910-d65e |
+| Vilagarcía de Arousa | alcaldia@vilagarcia.es | Proposta de demostración | 01a1e910-f394 |
+| Redondela | alcaldia@redondela.gal | Proposta de demostración | 01a1e911-106b |
+| Cangas de Morrazo | alcaldia@cangas.gal | Proposta de demostración | 01a1e911-2d66 |
+| Marín | alcaldia@concellodemarin.es | Proposta de demostración | 01a1e911-4a4d |
+| Ponteareas | info@ponteareas.es | Proposta de demostración | 01a1e911-671d |
+| O Porriño | gabinete.alcaldia@oporrino.org | Proposta de demostración | 01a1e911-83f8 |
+| Lalín | lalin@lalin.org | Proposta de demostración | 01a1e911-a0d0 |
+| A Estrada | info@aestrada.gal | Proposta de demostración | 01a1e911-bdc8 |
+
+Los 10 con estado `delivered` en Resend. Copia de control a `gmparamos@gmail.com` (BCC en cada envío + copia del correo de Vigo).
+
+Límite del día consumido: 10/10. Mañana no se envía nada a estos concellos; toca teléfono el 20/11 (toque 2).
+
+### 15.3 Dominio neutro de campaña
+
+Los correos de fase 1 enlazan a `https://ia-administracion-local.vercel.app/campana`, no a `vigo-ai-demo.vercel.app`.
+
+Es un proyecto Vercel gemelo con el mismo codigo y las mismas variables. Hay que desplegar en los dos.
+
+La pagina `/campana` es la variante neutra de `/ayuntamientos`: sin marca de Vigo, sin precios, sin "piloto" ni plazos comerciales.
+El formulario registra el lead con `orixe = landing_campana` para distinguirlo del trafico organico.
+
