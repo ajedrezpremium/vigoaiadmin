@@ -163,10 +163,10 @@ export default function Home() {
                 }`}
               >
                 <p className="text-[10px] font-bold uppercase tracking-widest text-brand-400">
-                  {a.code}
+                  {a.code[lang]}
                 </p>
-                <p className={`mt-1 font-semibold ${headingCls}`}>{a.label.es}</p>
-                <p className={`mt-2 text-xs leading-relaxed ${mutedCls}`}>{a.mission}</p>
+                <p className={`mt-1 font-semibold ${headingCls}`}>{a.label[lang]}</p>
+                <p className={`mt-2 text-xs leading-relaxed ${mutedCls}`}>{a.mission[lang]}</p>
               </div>
             );
           })}
