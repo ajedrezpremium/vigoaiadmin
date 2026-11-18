@@ -25,6 +25,7 @@ interface Lead {
   interese?: string | null;
   mensaxe?: string | null;
   estado?: string | null;
+  orixe?: string | null;
 }
 
 export default function AdminPage() {
@@ -311,6 +312,32 @@ export default function AdminPage() {
                 Solicitudes recibidas desde la landing /ayuntamientos. Si aparece vacío, revisa que
                 exista la tabla <code>leads</code> o el evento <code>lead_ayuntamiento</code>.
               </p>
+              <div className="mb-6 grid gap-3 sm:grid-cols-4">
+                {[
+                  { label: "Total", value: leads.length, color: "text-slate-100" },
+                  { label: "Nuevos", value: leads.filter((l) => (l.estado ?? "novo") === "novo").length, color: "text-amber-300" },
+                  { label: "Contactados", value: leads.filter((l) => l.estado === "contactado").length, color: "text-brand-300" },
+                  { label: "Reunión/Propuesta", value: leads.filter((l) => l.estado === "reunion" || l.estado === "proposta").length, color: "text-emerald-300" },
+                ].map((m) => (
+                  <div key={m.label} className="rounded-xl border border-slate-700 bg-slate-900/50 p-3 text-center">
+                    <p className={`text-2xl font-bold ${m.color}`}>{m.value}</p>
+                    <p className="mt-1 text-[11px] uppercase tracking-wide text-slate-500">{m.label}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="mb-4 flex flex-wrap gap-2 text-xs">
+                {["A", "B", "C", "D"].map((t) => {
+                  const n = leads.filter((l) => l.tramo === t).length;
+                  return (
+                    <span key={t} className="rounded-full border border-slate-700 bg-slate-900/60 px-2.5 py-1 text-slate-300">
+                      Tramo {t}: {n}
+                    </span>
+                  );
+                })}
+                <span className="rounded-full border border-slate-700 bg-slate-900/60 px-2.5 py-1 text-slate-300">
+                  Landing campaña: {leads.filter((l) => l.orixe === "landing_campana").length}
+                </span>
+              </div>
               <div className="space-y-3">
                 {leads.map((l) => (
                   <article
