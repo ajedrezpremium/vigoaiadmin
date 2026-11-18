@@ -92,23 +92,24 @@ docs/
 
 ---
 
-## 5. Quick wins (1–2 días, alto impacto)
+## 5. Quick wins (1–2 días, alto impacto) — COMPLETADOS
 
-1. **Actualizar README.md** (modelos, 10 agentes, escalación real). Esfuerzo: 2 h.
-2. **Sincronizar COMERCIAL_EMAIL_TEMPLATE.md** con `lib/email-templates.ts`. Esfuerzo: 1 h.
-3. **Crear `NAMING.md`** con la guía de nombres. Esfuerzo: 30 min.
-4. **Crear `MATERIALES_COMERCIALES.md`** (índice). Esfuerzo: 1 h.
-5. **Añadir plantilla de toque 4** al plan de campaña. Esfuerzo: 30 min.
-6. **Añadir `CHANGELOG.md`** con v1.0 → v1.2 → v2.0. Esfuerzo: 1 h.
+1. ✅ **Actualizar README.md** — modelos, 10 agentes, escalación real (ya actualizado en v1.2).
+2. ✅ **Sincronizar COMERCIAL_EMAIL_TEMPLATE.md** con `lib/email-templates.ts`.
+3. ✅ **Crear `NAMING.md`** — guía de nombres por contexto.
+4. ✅ **Crear `MATERIALES_COMERCIALES.md`** (índice).
+5. ✅ **Añadir plantilla de toque 4** al plan de campaña (§8.5).
+6. ✅ **Crear `CHANGELOG.md`** con v1.0 → v1.2 → v2.0.
+7. ✅ **Crear `API.md`** — documentación de todos los endpoints.
+8. ✅ **Relación piloto ↔ producción** documentada en PILOTO y PRESUPUESTO.
+9. ✅ **Crear `DEMO_SCRIPT.md`** — guion de demo 30 min.
+10. ✅ **Crear `ONBOARDING_PLAYBOOK.md`** — qué pasa después de firmar.
 
-## 6. Mejoras de medio plazo (1–2 semanas)
+## 6. Mejoras de medio plazo (pendientes)
 
-7. **Dividir `CAMPANA_PONTEVEDRA.md`** en 3 documentos. Esfuerzo: 3 h.
-8. **Crear `DEMO_SCRIPT.md`** (guion de demo 30 min). Esfuerzo: 2 h.
-9. **Crear `ONBOARDING_PLAYBOOK.md`** (qué pasa después de firmar). Esfuerzo: 3 h.
-10. **Ampliar `ACCESIBILIDAD_WCAG.md`** con resultados de axe-core. Esfuerzo: 4 h.
-11. **Documentar API** (OpenAPI o `API.md`). Esfuerzo: 4 h.
-12. **Añadir dashboard de métricas de leads** en `/admin`. Esfuerzo: 1 día.
+7. ⏳ **Dividir `CAMPANA_PONTEVEDRA.md`** en 3 documentos.
+10. ⏳ **Ampliar `ACCESIBILIDAD_WCAG.md`** con resultados de axe-core.
+12. ⏳ **Añadir dashboard de métricas de leads** en `/admin`.
 
 ## 7. Mejoras estratégicas (1 mes)
 
