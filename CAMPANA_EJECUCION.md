@@ -183,7 +183,7 @@ Mismo remitente y misma plantilla neutra (`firstContactEmail`, gallego) que el d
 | Cambados | alcaldia@cambados.es | 01a1edf2-8ab6 |
 | Baiona | secretaria@baiona.org | 01a1edf2-8ff4 |
 
-Los 10 con `status 200` en Resend y copia de control a `gmparamos@gmail.com` (BCC). Límite del día consumido: 10/10.
+Los 10 con estado `delivered` en Resend (verificado el mismo día) y copia de control a `gmparamos@gmail.com` (BCC). Límite del día consumido: 10/10.
 
 **Calendario de llamadas resultante:**
 
