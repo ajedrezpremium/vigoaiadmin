@@ -44,9 +44,12 @@ Características destacadas:
 - **Accesibilidad**: WCAG 2.1 AA (skip link, focus, contraste, prefers-reduced-motion)
 
 ### Propuesta económica
-- **Piloto completo:** 90.000 € (sin IVA) — 6-8 semanas
-- **Descubrimiento:** 3.000-6.000 € (talleres, mapa de proceso, evaluación de datos)
-- **Piloto documental:** 18.000-35.000 € (prototipo acotado, corpus autorizado, interfaz, pruebas, formación)
+- **Piloto (tramo A):** 12.500 € (sin IVA) — 6 semanas, 1 área real, 100 documentos
+- **Proyecto completo (producción):** 90.000 € (sin IVA) — 6–8 semanas + 3 meses de soporte
+- **Descubrimiento:** 3.000–6.000 € (talleres, mapa de proceso, evaluación de datos)
+- **Piloto documental:** 18.000–35.000 € (prototipo acotado, corpus autorizado, interfaz, pruebas, formación)
+
+El piloto es el tramo A del proyecto completo. Si cumple los objetivos acordados, se firma el proyecto completo. Si no, el Concello se queda con el informe, sin compromiso de continuidad.
 
 ### Documentación adjunta
 1. **Resumen ejecutivo** (1-2 páginas)
@@ -78,7 +81,7 @@ https://vigo-ai-demo.vercel.app
 - **Personalizar** el nombre del responsable y el departamento.
 - **Adjuntar** el PDF comercial (`COMERCIAL_VIGO_AI_ADMINISTRATION.pdf`).
 - **Mencionar** el expediente 1113/113 (servidor de alto rendimiento para IA) si aplica.
-- **No mencionar** precios vinculantes — los importes son orientativos.
+- **Los importes del piloto (12.500 €) son vinculantes** — están en el presupuesto v2.0. Los del proyecto completo (90.000 €) son orientativos hasta la licitación.
 - **Enfatizar** que es una demo con datos sintéticos, no un sistema en producción.
 
 ---
