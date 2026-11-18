@@ -5,7 +5,7 @@
 
 import { useEffect, useState } from "react";
 import AssistantWidget from "@/components/AssistantWidget";
-import Hero from "@/components/Hero";
+import Hero, { type HeroImage } from "@/components/Hero";
 import SiteHeader from "@/components/SiteHeader";
 import { AGENTS } from "@/lib/agents";
 import { I18N } from "@/lib/i18n";
@@ -13,68 +13,54 @@ import type { AgentId, Lang } from "@/types";
 
 export const dynamic = "force-dynamic";
 
-const HERO_IMAGES = [
-  {
-    src: "/Vigo_vista_aerea.jpg",
-    alt: "Vigo — vista aérea",
-    name: "Vigo — vista aérea",
-    caption: "Vigo — vista aérea",
-    link: "/Vigo_vista_aerea.jpg",
-    filterClass: "brightness-115 contrast-105 saturate-110",
-  },
-  {
-    src: "/Vista%20Aerea%20Cies.png",
-    alt: "Islas Cíes — vista aérea",
-    name: "Illas Cíes",
-    caption: "Illas Cíes",
-    link: "/Vista%20Aerea%20Cies.png",
-    filterClass: "brightness-115 contrast-105 saturate-110",
-  },
-  {
-    src: "https://upload.wikimedia.org/wikipedia/commons/0/0e/Paseo_samil%2C_Vigo.jpg",
-    alt: "Playa de Samil",
-    name: "Samil",
-    caption: "Playa de Samil",
-    link: "https://upload.wikimedia.org/wikipedia/commons/0/0e/Paseo_samil%2C_Vigo.jpg",
-  },
-  {
-    src: "https://upload.wikimedia.org/wikipedia/commons/d/d4/O_Castro%2C_Vigo.jpg",
-    alt: "Monte do Castro — panorámica",
-    name: "Monte do Castro",
-    caption: "Monte do Castro",
-    link: "https://upload.wikimedia.org/wikipedia/commons/d/d4/O_Castro%2C_Vigo.jpg",
-  },
-  {
-    src: "https://upload.wikimedia.org/wikipedia/commons/e/ec/Ponte_de_Rande_desde_A_Gu%C3%ADa_%28Teis%2C_Vigo%29.jpg",
-    alt: "Puente de Rande",
-    name: "Puente de Rande",
-    caption: "Puente de Rande",
-    link: "https://upload.wikimedia.org/wikipedia/commons/e/ec/Ponte_de_Rande_desde_A_Gu%C3%ADa_%28Teis%2C_Vigo%29.jpg",
-    filterClass: "brightness-125 contrast-110 saturate-150",
-    tintClass: "bg-blue-500/25",
-  },
-  {
-    src: "https://upload.wikimedia.org/wikipedia/commons/0/08/Puerto_de_Vigo.jpg",
-    alt: "Puerto de Vigo",
-    name: "Puerto de Vigo",
-    caption: "Puerto de Vigo",
-    link: "https://upload.wikimedia.org/wikipedia/commons/0/08/Puerto_de_Vigo.jpg",
-  },
-  {
-    src: "https://upload.wikimedia.org/wikipedia/commons/1/10/Vigo_puesta_de_Sol.jpg",
-    alt: "Puesta de sol en Vigo",
-    name: "Puesta de sol",
-    caption: "Puesta de sol",
-    link: "https://upload.wikimedia.org/wikipedia/commons/1/10/Vigo_puesta_de_Sol.jpg",
-  },
-  {
-    src: "https://upload.wikimedia.org/wikipedia/commons/9/9b/R%C3%ADa_de_Vigo_e_islas_C%C3%ADes.jpg",
-    alt: "Ría de Vigo e Islas Cíes",
-    name: "Ría de Vigo",
-    caption: "Ría de Vigo",
-    link: "https://upload.wikimedia.org/wikipedia/commons/9/9b/R%C3%ADa_de_Vigo_e_islas_C%C3%ADes.jpg",
-  },
+const HERO_IMAGE_BASE = [
+  { src: "/Vigo_vista_aerea.jpg", link: "/Vigo_vista_aerea.jpg", filterClass: "brightness-115 contrast-105 saturate-110" },
+  { src: "/Vista%20Aerea%20Cies.png", link: "/Vista%20Aerea%20Cies.png", filterClass: "brightness-115 contrast-105 saturate-110" },
+  { src: "https://upload.wikimedia.org/wikipedia/commons/0/0e/Paseo_samil%2C_Vigo.jpg", link: "https://upload.wikimedia.org/wikipedia/commons/0/0e/Paseo_samil%2C_Vigo.jpg" },
+  { src: "https://upload.wikimedia.org/wikipedia/commons/d/d4/O_Castro%2C_Vigo.jpg", link: "https://upload.wikimedia.org/wikipedia/commons/d/d4/O_Castro%2C_Vigo.jpg" },
+  { src: "https://upload.wikimedia.org/wikipedia/commons/e/ec/Ponte_de_Rande_desde_A_Gu%C3%ADa_%28Teis%2C_Vigo%29.jpg", link: "https://upload.wikimedia.org/wikipedia/commons/e/ec/Ponte_de_Rande_desde_A_Gu%C3%ADa_%28Teis%2C_Vigo%29.jpg", filterClass: "brightness-125 contrast-110 saturate-150", tintClass: "bg-blue-500/25" },
+  { src: "https://upload.wikimedia.org/wikipedia/commons/0/08/Puerto_de_Vigo.jpg", link: "https://upload.wikimedia.org/wikipedia/commons/0/08/Puerto_de_Vigo.jpg" },
+  { src: "https://upload.wikimedia.org/wikipedia/commons/1/10/Vigo_puesta_de_Sol.jpg", link: "https://upload.wikimedia.org/wikipedia/commons/1/10/Vigo_puesta_de_Sol.jpg" },
+  { src: "https://upload.wikimedia.org/wikipedia/commons/9/9b/R%C3%ADa_de_Vigo_e_islas_C%C3%ADes.jpg", link: "https://upload.wikimedia.org/wikipedia/commons/9/9b/R%C3%ADa_de_Vigo_e_islas_C%C3%ADes.jpg" },
 ];
+
+const HERO_IMAGE_TEXTS: Record<Lang, { alt: string; name: string; caption: string }[]> = {
+  gl: [
+    { alt: "Vigo — vista aérea", name: "Vigo — vista aérea", caption: "Vigo — vista aérea" },
+    { alt: "Illas Cíes — vista aérea", name: "Illas Cíes", caption: "Illas Cíes" },
+    { alt: "Praia de Samil", name: "Samil", caption: "Praia de Samil" },
+    { alt: "Monte do Castro — panorámica", name: "Monte do Castro", caption: "Monte do Castro" },
+    { alt: "Ponte de Rande", name: "Ponte de Rande", caption: "Ponte de Rande" },
+    { alt: "Porto de Vigo", name: "Porto de Vigo", caption: "Porto de Vigo" },
+    { alt: "Posta de sol en Vigo", name: "Posta de sol", caption: "Posta de sol" },
+    { alt: "Ría de Vigo e Illas Cíes", name: "Ría de Vigo", caption: "Ría de Vigo" },
+  ],
+  es: [
+    { alt: "Vigo — vista aérea", name: "Vigo — vista aérea", caption: "Vigo — vista aérea" },
+    { alt: "Islas Cíes — vista aérea", name: "Islas Cíes", caption: "Islas Cíes" },
+    { alt: "Playa de Samil", name: "Samil", caption: "Playa de Samil" },
+    { alt: "Monte do Castro — panorámica", name: "Monte do Castro", caption: "Monte do Castro" },
+    { alt: "Puente de Rande", name: "Puente de Rande", caption: "Puente de Rande" },
+    { alt: "Puerto de Vigo", name: "Puerto de Vigo", caption: "Puerto de Vigo" },
+    { alt: "Puesta de sol en Vigo", name: "Puesta de sol", caption: "Puesta de sol" },
+    { alt: "Ría de Vigo e Islas Cíes", name: "Ría de Vigo", caption: "Ría de Vigo" },
+  ],
+  en: [
+    { alt: "Vigo — aerial view", name: "Vigo — aerial view", caption: "Vigo — aerial view" },
+    { alt: "Cíes Islands — aerial view", name: "Cíes Islands", caption: "Cíes Islands" },
+    { alt: "Samil Beach", name: "Samil", caption: "Samil Beach" },
+    { alt: "Monte do Castro — panorama", name: "Monte do Castro", caption: "Monte do Castro" },
+    { alt: "Rande Bridge", name: "Rande Bridge", caption: "Rande Bridge" },
+    { alt: "Port of Vigo", name: "Port of Vigo", caption: "Port of Vigo" },
+    { alt: "Sunset in Vigo", name: "Sunset", caption: "Sunset" },
+    { alt: "Ría de Vigo and Cíes Islands", name: "Ría de Vigo", caption: "Ría de Vigo" },
+  ],
+};
+
+function heroImages(lang: Lang): HeroImage[] {
+  const texts = HERO_IMAGE_TEXTS[lang] ?? HERO_IMAGE_TEXTS.gl;
+  return HERO_IMAGE_BASE.map((b, i) => ({ ...b, ...texts[i] }));
+}
 
 const AGENT_ORDER: AgentId[] = [
   "citizen",
@@ -123,7 +109,7 @@ export default function Home() {
 
       {/* Hero */}
       <div id="inicio">
-        <Hero lang={lang} images={HERO_IMAGES} theme={theme} />
+        <Hero lang={lang} images={heroImages(lang)} theme={theme} />
       </div>
 
       {/* FIN HERO */}
@@ -248,10 +234,14 @@ export default function Home() {
           <div className="grid gap-6 p-6 md:grid-cols-2 md:gap-8 md:p-8">
             <div>
               <p className={`text-xs font-semibold uppercase tracking-wider ${isDark ? "text-brand-300" : "text-brand-600"}`}>
-                A cidade
+                {lang === "gl" ? "A cidade" : lang === "es" ? "La ciudad" : "The city"}
               </p>
               <h2 className={`mt-2 text-2xl font-semibold md:text-3xl ${headingCls}`}>
-                Vigo, a capital da cultura galega
+                {lang === "gl"
+                  ? "Vigo, a capital da cultura galega"
+                  : lang === "es"
+                  ? "Vigo, la capital de la cultura gallega"
+                  : "Vigo, the capital of Galician culture"}
               </h2>
               <p className={`mt-3 text-sm leading-relaxed ${bodyCls}`}>
                 <a href="https://maps.google.com/?q=Praza+do+Rei+Vigo">
@@ -264,7 +254,7 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className={`mt-4 inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-medium transition ${linkCls}`}
               >
-                🗺️ Mapa · Praza do Rei, 1
+                🗺️ {lang === "gl" ? "Mapa · Praza do Rei, 1" : lang === "es" ? "Mapa · Praza do Rei, 1" : "Map · Praza do Rei, 1"}
               </a>
             </div>
             <div className={`overflow-hidden rounded-xl border ${isDark ? "border-slate-700" : "border-slate-300"}`}>
