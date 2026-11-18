@@ -88,8 +88,11 @@ create policy "user_roles_self_select" on public.user_roles
   for select to authenticated using (auth.uid() = user_id);
 
 -- ==============================================================
--- ROW LEVEL SECURITY (RLS) — v1.2
+-- ROW LEVEL SECURITY (RLS) — v1.2 (COMPLETADO)
 -- ==============================================================
+-- RLS habilitado en todas las tablas (conversations, messages, audit_events,
+-- escalations, leads, user_roles). Políticas definidas arriba.
+-- service_role (servidor Next.js) bypass RLS automáticamente.
 
 -- Habilitar RLS en todas las tablas
 alter table public.conversations enable row level security;

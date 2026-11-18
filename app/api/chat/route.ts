@@ -10,7 +10,7 @@ import { loadAgentConfig } from "@/lib/agents.loader";
 // Agentes: config externa (config/agents.json) con fallback hardcodeado
 const AGENTS = loadAgentConfig() ?? FALLBACK_AGENTS;
 import { classify, classifyAll, detectLanguage } from "@/lib/router";
-import { retrieve, evidenceBlock } from "@/lib/rag";
+import { retrieve, retrieveAsync, evidenceBlock } from "@/lib/rag";
 import { chatLLM, llmConfigured } from "@/lib/llm";
 import { rateLimit } from "@/lib/rate-limit";
 import { getConversationHistory, logAudit, logConversation } from "@/lib/supabase";
@@ -180,7 +180,7 @@ async function handleChat(req: NextRequest) {
   void endSpan(startSpan("chat.classify", { agent: route.agent, score: route.score, collaborators: secondaryAgents.length }));
 
   // --- RAG: recuperación de evidencia ---
-  const { sources, hasEvidence } = retrieve(message, lang);
+  const { sources, hasEvidence } = await retrieveAsync(message, lang);
   void endSpan(startSpan("chat.retrieve", { hasEvidence, sources: sources.length }));
   const system = buildSystemPrompt(agent, lang, evidenceBlock(sources));
 

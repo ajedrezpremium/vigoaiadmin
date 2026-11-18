@@ -4,6 +4,7 @@
 
 import type { DemoDoc, Lang, SourceRef } from "@/types";
 import { DEMO_CORPUS } from "@/data/demo-corpus";
+import { embed, cosineSimilarity, getDocEmbedding, embeddingsEnabled } from "./embeddings";
 
 const STOPWORDS = new Set([
   "el","la","los","las","un","una","de","del","para","por","con","que","como","cual","cuando",
@@ -114,6 +115,78 @@ export function retrieve(query: string, _lang: Lang, topK = 3, minScore = 4): Re
   const hasEvidence = scored.length > 0 && scored[0].score >= minScore;
 
   const sources: SourceRef[] = scored.map((r, i) => ({
+    ref: `S${i + 1}`,
+    id: r.doc.id,
+    title: r.doc.title,
+    dept: r.doc.dept,
+    type: r.doc.type,
+    published: r.doc.published,
+    effective: r.doc.effective,
+    snippet: bestSnippet(r.doc, qTerms),
+  }));
+
+  return { sources, hasEvidence };
+}
+
+/**
+ * Búsqueda híbrida (v2.0): embeddings + léxico.
+ * Si los embeddings no están habilitados o fallan, cae a retrieve() (léxico).
+ * Async porque los embeddings requieren llamada a API.
+ */
+export async function retrieveAsync(
+  query: string,
+  lang: Lang,
+  topK = 3,
+  minScore = 4
+): Promise<RetrievalResult> {
+  // Fallback inmediato si embeddings desactivados
+  if (!embeddingsEnabled()) {
+    return retrieve(query, lang, topK, minScore);
+  }
+
+  const qTerms = expand(terms(query));
+  if (qTerms.length === 0) return { sources: [], hasEvidence: false };
+
+  const queryEmb = await embed(query);
+  if (!queryEmb) {
+    return retrieve(query, lang, topK, minScore);
+  }
+
+  // Calcular similitud coseno para cada documento
+  const scored: Array<{ doc: DemoDoc; score: number; cosSim: number }> = [];
+  for (const doc of DEMO_CORPUS) {
+    const docText = `${doc.title}. ${doc.dept}. ${doc.type}. ${doc.content}`;
+    const docEmb = await getDocEmbedding(doc.id, docText);
+    if (!docEmb) {
+      // Si falla un documento, caer a léxico completo
+      return retrieve(query, lang, topK, minScore);
+    }
+    const cosSim = cosineSimilarity(queryEmb, docEmb);
+    // Combinar: 60% coseno + 40% léxico (normalizado)
+    const lexicalScore = (() => {
+      const title = normalize(doc.title);
+      const content = normalize(doc.content);
+      const dept = normalize(doc.dept);
+      const type = normalize(doc.type);
+      let s = 0;
+      for (const t of qTerms) {
+        if (hasWord(title, t)) s += 4;
+        else if (title.includes(t)) s += 2;
+        if (hasWord(dept, t) || hasWord(type, t)) s += 2;
+        else if (dept.includes(t) || type.includes(t)) s += 1;
+        if (hasWord(content, t)) s += 1;
+      }
+      return s;
+    })();
+    const combined = cosSim * 0.6 + (lexicalScore / 20) * 0.4;
+    scored.push({ doc, score: combined, cosSim });
+  }
+
+  scored.sort((a, b) => b.score - a.score);
+  const top = scored.slice(0, topK);
+  const hasEvidence = top.length > 0 && (top[0].cosSim >= 0.3 || top[0].score >= minScore / 20);
+
+  const sources: SourceRef[] = top.map((r, i) => ({
     ref: `S${i + 1}`,
     id: r.doc.id,
     title: r.doc.title,
