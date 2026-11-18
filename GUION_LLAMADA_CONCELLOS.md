@@ -147,3 +147,9 @@ Central de Vigo si no responde la Oficina de Informática: **986 810 100**.
 | 10 | Baiona | 986 385 050 | secretaria@baiona.org |
 
 **Ventana de llamadas:** 09:30–11:30 y 13:00–14:00. Evitar viernes por la tarde y vísperas de pleno.
+
+## Anexo C — Hojas de llamadas por día
+
+Cuando el volumen crece, la lista del día vive en su propio archivo para no mezclar lotes:
+
+- `LLAMADAS_2026-11-26.md` — 10 llamadas del lote enviado el 23/11 (8 del segmento C + 2 del D), más los teléfonos de todo el C y el D.

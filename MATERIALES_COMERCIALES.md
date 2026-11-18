@@ -12,12 +12,14 @@
 | **Landing de campaña** | `ia-administracion-local.vercel.app/campana` | Enlace en los correos de fase 1. Sin marca Vigo. | Todos |
 | **Landing comercial** | `vigo-ai-demo.vercel.app/ayuntamientos` | Fase 2, cuando piden ver la oferta completa. | Todos |
 | **Demo en vivo** | `vigo-ai-demo.vercel.app` | Fase 2, tras el formulario. | Todos |
-| **Presupuesto v2.0** | `COMERCIAL_PRESUPUESTA_V2.md` | Fase 3, con la propuesta formal. | Concello de Vigo |
+| **Presupuesto v2.0** | `COMERCIAL_PRESUPUESTO_V2.md` | Fase 3, con la propuesta formal. | Concello de Vigo |
 | **Piloto 12.500 €** | `PILOTO_12500_VIGO.md` | Fase 3, propuesta de piloto. | Concello de Vigo |
 | **Resumen ejecutivo** | `COMERCIAL_RESUMEN_EJECUTIVO.md` | Reunión comercial, anexo. | Todos |
 | **Propuesta completa** | `COMERCIAL_PROPUESTA.md` | Reunión comercial, anexo. | Todos |
 | **Dossier de licitación** | `LICITACION_CHECKLIST_VIGO.md` | Solo si se abre licitación pública (Vigo). | Concello de Vigo |
 | **Guion de llamada** | `GUION_LLAMADA_CONCELLOS.md` | Toque 2 (día 3), llamada telefónica. | Interno |
+| **Hoja de llamadas del día** | `LLAMADAS_2026-11-26.md` | Lista de marcado con teléfonos, buzones y alcaldes (26/11). | Interno |
+| **Lotes de envío** | `campaign/batches/` | JSON de cada tanda de 10 correos, con su registro. | Interno |
 | **Infografía comercial** | `COMERCIAL_INFOGRAFIA.html` | Presentación en reunión. | Todos |
 | **Video 30s** | `COMERCIAL_VIDEO_30S.md` | Redes sociales, email. | Todos |
 | **Firma Gmail** | `FIRMA_GMAIL.html` | Configuración de Gmail (una sola vez). | Interno |

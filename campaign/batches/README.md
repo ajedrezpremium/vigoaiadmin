@@ -25,5 +25,6 @@ node --experimental-strip-types scripts/send-batch.mjs --file campaign/batches/2
 |---|---|---|
 | `2026-11-18.json` | 18/11/2026 | 10 concellos del segmento B (enviado, 10/10 `delivered`) |
 | `2026-11-19.json` | 19/11/2026 | 5 restantes del segmento B + 5 primeros del C (preparado) |
+| `2026-11-23.json` | 23/11/2026 | 8 restantes del C + 2 primeros del D (preparado) |
 
 El detalle de envíos, con identificadores de Resend, está en `CAMPANA_EJECUCION.md` §15.
