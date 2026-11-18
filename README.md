@@ -198,7 +198,7 @@ ENDPOINTS PRO:
 - Escalación humana persiste en Supabase (real, no simulada).
 - **No apto para producción pública sin evaluación de seguridad** (RGPD, ENS, Reglamento (UE) 2024/1689, accesibilidad UNE-EN 301 549): ver Propuesta Comercial §6 y §7.
 
-## Roadmap hacia el piloto real (VIGO DOCS AI)
+## Roadmap hacia el piloto real (VIGO AI ADMINISTRATION)
 
 1. **Descubrimiento** (3.000–6.000 €): proceso, corpus autorizado, criterios de aceptación.
 2. **Piloto** (18.000–35.000 €): embeddings + búsqueda híbrida, Supabase/pgvector, gestor documental, evaluación de calidad, formación.

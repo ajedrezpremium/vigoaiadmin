@@ -26,7 +26,7 @@
 | 1 | **Dos ofertas distintas sin relación explícita**: piloto 12.500 € (6 sem) vs. producción 90.000 € (6–8 sem + 3 meses). No se explica que el piloto es el primer tramo del proyecto completo. | `PILOTO_12500_VIGO.md` vs `COMERCIAL_PRESUPUESTO_V2.md` | Añadir una sección "Relación entre ofertas" en ambos: el piloto es el tramo A (12.500 €) y la producción es el total (90.000 €) con los mismos tramos A–D. |
 | 2 | **README desactualizado** (auditado en B11): dice 9 agentes (son 10), modelos `llama-3.3-70b-instruct:free` y `gemini-2.0-flash` que ya no existen, escalación "simulada" (ahora real). | `README.md` | Reescribir secciones de stack, agentes y escalación. |
 | 3 | **COMERCIAL_EMAIL_TEMPLATE.md** probablemente desactualizado respecto a `lib/email-templates.ts` (que ya tiene `finalEmail` y `firstContactEmail`). | `COMERCIAL_EMAIL_TEMPLATE.md` | Sincronizar o marcar como "fuente de verdad: código". |
-| 4 | **Nombre del producto inconsistente**: "VIGO AI ADMINISTRATION" (demo), "VIGO DOCS AI" (piloto), "IA para la Administración Local" (campaña). | Varios | Crear `NAMING.md` con la guía de nombres por contexto. |
+| 4 | **Nombre del producto**: decidido — "VIGO AI ADMINISTRATION" para Vigo, "IA para la Administración Local" para el resto de municipios. "VIGO DOCS AI" eliminado. | Varios | `NAMING.md` creado con la guía. |
 | 5 | **Las 5 métricas de `/campana`** no están en ningún documento de producto. | `components/CampanaLanding.tsx` | Añadir a `PUBLICOS_Y_ALCANCE.md` y a `COMERCIAL_PROPUESTA.md`. |
 | 6 | **Infografía de 10 razones** no referenciada en ningún doc comercial. | `public/infografia-10-razones.html` | Añadir al índice de materiales en `COMERCIAL_RESUMEN_EJECUTIVO.md`. |
 

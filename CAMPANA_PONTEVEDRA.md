@@ -187,6 +187,24 @@ Los correos de la campaña se envían desde `chessagencyai@gmail.com`, con el no
 
 Objetivo de la llamada: **nombre, correo y cargo**. No vender por teléfono.
 
+### 8.5 Cierre de cortesía (día 14)
+
+> **Asunto:** Re: Un asistente de IA para o Concello de [nome]
+>
+> Bo día [nome]:
+>
+> Último correo sobre este tema: deixo o asunto pechado por agora.
+>
+> Se en algún momento o concello quere probar a demostración (30 minutos, sen compromiso, con datos sintéticos), estou á vosa disposición. Se prefires, retomo o contacto en tres meses.
+>
+> Grazas pola vosa atención.
+>
+> Atentamente,
+> Roberto Páramos · CHESS AI AGENCY · 607 869 278 · chessagencyai@gmail.com
+> https://ia-administracion-local.vercel.app/campana
+
+Si no responden a los cuatro toques, se archiva y se reintenta en tres meses. Sin excepciones.
+
 ---
 
 ## 9. Objeciones y respuestas

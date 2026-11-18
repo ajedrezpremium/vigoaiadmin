@@ -39,6 +39,24 @@ El personal municipal dedica horas a buscar normativa, redactar borradores e inf
 
 Hardware, licencias de terceros, integración con la sede electrónica real y digitalización masiva del archivo. Esas fases se presupuestan aparte, una vez validado el piloto.
 
+## Relación con el proyecto completo (90.000 €)
+
+El piloto de 12.500 € es el **tramo A** del proyecto completo de producción (presupuesto v2.0: 90.000 €, 6–8 semanas + 3 meses de soporte). No es un producto distinto: es la primera fase del mismo, con alcance reducido para validar el modelo antes de invertir el total.
+
+| Tramo | Precio | Alcance |
+|---|---|---|
+| **Tramo A — Piloto (este documento)** | 12.500 € | 1 área real, 100 documentos, 6 semanas, formación básica |
+| Tramo B | 7.900 € | Concellos de 10.000–20.000 hab. (alcance reducido) |
+| Tramo C | 4.900 € | Concellos de 5.000–10.000 hab. |
+| Tramo D | 2.900 € | Concellos de < 5.000 hab. |
+| **Producción completa** | 90.000 € | Todo lo anterior + embeddings, integración Sede Electrónica, panel admin con RBAC, seguridad y cumplimiento, testing y formación |
+
+**Decisión del Concello tras el piloto:**
+- Si el piloto cumple los objetivos (60 % reducción en consultas, 100 % respuestas con fuente, 20 borradores validados), se firma el proyecto completo por 90.000 €.
+- Si no cumple, el Concello se queda con el informe de resultados y el aprendizaje, sin compromiso de continuidad.
+
+El piloto se tramita como **contrato menor de servicios** (art. 118 LCSP, por debajo de 15.000 €). El proyecto completo se tramita como licitación ordinaria.
+
 ## Qué necesitamos del Concello
 
 Un interlocutor técnico, 100 documentos públicos, dos sesiones de validación y un área piloto (sugerencia: Secretaría o Intervención).

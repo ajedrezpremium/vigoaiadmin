@@ -7,6 +7,21 @@
 
 ---
 
+## 0. Relación con el piloto de 12.500 €
+
+El presupuesto de 90.000 € es el **proyecto completo de producción**. El **piloto de 12.500 €** (tramo A, 6 semanas) es la primera fase de este mismo proyecto, con alcance reducido para validar el modelo antes de invertir el total.
+
+| Fase | Precio | Qué incluye | Cuándo |
+|---|---|---|---|
+| **Piloto (tramo A)** | 12.500 € | 1 área real, 100 documentos, 6 semanas, formación básica | Primero: valida el modelo |
+| **Producción completa** | 90.000 € | Todo lo del piloto + embeddings, integración Sede Electrónica, panel admin RBAC, seguridad y cumplimiento, testing, formación completa | Después, si el piloto cumple objetivos |
+
+**Decisión:** el Concello firma primero el piloto (contrato menor, < 15.000 €). Si cumple los objetivos acordados (60 % reducción en consultas, 100 % respuestas con fuente, 20 borradores validados), firma el proyecto completo por 90.000 € (licitación ordinaria). Si no cumple, se queda con el informe y sin compromiso de continuidad.
+
+Los tramos B (7.900 €), C (4.900 €) y D (2.900 €) son versiones reducidas del piloto para concellos de menor tamaño, no del proyecto completo.
+
+---
+
 ## 1. Desglose por fase
 
 | Fase | Descripción | Horas | Tarifa/h | Importe |
