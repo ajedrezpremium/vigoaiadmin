@@ -166,3 +166,47 @@ Es un proyecto Vercel gemelo con el mismo codigo y las mismas variables. Hay que
 La pagina `/campana` es la variante neutra de `/ayuntamientos`: sin marca de Vigo, sin precios, sin "piloto" ni plazos comerciales.
 El formulario registra el lead con `orixe = landing_campana` para distinguirlo del trafico organico.
 
+### 15.2b Envío del 18/11/2026 (día 2)
+
+Mismo remitente y misma plantilla neutra (`firstContactEmail`, gallego) que el día 1. Destinatarios del **segmento B**, los diez de mayor población.
+
+| Concello | Destinatario | Resend |
+|---|---|---|
+| Moaña | alcaldia@concellodemoana.org | 01a1edf2-60b4 |
+| Nigrán | info@nigran.org | 01a1edf2-65ff |
+| Sanxenxo | info@sanxenxo.org | 01a1edf2-6b3e |
+| Tui | concellotui@concellotui.org | 01a1edf2-707d |
+| Poio | poio@concellopoio.gal | 01a1edf2-75c5 |
+| Mos | informacion@concellomos.es | 01a1edf2-7b07 |
+| Gondomar | alcaldia@concellodegondomar.com | 01a1edf2-8044 |
+| Tomiño | comunicacion@tomino.gal | 01a1edf2-8573 |
+| Cambados | alcaldia@cambados.es | 01a1edf2-8ab6 |
+| Baiona | secretaria@baiona.org | 01a1edf2-8ff4 |
+
+Los 10 con `status 200` en Resend y copia de control a `gmparamos@gmail.com` (BCC). Límite del día consumido: 10/10.
+
+**Calendario de llamadas resultante:**
+
+| Lote | Envío | Toque 2 (teléfono) |
+|---|---|---|
+| 10 primeros (segmento A) | 17/11 | **viernes 20/11** |
+| 10 siguientes (segmento B) | 18/11 | **lunes 23/11** (el día 3 cae en sábado) |
+
+Así las 20 llamadas no se acumulan en la misma jornada: 10 el viernes y 10 el lunes.
+
+### 15.4 Herramienta de envío por lote
+
+`scripts/send-batch.mjs` envía hasta 10 correos desde un JSON y se detiene si el lote los supera.
+
+```powershell
+# simulación (no envía nada)
+node --experimental-strip-types scripts/send-batch.mjs --file tmp/batch-2026-11-18.json
+
+# envío real
+node --experimental-strip-types scripts/send-batch.mjs --file tmp/batch-2026-11-18.json --commit
+```
+
+- BCC de control por defecto: `gmparamos@gmail.com` (`--bcc ""` para desactivarlo).
+- Pausa de 1,2 s entre envíos y registro en `tmp/batch-<fecha>.json`.
+- El límite de 10/día es una regla de campaña, no del proveedor: el script la aplica para que no se olvide.
+

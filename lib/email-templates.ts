@@ -720,7 +720,7 @@ export function firstContactEmail(lead: LeadInput): { subject: string; html: str
       role,
       somos: "https://chess-ai-agency.vercel.app/nosotros.html",
       siteUrl: campaignLanding,
-      siteLabel: "ia-administracion-local.vercel.app/ayuntamientos",
+      siteLabel: "ia-administracion-local.vercel.app/campana",
       logo: `${CAMPAIGN_SITE}/logo-email.png`,
     }),
     text,

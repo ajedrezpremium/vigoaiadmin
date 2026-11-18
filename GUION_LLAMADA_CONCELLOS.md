@@ -1,6 +1,6 @@
 # Guion de llamada — Toque 2 (Día 3)
 
-**Cuándo:** 20/11/2026 (jueves). **Duración objetivo:** 5–8 minutos.
+**Cuándo:** 20/11/2026 (viernes). **Duración objetivo:** 5–8 minutos.
 **Objetivo único:** confirmar recepción del correo + encontrar la persona correcta + acordar una demostración de 30 min.
 **No es una venta:** no se cierra nada por teléfono. El teléfono vende la reunión, no el proyecto.
 
@@ -111,3 +111,39 @@ Esto te dice si hay dolor (y por tanto interés).
 ---
 
 **Regla de oro:** nunca dar el precio en la primera llamada si no lo piden. Si lo piden, dar el rango y cerrar con la demo. El precio se cierra en la reunión, no por teléfono.
+
+---
+
+## Anexo A — Lista de llamadas del viernes 20/11 (lote A, enviado 17/11)
+
+| # | Concello | Teléfono | Buzón del correo |
+|---|---|---|---|
+| 1 | Vigo · Oficina de Informática | 986 810 159 / 986 220 341* | informatica@vigo.org |
+| 2 | Pontevedra | 986 804 300 | contacto@pontevedra.gal |
+| 3 | Vilagarcía de Arousa | 986 099 200 | alcaldia@vilagarcia.es |
+| 4 | Redondela | 986 400 300 | alcaldia@redondela.gal |
+| 5 | Cangas de Morrazo | 986 300 050 | alcaldia@cangas.gal |
+| 6 | Marín | 986 880 300 | alcaldia@concellodemarin.es |
+| 7 | Ponteareas | 986 640 000 | info@ponteareas.es |
+| 8 | O Porriño | 986 337 177 | gabinete.alcaldia@oporrino.org |
+| 9 | Lalín | 986 787 060 | lalin@lalin.org |
+| 10 | A Estrada | 986 570 165 | info@aestrada.gal |
+
+Central de Vigo si no responde la Oficina de Informática: **986 810 100**.
+
+## Anexo B — Lista de llamadas del lunes 23/11 (lote B, enviado 18/11)
+
+| # | Concello | Teléfono | Buzón del correo |
+|---|---|---|---|
+| 1 | Moaña | 986 310 100 | alcaldia@concellodemoana.org |
+| 2 | Nigrán | 986 365 000 | info@nigran.org |
+| 3 | Sanxenxo | 986 720 075 | info@sanxenxo.org |
+| 4 | Tui | 986 603 625 | concellotui@concellotui.org |
+| 5 | Poio | 986 770 001 | poio@concellopoio.gal |
+| 6 | Mos | 986 331 200 | informacion@concellomos.es |
+| 7 | Gondomar | 986 360 125 | alcaldia@concellodegondomar.com |
+| 8 | Tomiño | 986 622 001 | comunicacion@tomino.gal |
+| 9 | Cambados | 986 520 902 | alcaldia@cambados.es |
+| 10 | Baiona | 986 385 050 | secretaria@baiona.org |
+
+**Ventana de llamadas:** 09:30–11:30 y 13:00–14:00. Evitar viernes por la tarde y vísperas de pleno.
