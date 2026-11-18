@@ -1,0 +1,12 @@
+[
+  { "concello": "Moaña", "email": "alcaldia@concellodemoana.org", "idioma": "gl", "tramo": "B" },
+  { "concello": "Nigrán", "email": "info@nigran.org", "idioma": "gl", "tramo": "B" },
+  { "concello": "Sanxenxo", "email": "info@sanxenxo.org", "idioma": "gl", "tramo": "B" },
+  { "concello": "Tui", "email": "concellotui@concellotui.org", "idioma": "gl", "tramo": "B" },
+  { "concello": "Poio", "email": "poio@concellopoio.gal", "idioma": "gl", "tramo": "B" },
+  { "concello": "Mos", "email": "informacion@concellomos.es", "idioma": "gl", "tramo": "B" },
+  { "concello": "Gondomar", "email": "alcaldia@concellodegondomar.com", "idioma": "gl", "tramo": "B" },
+  { "concello": "Tomiño", "email": "comunicacion@tomino.gal", "idioma": "gl", "tramo": "B" },
+  { "concello": "Cambados", "email": "alcaldia@cambados.es", "idioma": "gl", "tramo": "B" },
+  { "concello": "Baiona", "email": "secretaria@baiona.org", "idioma": "gl", "tramo": "B" }
+]

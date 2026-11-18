@@ -1,0 +1,12 @@
+[
+  { "concello": "Bueu", "email": "concello@concellodebueu.gal", "idioma": "gl", "tramo": "B" },
+  { "concello": "O Grove", "email": "alcaldia@concellodogrove.es", "idioma": "gl", "tramo": "B" },
+  { "concello": "Vilanova de Arousa", "email": "rexistroxeral@vilanovadearousa.com", "idioma": "gl", "tramo": "B" },
+  { "concello": "Salvaterra de Miño", "email": "rexistro@concellodesalvaterra.org", "idioma": "gl", "tramo": "B" },
+  { "concello": "A Guarda", "email": "alcaldia@aguarda.es", "idioma": "gl", "tramo": "B" },
+  { "concello": "Caldas de Reis", "email": "concello@caldasdereis.com", "idioma": "gl", "tramo": "C" },
+  { "concello": "Salceda de Caselas", "email": "alcaldia@salcedadecaselas.es", "idioma": "gl", "tramo": "C" },
+  { "concello": "Silleda", "email": "info@silleda.gal", "idioma": "gl", "tramo": "C" },
+  { "concello": "Soutomaior", "email": "alcaldia@soutomaior.com", "idioma": "gl", "tramo": "C" },
+  { "concello": "O Rosal", "email": "orosal@concellodorosal.es", "idioma": "gl", "tramo": "C" }
+]

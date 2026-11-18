@@ -210,3 +210,23 @@ node --experimental-strip-types scripts/send-batch.mjs --file tmp/batch-2026-11-
 - Pausa de 1,2 s entre envíos y registro en `tmp/batch-<fecha>.json`.
 - El límite de 10/día es una regla de campaña, no del proveedor: el script la aplica para que no se olvide.
 
+Los lotes viven en `campaign/batches/` (versionados, no en `tmp/`). Un archivo por día; ver el `README.md` de esa carpeta.
+
+### 15.5 Base de contactos completa (61 concellos)
+
+Fuente única: **directorio oficial de la Deputación de Pontevedra** — <https://www.depo.gal/es/datos-concellos-da-provincia-de-pontevedra> (consultado el 18/11/2026). De ahí salen el correo, el teléfono, el alcalde/alcaldesa y la comarca de cada concello.
+
+`CONTACTOS_PONTEVEDRA.csv` tiene **62 filas**: los 61 concellos más una fila extra con la Oficina de Informática de Vigo.
+
+| Tramo | Concellos | Estado |
+|---|---|---|
+| A | 10 | contactados (17/11) |
+| B | 15 | 10 contactados (18/11) · 5 pendientes |
+| C | 13 | pendientes |
+| D | 23 | pendientes |
+
+- **Verificado:** concello, comarca, alcalde, correo y teléfono.
+- **Pendiente:** la cifra de habitantes de C y D. El tramo ya está asignado por población; falta el dato exacto en la columna.
+- **Buzones especiales** (no son `@concellox.gal`): Valga y Catoira usan `eidolocal.es` (servicio mancomunado); Covelo, `rexistro.covelo@fegamp.gal`; Portas, `@concellos.depontevedra.es`; Arbo, un Gmail.
+- **Regla:** un destinatario por concello y por toque. Nada de enviar a varios buzones del mismo concello a la vez.
+
