@@ -15,7 +15,7 @@ const COPY = {
   gl: {
     brand: ["CHESS AI", "AGENCY"],
     brandSub: "Intelixencia Artificial para a Administración Local",
-    nav: { inclue: "Que inclúe", como: "Como traballamos", garantias: "Garantías", contacto: "Contacto" },
+    nav: { inclue: "Que inclúe", como: "Como traballamos", metricas: "Obxectivos", garantias: "Garantías", contacto: "Contacto" },
     ctaNav: "Solicitar demostración",
     heroTag: "Para concellos e entidades locais",
     h1first: "A información municipal,",
@@ -80,6 +80,16 @@ const COPY = {
         t: "Decisión con datos",
         d: "Ao rematar entregamos os resultados. A continuidade decídea o concello.",
       },
+    ],
+    metricsTitle: "Obxectivos medibles",
+    metricsSub:
+      "O que se pode medir, mídese. Estes son os indicadores que acordamos por escrito na fase inicial.",
+    metrics: [
+      { v: "−60 %", l: "tempo en consultas internas" },
+      { v: "−50 %", l: "tempo en redacción de borradores" },
+      { v: "+40 %", l: "consultas resoltas no primeiro contacto" },
+      { v: "100 %", l: "respostas con fonte citada" },
+      { v: "< 24 h", l: "tempo de resposta á cidadanía" },
     ],
     guarTitle: "Garantías",
     guarSub: "O principio é sinxelo: a IA analiza, asiste e propón; as persoas deciden.",
@@ -153,7 +163,7 @@ const COPY = {
   es: {
     brand: ["CHESS AI", "AGENCY"],
     brandSub: "Inteligencia Artificial para la Administración Local",
-    nav: { inclue: "Qué incluye", como: "Cómo trabajamos", garantias: "Garantías", contacto: "Contacto" },
+    nav: { inclue: "Qué incluye", como: "Cómo trabajamos", metricas: "Objetivos", garantias: "Garantías", contacto: "Contacto" },
     ctaNav: "Solicitar demostración",
     heroTag: "Para ayuntamientos y entidades locales",
     h1first: "La información municipal,",
@@ -218,6 +228,16 @@ const COPY = {
         t: "Decisión con datos",
         d: "Al terminar entregamos los resultados. La continuidad la decide el ayuntamiento.",
       },
+    ],
+    metricsTitle: "Objetivos medibles",
+    metricsSub:
+      "Lo que se puede medir, se mide. Estos son los indicadores que acordamos por escrito en la fase inicial.",
+    metrics: [
+      { v: "−60 %", l: "tiempo en consultas internas" },
+      { v: "−50 %", l: "tiempo en redacción de borradores" },
+      { v: "+40 %", l: "consultas resueltas en el primer contacto" },
+      { v: "100 %", l: "respuestas con fuente citada" },
+      { v: "< 24 h", l: "tiempo de respuesta a la ciudadanía" },
     ],
     guarTitle: "Garantías",
     guarSub: "El principio es sencillo: la IA analiza, asiste y propone; las personas deciden.",
@@ -374,6 +394,9 @@ export default function CampanaLanding() {
             <a href="#como" className="rounded-lg px-3 py-1.5 text-sm text-slate-300 hover:bg-slate-800 hover:text-brand-200">
               {t.nav.como}
             </a>
+            <a href="#metricas" className="rounded-lg px-3 py-1.5 text-sm text-slate-300 hover:bg-slate-800 hover:text-brand-200">
+              {t.nav.metricas}
+            </a>
             <a href="#garantias" className="rounded-lg px-3 py-1.5 text-sm text-slate-300 hover:bg-slate-800 hover:text-brand-200">
               {t.nav.garantias}
             </a>
@@ -480,6 +503,28 @@ export default function CampanaLanding() {
               </li>
             ))}
           </ol>
+        </div>
+      </section>
+
+      {/* Métricas / objetivos medibles */}
+      <section id="metricas" className="relative border-t border-slate-800/70 py-16">
+        <div className="mx-auto max-w-6xl px-6">
+          <h2 className="text-2xl font-bold sm:text-3xl">{t.metricsTitle}</h2>
+          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-slate-400">{t.metricsSub}</p>
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+            {t.metrics.map((m) => (
+              <div
+                key={m.l}
+                className="rounded-2xl border border-brand-500/30 bg-brand-500/5 p-5 text-center"
+              >
+                <p className="text-3xl font-extrabold tracking-tight text-brand-300">{m.v}</p>
+                <p className="mt-2 text-xs leading-relaxed text-slate-300">{m.l}</p>
+              </div>
+            ))}
+          </div>
+          <p className="mt-6 text-xs text-slate-500">
+            Indicadores acordados por escrito na fase inicial. Medición ao finalizar as 6 semanas.
+          </p>
         </div>
       </section>
 
