@@ -185,12 +185,32 @@ Mismo remitente y misma plantilla neutra (`firstContactEmail`, gallego) que el d
 
 Los 10 con estado `delivered` en Resend (verificado el mismo día) y copia de control a `gmparamos@gmail.com` (BCC). Límite del día consumido: 10/10.
 
+### 15.2c Envío del 19/11/2026 (día 3)
+
+5 restantes del segmento B y 5 del segmento C, por orden de población.
+
+| Concello | Destinatario | Resend | Estado |
+|---|---|---|---|
+| Bueu | concello@concellodebueu.gal | 01a1f30d-6eeb | delivered |
+| O Grove | alcaldia@concellodogrove.es | 01a1f30d-7439 | delivered |
+| Vilanova de Arousa | rexistroxeral@vilanovadearousa.com | 01a1f30d-79b5 | delivered |
+| Salvaterra de Miño | rexistro@concellodesalvaterra.org | 01a1f30d-7fc9 | delivered |
+| A Guarda | alcaldia@aguarda.es | 01a1f30d-8533 | delivered |
+| Caldas de Reis | concello@caldasdereis.com | 01a1f30d-8b0b | **bounced** |
+| Salceda de Caselas | alcaldia@salcedadecaselas.es | 01a1f30d-90c7 | delivered |
+| Silleda | info@silleda.gal | 01a1f30d-966e | delivered |
+| Soutomaior | alcaldia@soutomaior.com | 01a1f30d-9cb8 | delivered |
+| O Rosal | orosal@concellodorosal.es | 01a1f30d-a2b1 | delivered |
+
+9 de 10 entregados. **Caldas de Reis rebotó**: el dominio `caldasdereis.com` usa un buzón que ya no acepta correo. El aviso legal y la sede electrónica del concello publican `concello@caldasdereis.gal`, que es la dirección de reenvío del 20/11. El CSV queda en estado `rebotado` hasta que salga el reenvío.
+
 **Calendario de llamadas resultante:**
 
 | Lote | Envío | Toque 2 (teléfono) |
 |---|---|---|
 | 10 primeros (segmento A) | 17/11 | **viernes 20/11** |
 | 10 siguientes (segmento B) | 18/11 | **lunes 23/11** (el día 3 cae en sábado) |
+| 10 del día 3 (B y C) | 19/11 | **martes 24/11** (el día 3 cae en domingo) |
 
 Así las 20 llamadas no se acumulan en la misma jornada: 10 el viernes y 10 el lunes.
 
