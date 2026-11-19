@@ -19,6 +19,8 @@
 | **Dossier de licitación** | `LICITACION_CHECKLIST_VIGO.md` | Solo si se abre licitación pública (Vigo). | Concello de Vigo |
 | **Guion de llamada** | `GUION_LLAMADA_CONCELLOS.md` | Toque 2 (día 3), llamada telefónica. | Interno |
 | **Hoja de llamadas del día** | `LLAMADAS_2026-11-26.md` | Lista de marcado con teléfonos, buzones y alcaldes (26/11). | Interno |
+| **Hoja de llamadas de ciudades** | `LLAMADAS_2026-12-01.md` | Llamadas a Ourense, Santiago y Lugo, con guion adaptado. | Interno |
+| **Agenda diaria** | `AGENDA_CAMPANA.md` | Qué toca cada día del 19/11 al 16/12: envíos, llamadas y enlaces. | Interno |
 | **Lotes de envío** | `campaign/batches/` | JSON de cada tanda de 10 correos, con su registro. | Interno |
 | **Campaña 2 (ciudades)** | `CAMPANA_2_OURENSE_SANTIAGO_LUGO.md` | Ourense, Santiago y Lugo: contactos, calendario y discurso para ciudades. | Interno |
 | **Contactos campaña 2** | `CONTACTOS_CAMPANA_2.csv` | Tres ciudades >100.000 con buzón y teléfono verificados. | Interno |

@@ -26,9 +26,9 @@ En la provincia de Ourense **solo la capital supera los 20.000 habitantes**. No 
 
 Por eso la campaña 2 son **tres ciudades**, no una lista provincial. Si el criterio era «capitales + área», habría que añadir A Coruña y Ferrol, que hoy no están en el encargo.
 
-**Extensión opcional (banda 10.000–20.000 en Ourense):** Verín (≈13.956), O Barco de Valdeorras (≈13.368), O Carballiño (≈13.000–14.000) y Barbadás (≈11.201). Xinzo de Limia se queda en ≈9.699. Son cuatro ayuntamientos, no una campaña: encajan mejor como anexo de la campaña de Pontevedra que como segunda campaña propia.
+**Extensión ya aprobada (banda 10.000–20.000 en Ourense):** O Carballiño (14.249), Verín (13.956), O Barco de Valdeorras (13.368) y Barbadás (11.201). Xinzo de Limia se queda en 9.699 y no entra. Son cuatro ayuntamientos, no una campaña: van como segundo lote de la campaña 2, con el discurso de concellos pequeños.
 
-> Población: INE, 1 de enero de 2025 (cifras redondeadas). Revisar antes de citarlas en una propuesta.
+> Población: censo municipal recogido por la FEGAMP y el directorio de la Deputación de Ourense. No se ha contrastado una a una con el IGE: úsese solo para segmentar.
 
 ---
 
@@ -56,15 +56,20 @@ El cupo de 10 correos/día es del buzón, no de la campaña. Por eso la campaña
 
 | Fecha | Acción | Detalle |
 |---|---|---|
-| 20/11 (vie) | Llamadas lote A (Pontevedra) | No se envía |
-| 23/11 (lun) | Lote Pontevedra (10) | 8 C + A Illa + Meis |
-| 24/11 (mar) | Lote Pontevedra (10) | — |
-| 25/11 (mié) | Lote Pontevedra (10) | — |
-| 26/11 (jue) | Último envío Pontevedra (1) + llamadas lote 19/11 | Cierra los 61 |
-| **27/11 (vie)** | **Campaña 2: 3 correos** | 3/10 del cupo |
-| **1/12 (mar)** | **Toque 2: llamadas** | El día 3 cae en domingo 30/11 |
-| **4/12 (vie)** | **Toque 3: segundo correo** | Solo a quien no haya respondido |
-| **11/12 (vie)** | **Toque 4: cierre de cortesía** | Último contacto |
+| 20/11 (vie) | Llamadas lote A (Pontevedra) + reenvío Caldas | No hay envío de lote |
+| 23/11 (lun) | Lote Pontevedra (10) + llamadas lote B | 8 C + A Illa + Meis |
+| 24/11 (mar) | Lote Pontevedra (10) + llamadas lote 19/11 | — |
+| 25/11 (mié) | Lote Pontevedra (10) | Sin llamadas |
+| 26/11 (jue) | Último envío Pontevedra (1) + llamadas lote 23/11 | Cierra los 61 |
+| **27/11 (vie)** | **Campaña 2: 3 correos** + llamadas lote 24/11 | 3/10 del cupo |
+| 30/11 (lun) | Llamadas lote 25/11 | Últimas de Pontevedra |
+| **1/12 (mar)** | **Toque 2: llamadas a las 3 ciudades** | El día 3 cae en domingo 30/11 |
+| **2/12 (mié)** | **Extensión: 4 correos** | O Carballiño, Verín, O Barco, Barbadás |
+| **4/12 (vie)** | **Toque 3: segundo correo a las ciudades** | Solo a quien no haya respondido |
+| **7/12 (lun)** | **Extensión: llamadas** | El día 3 cae en sábado 5/12 |
+| **9/12 (mié)** | **Extensión: segundo correo** | Solo a quien no haya respondido |
+| **11/12 (vie)** | **Toque 4: cierre de cortesía a las ciudades** | Último contacto |
+| **16/12 (mié)** | **Extensión: cierre de cortesía** | Fin de la campaña 2 |
 
 Si algún lote de Pontevedra se retrasa, la campaña 2 se desplaza: **primero se termina la campaña en curso**. Si una de las tres ciudades responde, su llamada tiene prioridad sobre las de Pontevedra.
 
@@ -109,7 +114,7 @@ Responder a: chessagencyai@gmail.com
 Enlace: https://ia-administracion-local.vercel.app/campana
 ```
 
-La plantilla incluye una frase sobre «valorar un posible proyecto piloto». En estas tres ciudades conviene **no subrayarla** en la llamada: el primer objetivo es la demostración, y el piloto solo se menciona si preguntan por compromiso o presupuesto.
+La plantilla de fase 1 ya no menciona el piloto: dice «valorar el alcance y el ritmo de una implantación adaptada». El primer objetivo sigue siendo la demostración; el piloto solo se menciona si preguntan por compromiso o presupuesto.
 
 ---
 
@@ -122,14 +127,14 @@ La plantilla incluye una frase sobre «valorar un posible proyecto piloto». En 
 | Lugo con 010 | `010@lugo.gal` es el buzón más visible pero enruta como atención ciudadana. | Usar `alcaldia@lugo.gal`; el 010 solo si rebota. |
 | Cupo diario | 10 correos/día desde el mismo buzón. | No enviar campaña 2 hasta cerrar Pontevedra. |
 | Respuesta institucional | En ciudades, el alcalde no lee el correo; lo deriva. | Pedir en la llamada el nombre de la persona de Administración Electrónica. |
-| Datos de población | Cifras INE 2025 redondeadas, no auditadas para esta campaña. | No usarlas como argumento de venta; solo para segmentar. |
+| Datos de población | Cifras del censo municipal (FEGAMP/Deputación), no auditadas para esta campaña. | No usarlas como argumento de venta; solo para segmentar. |
 
 ---
 
 ## 9. Checklist antes de enviar (27/11)
 
 - [ ] Los 61 concellos de Pontevedra están contactados o descartados; el cupo del 26/11 quedó cerrado.
-- [ ] `CONTACTOS_CAMPANA_2.csv` revisado: 3 filas, un destinatario por concello.
+- [ ] `CONTACTOS_CAMPANA_2.csv` revisado: 7 filas (3 ciudades + 4 extensión), un destinatario por concello.
 - [ ] Simulación del lote: `node --experimental-strip-types scripts/send-batch.mjs --file campaign/batches/2026-11-27.json`
 - [ ] Confirmar que el asunto y el enlace son los neutros (`/campana`).
 - [ ] Envío real con `--commit` y registro de los tres `Resend ID` en el CSV.
@@ -137,19 +142,25 @@ La plantilla incluye una frase sobre «valorar un posible proyecto piloto». En 
 
 ---
 
-## 10. Extensión 10.000–20.000 (si se aprueba)
+## 10. Extensión 10.000–20.000 (aprobada)
 
-No se prepara lote hasta que el usuario lo decida. Candidatos en la provincia de Ourense, con población aproximada:
+Lote de 4 dentro de la campaña 2, con el discurso de concellos pequeños (no el de ciudades). Envío el **miércoles 02/12**; llamadas el **lunes 07/12**.
 
-| Concello | Habitantes | Nota |
-|---|---:|---|
-| Verín | 13.956 | Cabecera de Verín; sede comarcal |
-| O Barco de Valdeorras | 13.368 | Cabecera de Valdeorras |
-| O Carballiño | ≈13.000 | Cabecera de O Carballiño |
-| Barbadás | 11.201 | Área metropolitana de Ourense |
-| Xinzo de Limia | 9.699 | Por debajo del corte; solo si se baja a 9.000 |
+| Concello | Habitantes | Buzón | Teléfono | Alcalde/alcaldesa |
+|---|---:|---|---|---|
+| O Carballiño | 14.249 | `concello@carballino.gal` | 988 530 007 | Francisco José Fumega Piñeiro (en funciones: José Castro Gil) |
+| Verín | 13.956 | `notificacions@verin.gal` | 988 410 000 | Gerardo Seoane Fidalgo |
+| O Barco de Valdeorras | 13.368 | `alcaldebarco@concellodobarco.org` | 988 320 202 | Aurentino Alonso Araujo |
+| Barbadás | 11.201 | `concello@barbadas.es` | 988 360 000 | Xosé Carlos Valcárcel Doval |
 
-Si se activa, sería un **lote de 4** dentro de la misma campaña 2, con el mismo discurso que los concellos de Pontevedra (no el de ciudades).
+**Avisos:**
+
+- **O Carballiño:** el alcalde está de baja temporal; despacha el teniente alcalde, José Castro Gil. El concello solo publica `concello@`.
+- **Verín:** la web oficial es `verin.es` (`verin.gal` redirige). Solo publica `notificacions@verin.gal`, que es buzón de registro; si no hay respuesta, pedir en la llamada el correo directo de Secretaría.
+- **O Barco:** el buzón de alcaldía es `alcaldebarco@concellodobarco.org`, aunque la web use el dominio `.gal`.
+- **Barbadás:** el concello publica `concello@` y `administracion@`; se usa el general.
+
+Lote: `campaign/batches/2026-12-02.json` · Seguimiento en `CONTACTOS_CAMPANA_2.csv` (tramo `EXT`).
 
 ---
 
