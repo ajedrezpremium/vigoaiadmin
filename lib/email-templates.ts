@@ -611,8 +611,8 @@ export function firstContactEmail(lead: LeadInput): { subject: string; html: str
     ? "Proponemos conocer las posibilidades de la solución mediante una demostración práctica y sin compromiso."
     : "Propoñemos coñecer as posibilidades da solución mediante unha demostración práctica e sen compromiso.";
   const uni2 = es
-    ? "A partir de las necesidades identificadas, podremos valorar una implantación progresiva y un posible proyecto piloto adaptado a la realidad de cada municipio."
-    : "A partir das necesidades identificadas, poderemos valorar unha implantación progresiva e un posible proxecto piloto adaptado á realidade de cada municipio.";
+    ? "A partir de las necesidades identificadas, podremos valorar el alcance y el ritmo de una implantación adaptada a la realidad de cada municipio."
+    : "A partir das necesidades identificadas, poderemos valorar o alcance e o ritmo dunha implantación adaptada á realidade de cada municipio.";
   const cta = es ? "SOLICITE UNA DEMOSTRACIÓN" : "SOLICITE UNHA DEMOSTRACIÓN";
   const note = es
     ? "Sin compromiso · Adaptable a cada Ayuntamiento · Implantación progresiva."

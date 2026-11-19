@@ -20,6 +20,8 @@
 | **Guion de llamada** | `GUION_LLAMADA_CONCELLOS.md` | Toque 2 (día 3), llamada telefónica. | Interno |
 | **Hoja de llamadas del día** | `LLAMADAS_2026-11-26.md` | Lista de marcado con teléfonos, buzones y alcaldes (26/11). | Interno |
 | **Lotes de envío** | `campaign/batches/` | JSON de cada tanda de 10 correos, con su registro. | Interno |
+| **Campaña 2 (ciudades)** | `CAMPANA_2_OURENSE_SANTIAGO_LUGO.md` | Ourense, Santiago y Lugo: contactos, calendario y discurso para ciudades. | Interno |
+| **Contactos campaña 2** | `CONTACTOS_CAMPANA_2.csv` | Tres ciudades >100.000 con buzón y teléfono verificados. | Interno |
 | **Infografía comercial** | `COMERCIAL_INFOGRAFIA.html` | Presentación en reunión. | Todos |
 | **Video 30s** | `COMERCIAL_VIDEO_30S.md` | Redes sociales, email. | Todos |
 | **Firma Gmail** | `FIRMA_GMAIL.html` | Configuración de Gmail (una sola vez). | Interno |
