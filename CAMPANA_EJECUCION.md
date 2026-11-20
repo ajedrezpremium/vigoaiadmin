@@ -202,7 +202,9 @@ Los 10 con estado `delivered` en Resend (verificado el mismo día) y copia de co
 | Soutomaior | alcaldia@soutomaior.com | 01a1f30d-9cb8 | delivered |
 | O Rosal | orosal@concellodorosal.es | 01a1f30d-a2b1 | delivered |
 
-9 de 10 entregados. **Caldas de Reis rebotó**: el dominio `caldasdereis.com` usa un buzón que ya no acepta correo. El aviso legal y la sede electrónica del concello publican `concello@caldasdereis.gal`, que es la dirección de reenvío del 20/11. El CSV queda en estado `rebotado` hasta que salga el reenvío.
+9 de 10 entregados. **Caldas de Reis rebotó**: el dominio `caldasdereis.com` usa un buzón que ya no acepta correo. El aviso legal y la sede electrónica del concello publican `concello@caldasdereis.gal`, que es la dirección de reenvío del 20/11.
+
+**Reenvío del 20/11:** enviado a `concello@caldasdereis.gal` con el mismo asunto y plantilla (Resend `01a1f838-16bc-7943-846d-7ae81566b537`), `delivered`. El CSV pasa a `contactado` y la llamada se mantiene el 24/11.
 
 **Calendario de llamadas resultante:**
 

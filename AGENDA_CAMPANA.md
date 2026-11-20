@@ -14,7 +14,7 @@
 | Día | Envíos | Llamadas | Notas | Hecho |
 |---|---|---|---|---|
 | **jue 19** | 10 correos (lote 19/11) | — | 9/10 `delivered`; Caldas rebotado. Población IGE completada. | [x] |
-| **vie 20** | 1: Caldas → `concello@caldasdereis.gal` | **10 del lote A** (Vigo + 9 concellos) | Anexo A de `GUION_LLAMADA_CONCELLOS.md`. Reenviar Caldas antes de las 09:30. | [ ] |
+| **vie 20** | 1: Caldas → `concello@caldasdereis.gal` (hecho, delivered) | **10 del lote A** (Vigo + 9 concellos) | Hoja propia: `LLAMADAS_2026-11-20.md`. | [ ] |
 | sáb 21 | — | — | Descanso. | — |
 | dom 22 | — | — | Descanso. | — |
 

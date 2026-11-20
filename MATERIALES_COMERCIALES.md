@@ -18,6 +18,7 @@
 | **Propuesta completa** | `COMERCIAL_PROPUESTA.md` | Reunión comercial, anexo. | Todos |
 | **Dossier de licitación** | `LICITACION_CHECKLIST_VIGO.md` | Solo si se abre licitación pública (Vigo). | Concello de Vigo |
 | **Guion de llamada** | `GUION_LLAMADA_CONCELLOS.md` | Toque 2 (día 3), llamada telefónica. | Interno |
+| **Hoja de llamadas del día** | `LLAMADAS_2026-11-20.md` | Primera tanda: Vigo (piloto) + 9 concellos del lote A. | Interno |
 | **Hoja de llamadas del día** | `LLAMADAS_2026-11-26.md` | Lista de marcado con teléfonos, buzones y alcaldes (26/11). | Interno |
 | **Hoja de llamadas de ciudades** | `LLAMADAS_2026-12-01.md` | Llamadas a Ourense, Santiago y Lugo, con guion adaptado. | Interno |
 | **Agenda diaria** | `AGENDA_CAMPANA.md` | Qué toca cada día del 19/11 al 16/12: envíos, llamadas y enlaces. | Interno |
