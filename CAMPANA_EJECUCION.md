@@ -163,6 +163,8 @@ Los correos de fase 1 enlazan a `https://ia-administracion-local.vercel.app/camp
 
 Es un proyecto Vercel gemelo con el mismo codigo y las mismas variables. Hay que desplegar en los dos.
 
+**Decisión 20/11/2026: se conserva este enlace.** Se evaluó `https://agency.ajedrezpremium.com/` y se descartó. Es la web corporativa de la agencia (CNAME a otro proyecto de Vercel, título «Chess Agency IA - Inteligencia Artificial para Ajedrez y Deportes») y su ruta `/campana` devuelve la portada, no la demo: meterlo en los correos dejaría al destinatario fuera de la campaña. Reapuntarlo tumbaría la web de la agencia. Tampoco se crea un subdominio nuevo, porque los 31 correos ya enviados enlazan a esta URL y hay que evitar dos canónicos. No hay cambios en `lib/email-templates.ts` ni despliegue derivado.
+
 La pagina `/campana` es la variante neutra de `/ayuntamientos`: sin marca de Vigo, sin precios, sin "piloto" ni plazos comerciales.
 El formulario registra el lead con `orixe = landing_campana` para distinguirlo del trafico organico.
 
