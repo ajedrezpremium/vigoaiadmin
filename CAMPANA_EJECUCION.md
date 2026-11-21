@@ -168,6 +168,8 @@ Es un proyecto Vercel gemelo con el mismo codigo y las mismas variables. Hay que
 La pagina `/campana` es la variante neutra de `/ayuntamientos`: sin marca de Vigo, sin precios, sin "piloto" ni plazos comerciales.
 El formulario registra el lead con `orixe = landing_campana` para distinguirlo del trafico organico.
 
+**21/11/2026 — Proveedor Groq activado.** La clave `Vigo_AI_Admin` de `console.groq.com` estaba guardada como `GROK_API_KEY` (nombre equivocado: Groq no es Grok/xAI), asi que el router nunca la veia y la consola marcaba *Last Used: Never*. Renombrada a `GROQ_API_KEY` en los dos entornos locales y en los dos proyectos Vercel, con `GROQ_MODEL=openai/gpt-oss-120b`. Entra como cuarto intento de la cadena: OpenRouter (3 intentos) → Groq → Gemini. Verificado con `GET /v1/models` y `POST /chat/completions` (200, respuesta "OK") y con despliegue `READY` de `vigo-ai-demo` e `ia-administracion-local`. Sin cambios en `lib/llm.ts`: el proveedor ya estaba implementado en `lib/providers.ts`.
+
 ### 15.2b Envío del 18/11/2026 (día 2)
 
 Mismo remitente y misma plantilla neutra (`firstContactEmail`, gallego) que el día 1. Destinatarios del **segmento B**, los diez de mayor población.
