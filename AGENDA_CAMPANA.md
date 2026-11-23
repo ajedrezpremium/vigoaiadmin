@@ -26,7 +26,7 @@
 
 | Día | Envíos | Llamadas | Notas | Hecho |
 |---|---|---|---|---|
-| **lun 23** | 10: 8 del C + A Illa + Meis | **10 del lote B** | Anexo B del guion. Enviar a las 08:30. | [ ] |
+| **lun 23** | 10: 8 del C + A Illa + Meis | **10 del lote B** | Enviados 10/10 `delivered`. Llamadas del anexo B: Moaña, Nigrán, Sanxenxo, Tui, Poio, Mos, Gondomar, Tomiño, Cambados y Baiona. | [x] |
 | **mar 24** | 10: Cuntis, Mondariz, Moraña, As Neves, Barro, Catoira, Forcarei, Oia, Pontecesures, Pazos de Borbén | **10 del lote 19/11** (incluye Caldas) | Teléfonos en el anexo A de esta agenda. | [ ] |
 | **mié 25** | 10: Portas, Arbo, A Lama, Covelo, Rodeiro, Agolada, Crecente, O Campo Lameiro, Fornelos de Montes, Dozón | — | Día solo de envío. | [ ] |
 | **jue 26** | 1: Mondariz-Balneario | **10 del lote 23/11** | Hoja propia: `LLAMADAS_2026-11-26.md`. | [ ] |

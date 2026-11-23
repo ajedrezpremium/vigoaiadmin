@@ -220,6 +220,25 @@ Los 10 con estado `delivered` en Resend (verificado el mismo día) y copia de co
 
 Así las 20 llamadas no se acumulan en la misma jornada: 10 el viernes y 10 el lunes.
 
+### 15.2d Envío del 23/11/2026 (día 5)
+
+Lote C/D: los 8 primeros del segmento C más A Illa de Arousa y Meis (segmento D). Primer contacto con la plantilla neutra en gallego y enlace `/campana`.
+
+| Concello | Destinatario | Resend | Estado |
+|---|---|---|---|
+| Vilaboa | info@vilaboa.org | 01a207f1-dea0 | delivered |
+| Valga | concello.valga@eidolocal.es | 01a207f1-e3e7 | delivered |
+| Cerdedo-Cotobade | concello@cerdedo-cotobade.gal | 01a207f1-e935 | delivered |
+| Ponte Caldelas | alcaldia@pontecaldelas.org | 01a207f1-ee74 | delivered |
+| Meaño | concellodemeano@concellodemeano.com | 01a207f1-f3ba | delivered |
+| Ribadumia | concello@ribadumia.org | 01a207f1-f8fc | delivered |
+| Vila de Cruces | info@viladecruces.es | 01a207f1-fe3a | delivered |
+| A Cañiza | info@caniza.org | 01a207f2-0377 | delivered |
+| A Illa de Arousa | concello@ailladearousa.es | 01a207f2-08bd | delivered |
+| Meis | correo@meis.gal | 01a207f2-0dfb | delivered |
+
+**10/10 `delivered`** (verificado en Resend el mismo día). Cupo del día consumido: 10/10. Toque 2 (teléfono) el **jueves 26/11** según `LLAMADAS_2026-11-26.md`.
+
 ### 15.4 Herramienta de envío por lote
 
 `scripts/send-batch.mjs` envía hasta 10 correos desde un JSON y se detiene si el lote los supera.
