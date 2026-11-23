@@ -237,7 +237,7 @@ Lote C/D: los 8 primeros del segmento C más A Illa de Arousa y Meis (segmento D
 | A Illa de Arousa | concello@ailladearousa.es | 01a207f2-08bd | delivered |
 | Meis | correo@meis.gal | 01a207f2-0dfb | delivered |
 
-**10/10 `delivered`** (verificado en Resend el mismo día). Cupo del día consumido: 10/10. Toque 2 (teléfono) el **jueves 26/11** según `LLAMADAS_2026-11-26.md`.
+**10/10 `delivered`** (verificado en Resend el mismo día). Cupo del día consumido: 10/10. Toque 2 (teléfono) desplazado al **lunes 30/11** por la pausa del 24–27/11; hoja: `LLAMADAS_PONTEVEDRA_PENDIENTES.md`.
 
 ### 15.4 Herramienta de envío por lote
 

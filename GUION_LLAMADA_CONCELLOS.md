@@ -152,4 +152,4 @@ Central de Vigo si no responde la Oficina de Informática: **986 810 100**.
 
 Cuando el volumen crece, la lista del día vive en su propio archivo para no mezclar lotes:
 
-- `LLAMADAS_2026-11-26.md` — 10 llamadas del lote enviado el 23/11 (8 del segmento C + 2 del D), más los teléfonos de todo el C y el D.
+- `LLAMADAS_PONTEVEDRA_PENDIENTES.md` - llamadas de los lotes del 18, 19 y 23/11 desplazadas al 30/11, 1/12 y 2/12.

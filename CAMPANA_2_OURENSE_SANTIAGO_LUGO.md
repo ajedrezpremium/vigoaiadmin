@@ -1,38 +1,43 @@
-# Campaña 2 · Ourense, Santiago de Compostela y Lugo
+# Campaña 2 · Ciudades gallegas y bloque G20
 
-**Preparado por CHESS AI AGENCY · 19/11/2026**
-**Base de contactos:** `CONTACTOS_CAMPANA_2.csv` · **Lote:** `campaign/batches/2026-11-27.json`
+**Preparado por CHESS AI AGENCY · 19/11/2026 · actualizado el 23/11/2026**
+**Base de contactos:** `CONTACTOS_CAMPANA_2.csv` y `CONTACTOS_GALICIA_20K.csv`
+**Lotes:** `campaign/batches/2026-11-30.json`, `2026-12-01.json` y `2026-12-02.json`
 **Enlace de campaña:** `https://ia-administracion-local.vercel.app/campana`
 
 ---
 
 ## 1. Qué es y qué no es esta campaña
 
-Es la extensión de la campaña municipal a las tres ciudades gallegas de más de 100.000 habitantes que no son Vigo. Usa **la misma plantilla neutra** de la fase 1: sin nombre de producto, sin precio y sin propuesta de piloto cerrada. El objetivo del primer correo es el mismo que en Pontevedra: **conseguir una demostración**, no vender.
+Es la extensión de la campaña municipal a las ciudades gallegas que no son Vigo y a los municipios de A Coruña que superan los 20.000 habitantes. Usa **la misma plantilla neutra** de la fase 1: sin nombre de producto, sin precio y sin propuesta de piloto cerrada. El objetivo del primer correo es el mismo que en Pontevedra: **conseguir una demostración**, no vender.
 
 No es la campaña de Vigo. Vigo tiene su propia propuesta (`finalEmail`, piloto 12.500 €) y no debe recibir esta plantilla.
 
+**Cambio de calendario del 23/11:** la campaña se pausa del 24 al 27/11 y arranca el **lunes 30/11**. Se añaden los **10 municipios de A Coruña >20.000** que antes estaban fuera del encargo.
+
 ---
 
-## 2. Aviso de alcance: «+20.000 habitantes» no da 61 municipios
+## 2. Alcance real: 13 municipios pendientes, no 61
 
-En la provincia de Ourense **solo la capital supera los 20.000 habitantes**. No hay una lista de municipios ourensanos que enviar: hay uno.
+En Galicia hay **23 municipios >20.000 habitantes**. Diez son de Pontevedra y ya están contactados (Vigo incluido, con propuesta propia). Quedaban **13**:
 
-| Provincia | Municipios > 20.000 | Cuáles |
+| Provincia | Municipios > 20k | Situación |
 |---|---|---|
 | Ourense | 1 | Ourense |
-| A Coruña | varios | Santiago de Compostela (y el resto de la comarca, fuera de esta campaña) |
+| A Coruña | 11 | Santiago de Compostela + 10 del bloque G20 |
 | Lugo | 1 | Lugo |
 
-Por eso la campaña 2 son **tres ciudades**, no una lista provincial. Si el criterio era «capitales + área», habría que añadir A Coruña y Ferrol, que hoy no están en el encargo.
+**Bloque G20 (A Coruña):** A Coruña, Ferrol, Narón, Oleiros, Arteixo, Ames, Carballo, Culleredo, Ribeira y Cambre. Los diez superan los 20.000 habitantes según la FEGAMP.
 
-**Extensión ya aprobada (banda 10.000–20.000 en Ourense):** O Carballiño (14.249), Verín (13.956), O Barco de Valdeorras (13.368) y Barbadás (11.201). Xinzo de Limia se queda en 9.699 y no entra. Son cuatro ayuntamientos, no una campaña: van como segundo lote de la campaña 2, con el discurso de concellos pequeños.
+**Extensión 10.000–20.000 en Ourense:** O Carballiño (14.249), Verín (13.956), O Barco de Valdeorras (13.368) y Barbadás (11.201). Xinzo de Limia se queda en 9.699 y no entra.
 
-> Población: censo municipal recogido por la FEGAMP y el directorio de la Deputación de Ourense. No se ha contrastado una a una con el IGE: úsese solo para segmentar.
+> Población: censo municipal recogido por la FEGAMP y los directorios provinciales. No se ha contrastado una a una con el IGE: úsese solo para segmentar.
 
 ---
 
-## 3. Contactos verificados (19/11/2026)
+## 3. Contactos verificados
+
+### 3.1 Las tres ciudades
 
 | Concello | Buzón | Teléfono | Alcalde / alcaldesa | Fuente |
 |---|---|---|---|---|
@@ -40,11 +45,29 @@ Por eso la campaña 2 son **tres ciudades**, no una lista provincial. Si el crit
 | Santiago de Compostela | `informacion@santiagodecompostela.gal` | 981 542 300 | Goretti Sanmartín Rei | [contacto oficial](https://santiagodecompostela.gal/gl/contacto) y [saludo de la alcaldesa](https://santiagodecompostela.gal/gl/saudo-da-alcaldesa) |
 | Lugo | `alcaldia@lugo.gal` | 982 297 133 · central 982 297 100 | Elena Candia López | [El Ayuntamiento de Lugo](https://concellodelugo.gal/es/el-ayuntamiento-de-lugo/portada) |
 
+### 3.2 Bloque G20 (A Coruña)
+
+| Concello | Hab. | Buzón | Teléfono | Alcalde / alcaldesa | Fuente |
+|---|---:|---|---|---|---|
+| A Coruña | 251.543 | `alcaldia@coruna.gal` | 981 184 200 | Inés Rey García | [FEGAMP](https://www.fegamp.gal/concello/coruna) |
+| Ferrol | 64.367 | `web@ferrol.es` | 981 944 000 | José Manuel Rey Varela | [FEGAMP](https://www.fegamp.gal/concello/ferrol) |
+| Narón | 39.953 | `naron@naron.gal` | 981 337 700 | Marián Ferreiro Díaz | [contacto oficial](https://naron.gal/cat/gal/concello/contacto) |
+| Oleiros | 38.793 | `alcaldia@oleiros.org` | 981 610 000 | Ángel García Seoane | [alcaldía](https://www.oleiros.org/alcald%C3%ADa) |
+| Arteixo | 34.403 | `correo@arteixo.org` | 981 659 000 | José Carlos Calvelo Martínez | [web oficial](https://www.arteixo.org/) |
+| Ames | 33.276 | `atencioncidada@concellodeames.gal` | 981 080 300 | José Blas García Piñeiro | [contacto](https://www.concellodeames.gal/gl/atencion-cidada/contacto) |
+| Carballo | 32.120 | `infocarballo@carballo.gal` | 981 704 100 | Daniel Pérez López | [FEGAMP](https://www.fegamp.gal/concello/carballo) |
+| Culleredo | 31.254 | `info@culleredo.es` | 981 677 777 | José Ramón Rioboo Castro | [FEGAMP](https://www.fegamp.gal/concello/culleredo) |
+| Ribeira | 27.102 | `atencionciudadana@ribeira.gal` | 981 835 417 | María Sampedro Fernández | [corporación](https://www.ribeira.gal/corporaci%C3%B3n-municipal) |
+| Cambre | 24.765 | `cambre@cambre.org` | 981 613 187 | Diana Piñeiro Fernández | [FEGAMP](https://www.fegamp.gal/concello/cambre) |
+
 ### Decisiones de buzón
 
 - **Ourense:** alcaldía directa. Existe `contacto@ourense.gal` y `atencioncidada@ourense.es` (010); se evitan en el primer contacto.
-- **Santiago:** el concello solo publica `informacion@`. `alcaldia@santiagodecompostela.gal` aparece en directorios de terceros y **no está verificado en la web oficial**: no se usa. Es la única de las tres que empieza por buzón general, y por eso el asunto y el texto deben leerse como propuesta institucional, no como consulta ciudadana.
+- **Santiago:** el concello solo publica `informacion@`. `alcaldia@santiagodecompostela.gal` aparece en directorios de terceros y **no está verificado en la web oficial**: no se usa.
 - **Lugo:** alcaldía verificada en la ficha oficial. `010@lugo.gal` existe, pero se evita.
+- **A Coruña:** la web municipal no publica correo en la página de contacto; se usa el buzón de alcaldía que lista la FEGAMP. Confirmar en la llamada.
+- **Ferrol:** la FEGAMP publica `web@ferrol.es` como buzón general. No hay buzón directo de alcaldía verificado; se pide en la llamada.
+- **Cambre:** la web tiene el certificado TLS roto; buzón y teléfono vienen de la FEGAMP.
 
 Un solo destinatario por concello. Nada de copias a informática en el primer correo.
 
@@ -52,37 +75,32 @@ Un solo destinatario por concello. Nada de copias a informática en el primer co
 
 ## 4. Calendario
 
-El cupo de 10 correos/día es del buzón, no de la campaña. Por eso la campaña 2 **no puede solaparse** con los últimos lotes de Pontevedra.
+El cupo de 10 correos/día es del buzón, no de la campaña. Por eso los 13 pendientes se reparten en dos días.
 
 | Fecha | Acción | Detalle |
 |---|---|---|
-| 20/11 (vie) | Llamadas lote A (Pontevedra) + reenvío Caldas | No hay envío de lote |
-| 23/11 (lun) | Lote Pontevedra (10) + llamadas lote B | 8 C + A Illa + Meis |
-| 24/11 (mar) | Lote Pontevedra (10) + llamadas lote 19/11 | — |
-| 25/11 (mié) | Lote Pontevedra (10) | Sin llamadas |
-| 26/11 (jue) | Último envío Pontevedra (1) + llamadas lote 23/11 | Cierra los 61 |
-| **27/11 (vie)** | **Campaña 2: 3 correos** + llamadas lote 24/11 | 3/10 del cupo |
-| 30/11 (lun) | Llamadas lote 25/11 | Últimas de Pontevedra |
-| **1/12 (mar)** | **Toque 2: llamadas a las 3 ciudades** | El día 3 cae en domingo 30/11 |
-| **2/12 (mié)** | **Extensión: 4 correos** | O Carballiño, Verín, O Barco, Barbadás |
-| **4/12 (vie)** | **Toque 3: segundo correo a las ciudades** | Solo a quien no haya respondido |
-| **7/12 (lun)** | **Extensión: llamadas** | El día 3 cae en sábado 5/12 |
-| **9/12 (mié)** | **Extensión: segundo correo** | Solo a quien no haya respondido |
-| **11/12 (vie)** | **Toque 4: cierre de cortesía a las ciudades** | Último contacto |
-| **16/12 (mié)** | **Extensión: cierre de cortesía** | Fin de la campaña 2 |
+| 24–27/11 | **Pausa** | No se envía ni se llama |
+| **30/11 (lun)** | **Lote de 10** | 3 ciudades + A Coruña, Ferrol, Narón, Oleiros, Arteixo, Ames y Carballo |
+| **1/12 (mar)** | **Lote de 3** | Culleredo, Ribeira y Cambre |
+| **2/12 (mié)** | **Extensión: 4 correos** | O Carballiño, Verín, O Barco y Barbadás |
+| **3/12 (jue)** | **Toque 2: 10 llamadas** | Ciudades + los 7 del lote del 30/11 |
+| **4/12 (vie)** | **Toque 2: 3 llamadas** | Culleredo, Ribeira y Cambre |
+| **10/12 (jue)** | **Toque 2: 4 llamadas** | Extensión 10–20k (el día 3 cae en sábado 5/12) |
+| **14/12 (lun)** | **Toque 3: 2º correo a las ciudades + A Coruña** | Solo a quien no haya respondido |
+| **15/12 (mar)** | **Toque 3: 2º correo a G20-B** | Culleredo, Ribeira y Cambre |
+| **21/12 (lun)** | **Toque 4: cierre de cortesía** | Ciudades + G20-A |
+| **22/12 (mar)** | **Cierre G20-B y extensión** | Culleredo, Ribeira, Cambre + los 4 de Ourense |
 
-Si algún lote de Pontevedra se retrasa, la campaña 2 se desplaza: **primero se termina la campaña en curso**. Si una de las tres ciudades responde, su llamada tiene prioridad sobre las de Pontevedra.
+Si una ciudad responde, su llamada tiene prioridad sobre el resto. Si un lote se retrasa, se desplaza la secuencia entera.
 
 ---
 
 ## 5. Secuencia de 4 toques
 
-Idéntica a la campaña 1, con una diferencia de tono en la llamada.
-
-1. **Correo día 0 (27/11).** Plantilla `firstContactEmail`, idioma gallego, asunto `Proposta de demostración · <concello>`. Enlace a `/campana`. Sin adjuntos.
-2. **Teléfono día 3 (1/12).** No preguntar «¿recibió el correo?». Preguntar por el estado de los servicios digitales y por quién lleva la atención ciudadana. En una ciudad, el interlocutor no es el alcalde: es quien dirige Administración Electrónica o Atención Ciudadana.
-3. **Correo día 7 (4/12).** Recordatorio breve, con un caso de uso concreto elegido según la conversación telefónica. Sin precio.
-4. **Cierre día 14 (11/12).** «Dejo el tema en pausa; si en el primer trimestre queréis retomarlo, aquí estoy.» Cierra la secuencia sin quemar el contacto.
+1. **Correo día 0 (30/11 o 1/12).** Plantilla `firstContactEmail`, idioma gallego, asunto `Proposta de demostración · <concello>`. Enlace a `/campana`. Sin adjuntos.
+2. **Teléfono día 3 (3/12 o 4/12).** No preguntar «¿recibió el correo?». Preguntar por el estado de los servicios digitales y por quién lleva la atención ciudadana. En una ciudad, el interlocutor no es el alcalde: es quien dirige Administración Electrónica o Atención Ciudadana.
+3. **Correo día 7 (14/12 o 15/12).** Recordatorio breve, con un caso de uso concreto elegido según la conversación telefónica. Sin precio.
+4. **Cierre día 14 (21/12 o 22/12).** «Dejo el tema en pausa; si en el primer trimestre queréis retomarlo, aquí estoy.» Cierra la secuencia sin quemar el contacto.
 
 Responder siempre desde `chessagencyai@gmail.com`, con firma CHESS AI AGENCY. El emisor técnico sigue siendo `CHESS AI AGENCY <leads@ajedrezpremium.com>` y la copia de control `gmparamos@gmail.com`.
 
@@ -90,7 +108,7 @@ Responder siempre desde `chessagencyai@gmail.com`, con firma CHESS AI AGENCY. El
 
 ## 6. Diferencia con los concellos pequeños: aquí no vale «¿tenéis chatbot?»
 
-Las tres ciudades ya tienen web corporativa, sede electrónica y algún asistente o buscador. El discurso de la campaña 1 («una web que se consulta frente a una web que entiende») suena a lección en una ciudad que lleva años digitalizando.
+Las ciudades y los municipios del bloque G20 ya tienen web corporativa, sede electrónica y algún asistente o buscador. El discurso de la campaña 1 («una web que se consulta frente a una web que entiende») suena a lección en un concello que lleva años digitalizando.
 
 **Ángulo correcto:**
 
@@ -122,29 +140,32 @@ La plantilla de fase 1 ya no menciona el piloto: dice «valorar el alcance y el 
 
 | Riesgo | Detalle | Mitigación |
 |---|---|---|
-| TLS de Ourense | `www.ourense.es` y `ourense.es` tienen certificado inválido (`ERR_CERT_AUTHORITY_INVALID`). El dominio correcto es **`ourense.gal`**. | No enlazar ni citar `ourense.es`. Si alguien lo menciona, aclarar que el dominio oficial es `.gal`. |
+| TLS de Ourense | `www.ourense.es` y `ourense.es` tienen certificado inválido (`ERR_CERT_AUTHORITY_INVALID`). El dominio correcto es **`ourense.gal`**. | No enlazar ni citar `ourense.es`. |
 | Santiago sin buzón de alcaldía | Solo `informacion@` está verificado. | Asumir que el correo pasa por registro; llamar el día 3 para localizar al responsable. |
-| Lugo con 010 | `010@lugo.gal` es el buzón más visible pero enruta como atención ciudadana. | Usar `alcaldia@lugo.gal`; el 010 solo si rebota. |
-| Cupo diario | 10 correos/día desde el mismo buzón. | No enviar campaña 2 hasta cerrar Pontevedra. |
+| Lugo con 010 | `010@lugo.gal` enruta como atención ciudadana. | Usar `alcaldia@lugo.gal`; el 010 solo si rebota. |
+| A Coruña y Ferrol | Buzón tomado de la FEGAMP, no de la web municipal. | Confirmar en la llamada que llegó a Alcaldía. |
+| Cambre | Certificado TLS roto en la web oficial. | Buzón y teléfono de la FEGAMP; no enlazar la web en el correo. |
+| Cupo diario | 10 correos/día desde el mismo buzón. | Reparto 10 + 3 + 4 en tres días. |
 | Respuesta institucional | En ciudades, el alcalde no lee el correo; lo deriva. | Pedir en la llamada el nombre de la persona de Administración Electrónica. |
-| Datos de población | Cifras del censo municipal (FEGAMP/Deputación), no auditadas para esta campaña. | No usarlas como argumento de venta; solo para segmentar. |
+| Datos de población | Cifras del censo municipal (FEGAMP), no auditadas para esta campaña. | No usarlas como argumento de venta; solo para segmentar. |
 
 ---
 
-## 9. Checklist antes de enviar (27/11)
+## 9. Checklist antes de enviar (30/11)
 
-- [ ] Los 61 concellos de Pontevedra están contactados o descartados; el cupo del 26/11 quedó cerrado.
-- [ ] `CONTACTOS_CAMPANA_2.csv` revisado: 7 filas (3 ciudades + 4 extensión), un destinatario por concello.
-- [ ] Simulación del lote: `node --experimental-strip-types scripts/send-batch.mjs --file campaign/batches/2026-11-27.json`
+- [ ] Los 61 concellos de Pontevedra están contactados o descartados.
+- [ ] Los 10 de A Coruña están revisados: un destinatario por concello.
+- [ ] Simulación del lote: `node --experimental-strip-types scripts/send-batch.mjs --file campaign/batches/2026-11-30.json`
+- [ ] Simulación del lote del 1/12: `node --experimental-strip-types scripts/send-batch.mjs --file campaign/batches/2026-12-01.json`
 - [ ] Confirmar que el asunto y el enlace son los neutros (`/campana`).
-- [ ] Envío real con `--commit` y registro de los tres `Resend ID` en el CSV.
+- [ ] Envío real con `--commit` y registro de los `Resend ID` en el CSV.
 - [ ] Comprobar `last_event` a las 24 h; si hay bounce, corregir buzón antes del día 3.
 
 ---
 
 ## 10. Extensión 10.000–20.000 (aprobada)
 
-Lote de 4 dentro de la campaña 2, con el discurso de concellos pequeños (no el de ciudades). Envío el **miércoles 02/12**; llamadas el **lunes 07/12**.
+Lote de 4 dentro de la campaña 2, con el discurso de concellos pequeños (no el de ciudades). Envío el **miércoles 02/12**; llamadas el **jueves 10/12**; cierre de cortesía el **martes 22/12**.
 
 | Concello | Habitantes | Buzón | Teléfono | Alcalde/alcaldesa |
 |---|---:|---|---|---|
@@ -164,4 +185,4 @@ Lote: `campaign/batches/2026-12-02.json` · Seguimiento en `CONTACTOS_CAMPANA_2.
 
 ---
 
-**CHESS AI AGENCY** · AI · Innovation · Execution · 19/11/2026
+**CHESS AI AGENCY** · AI · Innovation · Execution · 23/11/2026

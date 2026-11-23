@@ -25,4 +25,4 @@ Este documento se ha dividido en tres partes para facilitar el mantenimiento:
 - **Toque 2 (día 3):** llamada telefónica.
 - **Toque 4 (día 14):** cierre de cortesía.
 
-Ver también: [GUION_LLAMADA_CONCELLOS.md](GUION_LLAMADA_CONCELLOS.md), [LLAMADAS_2026-11-26.md](LLAMADAS_2026-11-26.md), [MATERIALES_COMERCIALES.md](MATERIALES_COMERCIALES.md), [NAMING.md](NAMING.md).
+Ver también: [GUION_LLAMADA_CONCELLOS.md](GUION_LLAMADA_CONCELLOS.md), [LLAMADAS_PONTEVEDRA_PENDIENTES.md](LLAMADAS_PONTEVEDRA_PENDIENTES.md), [MATERIALES_COMERCIALES.md](MATERIALES_COMERCIALES.md), [NAMING.md](NAMING.md).

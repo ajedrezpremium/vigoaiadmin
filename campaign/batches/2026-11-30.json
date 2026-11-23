@@ -1,0 +1,12 @@
+[
+  { "concello": "Ourense", "email": "alcaldia@ourense.gal", "idioma": "gl", "tramo": "CIUDADE" },
+  { "concello": "Santiago de Compostela", "email": "informacion@santiagodecompostela.gal", "idioma": "gl", "tramo": "CIUDADE" },
+  { "concello": "Lugo", "email": "alcaldia@lugo.gal", "idioma": "gl", "tramo": "CIUDADE" },
+  { "concello": "A Coruña", "email": "alcaldia@coruna.gal", "idioma": "gl", "tramo": "G20" },
+  { "concello": "Ferrol", "email": "web@ferrol.es", "idioma": "gl", "tramo": "G20" },
+  { "concello": "Narón", "email": "naron@naron.gal", "idioma": "gl", "tramo": "G20" },
+  { "concello": "Oleiros", "email": "alcaldia@oleiros.org", "idioma": "gl", "tramo": "G20" },
+  { "concello": "Arteixo", "email": "correo@arteixo.org", "idioma": "gl", "tramo": "G20" },
+  { "concello": "Ames", "email": "atencioncidada@concellodeames.gal", "idioma": "gl", "tramo": "G20" },
+  { "concello": "Carballo", "email": "infocarballo@carballo.gal", "idioma": "gl", "tramo": "G20" }
+]

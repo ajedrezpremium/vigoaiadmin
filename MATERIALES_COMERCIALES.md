@@ -19,12 +19,16 @@
 | **Dossier de licitación** | `LICITACION_CHECKLIST_VIGO.md` | Solo si se abre licitación pública (Vigo). | Concello de Vigo |
 | **Guion de llamada** | `GUION_LLAMADA_CONCELLOS.md` | Toque 2 (día 3), llamada telefónica. | Interno |
 | **Hoja de llamadas del día** | `LLAMADAS_2026-11-20.md` | Primera tanda: Vigo (piloto) + 9 concellos del lote A. | Interno |
-| **Hoja de llamadas del día** | `LLAMADAS_2026-11-26.md` | Lista de marcado con teléfonos, buzones y alcaldes (26/11). | Interno |
-| **Hoja de llamadas de ciudades** | `LLAMADAS_2026-12-01.md` | Llamadas a Ourense, Santiago y Lugo, con guion adaptado. | Interno |
-| **Agenda diaria** | `AGENDA_CAMPANA.md` | Qué toca cada día del 19/11 al 16/12: envíos, llamadas y enlaces. | Interno |
+| **Hoja de llamadas pendientes** | `LLAMADAS_PONTEVEDRA_PENDIENTES.md` | Lotes del 18, 19 y 23/11 desplazados al 30/11, 1/12 y 2/12. | Interno |
+| **Hoja de llamadas G20** | `LLAMADAS_2026-12-03.md` | Ciudades + A Coruña, con guion adaptado (3/12). | Interno |
+| **Hoja de llamadas G20-B** | `LLAMADAS_2026-12-04.md` | Culleredo, Ribeira y Cambre (4/12). | Interno |
+| **Hoja de llamadas extensión** | `LLAMADAS_2026-12-10.md` | O Carballiño, Verín, O Barco y Barbadás (10/12). | Interno |
+| **Agenda diaria** | `AGENDA_CAMPANA.md` | Qué toca cada día del 23/11 al 15/01: envíos, llamadas y enlaces. | Interno |
 | **Lotes de envío** | `campaign/batches/` | JSON de cada tanda de 10 correos, con su registro. | Interno |
-| **Campaña 2 (ciudades)** | `CAMPANA_2_OURENSE_SANTIAGO_LUGO.md` | Ourense, Santiago y Lugo: contactos, calendario y discurso para ciudades. | Interno |
-| **Contactos campaña 2** | `CONTACTOS_CAMPANA_2.csv` | Tres ciudades >100.000 con buzón y teléfono verificados. | Interno |
+| **Campaña 2 (ciudades y G20)** | `CAMPANA_2_OURENSE_SANTIAGO_LUGO.md` | Ciudades, A Coruña >20k y extensión: contactos, calendario y discurso. | Interno |
+| **Contactos campaña 2** | `CONTACTOS_CAMPANA_2.csv` | Tres ciudades + extensión, con buzón y teléfono verificados. | Interno |
+| **Contactos Galicia >20k** | `CONTACTOS_GALICIA_20K.csv` | Diez municipios de A Coruña con buzón, teléfono y alcalde. | Interno |
+| **Campaña España >50k** | `CAMPANA_ESPANA_50K.md` | Top 30, fases y calendario. | Interno |
 | **Infografía comercial** | `COMERCIAL_INFOGRAFIA.html` | Presentación en reunión. | Todos |
 | **Video 30s** | `COMERCIAL_VIDEO_30S.md` | Redes sociales, email. | Todos |
 | **Firma Gmail** | `FIRMA_GMAIL.html` | Configuración de Gmail (una sola vez). | Interno |
