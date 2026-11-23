@@ -1,0 +1,187 @@
+# Campaña España >50.000 · fase 1 (top 30)
+
+**Preparado por CHESS AI AGENCY · 23/11/2026**
+**Base de contactos:** `CONTACTOS_ESPANA_50K.csv`
+**Lotes previstos:** `campaign/batches/2026-12-09.json`, `2026-12-10.json` y `2026-12-11.json`
+**Enlace:** `https://ia-administracion-local.vercel.app/campana`
+
+---
+
+## 1. Qué es esta campaña
+
+Es la extensión nacional de la campaña municipal, con el mismo principio que Galicia: **una demostración, no una venta**. Se envía en **español**, con la marca **IA para la Administración Local**, sin nombre de producto, sin precio y sin propuesta de piloto en el primer contacto.
+
+**No es la campaña de Vigo.** Vigo tiene su propio circuito (`finalEmail`, piloto 12.500 €) y no se menciona en ningún correo de esta campaña.
+
+**Criterio de entrada:** municipios de más de 50.000 habitantes. La fase 1 se limita al **top 30** para medir respuesta antes de ampliar.
+
+---
+
+## 2. Top 30 (sin Vigo ni A Coruña)
+
+Vigo (294.489) y A Coruña (251.543) quedan fuera porque ya están en campaña con su propio circuito. Al excluirlas, el puesto 30 lo ocupa Leganés (195.734).
+
+| # | Municipio | Provincia | CCAA | Habitantes | Web oficial | Lote |
+|---:|---|---|---|---:|---|---|
+| 1 | Madrid | Madrid | Madrid | 3.506.730 | madrid.es | ES-1 |
+| 2 | Barcelona | Barcelona | Cataluña | 1.731.649 | barcelona.cat | ES-1 |
+| 3 | Valencia | Valencia | C. Valenciana | 840.792 | valencia.es | ES-1 |
+| 4 | Zaragoza | Zaragoza | Aragón | 693.091 | zaragoza.es | ES-1 |
+| 5 | Sevilla | Sevilla | Andalucía | 689.423 | sevilla.org | ES-1 |
+| 6 | Málaga | Málaga | Andalucía | 599.063 | malaga.eu | ES-1 |
+| 7 | Murcia | Murcia | Murcia | 479.405 | murcia.es | ES-1 |
+| 8 | Palma de Mallorca | Baleares | Baleares | 434.786 | palma.cat | ES-1 |
+| 9 | Las Palmas de Gran Canaria | Las Palmas | Canarias | 381.868 | laspalmasgc.es | ES-1 |
+| 10 | Alicante | Alicante | C. Valenciana | 366.221 | alicante.es | ES-1 |
+| 11 | Bilbao | Vizcaya | País Vasco | 351.124 | bilbao.eus | ES-2 |
+| 12 | Córdoba | Córdoba | Andalucía | 323.262 | cordoba.es | ES-2 |
+| 13 | Valladolid | Valladolid | Castilla y León | 302.614 | valladolid.es | ES-2 |
+| 14 | L'Hospitalet de Llobregat | Barcelona | Cataluña | 289.510 | l-h.cat | ES-2 |
+| 15 | Gijón | Asturias | Asturias | 269.894 | gijon.es | ES-2 |
+| 16 | Vitoria-Gasteiz | Álava | País Vasco | 260.699 | vitoria-gasteiz.org | ES-2 |
+| 17 | Elche | Alicante | C. Valenciana | 245.557 | elche.es | ES-2 |
+| 18 | Granada | Granada | Andalucía | 233.975 | granada.org | ES-2 |
+| 19 | Terrassa | Barcelona | Cataluña | 233.270 | terrassa.cat | ES-2 |
+| 20 | Badalona | Barcelona | Cataluña | 231.542 | badalona.cat | ES-2 |
+| 21 | Oviedo | Asturias | Asturias | 228.119 | oviedo.es | ES-3 |
+| 22 | Sabadell | Barcelona | Cataluña | 225.368 | sabadell.cat | ES-3 |
+| 23 | Cartagena | Murcia | Murcia | 220.704 | cartagena.es | ES-3 |
+| 24 | Móstoles | Madrid | Madrid | 214.817 | mostoles.es | ES-3 |
+| 25 | Jerez de la Frontera | Cádiz | Andalucía | 213.634 | jerez.es | ES-3 |
+| 26 | Santa Cruz de Tenerife | S. C. de Tenerife | Canarias | 211.957 | santacruzdetenerife.es | ES-3 |
+| 27 | Pamplona | Navarra | Navarra | 209.094 | pamplona.es | ES-3 |
+| 28 | Almería | Almería | Andalucía | 205.468 | almeria.es | ES-3 |
+| 29 | Alcalá de Henares | Madrid | Madrid | 203.208 | ayto-alcaladehenares.es | ES-3 |
+| 30 | Leganés | Madrid | Madrid | 195.734 | leganes.org | ES-3 |
+
+> Población: padrón municipal a 1/1/2025 (INE, anexo de municipios por población). Solo se usa para segmentar; no es argumento de venta.
+
+---
+
+## 3. Fases
+
+| Fase | Municipios | Cuándo | Condición para abrir |
+|---|---|---|---|
+| **F1** | Top 30 | 9–11/12/2026 | — |
+| **F2** | Puestos 31–60 | 11/01/2027 | Al menos 3 respuestas o 1 demo de F1 |
+| **F3** | Puestos 61–100 | Febrero de 2027 | Al menos 2 demos cerradas en F1/F2 |
+
+**Regla de ampliación:** no se abre una fase nueva si la anterior no ha generado conversaciones. El objetivo no es cubrir el censo de municipios, es aprender qué mensaje funciona.
+
+**Criterio de salida de cada fase:** 30 correos, 30 llamadas (10/día durante 3 días), 3-5 conversaciones y 2 demos. Si no se llega, se revisa el asunto y el primer párrafo antes de ampliar.
+
+---
+
+## 4. Calendario de la fase 1
+
+| Fecha | Acción | Lote |
+|---|---|---|
+| **mié 09/12** | Primer correo a 10 municipios (ES-1) | Madrid, Barcelona, Valencia, Zaragoza, Sevilla, Málaga, Murcia, Palma, Las Palmas, Alicante |
+| **jue 10/12** | Primer correo a 10 municipios (ES-2) | Bilbao, Córdoba, Valladolid, L'Hospitalet, Gijón, Vitoria, Elche, Granada, Terrassa, Badalona |
+| **vie 11/12** | Primer correo a 10 municipios (ES-3) | Oviedo, Sabadell, Cartagena, Móstoles, Jerez, Santa Cruz, Pamplona, Almería, Alcalá, Leganés |
+| **lun 14/12** | Llamadas ES-1 | El día 3 cae en sábado 12/12 |
+| **mar 15/12** | Llamadas ES-2 | El día 3 cae en domingo 13/12 |
+| **mié 16/12** | Llamadas ES-3 | El día 3 cae en lunes 14/12, pero se evita juntar 20 llamadas |
+| **mié 16/12** | Segundo correo ES-1 | A quien no haya respondido |
+| **jue 17/12** | Segundo correo ES-2 | A quien no haya respondido |
+| **vie 18/12** | Segundo correo ES-3 | A quien no haya respondido |
+| **mié 23/12** | Cierre de cortesía ES-1 | Último contacto del año para ese lote |
+| **lun 28/12** | Cierre de cortesía ES-2 | El día 14 cae en Navidad |
+| **mar 29/12** | Cierre de cortesía ES-3 | El día 14 cae en Navidad |
+
+**No se envía** el 8/12 (Inmaculada), el 24, 25 y 31/12 ni el 1/1. Tampoco se llama en festivo.
+
+---
+
+## 5. Plantilla y mensaje
+
+Se usa `firstContactEmail` con `idioma: "es"`:
+
+```
+Asunto: Propuesta de demostración · <municipio>
+De: CHESS AI AGENCY <leads@ajedrezpremium.com>
+Responder a: chessagencyai@gmail.com
+Enlace: https://ia-administracion-local.vercel.app/campana
+```
+
+**Qué dice el correo:**
+
+- Que el Ayuntamiento gestiona mucho volumen de información y consultas repetidas.
+- Que la IA puede ayudar a consultar documentación, preparar borradores y atender consultas con fuentes oficiales.
+- Que la IA analiza, asiste y propone; las personas supervisan, validan y deciden.
+- Que la demostración es práctica, sin compromiso y con información pública del municipio.
+
+**Qué no dice:**
+
+- Nombre de producto.
+- Precio, piloto o plazo de implantación.
+- Nombres de proveedores actuales.
+- Que Vigo sea cliente o piloto.
+- Comparaciones con su web o su asistente.
+
+**Ajuste de tono para grandes ciudades:** el correo llega a un gabinete o a una dirección general, no al alcalde. El primer párrafo debe leerse como una propuesta institucional, no como una consulta ciudadana. En la llamada se pide el nombre de quien dirige Administración Electrónica o Atención Ciudadana.
+
+---
+
+## 6. Protocolo de contactos
+
+1. **Fuente:** web oficial del ayuntamiento, sede electrónica o portal de transparencia. Nunca directorios de terceros sin contrastar.
+2. **Prioridad de buzón:** `alcaldia@` o `gabinete.alcaldia@` → `info@` / `contacto@` → oficina de atención ciudadana. **Evitar `010@`** en el primer contacto.
+3. **Un destinatario por municipio.** Nada de copias a informática, comunicación o prensa.
+4. **Registrar** en el CSV: correo, teléfono, alcalde/alcaldesa, fuente y fecha de verificación.
+5. **Si rebota:** corregir el buzón antes de llamar. Un rebote no se reintenta a ciegas.
+6. **Si piden no recibir más correos:** anotarlo y no volver a escribir.
+
+**Estado actual:** el CSV está completo en municipio, provincia, población y web oficial. La columna `correo` queda **pendiente de verificación** para los 30. No se crea ningún lote definitivo hasta tener los 10 correos de cada día verificados.
+
+---
+
+## 7. Calendario de verificación de contactos
+
+| Fecha | Tarea |
+|---|---|
+| 24–27/11 (pausa) | Verificar ES-1 (10 correos) |
+| 1–4/12 | Verificar ES-2 (10 correos) |
+| 4–6/12 | Verificar ES-3 (10 correos) |
+| 7–8/12 | Crear y simular los tres lotes; revisar asuntos y enlaces |
+
+Si un municipio no publica correo, se usa el formulario de contacto de su sede **solo como último recurso** y se anota en `notas`. No se inventan direcciones.
+
+---
+
+## 8. Cumplimiento y buenas prácticas
+
+- **RGPD/LOPDGDD:** los datos de contacto son profesionales y de fuentes públicas. Aun así, el envío debe ser proporcionado, identificable y con posibilidad de oposición.
+- **AI Act:** no se presenta la demo como un sistema en producción ni se usa para decisiones administrativas. Es una demostración con datos sintéticos o información pública.
+- **ENS:** no se accede a sistemas municipales ni se manipulan datos personales en la demo.
+- **Límite:** 10 correos/día desde `leads@ajedrezpremium.com`, un solo destinatario por municipio.
+- **Firma:** todas las respuestas salen de `chessagencyai@gmail.com` con la firma CHESS AI AGENCY.
+
+---
+
+## 9. Riesgos
+
+| Riesgo | Mitigación |
+|---|---|
+| Correos filtrados como spam en grandes ayuntamientos | Asunto sobrio, sin adjuntos, enlace neutro y dominio con SPF/DKIM correctos. |
+| El correo cae en registro o atención ciudadana | Llamada al día 3 para localizar al responsable. |
+| Buzones `010@` o formularios sin respuesta | Evitarlos en el primer contacto; usar alcaldía o gabinete. |
+| Semana de la Constitución y Navidad | Arranque el 9/12 y cierres antes del 23/12. |
+| Duplicidad con Galicia | Vigo y A Coruña están excluidos de la lista. |
+| Respuesta institucional lenta | Secuencia de 4 toques y cierre de cortesía; no insistir más. |
+
+---
+
+## 10. Checklist antes del 9/12
+
+- [ ] Los 30 contactos están verificados y con fuente.
+- [ ] Cada lote tiene 10 destinatarios y ningún municipio repetido.
+- [ ] Simulación de `2026-12-09.json`, `2026-12-10.json` y `2026-12-11.json`.
+- [ ] Asunto y enlace revisados en español.
+- [ ] Firma y reply-to correctos.
+- [ ] Registro de los `Resend ID` en el CSV tras el envío.
+- [ ] Comprobación de `last_event` a las 24 h.
+
+---
+
+**CHESS AI AGENCY** · AI · Innovation · Execution · 23/11/2026

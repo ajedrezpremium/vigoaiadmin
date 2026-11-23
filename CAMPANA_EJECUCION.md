@@ -263,15 +263,33 @@ Fuente única: **directorio oficial de la Deputación de Pontevedra** — <https
 
 `CONTACTOS_PONTEVEDRA.csv` tiene **62 filas**: los 61 concellos más una fila extra con la Oficina de Informática de Vigo.
 
-| Tramo | Concellos | Estado |
+| Tramo | Filas | Estado |
 |---|---|---|
-| A | 10 | contactados (17/11) |
-| B | 15 | 10 contactados (18/11) · 5 pendientes |
-| C | 13 | pendientes |
-| D | 23 | pendientes |
+| A | 11 | contactados (Vigo + Oficina de Informática) |
+| B | 15 | 15 contactados (18 y 19/11) |
+| C | 13 | 13 contactados (19 y 23/11) |
+| D | 23 | 2 contactados (23/11) · **21 aparcados hasta enero** |
 
 - **Verificado:** concello, comarca, alcalde, correo y teléfono.
 - **Pendiente:** la cifra de habitantes de C y D. El tramo ya está asignado por población; falta el dato exacto en la columna.
 - **Buzones especiales** (no son `@concellox.gal`): Valga y Catoira usan `eidolocal.es` (servicio mancomunado); Covelo, `rexistro.covelo@fegamp.gal`; Portas, `@concellos.depontevedra.es`; Arbo, un Gmail.
 - **Regla:** un destinatario por concello y por toque. Nada de enviar a varios buzones del mismo concello a la vez.
+
+### 15.6 Pausa del 24 al 27/11 y nuevo calendario
+
+El 23/11 se cierra el lote C/D con **10/10 `delivered`** y se decide **no enviar ni llamar del 24 al 27/11**. Los 21 concellos pequeños del segmento D quedan aparcados hasta enero; los lotes `2026-11-24.json`, `2026-11-25.json` y `2026-11-26.json` se conservan, pero no se envían en noviembre.
+
+**Nuevo arranque:**
+
+| Fecha | Acción | Cupo |
+|---|---|---|
+| 30/11 | 3 ciudades + 7 de A Coruña (G20) | 10/10 |
+| 1/12 | Culleredo, Ribeira y Cambre | 3/10 |
+| 2/12 | Extensión 10–20k de Ourense | 4/10 |
+| 3/12 | Llamadas del lote del 30/11 | — |
+| 4/12 | Llamadas de Culleredo, Ribeira y Cambre | — |
+
+**Campaña de España >50.000:** fase 1 con el top 30 (sin Vigo ni A Coruña), del 9 al 11/12. Base: `CONTACTOS_ESPANA_50K.csv`; plan: `CAMPANA_ESPANA_50K.md`. Los contactos están pendientes de verificación y no se crean lotes definitivos hasta tenerlos.
+
+Los envíos del 24–27/11 **no se recuperan**: se desplaza la secuencia entera, no se acumulan lotes.
 

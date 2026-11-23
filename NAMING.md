@@ -18,7 +18,7 @@
 ## Detalles
 
 - **VIGO AI ADMINISTRATION** es el nombre de la demo y del producto para el Concello de Vigo. Aparece en la portada, el widget, el panel admin y la propuesta a Vigo.
-- **IA para la Administración Local** es el nombre comercial para la campaña a los 61 concellos de Pontevedra. Es neutro y no revela que Vigo es el caso piloto.
+- **IA para la Administración Local** es el nombre comercial para la campaña a los 61 concellos de Pontevedra, para Galicia >20.000 y para la campaña de España >50.000. Es neutro y no revela que Vigo es el caso piloto.
 - **CHESS AI AGENCY** es la firma de la empresa. Siempre aparece junto al nombre del producto en correos, infografías y presupuestos.
 - En el código: el `landingTitle` en `lib/i18n.ts` es "VIGO AI ADMINISTRATION" (portada). La landing `/campana` usa "CHESS AI AGENCY" como marca principal. No mezclar.
 
