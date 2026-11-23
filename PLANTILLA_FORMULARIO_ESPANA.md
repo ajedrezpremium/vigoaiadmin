@@ -73,8 +73,23 @@
 | Móstoles | https://www.mostoles.es/es/ayuntamiento/alcaldia/contacta-alcalde | Contacta con el alcalde |
 | Jerez de la Frontera | https://www.jerez.es/contactar-con-la-alcaldesa | Contactar con la alcaldesa |
 | Alcalá de Henares | https://www.ayto-alcaladehenares.es/contacto/ | Contacto |
+| Valencia | https://www.valencia.es/cas/atencion-ciudadana/consultas-y-solicitudes-de-informacion | Consultas y solicitudes de información |
+| Gijón | https://www.gijon.es/es/contacto | Contacto |
+| Bilbao | https://www.bilbao.eus/cs/Satellite?c=Page&cid=3009011008&language=es&pageid=3009011008&pagename=Bilbaonet%2FPage%2FBIO_formulario | Tu Ayuntamiento te escucha |
+| Granada | https://sede.granada.org/sta/CarpetaPublic/doEvent?APP_CODE=STA&PAGE_CODE=CONTACTO | Contacto (sede) |
+| Badalona | https://seu.badalona.cat/sta/CarpetaPublic/doEvent?APP_CODE=STA&PAGE_CODE=CONTACTO | Contacto (sede) |
+| Leganés | https://www.leganes.org/w/areas-municipales-consultas-web-formularios | Consultas web · formularios |
 
-**Pendientes de localizar el formulario** (web bloquea bots o es JS): Madrid, Valencia, Bilbao, Gijón, Granada, Terrassa, Badalona, Santa Cruz de Tenerife, Almería y Leganés. Localizarlos antes de enviar; si no hay formulario accesible, pasar a teléfono primero.
+**Sin formulario de contacto utilizable → teléfono primero (4):**
+
+| Municipio | Motivo |
+|---|---|
+| Madrid | Solo «Sugerencias y reclamaciones», «Avisos sobre la ciudad» e «Incidencias informáticas». |
+| Santa Cruz de Tenerife | Solo «Sugerencias y Reclamaciones» (sede t261). |
+| Terrassa | Web y sede inalcanzables desde este entorno (403 / sin conexión). |
+| Almería | WAF bloquea el acceso automatizado («Request Rejected»). |
+
+En estas cuatro, llamar al gabinete/alcaldía, pedir el correo directo y enviar después. No se usa el canal de quejas/reclamaciones.
 
 ---
 
