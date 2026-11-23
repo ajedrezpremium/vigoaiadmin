@@ -2,7 +2,8 @@
 
 **Preparado por CHESS AI AGENCY · 23/11/2026**
 **Base de contactos:** `CONTACTOS_ESPANA_50K.csv`
-**Lotes previstos:** `campaign/batches/2026-12-09.json`, `2026-12-10.json` y `2026-12-11.json`
+**Lotes de correo (8 con buzón):** `campaign/batches/2026-12-09.json`, `2026-12-10.json` y `2026-12-11.json`
+**Formularios (22 sin buzón):** `PLANTILLA_FORMULARIO_ESPANA.md` · envío manual, sin Resend
 **Enlace:** `https://ia-administracion-local.vercel.app/campana`
 
 ---
@@ -72,24 +73,28 @@ Vigo (294.489) y A Coruña (251.543) quedan fuera porque ya están en campaña c
 
 ---
 
-## 4. Calendario de la fase 1
+## 4. Calendario de la fase 1 (correo + formulario)
 
-| Fecha | Acción | Lote |
-|---|---|---|
-| **mié 09/12** | Primer correo a 10 municipios (ES-1) | Madrid, Barcelona, Valencia, Zaragoza, Sevilla, Málaga, Murcia, Palma, Las Palmas, Alicante |
-| **jue 10/12** | Primer correo a 10 municipios (ES-2) | Bilbao, Córdoba, Valladolid, L'Hospitalet, Gijón, Vitoria, Elche, Granada, Terrassa, Badalona |
-| **vie 11/12** | Primer correo a 10 municipios (ES-3) | Oviedo, Sabadell, Cartagena, Móstoles, Jerez, Santa Cruz, Pamplona, Almería, Alcalá, Leganés |
-| **lun 14/12** | Llamadas ES-1 | El día 3 cae en sábado 12/12 |
-| **mar 15/12** | Llamadas ES-2 | El día 3 cae en domingo 13/12 |
-| **mié 16/12** | Llamadas ES-3 | El día 3 cae en lunes 14/12, pero se evita juntar 20 llamadas |
-| **mié 16/12** | Segundo correo ES-1 | A quien no haya respondido |
-| **jue 17/12** | Segundo correo ES-2 | A quien no haya respondido |
-| **vie 18/12** | Segundo correo ES-3 | A quien no haya respondido |
-| **mié 23/12** | Cierre de cortesía ES-1 | Último contacto del año para ese lote |
-| **lun 28/12** | Cierre de cortesía ES-2 | El día 14 cae en Navidad |
-| **mar 29/12** | Cierre de cortesía ES-3 | El día 14 cae en Navidad |
+Los **8 con buzón** van por correo (Resend). Las **22 sin buzón** van por formulario oficial (manual, no consume el cupo de correo). El toque 2 es telefónico en ambos casos.
 
-**No se envía** el 8/12 (Inmaculada), el 24, 25 y 31/12 ni el 1/1. Tampoco se llama en festivo.
+| Fecha | Correos (Resend) | Formularios | Llamadas |
+|---|---|---|---|
+| **mié 09/12** | Zaragoza, Málaga, Palma (3) | Barcelona, Sevilla, Murcia, Las Palmas, Alicante (5) | — |
+| **jue 10/12** | Córdoba, L'Hospitalet, Vitoria (3) | Valladolid, Elche, Sabadell, Cartagena (4) | — |
+| **vie 11/12** | Oviedo, Pamplona (2) | Móstoles, Jerez, Alcalá de Henares (3) | — |
+| **lun 14/12** | — | Formularios pendientes, según se localicen | Llamadas del 9/12 (8) |
+| **mar 15/12** | — | Formularios pendientes | Llamadas del 10/12 (7) |
+| **mié 16/12** | 2º correo: Zaragoza, Málaga, Palma | Formularios pendientes | Llamadas del 11/12 (5) |
+| **jue 17/12** | 2º correo: Córdoba, L'Hospitalet, Vitoria | — | — |
+| **vie 18/12** | 2º correo: Oviedo, Pamplona | — | — |
+| **mié 23/12** | Cierre de cortesía a los 8 con buzón | — | Cierre telefónico de los de formulario |
+
+**Notas:**
+
+- Los **10 formularios pendientes** (Madrid, Valencia, Bilbao, Gijón, Granada, Terrassa, Badalona, Santa Cruz, Almería, Leganés) se envían en cuanto se localice su formulario; si no hay formulario accesible, esa ciudad pasa a teléfono primero.
+- El cupo de 10 correos/día solo aplica a los envíos por Resend; los formularios no lo consumen.
+- **No se envía** el 8/12 (Inmaculada), el 24, 25 y 31/12 ni el 1/1. Tampoco se llama en festivo.
+- Cada formulario se registra en el CSV con `canal=formulario`, `data_contacto` y la URL usada; no hay Resend ID.
 
 ---
 
@@ -145,15 +150,16 @@ Enlace: https://ia-administracion-local.vercel.app/campana
 | Oviedo | `ayuntamiento@oviedo.es` | General |
 | Pamplona | `pamplona@pamplona.es` | General |
 
-**Bloqueo de la campaña tal como está planteada:** el modelo de «10 correos/día» no funciona para Madrid, Barcelona, Valencia, Sevilla, Murcia, Las Palmas, Alicante, Bilbao, Valladolid, Gijón, Elche, Granada, Terrassa, Badalona, Sabadell, Cartagena, Móstoles, Jerez, Santa Cruz de Tenerife, Almería, Alcalá de Henares y Leganés, porque no publican un correo de alcaldía o general al que escribir. Enviar a `010@` o a `webmaster@` va contra la regla de buzón y tiene baja conversión.
+**Limitación detectada:** el modelo de «10 correos/día» no sirve para Madrid, Barcelona, Valencia, Sevilla, Murcia, Las Palmas, Alicante, Bilbao, Valladolid, Gijón, Elche, Granada, Terrassa, Badalona, Sabadell, Cartagena, Móstoles, Jerez, Santa Cruz de Tenerife, Almería, Alcalá de Henares y Leganés, porque no publican un correo de alcaldía o general al que escribir. Enviar a `010@` o a `webmaster@` va contra la regla de buzón y tiene baja conversión.
 
-**Opciones para desbloquear (pendiente de decisión):**
+**Decisión (23/11): formulario oficial.** En las 22 ciudades sin buzón, el primer contacto se hace por el **formulario oficial de contacto / buzón de alcaldía / solicitud de información** de la sede o la web municipal, con el mismo texto neutro. El seguimiento (toque 2) es telefónico, al día 3. No se usa Resend ni se generan Resend ID para los formularios.
 
-1. **Teléfono primero** en las ciudades sin correo: llamar al gabinete/alcaldía, pedir el correo directo y enviar después. Invierte el orden de los toques 1 y 2.
-2. **Formulario oficial** como primer contacto en las ciudades que solo lo ofrecen, con el mismo texto neutro. Sin correo, sin Resend ID: el seguimiento se hace por teléfono.
-3. **Reordenar la fase 1** para empezar por los municipios >50k que sí publican buzón (hay muchos fuera del top 30) y dejar las grandes ciudades para una fase con contacto telefónico.
+- Plantilla del formulario: `PLANTILLA_FORMULARIO_ESPANA.md` (mensaje estándar y versión corta).
+- **12 formularios ya localizados**; **10 pendientes** (Madrid, Valencia, Bilbao, Gijón, Granada, Terrassa, Badalona, Santa Cruz de Tenerife, Almería y Leganés) porque la web bloquea bots o es JS. Si no se localiza un formulario accesible, esa ciudad pasa a **teléfono primero**.
+- **No usar** formularios de «quejas y reclamaciones» ni de «incidencias»: solo contacto / información / buzón de alcaldía.
+- Los **8 con buzón** siguen por correo (Resend), con la plantilla `firstContactEmail` en español.
 
-Hasta decidir, **no se crean los lotes `2026-12-09/10/11.json`** con correos sin verificar.
+**Regla de buzón intacta:** no se envía a `010@` ni a `webmaster@`. Un formulario por municipio.
 
 ---
 
@@ -162,11 +168,13 @@ Hasta decidir, **no se crean los lotes `2026-12-09/10/11.json`** con correos sin
 | Fecha | Tarea | Estado |
 |---|---|---|
 | 23/11 | Rastreo de los 30 sitios oficiales | Hecho: 8 con buzón, 22 sin correo utilizable |
-| Pendiente | Decidir el canal para las 22 ciudades sin correo | **Bloqueante** |
+| 23/11 | Decidir el canal de las 22 sin correo | **Formulario oficial** |
+| 23/11 | Localizar formularios | Hecho: 12 localizados · 10 pendientes |
+| 23/11 | Crear y simular los lotes de correo (8) | Hecho: `2026-12-09/10/11.json` |
+| Pendiente | Localizar los 10 formularios restantes | Antes del 14/12 |
 | Pendiente | Verificar teléfono y alcalde/alcaldesa de los 8 con buzón | Antes del envío |
-| Pendiente | Crear y simular los lotes con correos verificados | Tras la decisión |
 
-Si un municipio no publica correo, se usa el formulario de contacto de su sede **solo como último recurso** y se anota en `notas`. No se inventan direcciones.
+Si un municipio no publica correo ni formulario accesible, pasa a **teléfono primero**. No se inventan direcciones.
 
 ---
 
@@ -195,13 +203,21 @@ Si un municipio no publica correo, se usa el formulario de contacto de su sede *
 
 ## 10. Checklist antes del 9/12
 
-- [ ] Los 30 contactos están verificados y con fuente.
-- [ ] Cada lote tiene 10 destinatarios y ningún municipio repetido.
-- [ ] Simulación de `2026-12-09.json`, `2026-12-10.json` y `2026-12-11.json`.
-- [ ] Asunto y enlace revisados en español.
+**Correo (8 con buzón):**
+- [x] Lotes `2026-12-09/10/11.json` creados y simulados (3 + 3 + 2).
+- [x] Asunto y enlace revisados en español.
+- [ ] Verificar teléfono y alcalde/alcaldesa de los 8.
 - [ ] Firma y reply-to correctos.
 - [ ] Registro de los `Resend ID` en el CSV tras el envío.
 - [ ] Comprobación de `last_event` a las 24 h.
+
+**Formulario (22 sin buzón):**
+- [x] Plantilla lista (`PLANTILLA_FORMULARIO_ESPANA.md`).
+- [x] 12 URLs de formulario localizadas.
+- [ ] Localizar los 10 formularios restantes (o pasar a teléfono primero).
+- [ ] Enviar un solo formulario por municipio, categoría «Contacto/Información/Alcaldía».
+- [ ] Registrar `canal=formulario`, `data_contacto` y URL en el CSV.
+- [ ] Programar la llamada de seguimiento al día 3.
 
 ---
 

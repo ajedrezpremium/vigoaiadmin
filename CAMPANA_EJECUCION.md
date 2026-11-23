@@ -289,7 +289,7 @@ El 23/11 se cierra el lote C/D con **10/10 `delivered`** y se decide **no enviar
 | 3/12 | Llamadas del lote del 30/11 | — |
 | 4/12 | Llamadas de Culleredo, Ribeira y Cambre | — |
 
-**Campaña de España >50.000:** fase 1 con el top 30 (sin Vigo ni A Coruña), del 9 al 11/12. Base: `CONTACTOS_ESPANA_50K.csv`; plan: `CAMPANA_ESPANA_50K.md`. Los contactos están pendientes de verificación y no se crean lotes definitivos hasta tenerlos.
+**Campaña de España >50.000:** fase 1 con el top 30 (sin Vigo ni A Coruña). Base: `CONTACTOS_ESPANA_50K.csv`; plan: `CAMPANA_ESPANA_50K.md`. De los 30, **solo 8 publican buzón de correo** (lotes `2026-12-09/10/11.json`, ya simulados); las **22 restantes van por formulario oficial** (decisión del 23/11), con `PLANTILLA_FORMULARIO_ESPANA.md` y seguimiento telefónico. 12 formularios localizados, 10 pendientes.
 
 Los envíos del 24–27/11 **no se recuperan**: se desplaza la secuencia entera, no se acumulan lotes.
 

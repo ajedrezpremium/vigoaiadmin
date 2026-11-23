@@ -32,10 +32,12 @@ node --experimental-strip-types scripts/send-batch.mjs --file campaign/batches/2
 | `2026-11-30.json` | 30/11/2026 | 3 ciudades + 7 de A Coruña (G20) | Preparado y simulado, 10/10 del cupo |
 | `2026-12-01.json` | 01/12/2026 | Culleredo, Ribeira y Cambre (G20) | Preparado y simulado, 3/10 del cupo |
 | `2026-12-02.json` | 02/12/2026 | Extensión 10–20k de Ourense | Preparado y simulado, 4/10 del cupo |
-| `2026-12-09.json` | 09/12/2026 | España >50k · fase 1, lote ES-1 | **Bloqueado:** solo 8 de 30 publican buzón; decidir canal |
-| `2026-12-10.json` | 10/12/2026 | España >50k · fase 1, lote ES-2 | **Bloqueado:** decidir canal |
-| `2026-12-11.json` | 11/12/2026 | España >50k · fase 1, lote ES-3 | **Bloqueado:** decidir canal |
+| `2026-12-09.json` | 09/12/2026 | España >50k · ES-1 con buzón: Zaragoza, Málaga, Palma | Preparado y simulado, 3 correos (formularios aparte) |
+| `2026-12-10.json` | 10/12/2026 | España >50k · ES-2 con buzón: Córdoba, L'Hospitalet, Vitoria | Preparado y simulado, 3 correos (formularios aparte) |
+| `2026-12-11.json` | 11/12/2026 | España >50k · ES-3 con buzón: Oviedo, Pamplona | Preparado y simulado, 2 correos (formularios aparte) |
 
 Los lotes del 24, 25 y 26/11 **no se envían en noviembre**: la campaña se pausa del 24 al 27/11 y los 21 concellos pequeños de Pontevedra pasan a enero. Se conservan como referencia y se reprogramarán con fecha nueva.
+
+**España >50k:** los 8 municipios con buzón van por correo (lotes de arriba). Las 22 ciudades sin buzón van por **formulario oficial** (manual, sin Resend); ver `PLANTILLA_FORMULARIO_ESPANA.md` y `CONTACTOS_ESPANA_50K.csv`.
 
 El detalle de envíos, con identificadores de Resend, está en `CAMPANA_EJECUCION.md` §15.

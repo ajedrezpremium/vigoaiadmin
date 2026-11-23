@@ -79,7 +79,7 @@
 
 **Por qué el 9 y no el 7:** el 8/12 es festivo nacional y el 7/12 funciona como puente en muchas administraciones. Empezar el miércoles evita que el primer correo caiga en una semana de cierre.
 
-> **Aviso (23/11):** la verificación del top 30 muestra que **solo 8 municipios publican un buzón de correo utilizable**; los otros 22 usan formulario, 010 o bloquean bots. Los lotes ES-1/2/3 quedan **bloqueados** hasta decidir el canal (teléfono primero, formulario o reordenar la fase). Ver `CAMPANA_ESPANA_50K.md` §6.
+> **Aviso (23/11):** de los 30 del top, **solo 8 publican buzón de correo**; los otros 22 van por **formulario oficial** (decisión del 23/11). Los lotes de correo `2026-12-09/10/11.json` ya están creados y simulados (3 + 3 + 2). Los formularios se envían a mano con `PLANTILLA_FORMULARIO_ESPANA.md`; 12 URLs localizadas y 10 pendientes. Ver `CAMPANA_ESPANA_50K.md` §4 y §6.
 
 ---
 

@@ -1,0 +1,5 @@
+[
+  { "concello": "Zaragoza", "email": "alcaldesa@zaragoza.es", "idioma": "es", "tramo": "ES-1" },
+  { "concello": "Málaga", "email": "info@malaga.eu", "idioma": "es", "tramo": "ES-1" },
+  { "concello": "Palma de Mallorca", "email": "ajuntament@palma.es", "idioma": "es", "tramo": "ES-1" }
+]

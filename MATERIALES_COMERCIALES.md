@@ -29,6 +29,8 @@
 | **Contactos campaña 2** | `CONTACTOS_CAMPANA_2.csv` | Tres ciudades + extensión, con buzón y teléfono verificados. | Interno |
 | **Contactos Galicia >20k** | `CONTACTOS_GALICIA_20K.csv` | Diez municipios de A Coruña con buzón, teléfono y alcalde. | Interno |
 | **Campaña España >50k** | `CAMPANA_ESPANA_50K.md` | Top 30, fases y calendario. | Interno |
+| **Plantilla de formulario ES** | `PLANTILLA_FORMULARIO_ESPANA.md` | Primer contacto por formulario en las ciudades sin buzón. | Interno |
+| **Contactos España >50k** | `CONTACTOS_ESPANA_50K.csv` | Top 30 con canal (correo/formulario) y URLs. | Interno |
 | **Infografía comercial** | `COMERCIAL_INFOGRAFIA.html` | Presentación en reunión. | Todos |
 | **Video 30s** | `COMERCIAL_VIDEO_30S.md` | Redes sociales, email. | Todos |
 | **Firma Gmail** | `FIRMA_GMAIL.html` | Configuración de Gmail (una sola vez). | Interno |
