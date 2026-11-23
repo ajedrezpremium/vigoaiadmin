@@ -132,18 +132,39 @@ Enlace: https://ia-administracion-local.vercel.app/campana
 5. **Si rebota:** corregir el buzón antes de llamar. Un rebote no se reintenta a ciegas.
 6. **Si piden no recibir más correos:** anotarlo y no volver a escribir.
 
-**Estado actual:** el CSV está completo en municipio, provincia, población y web oficial. La columna `correo` queda **pendiente de verificación** para los 30. No se crea ningún lote definitivo hasta tener los 10 correos de cada día verificados.
+**Estado actual (verificado el 23/11):** de los 30 municipios del top, **solo 8 publican un buzón de correo utilizable** (3 de alcaldía y 5 generales). Los otros 22 usan formulario web, 010 o bloquean el acceso automatizado. No se inventan direcciones.
+
+| Municipio | Buzón verificado | Tipo |
+|---|---|---|
+| Zaragoza | `alcaldesa@zaragoza.es` | Alcaldía |
+| Córdoba | `g_alcaldia@ayuncordoba.es` | Alcaldía |
+| L'Hospitalet de Llobregat | `alcaldia@l-h.cat` | Alcaldía |
+| Málaga | `info@malaga.eu` | General |
+| Palma de Mallorca | `ajuntament@palma.es` | General |
+| Vitoria-Gasteiz | `informacion@vitoria-gasteiz.org` | General |
+| Oviedo | `ayuntamiento@oviedo.es` | General |
+| Pamplona | `pamplona@pamplona.es` | General |
+
+**Bloqueo de la campaña tal como está planteada:** el modelo de «10 correos/día» no funciona para Madrid, Barcelona, Valencia, Sevilla, Murcia, Las Palmas, Alicante, Bilbao, Valladolid, Gijón, Elche, Granada, Terrassa, Badalona, Sabadell, Cartagena, Móstoles, Jerez, Santa Cruz de Tenerife, Almería, Alcalá de Henares y Leganés, porque no publican un correo de alcaldía o general al que escribir. Enviar a `010@` o a `webmaster@` va contra la regla de buzón y tiene baja conversión.
+
+**Opciones para desbloquear (pendiente de decisión):**
+
+1. **Teléfono primero** en las ciudades sin correo: llamar al gabinete/alcaldía, pedir el correo directo y enviar después. Invierte el orden de los toques 1 y 2.
+2. **Formulario oficial** como primer contacto en las ciudades que solo lo ofrecen, con el mismo texto neutro. Sin correo, sin Resend ID: el seguimiento se hace por teléfono.
+3. **Reordenar la fase 1** para empezar por los municipios >50k que sí publican buzón (hay muchos fuera del top 30) y dejar las grandes ciudades para una fase con contacto telefónico.
+
+Hasta decidir, **no se crean los lotes `2026-12-09/10/11.json`** con correos sin verificar.
 
 ---
 
-## 7. Calendario de verificación de contactos
+## 7. Estado de la verificación de contactos
 
-| Fecha | Tarea |
-|---|---|
-| 24–27/11 (pausa) | Verificar ES-1 (10 correos) |
-| 1–4/12 | Verificar ES-2 (10 correos) |
-| 4–6/12 | Verificar ES-3 (10 correos) |
-| 7–8/12 | Crear y simular los tres lotes; revisar asuntos y enlaces |
+| Fecha | Tarea | Estado |
+|---|---|---|
+| 23/11 | Rastreo de los 30 sitios oficiales | Hecho: 8 con buzón, 22 sin correo utilizable |
+| Pendiente | Decidir el canal para las 22 ciudades sin correo | **Bloqueante** |
+| Pendiente | Verificar teléfono y alcalde/alcaldesa de los 8 con buzón | Antes del envío |
+| Pendiente | Crear y simular los lotes con correos verificados | Tras la decisión |
 
 Si un municipio no publica correo, se usa el formulario de contacto de su sede **solo como último recurso** y se anota en `notas`. No se inventan direcciones.
 
