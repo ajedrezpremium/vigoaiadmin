@@ -25,7 +25,10 @@ node --experimental-strip-types scripts/send-batch.mjs --file campaign/batches/2
 |---|---|---|
 | `2026-11-18.json` | 18/11/2026 | 10 concellos del segmento B (enviado, 10/10 `delivered`) |
 | `2026-11-19.json` | 19/11/2026 | 5 restantes del segmento B + 5 primeros del C (enviado: 9/10 `delivered`, Caldas rebotado) |
-| `2026-11-23.json` | 23/11/2026 | 8 restantes del C + 2 primeros del D (preparado) |
+| `2026-11-23.json` | 23/11/2026 | 8 restantes del C + 2 primeros del D (enviado, 10/10 `delivered`) |
+| `2026-11-24.json` | 24/11/2026 | 10 del segmento D (preparado, simulado) |
+| `2026-11-25.json` | 25/11/2026 | 10 del segmento D (preparado, simulado) |
+| `2026-11-26.json` | 26/11/2026 | 1 del segmento D: Mondariz-Balneario (preparado, simulado) |
 | `2026-11-27.json` | 27/11/2026 | Campaña 2: Ourense, Santiago de Compostela y Lugo (preparado, 3/10 del cupo) |
 | `2026-12-02.json` | 02/12/2026 | Campaña 2, extensión: O Carballiño, Verín, O Barco y Barbadás (preparado, 4/10 del cupo) |
 
