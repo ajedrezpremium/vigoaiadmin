@@ -31,6 +31,9 @@
 | **Campaña España >50k** | `CAMPANA_ESPANA_50K.md` | Top 30, fases y calendario. | Interno |
 | **Plantilla de formulario ES** | `PLANTILLA_FORMULARIO_ESPANA.md` | Primer contacto por formulario en las ciudades sin buzón. | Interno |
 | **Contactos España >50k** | `CONTACTOS_ESPANA_50K.csv` | Top 30 con canal (correo/formulario) y URLs. | Interno |
+| **Hoja de llamadas España** | `LLAMADAS_ESPANA_50K.md` | Los 30 por día de llamada, canal y teléfono. | Interno |
+| **Sincronizador con CRM** | `scripts/crm-sync.mjs` | Comparte la campaña con el CRM de CHESS AI AGENCY. | Interno |
+| **Informe global CRM** | `scripts/crm-report.mjs` · `SEGUIMIENTO_GLOBAL_CRM.md` | Portfolio + pipeline de la campaña. | Interno |
 | **Infografía comercial** | `COMERCIAL_INFOGRAFIA.html` | Presentación en reunión. | Todos |
 | **Video 30s** | `COMERCIAL_VIDEO_30S.md` | Redes sociales, email. | Todos |
 | **Firma Gmail** | `FIRMA_GMAIL.html` | Configuración de Gmail (una sola vez). | Interno |

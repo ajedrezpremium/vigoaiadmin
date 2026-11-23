@@ -244,8 +244,9 @@ Teléfonos y buzones: `CONTACTOS_PONTEVEDRA.csv`. Guion: `GUION_LLAMADA_CONCELLO
 - **Hojas de llamadas:** `LLAMADAS_PONTEVEDRA_PENDIENTES.md`, `LLAMADAS_2026-12-03.md`, `LLAMADAS_2026-12-04.md` y `LLAMADAS_2026-12-10.md`.
 - **Lotes de envío:** `campaign/batches/`.
 - **Campaña 2:** `CAMPANA_2_OURENSE_SANTIAGO_LUGO.md`.
-- **Campaña de España:** `CAMPANA_ESPANA_50K.md` y `CONTACTOS_ESPANA_50K.csv`.
+- **Campaña de España:** `CAMPANA_ESPANA_50K.md`, `CONTACTOS_ESPANA_50K.csv` y `LLAMADAS_ESPANA_50K.md`.
 - **Registro de envíos:** `CAMPANA_EJECUCION.md` §15.
+- **CRM de CHESS AI AGENCY:** `scripts/crm-sync.mjs` (compartir campaña) y `scripts/crm-report.mjs` + `SEGUIMIENTO_GLOBAL_CRM.md` (seguimiento global).
 
 ---
 
