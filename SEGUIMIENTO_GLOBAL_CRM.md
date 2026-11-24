@@ -63,3 +63,18 @@
 - Compartir con el CRM: `node scripts/crm-sync.mjs --commit`.
 - Este informe: `node scripts/crm-report.mjs --md`.
 - Vista interactiva: `crm.html` del proyecto CHESS AI AGENCY (login con token de admin).
+
+## 5. Agenda compartida (pestaña Agenda del CRM)
+
+La campaña tiene una agenda única que se ve en el CRM y se versiona aquí.
+
+| Pieza | Dónde |
+|---|---|
+| Fuente de verdad | `campaign/agenda.json` (35 eventos, 30/11/2026 → 11/01/2027) |
+| Tabla del CRM | `campaign_agenda` en el Supabase `okdeqt…` (solo lectura con anon) |
+| Sincronización | `node scripts/crm-agenda-sync.mjs --commit` |
+| Vista | `https://agency.ajedrezpremium.com/crm.html` → pestaña **Agenda** |
+
+La pestaña Agenda filtra por campaña (`galicia-20k`, `espana-50k`, `pontevedra-enero`) y por estado, y muestra los contadores de acciones, pendientes, hechas y próximos 7 días. La tabla se creó el 24/11/2026 con política de solo lectura para `anon`; la escritura va con `service_role` desde el script.
+
+**Regla:** cuando cambie una fecha, se edita `campaign/agenda.json`, se sincroniza y se refleja también en `AGENDA_CAMPANA.md`. Nunca se edita la tabla a mano.

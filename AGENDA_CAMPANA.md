@@ -6,6 +6,8 @@
 
 **Cómo se usa:** busca la fila de hoy y haz solo eso. Los envíos van a las 08:30; las llamadas, de 09:30 a 11:30 y de 13:00 a 14:00. Si un día se cae, se desplaza la secuencia entera: nunca se adelanta el lote siguiente.
 
+**Vista compartida:** esta agenda está sincronizada con el CRM de CHESS AI AGENCY en la pestaña **Agenda** (`https://agency.ajedrezpremium.com/crm.html`). La fuente de verdad es `campaign/agenda.json`; cualquier cambio de fecha se hace ahí y se sube con `node scripts/crm-agenda-sync.mjs --commit`. Si se edita una fecha, se actualizan los dos sitios a la vez.
+
 **Leyenda:** `[ ]` pendiente · `[x]` hecho · `[~]` desplazado · `—` descanso
 
 ---
