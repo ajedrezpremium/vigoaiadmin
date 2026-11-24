@@ -3,7 +3,8 @@
 **Preparado por CHESS AI AGENCY · 23/11/2026**
 **Base de contactos:** `CONTACTOS_ESPANA_50K.csv`
 **Lotes de correo (8 con buzón):** `campaign/batches/2026-12-09.json`, `2026-12-10.json` y `2026-12-11.json`
-**Formularios (22 sin buzón):** `PLANTILLA_FORMULARIO_ESPANA.md` · envío manual, sin Resend
+**Formularios (15 sin buzón utilizable):** `PLANTILLA_FORMULARIO_ESPANA.md` · envío manual, sin Resend
+**Teléfono primero (7):** Madrid, Santa Cruz de Tenerife, Terrassa, Almería, Barcelona, Valladolid y Gijón
 **Enlace:** `https://ia-administracion-local.vercel.app/campana`
 
 ---
@@ -75,23 +76,23 @@ Vigo (294.489) y A Coruña (251.543) quedan fuera porque ya están en campaña c
 
 ## 4. Calendario de la fase 1 (correo + formulario)
 
-Los **8 con buzón** van por correo (Resend). De las **22 sin buzón**, **18 van por formulario oficial** (manual, no consume el cupo de correo) y **4 a teléfono primero** (Madrid, Santa Cruz de Tenerife, Terrassa y Almería). El toque 2 es telefónico en todos los casos.
+Los **8 con buzón** van por correo (Resend). De las **22 sin buzón**, **15 van por formulario oficial** (manual, no consume el cupo de correo) y **7 a teléfono primero** (Madrid, Santa Cruz de Tenerife, Terrassa, Almería, Barcelona, Valladolid y Gijón). El toque 2 es telefónico en todos los casos.
 
 | Fecha | Correos (Resend) | Formularios | Llamadas |
 |---|---|---|---|
-| **mié 09/12** | Zaragoza, Málaga, Palma (3) | Barcelona, Sevilla, Murcia, Las Palmas, Alicante, Valencia (6) | — |
-| **jue 10/12** | Córdoba, L'Hospitalet, Vitoria (3) | Valladolid, Elche, Sabadell, Cartagena, Gijón, Bilbao (6) | — |
+| **mié 09/12** | Zaragoza, Málaga, Palma (3) | Sevilla, Murcia, Las Palmas, Alicante, Valencia (5) | — |
+| **jue 10/12** | Córdoba, L'Hospitalet, Vitoria (3) | Elche, Sabadell, Cartagena, Bilbao (4) | — |
 | **vie 11/12** | Oviedo, Pamplona (2) | Móstoles, Jerez, Alcalá, Granada, Badalona, Leganés (6) | — |
-| **lun 14/12** | — | Teléfono primero: Madrid, Santa Cruz de Tenerife | Llamadas del 9/12 (8) |
-| **mar 15/12** | — | Teléfono primero: Terrassa, Almería | Llamadas del 10/12 (7) |
-| **mié 16/12** | 2º correo: Zaragoza, Málaga, Palma | — | Llamadas del 11/12 (5) |
+| **lun 14/12** | — | — | Seguimiento del 9/12 (8) + teléfono primero: Madrid, Santa Cruz, Barcelona (3) |
+| **mar 15/12** | — | — | Seguimiento del 10/12 (7) + teléfono primero: Terrassa, Almería, Valladolid, Gijón (4) |
+| **mié 16/12** | 2º correo: Zaragoza, Málaga, Palma | — | Seguimiento del 11/12 (8) |
 | **jue 17/12** | 2º correo: Córdoba, L'Hospitalet, Vitoria | — | — |
 | **vie 18/12** | 2º correo: Oviedo, Pamplona | — | — |
 | **mié 23/12** | Cierre de cortesía a los 8 con buzón | — | Cierre telefónico de los de formulario |
 
 **Notas:**
 
-- Los **18 formularios localizados** se reparten del 9 al 16/12. Las **4 ciudades a teléfono primero** (Madrid, Santa Cruz de Tenerife, Terrassa y Almería) se llaman del 14 al 16/12 para pedir el correo directo y enviar después.
+- Los **15 formularios localizados** se reparten del 9 al 11/12. Las **7 ciudades a teléfono primero** (Madrid, Santa Cruz de Tenerife, Terrassa, Almería, Barcelona, Valladolid y Gijón) se llaman del 14 al 16/12 para pedir el correo directo y enviar después.
 - El cupo de 10 correos/día solo aplica a los envíos por Resend; los formularios no lo consumen.
 - **No se envía** el 8/12 (Inmaculada), el 24, 25 y 31/12 ni el 1/1. Tampoco se llama en festivo.
 - Cada formulario se registra en el CSV con `canal=formulario`, `data_contacto` y la URL usada; no hay Resend ID.
@@ -155,7 +156,7 @@ Enlace: https://ia-administracion-local.vercel.app/campana
 **Decisión (23/11): formulario oficial.** En las 22 ciudades sin buzón, el primer contacto se hace por el **formulario oficial de contacto / buzón de alcaldía / solicitud de información** de la sede o la web municipal, con el mismo texto neutro. El seguimiento (toque 2) es telefónico, al día 3. No se usa Resend ni se generan Resend ID para los formularios.
 
 - Plantilla del formulario: `PLANTILLA_FORMULARIO_ESPANA.md` (mensaje estándar y versión corta).
-- **18 formularios localizados**; **4 pasan a teléfono primero** (Madrid, Santa Cruz de Tenerife, Terrassa y Almería) porque solo ofrecen quejas/reclamaciones o bloquean el acceso. En esas cuatro se llama al gabinete, se pide el correo directo y se envía después.
+- **15 formularios localizados**; **7 pasan a teléfono primero** (Madrid, Santa Cruz de Tenerife, Terrassa, Almería, Barcelona, Valladolid y Gijón) porque solo ofrecen quejas/reclamaciones o bloquean el acceso. En esas siete se llama al gabinete, se pide el correo directo y se envía después.
 - **No usar** formularios de «quejas y reclamaciones» ni de «incidencias»: solo contacto / información / buzón de alcaldía.
 - Los **8 con buzón** siguen por correo (Resend), con la plantilla `firstContactEmail` en español. Teléfonos y alcaldes ya verificados en el CSV.
 
@@ -172,7 +173,8 @@ Enlace: https://ia-administracion-local.vercel.app/campana
 | 23/11 | Localizar formularios | Hecho: 18 localizados · 4 a teléfono primero |
 | 23/11 | Crear y simular los lotes de correo (8) | Hecho: `2026-12-09/10/11.json` |
 | 23/11 | Verificar teléfono y alcalde de los 8 con buzón | Hecho |
-| Pendiente | Teléfono primero en Madrid, Santa Cruz, Terrassa y Almería | Antes del 14/12 |
+| 24/11 | Verificar las 30 centralitas y las 18 URLs de formulario | Hecho: 2 URLs no eran formulario (Barcelona, Valladolid) y Gijón no tiene → **7 a teléfono primero** |
+| Pendiente | Teléfono primero en Madrid, Santa Cruz, Terrassa, Almería, Barcelona, Valladolid y Gijón | Antes del 14/12 |
 
 Si un municipio no publica correo ni formulario accesible, pasa a **teléfono primero**. No se inventan direcciones.
 
@@ -211,10 +213,10 @@ Si un municipio no publica correo ni formulario accesible, pasa a **teléfono pr
 - [ ] Registro de los `Resend ID` en el CSV tras el envío.
 - [ ] Comprobación de `last_event` a las 24 h.
 
-**Formulario (18) y teléfono primero (4):**
+**Formulario (15) y teléfono primero (7):**
 - [x] Plantilla lista (`PLANTILLA_FORMULARIO_ESPANA.md`).
-- [x] 18 URLs de formulario localizadas.
-- [x] 4 ciudades a teléfono primero identificadas (Madrid, Santa Cruz, Terrassa, Almería).
+- [x] 15 URLs de formulario localizadas y comprobadas (HTTP 200).
+- [x] 7 ciudades a teléfono primero identificadas (Madrid, Santa Cruz, Terrassa, Almería, Barcelona, Valladolid, Gijón).
 - [ ] Enviar un solo formulario por municipio, categoría «Contacto/Información/Alcaldía».
 - [ ] Registrar `canal=formulario`, `data_contacto` y URL en el CSV.
 - [ ] Programar la llamada de seguimiento al día 3.

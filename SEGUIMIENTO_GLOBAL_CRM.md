@@ -1,6 +1,6 @@
 # Seguimiento global · CHESS AI AGENCY + IA Administración Local
 
-**Generado:** 2026-11-23 15:21 · **Fuente:** Supabase del CRM (`okdeqt…`) · **Vista:** `crm.html`
+**Generado:** 2026-11-24 10:08 · **Fuente:** Supabase del CRM (`okdeqt…`) · **Vista:** `crm.html`
 
 ## 1. Portfolio de proyectos (27)
 
@@ -45,8 +45,8 @@
 | negotiation | 1 |
 
 **Por proyecto:**
-- VIGO AI ADMINISTRATION: 1
 - IA Administración Local: 86
+- VIGO AI ADMINISTRATION: 1
 
 **Vigo (piloto):** Vigo · negotiation · 12500 €
 

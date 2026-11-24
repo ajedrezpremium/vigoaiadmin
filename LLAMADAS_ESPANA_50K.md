@@ -5,7 +5,8 @@
 **Ventana:** 09:30–11:30 y 13:00–14:00.
 **Idioma:** español. Marca **IA para la Administración Local**. Sin producto, sin precio, sin piloto, sin mencionar Vigo.
 
-> Los teléfonos marcados **(confirmar)** son centralitas conocidas pero no verificadas en la web oficial en esta sesión: confírmalos en la página de contacto antes de marcar. El resto salen de la web/sede oficial.
+> **Teléfonos verificados el 24/11/2026** en la web/sede oficial de cada municipio (o en la ficha oficial enlazada desde ella). Son centralitas: al marcar, pide directamente el Gabinete de Alcaldía o el área de Administración Electrónica.
+> Los **siete de teléfono primero** (Madrid, Santa Cruz de Tenerife, Terrassa, Almería, Barcelona, Valladolid y Gijón) no tienen un formulario de contacto utilizable –solo quejas/reclamaciones o ninguno–: la llamada abre el contacto.
 
 ---
 
@@ -16,16 +17,16 @@
 | Zaragoza | Correo | 976 72 11 00 | Natalia Chueca Muñoz |
 | Málaga | Correo | 951 92 60 10 | Francisco de la Torre Prados |
 | Palma de Mallorca | Correo | 971 22 59 00 | Jaime Martínez Llabrés |
-| Barcelona | Formulario | 93 402 70 00 | — |
-| Sevilla | Formulario | 955 01 00 10 | — |
+| **Barcelona** | **Teléfono primero** | 93 402 70 00 | — |
+| Sevilla | Formulario | 955 47 33 43 | — |
 | Murcia | Formulario | 968 22 95 49 | — |
-| Las Palmas de GC | Formulario | 928 44 60 00 (confirmar) | — |
-| Alicante | Formulario | 96 514 90 00 (confirmar) | — |
+| Las Palmas de GC | Formulario | 928 44 60 00 | — |
+| Alicante | Formulario | 965 14 99 59 | — |
 | Valencia | Formulario | 96 352 54 78 | — |
-| **Madrid** | **Teléfono primero** | 91 588 10 00 (confirmar) | — |
-| **Santa Cruz de Tenerife** | **Teléfono primero** | 922 60 60 10 | — |
+| **Madrid** | **Teléfono primero** | 91 588 10 00 | — |
+| **Santa Cruz de Tenerife** | **Teléfono primero** | 922 60 67 50 | — |
 
-**Madrid y Santa Cruz:** no hay formulario de contacto utilizable. La llamada es el **primer contacto**: pide el correo directo de Alcaldía/Gabinete y envía después la plantilla neutra.
+**Madrid, Santa Cruz y Barcelona:** no hay formulario de contacto utilizable (Madrid y Santa Cruz solo ofrecen sugerencias/reclamaciones; Barcelona, su bústia de queixes). La llamada es el **primer contacto**: pide el correo directo de Alcaldía/Gabinete y envía después la plantilla neutra.
 
 ---
 
@@ -36,16 +37,16 @@
 | Córdoba | Correo | 957 49 99 00 | José María Bellido Roche |
 | L'Hospitalet de Llobregat | Correo | 93 402 94 00 | David Quirós Brito |
 | Vitoria-Gasteiz | Correo | 945 16 16 16 | Maider Etxebarria García |
-| Valladolid | Formulario | 983 42 61 00 | — |
-| Elche | Formulario | 96 665 80 20 | — |
-| Sabadell | Formulario | 93 745 30 00 (confirmar) | — |
+| **Valladolid** | **Teléfono primero** | 983 42 61 00 | — |
+| Elche | Formulario | 966 65 80 00 | — |
+| Sabadell | Formulario | 93 745 31 00 | — |
 | Cartagena | Formulario | 968 12 88 00 | — |
-| Gijón | Formulario | 985 18 10 00 (confirmar) | — |
-| Bilbao | Formulario | 94 420 42 00 | — |
-| **Terrassa** | **Teléfono primero** | 93 736 10 00 (confirmar) | — |
-| **Almería** | **Teléfono primero** | 950 21 00 00 (confirmar) | — |
+| **Gijón** | **Teléfono primero** | 985 18 11 11 | — |
+| Bilbao | Formulario | 944 20 42 00 | — |
+| **Terrassa** | **Teléfono primero** | 937 39 70 00 | — |
+| **Almería** | **Teléfono primero** | 950 21 00 00 | — |
 
-**Terrassa y Almería:** web/sede bloqueadas. La llamada es el primer contacto: pide el correo directo y envía después.
+**Terrassa, Almería, Valladolid y Gijón:** web/sede bloqueadas o sin formulario de contacto (Valladolid solo tiene el SQI de quejas; Gijón no publica formulario operativo). La llamada es el primer contacto: pide el correo directo y envía después.
 
 ---
 
@@ -55,20 +56,20 @@
 |---|---|---|---|
 | Oviedo | Correo | 984 08 38 00 | Alfredo Canteli Fernández |
 | Pamplona | Correo | 948 42 01 00 | Joseba Asiron Saez |
-| Móstoles | Formulario | 91 664 75 00 (confirmar) | — |
+| Móstoles | Formulario | 91 664 75 00 | — |
 | Jerez de la Frontera | Formulario | 956 14 93 00 | — |
 | Alcalá de Henares | Formulario | 91 888 33 00 | — |
 | Granada | Formulario | 958 53 96 97 | — |
 | Badalona | Formulario | 93 483 26 00 | — |
-| Leganés | Formulario | 91 248 90 00 | — |
+| Leganés | Formulario | 912 48 90 10 | — |
 
 ---
 
 ## 4. Cómo entrar según el canal
 
 - **Correo (8):** «Les enviamos un correo el [día] a [buzón] sobre una demostración de IA para la administración local. ¿Con quién podría hablar de administración electrónica o atención ciudadana?» Si el correo fue a `info@`/general, pide que lo deriven a Alcaldía o Gabinete.
-- **Formulario (18):** «Les escribimos por el formulario de [contacto/buzón de alcaldía] el [día]. ¿Podrían confirmar quién lo recibió y con quién hablar del área?» El formulario suele caer en registro: el objetivo es sacar el nombre y el correo directo.
-- **Teléfono primero (4):** es el primer contacto. Preséntate, explica la demostración en 30 segundos y pide el correo directo de Alcaldía/Gabinete para enviar la propuesta. No dejes solo un recado.
+- **Formulario (15):** «Les escribimos por el formulario de [contacto/buzón de alcaldía] el [día]. ¿Podrían confirmar quién lo recibió y con quién hablar del área?» El formulario suele caer en registro: el objetivo es sacar el nombre y el correo directo.
+- **Teléfono primero (7):** es el primer contacto. Preséntate, explica la demostración en 30 segundos y pide el correo directo de Alcaldía/Gabinete para enviar la propuesta. No dejes solo un recado.
 
 ---
 
@@ -106,4 +107,34 @@ Si no localizas a nadie, deja un mensaje y reintenta al día siguiente a primera
 
 ---
 
-**CHESS AI AGENCY** · 23/11/2026
+## 8. Fuente de cada teléfono (verificado 24/11/2026)
+
+| Municipio | Fuente oficial |
+|---|---|
+| Madrid | `madrid.es` · centralita municipal 91 588 10 00 (010 / 91 480 00 10 para ciudadanía) |
+| Barcelona | `guia.barcelona.cat` · centraleta 93 402 70 00 |
+| Valencia | `valencia.es` · 96 352 54 78 (010: 963 10 00 10) |
+| Sevilla | `sevilla.org` · centralita 955 47 33 43 (010: 955 01 00 10) |
+| Murcia | `web.murcia.es` · 968 22 95 49 |
+| Las Palmas de GC | `laspalmasgc.es` · 928 44 60 00 |
+| Alicante | `electronica.alicante.es/aviso_legal` · 965 14 99 59 (SAIC: 900 153 862) |
+| Bilbao | `bilbao.eus` · 944 20 42 00 |
+| Valladolid | `valladolid.es` · 983 42 61 00 (010: 983 100 105) |
+| Elche | `elche.es` · centralita 966 65 80 00 (OMAC: 966 65 80 50) |
+| Gijón | `gijon.es` · centralita 985 18 11 11 (atención: 985 18 11 05) |
+| Terrassa | `aoberta.terrassa.cat` · 937 39 70 00 (010: 937 39 70 31) |
+| Granada | `granada.org` · 958 53 96 97 |
+| Sabadell | `web.sabadell.cat/contacte` · centraleta 93 745 31 00 |
+| Cartagena | `cartagena.es` · centralita 968 12 88 00 |
+| Móstoles | `mostoles.es` · centralita 91 664 75 00 (010: 91 647 17 10) |
+| Jerez de la Frontera | `jerez.es` · centralita 956 14 93 00 |
+| Santa Cruz de Tenerife | `santacruzdetenerife.es` · centralita 922 60 67 50 (010: 922 60 60 10) |
+| Almería | `almeriaciudad.es` · 950 21 00 00 |
+| Alcalá de Henares | `ayto-alcaladehenares.es` · 918 88 33 00 |
+| Leganés | `leganes.org` · atención telefónica 912 48 90 10 |
+
+*(Zaragoza, Málaga, Palma, Córdoba, L'Hospitalet, Vitoria-Gasteiz, Oviedo y Pamplona ya constaban verificados el 23/11 en su web oficial.)*
+
+---
+
+**CHESS AI AGENCY** · 24/11/2026

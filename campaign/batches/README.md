@@ -38,6 +38,6 @@ node --experimental-strip-types scripts/send-batch.mjs --file campaign/batches/2
 
 Los lotes del 24, 25 y 26/11 **no se envían en noviembre**: la campaña se pausa del 24 al 27/11 y los 21 concellos pequeños de Pontevedra pasan a enero. Se conservan como referencia y se reprogramarán con fecha nueva.
 
-**España >50k:** los 8 municipios con buzón van por correo (lotes de arriba). Las 22 ciudades sin buzón van por **formulario oficial** (manual, sin Resend); ver `PLANTILLA_FORMULARIO_ESPANA.md` y `CONTACTOS_ESPANA_50K.csv`.
+**España >50k:** los 8 municipios con buzón van por correo (lotes de arriba). De las 22 ciudades sin buzón, **15 van por formulario oficial** (manual, sin Resend) y **7 a teléfono primero** (Madrid, Santa Cruz de Tenerife, Terrassa, Almería, Barcelona, Valladolid y Gijón); ver `PLANTILLA_FORMULARIO_ESPANA.md`, `LLAMADAS_ESPANA_50K.md` y `CONTACTOS_ESPANA_50K.csv`.
 
 El detalle de envíos, con identificadores de Resend, está en `CAMPANA_EJECUCION.md` §15.

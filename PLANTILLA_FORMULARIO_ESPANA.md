@@ -57,30 +57,29 @@
 
 ---
 
-## 5. URLs de formulario localizadas (23/11)
+## 5. URLs de formulario localizadas (comprobadas el 24/11)
+
+Las **15** responden HTTP 200 y son formularios reales (no catálogos ni portadas).
 
 | Municipio | URL de contacto / formulario | Tipo |
 |---|---|---|
-| Barcelona | https://atencioenlinia.ajuntament.barcelona.cat/es | Atención en línea |
 | Sevilla | https://www.sevilla.org/ayuntamiento/el-ayuntamiento/el-alcalde/contacte-con-el-alcalde | Contacte con el alcalde |
 | Murcia | https://web.murcia.es/contacta | Contacto |
 | Las Palmas de GC | https://www.laspalmasgc.es/es/otras-secciones/contacto/buzon-alcaldia/ | Buzón de alcaldía |
 | Alicante | https://www.alicante.es/es/formularios/formulario-avisos-incidencias-y-solicitud-informacion | Solicitud de información |
-| Valladolid | https://sede.valladolid.es | Sede / registro |
-| Elche | https://sede.elche.es/sta/CarpetaPublic/doEvent?APP_CODE=STA&PAGE_CODE=CATALOGO | Carpeta ciudadana |
+| Elche | https://www.elche.es/oficina-municipal-de-atencion-ciudadana-omac/buzon-de-la-ciudadania/ | Buzón de la ciudadanía |
 | Sabadell | https://web.sabadell.cat/contacte | Contacto |
 | Cartagena | https://www.cartagena.es/contacto.asp | Contacto |
 | Móstoles | https://www.mostoles.es/es/ayuntamiento/alcaldia/contacta-alcalde | Contacta con el alcalde |
 | Jerez de la Frontera | https://www.jerez.es/contactar-con-la-alcaldesa | Contactar con la alcaldesa |
 | Alcalá de Henares | https://www.ayto-alcaladehenares.es/contacto/ | Contacto |
 | Valencia | https://www.valencia.es/cas/atencion-ciudadana/consultas-y-solicitudes-de-informacion | Consultas y solicitudes de información |
-| Gijón | https://www.gijon.es/es/contacto | Contacto |
 | Bilbao | https://www.bilbao.eus/cs/Satellite?c=Page&cid=3009011008&language=es&pageid=3009011008&pagename=Bilbaonet%2FPage%2FBIO_formulario | Tu Ayuntamiento te escucha |
 | Granada | https://sede.granada.org/sta/CarpetaPublic/doEvent?APP_CODE=STA&PAGE_CODE=CONTACTO | Contacto (sede) |
 | Badalona | https://seu.badalona.cat/sta/CarpetaPublic/doEvent?APP_CODE=STA&PAGE_CODE=CONTACTO | Contacto (sede) |
 | Leganés | https://www.leganes.org/w/areas-municipales-consultas-web-formularios | Consultas web · formularios |
 
-**Sin formulario de contacto utilizable → teléfono primero (4):**
+**Sin formulario de contacto utilizable → teléfono primero (7):**
 
 | Municipio | Motivo |
 |---|---|
@@ -88,9 +87,12 @@
 | Santa Cruz de Tenerife | Solo «Sugerencias y Reclamaciones» (sede t261). |
 | Terrassa | Web y sede inalcanzables desde este entorno (403 / sin conexión). |
 | Almería | WAF bloquea el acceso automatizado («Request Rejected»). |
+| Barcelona | El único formulario es la «Bústia de queixes i suggeriments». |
+| Valladolid | El contacto redirige al SQI de quejas y sugerencias. |
+| Gijón | No publica formulario de contacto operativo (web SPA sin formulario). |
 
-En estas cuatro, llamar al gabinete/alcaldía, pedir el correo directo y enviar después. No se usa el canal de quejas/reclamaciones.
+En estas siete, llamar al gabinete/alcaldía, pedir el correo directo y enviar después. No se usa el canal de quejas/reclamaciones.
 
 ---
 
-**CHESS AI AGENCY** · 23/11/2026
+**CHESS AI AGENCY** · 24/11/2026
