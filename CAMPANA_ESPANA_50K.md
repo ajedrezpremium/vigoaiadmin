@@ -153,7 +153,7 @@ Enlace: https://ia-administracion-local.vercel.app/campana
 
 **Limitación detectada:** el modelo de «10 correos/día» no sirve para Madrid, Barcelona, Valencia, Sevilla, Murcia, Las Palmas, Alicante, Bilbao, Valladolid, Gijón, Elche, Granada, Terrassa, Badalona, Sabadell, Cartagena, Móstoles, Jerez, Santa Cruz de Tenerife, Almería, Alcalá de Henares y Leganés, porque no publican un correo de alcaldía o general al que escribir. Enviar a `010@` o a `webmaster@` va contra la regla de buzón y tiene baja conversión.
 
-**Decisión (23/11): formulario oficial.** En las 22 ciudades sin buzón, el primer contacto se hace por el **formulario oficial de contacto / buzón de alcaldía / solicitud de información** de la sede o la web municipal, con el mismo texto neutro. El seguimiento (toque 2) es telefónico, al día 3. No se usa Resend ni se generan Resend ID para los formularios.
+**Decisión (23/11, ajustada el 24/11): formulario oficial.** En las ciudades sin buzón, el primer contacto se hace por el **formulario oficial de contacto / buzón de alcaldía / solicitud de información** de la sede o la web municipal, con el mismo texto neutro. El seguimiento (toque 2) es telefónico, al día 3. No se usa Resend ni se generan Resend ID para los formularios. Las **7** que solo ofrecen quejas/reclamaciones, no tienen formulario operativo o bloquean el acceso pasan a **teléfono primero**.
 
 - Plantilla del formulario: `PLANTILLA_FORMULARIO_ESPANA.md` (mensaje estándar y versión corta).
 - **15 formularios localizados**; **7 pasan a teléfono primero** (Madrid, Santa Cruz de Tenerife, Terrassa, Almería, Barcelona, Valladolid y Gijón) porque solo ofrecen quejas/reclamaciones o bloquean el acceso. En esas siete se llama al gabinete, se pide el correo directo y se envía después.
