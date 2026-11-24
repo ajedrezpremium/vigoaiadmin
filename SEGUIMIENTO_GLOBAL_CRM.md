@@ -1,6 +1,6 @@
 # Seguimiento global · CHESS AI AGENCY + IA Administración Local
 
-**Generado:** 2026-11-24 14:49 · **Fuente:** Supabase del CRM (`okdeqt…`) · **Vista:** `crm.html`
+**Generado:** 2026-11-24 14:51 · **Fuente:** Supabase del CRM (`okdeqt…`) · **Vista:** `crm.html`
 
 ## 1. Portfolio de proyectos (28)
 
@@ -35,7 +35,7 @@
 | 3 | Politics AI | `politics-ai` |
 | 1 | IA para la Administración Local | `ia-administracion-local` |
 
-> Nivel 1 = DEMO … 10 = PRODUCTO. La campaña de IA Administración Local se sigue en el pipeline (§2), no como nivel de producto.
+> Nivel 1 = DEMO … 10 = PRODUCTO. La campaña de IA Administración Local figura también como proyecto propio en el portfolio (nivel 1, DEMO): `ia-administracion-local`. La operativa diaria de la campaña se sigue en el pipeline (§2) y en la agenda compartida (§5).
 
 ## 2. Pipeline de la campaña (87 oportunidades)
 
@@ -63,4 +63,24 @@
 - Contactos y estado: CSV de este repo (`CONTACTOS_*.csv`).
 - Compartir con el CRM: `node scripts/crm-sync.mjs --commit`.
 - Este informe: `node scripts/crm-report.mjs --md`.
-- Vista interactiva: `crm.html` del proyecto CHESS AI AGENCY (login con token de admin).
+- Agenda compartida (35 acciones): `campaign/agenda.json` → `node scripts/crm-agenda-sync.mjs --commit` (órdenes `--list`, `--done <id>`, `--move <id>=AAAA-MM-DD`).
+- Vista interactiva: `crm.html` del proyecto CHESS AI AGENCY (login con token de admin) → pestaña **Agenda**.
+
+## 5. Agenda compartida (35 acciones)
+
+| Campaña | Acciones |
+|---|---:|
+| espana-50k | 17 |
+| galicia-20k | 13 |
+| pontevedra-enero | 5 |
+
+| Estado | Nº |
+|---|---:|
+| pendiente | 35 |
+
+**Próximas 5:**
+- 2026-11-30 · envio · Galicia >20k · 10 correos
+- 2026-11-30 · llamada · Llamadas lote 23/11 · 10
+- 2026-12-01 · envio · Galicia · 3 correos
+- 2026-12-01 · llamada · Llamadas lote 18/11 · 10
+- 2026-12-02 · envio · Extensión 10–20k · 4 correos
