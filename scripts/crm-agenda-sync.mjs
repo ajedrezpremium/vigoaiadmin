@@ -1,13 +1,16 @@
 // Sincroniza la agenda de campaña con el CRM de CHESS AI AGENCY.
 //
-//   node scripts/crm-agenda-sync.mjs            # simulación
-//   node scripts/crm-agenda-sync.mjs --commit   # escribe en Supabase
+//   node scripts/crm-agenda-sync.mjs                     # simulación
+//   node scripts/crm-agenda-sync.mjs --commit            # escribe en Supabase
+//   node scripts/crm-agenda-sync.mjs --done <id>         # marca hecho (y sincroniza)
+//   node scripts/crm-agenda-sync.mjs --move <id>=<fecha> # cambia la fecha (y sincroniza)
+//   node scripts/crm-agenda-sync.mjs --list              # lista los eventos pendientes
 //
 // Fuente: campaign/agenda.json (un evento por acción).
 // Destino: Supabase del CRM (okdeqt…), tabla campaign_agenda.
 // La tabla es de solo lectura para el CRM (política select); la escritura va
 // con service_role desde este script.
-import { readFileSync } from "node:fs";
+import { readFileSync, writeFileSync } from "node:fs";
 
 const CHESS_ENV = "C:/Users/param/Documents/CHESS AI AGENCY/.env";
 const env = {};
@@ -24,6 +27,56 @@ const events = JSON.parse(readFileSync("campaign/agenda.json", "utf8"));
 const REQUIRED = ["id", "campaign", "fecha", "tipo", "titulo"];
 const TIPOS = new Set(["envio", "llamada", "formulario", "cierre", "hito"]);
 const ESTADOS = new Set(["pendiente", "hecho", "desplazado", "cancelado"]);
+
+/* ---------- utilidades de mantenimiento ---------- */
+const argOf = (name) => {
+  const i = process.argv.indexOf(name);
+  return i > -1 ? process.argv[i + 1] : null;
+};
+/** Escribe el JSON conservando un evento por línea (diffs mínimos). */
+const saveJson = () =>
+  writeFileSync("campaign/agenda.json", `[\n${events.map((e) => `  ${JSON.stringify(e)}`).join(",\n")}\n]\n`, "utf8");
+
+if (process.argv.includes("--list")) {
+  const pend = events.filter((e) => e.estado === "pendiente").sort((a, b) => `${a.fecha}${a.hora}`.localeCompare(`${b.fecha}${b.hora}`));
+  console.log(`Agenda: ${events.length} eventos · ${pend.length} pendientes\n`);
+  for (const e of pend) console.log(`${e.fecha} ${(e.hora || "").padEnd(5)} | ${e.campaign.padEnd(16)} | ${e.tipo.padEnd(10)} | ${e.titulo}`);
+  process.exit(0);
+}
+
+let changed = false;
+const doneId = argOf("--done");
+if (doneId) {
+  const e = events.find((x) => x.id === doneId);
+  if (!e) {
+    console.error(`No existe el evento ${doneId}. Usa --list para ver los ids.`);
+    process.exit(1);
+  }
+  e.estado = "hecho";
+  changed = true;
+  console.log(`Hecho: ${e.fecha} · ${e.titulo}`);
+}
+
+const moveArg = argOf("--move");
+if (moveArg) {
+  const [id, fecha] = moveArg.split("=");
+  const e = events.find((x) => x.id === id);
+  if (!e || !fecha) {
+    console.error(`Formato: --move <id>=YYYY-MM-DD`);
+    process.exit(1);
+  }
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(fecha) || Number.isNaN(Date.parse(`${fecha}T00:00:00`))) {
+    console.error(`Fecha inválida: ${fecha}`);
+    process.exit(1);
+  }
+  const antes = e.fecha;
+  e.fecha = fecha;
+  e.estado = "pendiente";
+  changed = true;
+  console.log(`Movido: ${e.titulo} · ${antes} → ${fecha}`);
+}
+
+if (changed) saveJson();
 
 let errors = 0;
 const ids = new Set();
@@ -61,7 +114,7 @@ const rows = events.map((e) => ({
   updated_at: new Date().toISOString(),
 }));
 
-if (!commit) {
+if (!commit && !changed) {
   console.log("\nSimulación. Primeros 3:");
   for (const r of rows.slice(0, 3)) console.log(`  ${r.fecha} ${r.hora} | ${r.campaign} | ${r.tipo} | ${r.titulo}`);
   console.log("\nUsa --commit para escribir en el CRM.");

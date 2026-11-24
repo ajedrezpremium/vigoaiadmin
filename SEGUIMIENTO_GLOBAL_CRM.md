@@ -77,4 +77,15 @@ La campaña tiene una agenda única que se ve en el CRM y se versiona aquí.
 
 La pestaña Agenda filtra por campaña (`galicia-20k`, `espana-50k`, `pontevedra-enero`) y por estado, y muestra los contadores de acciones, pendientes, hechas y próximos 7 días. La tabla se creó el 24/11/2026 con política de solo lectura para `anon`; la escritura va con `service_role` desde el script.
 
+**Mantenimiento diario** (la tabla nunca se toca a mano):
+
+```bash
+node scripts/crm-agenda-sync.mjs --list                     # ver lo pendiente
+node scripts/crm-agenda-sync.mjs --done gal-2026-11-30-envio # marcar hecho y sincronizar
+node scripts/crm-agenda-sync.mjs --move <id>=2026-12-03      # cambiar fecha y sincronizar
+node scripts/crm-agenda-sync.mjs --commit                    # subir cambios ya editados a mano
+```
+
+Las órdenes `--done` y `--move` actualizan `campaign/agenda.json` y sincronizan en el mismo paso; después hay que reflejar el cambio en `AGENDA_CAMPANA.md` y hacer commit.
+
 **Regla:** cuando cambie una fecha, se edita `campaign/agenda.json`, se sincroniza y se refleja también en `AGENDA_CAMPANA.md`. Nunca se edita la tabla a mano.

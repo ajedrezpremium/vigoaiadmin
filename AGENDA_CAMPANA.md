@@ -8,6 +8,8 @@
 
 **Vista compartida:** esta agenda está sincronizada con el CRM de CHESS AI AGENCY en la pestaña **Agenda** (`https://agency.ajedrezpremium.com/crm.html`). La fuente de verdad es `campaign/agenda.json`; cualquier cambio de fecha se hace ahí y se sube con `node scripts/crm-agenda-sync.mjs --commit`. Si se edita una fecha, se actualizan los dos sitios a la vez.
 
+**Mantenimiento:** `node scripts/crm-agenda-sync.mjs --list` para ver lo pendiente, `--done <id>` para marcar hecho y `--move <id>=AAAA-MM-DD` para reprogramar (ambas sincronizan solas).
+
 **Leyenda:** `[ ]` pendiente · `[x]` hecho · `[~]` desplazado · `—` descanso
 
 ---
