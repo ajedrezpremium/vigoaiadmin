@@ -468,8 +468,8 @@ export function finalEmail(
 
   const copy = {
     legal: es
-      ? "Propuesta comercial: VIGO AI ADMINISTRATION · Piloto de 6 semanas · 12.500 EUR · Quiénes somos: https://chess-ai-agency.vercel.app/nosotros.html · 29 proyectos en curso."
-      : "Proposta comercial: VIGO AI ADMINISTRATION · Piloto de 6 semanas · 12.500 € · Quen somos: https://chess-ai-agency.vercel.app/nosotros.html · 29 proxectos en curso.",
+      ? "Propuesta comercial: VIGO AI ADMINISTRATION · Piloto de 6 semanas · 12.500 EUR · Quiénes somos: https://chess-ai-agency.vercel.app/nosotros.html · 28 proyectos en curso."
+      : "Proposta comercial: VIGO AI ADMINISTRATION · Piloto de 6 semanas · 12.500 € · Quen somos: https://chess-ai-agency.vercel.app/nosotros.html · 28 proxectos en curso.",
     preheader: es
       ? "Piloto de 6 semanas con métricas acordadas. Sin compromiso."
       : "Piloto de 6 semanas con métricas acordadas. Sen compromiso.",
@@ -624,8 +624,8 @@ export function firstContactEmail(lead: LeadInput): { subject: string; html: str
   const demoUrl = `${CAMPAIGN_SITE}/campana`;
   const campaignLanding = demoUrl;
   const legal = es
-    ? "Propuesta comercial CHESS AI AGENCY · IA para la Administración Local · Demostración sin compromiso · Quiénes somos: https://chess-ai-agency.vercel.app/nosotros.html · 29 proyectos en curso."
-    : "Proposta comercial CHESS AI AGENCY · IA para a Administración Local · Demostración sen compromiso · Quen somos: https://chess-ai-agency.vercel.app/nosotros.html · 29 proxectos en curso.";
+    ? "Propuesta comercial CHESS AI AGENCY · IA para la Administración Local · Demostración sin compromiso · Quiénes somos: https://chess-ai-agency.vercel.app/nosotros.html · 28 proyectos en curso."
+    : "Proposta comercial CHESS AI AGENCY · IA para a Administración Local · Demostración sen compromiso · Quen somos: https://chess-ai-agency.vercel.app/nosotros.html · 28 proxectos en curso.";
   const preheader = es
     ? "Una demostración práctica y sin compromiso."
     : "Unha demostración práctica e sen compromiso.";

@@ -164,7 +164,7 @@ describe("finalEmail", () => {
     expect(html).toContain("Atentamente,");
     expect(html).toContain("Dirección de proxectos");
     expect(html).toContain("https://chess-ai-agency.vercel.app/nosotros.html");
-    expect(html).toContain("29 proxectos en curso");
+    expect(html).toContain("28 proxectos en curso");
     expect(html).toContain("CHESS AI AGENCY");
     expect(html).toContain("IA PARA CONCELLOS");
     expect(html).not.toContain("Tarxada sobre a cidade");
