@@ -35,6 +35,9 @@ node --experimental-strip-types scripts/send-batch.mjs --file campaign/batches/2
 | `2026-12-09.json` | 09/12/2026 | España >50k · ES-1 con buzón: Zaragoza, Málaga, Palma | Preparado y simulado, 3 correos (formularios aparte) |
 | `2026-12-10.json` | 10/12/2026 | España >50k · ES-2 con buzón: Córdoba, L'Hospitalet, Vitoria | Preparado y simulado, 3 correos (formularios aparte) |
 | `2026-12-11.json` | 11/12/2026 | España >50k · ES-3 con buzón: Oviedo, Pamplona | Preparado y simulado, 2 correos (formularios aparte) |
+| `2027-01-11.json` | 11/01/2027 | Pequeños de Pontevedra · 10 (Cuntis, Mondariz, Moraña, Barro, As Neves, Catoira, Pontecesures, Forcarei, Oia, Pazos de Borbén) | Preparado y simulado, 10/10 del cupo |
+| `2027-01-12.json` | 12/01/2027 | Pequeños de Pontevedra · 10 (Portas, Arbo, Covelo, A Lama, Rodeiro, Agolada, Crecente, O Campo Lameiro, Fornelos de Montes, Dozón) | Preparado y simulado, 10/10 del cupo |
+| `2027-01-13.json` | 13/01/2027 | Pequeños de Pontevedra · 1 (Mondariz-Balneario) | Preparado y simulado, 1/10 del cupo |
 
 Los lotes del 24, 25 y 26/11 **no se envían en noviembre**: la campaña se pausa del 24 al 27/11 y los 21 concellos pequeños de Pontevedra pasan a enero. Se conservan como referencia y se reprogramarán con fecha nueva.
 
