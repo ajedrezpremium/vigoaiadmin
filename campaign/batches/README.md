@@ -19,6 +19,17 @@ node --experimental-strip-types scripts/send-batch.mjs --file campaign/batches/2
 - Un solo destinatario por concello en el primer contacto.
 - BCC de control a `gmparamos@gmail.com` por defecto.
 
+## Tipos de toque (`--kind`)
+
+El mismo lote se puede reutilizar para los cuatro toques de la secuencia (día 0, 3 teléfono, 7 y 14). El correo cambia según `--kind`:
+
+- `first` (por defecto): primer contacto (presentación + demo).
+- `followup`: toque 3, día 7 (caso de uso concreto + demo de 30 min).
+- `closing`: toque 4, día 14 (cierre de cortesía, puerta abierta al próximo trimestre).
+- `final`: solo para Vigo (propuesta de piloto de 12.500 €).
+
+Ejemplo: `node --experimental-strip-types scripts/send-batch.mjs --file campaign/batches/2026-11-30.json --kind followup --commit`
+
 ## Registro
 
 | Archivo | Fecha | Contenido | Estado |
