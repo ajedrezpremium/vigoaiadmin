@@ -726,3 +726,190 @@ export function firstContactEmail(lead: LeadInput): { subject: string; html: str
     text,
   };
 }
+
+/* ---------------------------------------------------------------- */
+/* Toque 3 (día 7): caso de uso concreto para el tamaño del concello */
+/* ---------------------------------------------------------------- */
+
+export function followUpEmail(lead: LeadInput): { subject: string; html: string; text: string } {
+  const es = lead.idioma === "es";
+  const subject = es
+    ? `Seguimiento · IA para la Administración Local · ${lead.concello}`
+    : `Seguimento · IA para a Administración Local · ${lead.concello}`;
+
+  const kicker = es ? "IA PARA LA ADMINISTRACIÓN LOCAL" : "IA PARA A ADMINISTRACIÓN LOCAL";
+  const title = "CHESS AI AGENCY";
+  const subtitle = es
+    ? "Un caso de uso concreto para un concello de su tamaño."
+    : "Un caso de uso concreto para un concello do seu tamaño.";
+  const intro = es
+    ? "Hace unos días les escribí presentando nuestra propuesta de Inteligencia Artificial para la Administración Local. No quiero ocuparles más tiempo del necesario: les propongo un único ejemplo concreto, adaptado al tamaño de su concello."
+    : "Hai uns días escribínvos presentando a nosa proposta de Intelixencia Artificial para a Administración Local. Non quero ocuparvos máis tempo do necesario: propóñovos un único exemplo concreto, adaptado ao tamaño do voso concello.";
+  const casoT = es ? "Caso de uso" : "Caso de uso";
+  const caso = es
+    ? "Un asistente interno que responde en lenguaje natural a las consultas del personal municipal sobre documentación, normativa y procedimientos, con referencias a las fuentes oficiales. Reduce las consultas repetidas y libera tiempo para tareas de mayor valor. La IA asiste; las personas deciden."
+    : "Un asistente interno que responde en linguaxe natural ás consultas do persoal municipal sobre documentación, normativa e procedementos, con referencias ás fontes oficiais. Reduce as consultas repetidas e libera tempo para tarefas de maior valor. A IA asiste; as persoas deciden.";
+  const demoT = es ? "Demostración de 30 minutos" : "Demostración de 30 minutos";
+  const demo = es
+    ? "Me gustaría enseñarles una demostración de 30 minutos con información pública de su municipio, sin compromiso. Pueden ver una muestra aquí:"
+    : "Gustaríame amosarvos unha demostración de 30 minutos con información pública do voso municipio, sen compromiso. Podedes ver unha mostra aquí:";
+  const demoUrl = `${CAMPAIGN_SITE}/campana`;
+  const cta = es ? "SOLICITE UNA DEMOSTRACIÓN" : "SOLICITE UNHA DEMOSTRACIÓN";
+  const note = es
+    ? "Si prefieren que lo dejemos para más adelante, díganmelo y no les insisto."
+    : "Se preferides que o deixemos para máis adiante, dicídemolo e non insisto.";
+  const legal = es
+    ? "Propuesta comercial CHESS AI AGENCY · IA para la Administración Local · Demostración sin compromiso · 28 proyectos en curso."
+    : "Proposta comercial CHESS AI AGENCY · IA para a Administración Local · Demostración sen compromiso · 28 proxectos en curso.";
+  const preheader = es
+    ? "Un caso de uso concreto y una demostración de 30 minutos."
+    : "Un caso de uso concreto e unha demostración de 30 minutos.";
+  const role = es ? "Dirección de proyectos" : "Dirección de proxectos";
+
+  const P = "margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;";
+  const H = "margin:18px 0 0;font:16px/1.4 Arial,Helvetica,sans-serif;color:#172052;";
+
+  const body = [
+    `<p style='${P}'>${esc(intro)}</p>`,
+    `<p style='${H}'><b>${esc(casoT)}</b></p>`,
+    `<p style='${P}'>${esc(caso)}</p>`,
+    `<p style='${H}'><b>${esc(demoT)}</b></p>`,
+    `<p style='${P}'>${esc(demo)}</p>`,
+    button(demoUrl, cta),
+    `<p style="margin:14px 0 0;font:13px/1.6 Arial,Helvetica,sans-serif;color:#94a3b8;font-style:italic;">${esc(note)}</p>`,
+  ].join("\n");
+
+  const text = [
+    `${es ? "Seguimiento" : "Seguimento"} — ${lead.concello}`,
+    "",
+    intro,
+    "",
+    `${casoT}:`,
+    caso,
+    "",
+    `${demoT}:`,
+    demo,
+    demoUrl,
+    "",
+    note,
+    "",
+    FROM_NAME,
+    "AI · Innovation · Execution",
+    "",
+    OWNER,
+    role,
+    `Tel. ${PHONE}`,
+    MAIL,
+    "https://chess-ai-agency.vercel.app/nosotros.html",
+    "",
+    legal,
+  ].join("\n");
+
+  return {
+    subject,
+    html: layout({
+      lang: es ? "es" : "gl",
+      preheader,
+      kicker,
+      title,
+      subtitle,
+      body,
+      legal,
+      titleTag: subject,
+      role,
+      somos: "https://chess-ai-agency.vercel.app/nosotros.html",
+      siteUrl: demoUrl,
+      siteLabel: "ia-administracion-local.vercel.app/campana",
+      logo: `${CAMPAIGN_SITE}/logo-email.png`,
+    }),
+    text,
+  };
+}
+
+/* ---------------------------------------------------------------- */
+/* Toque 4 (día 14): cierre de cortesía                              */
+/* ---------------------------------------------------------------- */
+
+export function closingEmail(lead: LeadInput): { subject: string; html: string; text: string } {
+  const es = lead.idioma === "es";
+  const subject = es
+    ? `¿Lo dejamos para el próximo trimestre? · ${lead.concello}`
+    : `¿Deixámolo para o próximo trimestre? · ${lead.concello}`;
+
+  const kicker = es ? "IA PARA LA ADMINISTRACIÓN LOCAL" : "IA PARA A ADMINISTRACIÓN LOCAL";
+  const title = "CHESS AI AGENCY";
+  const subtitle = es ? "Cierre de cortesía." : "Pechado de cortesía.";
+  const intro = es
+    ? "Les escribo por última vez sobre esta propuesta. No quiero ser insistente: si ahora no es el momento, lo entendemos perfectamente."
+    : "Escribos por última vez sobre esta proposta. Non quero ser insistente: se agora non é o momento, entendémolo perfectamente.";
+  const prop = es
+    ? "Dejo la puerta abierta para el próximo trimestre. Si en algún momento quieren ver la demostración o retomar la conversación, estaré encantado de atenderles."
+    : "Deixo a porta aberta para o próximo trimestre. Se nalgún momento queredes ver a demostración ou retomar a conversa, estarei encantado de atendervos.";
+  const link = es
+    ? "Mientras tanto, pueden consultar la muestra en cualquier momento:"
+    : "Mentres tanto, podedes consultar a mostra en calquera momento:";
+  const demoUrl = `${CAMPAIGN_SITE}/campana`;
+  const cta = es ? "VER LA MUESTRA" : "VER A MOSTRA";
+  const note = es ? "Gracias por su tiempo y atención." : "Grazas polo voso tempo e atención.";
+  const legal = es
+    ? "Propuesta comercial CHESS AI AGENCY · IA para la Administración Local · Demostración sin compromiso · 28 proyectos en curso."
+    : "Proposta comercial CHESS AI AGENCY · IA para a Administración Local · Demostración sen compromiso · 28 proxectos en curso.";
+  const preheader = es
+    ? "Cierre de cortesía. Puerta abierta para el próximo trimestre."
+    : "Pechado de cortesía. Porta aberta para o próximo trimestre.";
+  const role = es ? "Dirección de proyectos" : "Dirección de proxectos";
+
+  const P = "margin:10px 0 0;font:15px/1.65 Arial,Helvetica,sans-serif;color:#334155;";
+
+  const body = [
+    `<p style='${P}'>${esc(intro)}</p>`,
+    `<p style='${P}'>${esc(prop)}</p>`,
+    `<p style='${P}'>${esc(link)}</p>`,
+    button(demoUrl, cta),
+    `<p style="margin:14px 0 0;font:13px/1.6 Arial,Helvetica,sans-serif;color:#94a3b8;font-style:italic;">${esc(note)}</p>`,
+  ].join("\n");
+
+  const text = [
+    `${es ? "Cierre de cortesía" : "Pechado de cortesía"} — ${lead.concello}`,
+    "",
+    intro,
+    "",
+    prop,
+    "",
+    link,
+    demoUrl,
+    "",
+    note,
+    "",
+    FROM_NAME,
+    "AI · Innovation · Execution",
+    "",
+    OWNER,
+    role,
+    `Tel. ${PHONE}`,
+    MAIL,
+    "https://chess-ai-agency.vercel.app/nosotros.html",
+    "",
+    legal,
+  ].join("\n");
+
+  return {
+    subject,
+    html: layout({
+      lang: es ? "es" : "gl",
+      preheader,
+      kicker,
+      title,
+      subtitle,
+      body,
+      legal,
+      titleTag: subject,
+      role,
+      somos: "https://chess-ai-agency.vercel.app/nosotros.html",
+      siteUrl: demoUrl,
+      siteLabel: "ia-administracion-local.vercel.app/campana",
+      logo: `${CAMPAIGN_SITE}/logo-email.png`,
+    }),
+    text,
+  };
+}

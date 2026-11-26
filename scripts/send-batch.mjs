@@ -7,7 +7,7 @@
 // El JSON de entrada es una lista: [{ "concello": "...", "email": "...", "idioma": "gl" }]
 // Regla de campaña: límite duro de 10 correos por ejecución.
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
-import { firstContactEmail, finalEmail } from "../lib/email-templates.ts";
+import { firstContactEmail, finalEmail, followUpEmail, closingEmail } from "../lib/email-templates.ts";
 
 function loadEnv(file = ".env.local") {
   const out = {};
@@ -74,7 +74,7 @@ for (const item of batch) {
     idioma: item.idioma === "es" ? "es" : "gl",
     orixe: "campana",
   };
-  const mail = kind === "final" ? finalEmail(lead) : firstContactEmail(lead);
+  const mail = kind === "final" ? finalEmail(lead) : kind === "followup" ? followUpEmail(lead) : kind === "closing" ? closingEmail(lead) : firstContactEmail(lead);
   const payload = {
     from,
     to: [item.email],
